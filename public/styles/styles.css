@@ -2,29 +2,41 @@
   border-radius: 50%;
 }
 
-.friendsTitle {
-  text-align: center;
-}
-
-.readingTitle {
-  text-align: center;
-}
-
-.friendsArrow {
-  font-size: 2em;
-}
-
-.bookPhoto {
-  width: 300px;
-  height: 250px;
-}
-
-.bookPhoto:hover {
-    opacity: 0.5;
+.userInfo {
+  font-size: 1.5em;
 }
 
 .readingContainer {
   margin: 20px 0;
+}
+
+.readingTitle {
+  text-align: center;
+  font-size: 2em;
+}
+
+.readingRow {
+  height: 240px;
+}
+
+.readingArrow {
+  height: inherit;
+  padding-top: 110px;
+  text-align: center;
+  background-color: #d6d6d6;
+}
+
+.readingColumn {
+  max-height: 240px;
+}
+
+.bookPhoto {
+  width: 100%;
+  max-height: inherit;
+}
+
+.bookPhoto:hover {
+  opacity: 0.5;
 }
 
 .friendsContainer {
@@ -32,9 +44,28 @@
 }
 
 .friendsTitle {
+  text-align: center;
   font-size: 2em;
 }
 
-.readingTitle {
-  font-size: 2em;
+.friendsRow {
+  height: 240px;
+}
+
+.friendsColumn {
+  max-height: 240px;
+}
+
+.friendPhoto {
+  width: 100%;
+  max-height: inherit;
+}
+
+.friendsArrow {
+  padding-top:15px;
+  border-radius: 50%;
+  /*width: 50px;*/
+  height: 50px;
+  text-align: center;
+  background-color: #d6d6d6;
 }

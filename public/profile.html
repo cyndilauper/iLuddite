@@ -1,74 +1,94 @@
 <html>
+
 <head>
-<link href="./styles/bootstrap.min.css" rel="stylesheet">
-<link href="./styles/styles.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="./styles/styles.css" rel="stylesheet">
 </head>
+
 <body>
-  <div class="container">
-    <div class="row profileCurrentRow">
-      <div class="col-sm-6 profileContainer">
-        Profile Info Here
-      </div>
-      <div class="col-sm-6 currentContainer">
-        Current Book Here
-      </div>
+    <div class="container">
+        <div class="row profileCurrentRow">
+            <div class="col-sm-6 profileContainer">
+                <div class="col-sm-6">
+                    <img src="./images/user.jpg" class="img-responsive profilePhoto">
+                </div>
+                <div class="col-sm-6 userInfo">
+                    <div class="row">
+                        Robert Davenport
+                    </div>
+                    <div class="row">
+                        Austin, TX
+                    </div>
+                    <div class="row">
+                        Total Books Read: 44
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 currentContainer">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <img src="./images/book0.jpg" class="img-responsive bookPhoto">
+                    </div>
+                    <div class="col-sm-9">The Motorcyle Diaries</div>
+                </div>
+            </div>
+        </div>
+        <div class="readingContainer">
+            <div class="row readingTitle">
+                Currently Reading
+            </div>
+            <div class="row readingRow">
+                <div class="col-sm-1 readingArrow">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </div>
+                <div class="col-sm-2 readingColumn">
+                    <img src='./images/book1.jpg' class='img-responsive bookPhoto'>
+                </div>
+                <div class="col-sm-2 readingColumn">
+                    <img src='./images/book2.jpg' class='img-responsive bookPhoto'>
+                </div>
+                <div class="col-sm-2 readingColumn">
+                    <img src='./images/book3.jpg' class='img-responsive bookPhoto'>
+                </div>
+                <div class="col-sm-2 readingColumn">
+                    <img src='./images/book4.jpg' class='img-responsive bookPhoto'>
+                </div>
+                <div class="col-sm-2 readingColumn">
+                    <img src='./images/book5.jpg' class='img-responsive bookPhoto'>
+                </div>
+                <div class="col-sm-1 readingArrow">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </div>
+            </div>
+        </div>
+        <div class="friendsContainer">
+            <div class="row friendsTitle">
+                Friends
+            </div>
+            <div class="row friendsRow">
+                <div class="col-sm-1 friendsArrow">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </div>
+                <div class="col-sm-2 friendsColumn">
+                    <img src='./images/friend1.jpg' class='img-responsive profilePhoto friendPhoto'>
+                </div>
+                <div class="col-sm-2 friendsColumn">
+                    <img src='./images/friend2.jpg' class='img-responsive profilePhoto friendPhoto'>
+                </div>
+                <div class="col-sm-2 friendsColumn">
+                    <img src='./images/friend3.jpg' class='img-responsive profilePhoto friendPhoto'>
+                </div>
+                <div class="col-sm-2 friendsColumn">
+                    <img src='./images/friend4.jpg' class='img-responsive profilePhoto friendPhoto'>
+                </div>
+                <div class="col-sm-2 friendsColumn">
+                    <img src='./images/friend5.jpg' class='img-responsive profilePhoto friendPhoto'>
+                </div>
+                <div class="col-sm-1 friendsArrow">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="container readingContainer">
-      <div class="row readingTitle">
-        Currently Reading
-      </div>
-      <div class="row">
-      <div class="col-sm-1 readingArrow">
-        <
-      </div>
-      <div class="col-sm-2 readingColumn">
-        <img src='./images/book1.jpg' class='img-responsive bookPhoto'>
-      </div>
-      <div class="col-sm-2 readingColumn">
-        <img src='./images/book2.jpg' class='img-responsive bookPhoto'>
-      </div>
-      <div class="col-sm-2 readingColumn">
-        <img src='./images/book3.jpg' class='img-responsive bookPhoto'>
-      </div>
-      <div class="col-sm-2 readingColumn">
-        <img src='./images/book4.jpg' class='img-responsive bookPhoto'>
-      </div>
-      <div class="col-sm-2 readingColumn">
-        <img src='./images/book5.jpg' class='img-responsive bookPhoto'>
-      </div>
-      <div class="col-sm-1 readingArrow">
-        >
-      </div>
-    </div>
-    </div>
-    <div class="container friendsContainer">
-      <div class="row friendsTitle">
-        Friends
-      </div>
-      <div class="row">
-      <div class="col-sm-1 friendsArrow">
-        <
-      </div>
-      <div class="col-sm-2 friendsColumn">
-        <img src='https://placem.at/people?random=0&w=400&h=400&txt=0' class='img-responsive profilePhoto'>
-      </div>
-      <div class="col-sm-2 friendsColumn">
-        <img src='https://placem.at/people?random=1&w=400&h=400&txt=0' class='img-responsive profilePhoto'>
-      </div>
-      <div class="col-sm-2 friendsColumn">
-        <img src='https://placem.at/people?random=2&w=400&h=400&txt=0' class='img-responsive profilePhoto'>
-      </div>
-      <div class="col-sm-2 friendsColumn">
-        <img src='https://placem.at/people?random=3&w=400&h=400&txt=0' class='img-responsive profilePhoto'>
-      </div>
-      <div class="col-sm-2 friendsColumn">
-        <img src='https://placem.at/people?random=4&w=400&h=400&txt=0' class='img-responsive profilePhoto'>
-      </div>
-      <div class="col-sm-1 friendsArrow">
-        >
-      </div>
-    </div>
-    </div>
-  </div>
 </body>
 </html
