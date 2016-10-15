@@ -7,7 +7,7 @@
 }
 
 .profilePhotoColumn {
-
+  padding-top: 2em;
 }
 
 .profilePhoto {
@@ -15,15 +15,15 @@
 }
 
 .userInfoColumnn {
-
+  padding-top: 8em;
 }
 
 .userName {
-  font-size: 1.6em;
+  font-size: 1.4em;
 }
 
 .userLocation {
-  font-size: 1.3em;
+  font-size: 1.2em;
 }
 
 .userBooksRead {
@@ -34,29 +34,40 @@
 
 }
 
-.currentPhotoColumn {
+.currentPhotoColumn img {
+  width: 100%;
+}
 
+.bookPhoto:hover {
+  opacity: 0.5;
 }
 
 .currentInfoColumnn {
 
 }
 
-.currentTitle {
+.currentHeader {
+  font-size:2em;
+  padding-bottom: 1.1em;
+}
 
+.currentTitle {
+  font-size: 1.3em;
 }
 
 .currentAuthor {
-
+  font-size: 1.1em;
+  font-weight: 300;
+  margin-bottom: 1.1em;
 }
 
 .currentBio {
-
+  font-size: .9em;
 }
 
 .readingRow {
   margin-top: 3em;
-  height: 240px;
+  height: 280px;
 }
 
 .readingTitleColumn {
@@ -66,21 +77,19 @@
 }
 
 .readingColumn {
-  max-height: 240px;
+  padding: 0;
+  margin: 0;
 }
 
-.bookPhoto {
+.readingColumn img {
   width: 100%;
-  max-height: inherit;
-}
-
-.bookPhoto:hover {
-  opacity: 0.5;
+  height: 280px;
 }
 
 .readingArrowColumn {
+  font-size: 1.5em;
   height: inherit;
-  padding-top: 110px;
+  padding-top: 140px;
   text-align: center;
   background-color: #d6d6d6;
 }
@@ -100,15 +109,38 @@
   max-height: 240px;
 }
 
+/*.friendsColumn .friendsCurrent {
+  position: relative;
+  bottom: 100px;
+  left: 0px;
+  visibility: hidden;
+}
+
+.friendsColumn:hover .friendsCurrent {
+  visibility:visible;
+}*/
+
 .friendsPhoto {
   width: 100%;
   max-height: inherit;
 }
 
+.friendsPhoto:hover {
+  opacity: 0.2;
+}
+
+.friendsCurrent {
+  text-align: center;
+}
+
 .friendsArrowColumn {
+  padding-top:4em;
+}
+
+.friendsArrowCircle {
   padding-top:15px;
   border-radius: 50%;
-  /*width: 50px;*/
+  width: 50px;
   height: 50px;
   text-align: center;
   background-color: #d6d6d6;
