@@ -1,29 +1,68 @@
+.profileRow {
+
+}
+
+.profileColumn {
+
+}
+
+.profilePhotoColumn {
+
+}
+
 .profilePhoto {
   border-radius: 50%;
 }
 
-.userInfo {
-  font-size: 1.5em;
+.userInfoColumnn {
+
 }
 
-.readingContainer {
-  margin: 20px 0;
+.userName {
+  font-size: 1.6em;
 }
 
-.readingTitle {
-  text-align: center;
-  font-size: 2em;
+.userLocation {
+  font-size: 1.3em;
+}
+
+.userBooksRead {
+
+}
+
+.currentColumn {
+
+}
+
+.currentPhotoColumn {
+
+}
+
+.currentInfoColumnn {
+
+}
+
+.currentTitle {
+
+}
+
+.currentAuthor {
+
+}
+
+.currentBio {
+
 }
 
 .readingRow {
+  margin-top: 3em;
   height: 240px;
 }
 
-.readingArrow {
-  height: inherit;
-  padding-top: 110px;
+.readingTitleColumn {
   text-align: center;
-  background-color: #d6d6d6;
+  font-size: 2em;
+  padding-bottom: .5em;
 }
 
 .readingColumn {
@@ -39,29 +78,34 @@
   opacity: 0.5;
 }
 
-.friendsContainer {
-  margin: 20px 0;
-}
-
-.friendsTitle {
+.readingArrowColumn {
+  height: inherit;
+  padding-top: 110px;
   text-align: center;
-  font-size: 2em;
+  background-color: #d6d6d6;
 }
 
 .friendsRow {
+  margin-top: 6em;
   height: 240px;
+}
+
+.friendsTitleColumn {
+  text-align: center;
+  font-size: 2em;
+  padding-bottom: .5em;
 }
 
 .friendsColumn {
   max-height: 240px;
 }
 
-.friendPhoto {
+.friendsPhoto {
   width: 100%;
   max-height: inherit;
 }
 
-.friendsArrow {
+.friendsArrowColumn {
   padding-top:15px;
   border-radius: 50%;
   /*width: 50px;*/
