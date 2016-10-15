@@ -5,3 +5,36 @@
 .friendsTitle {
   text-align: center;
 }
+
+.readingTitle {
+  text-align: center;
+}
+
+.friendsArrow {
+  font-size: 2em;
+}
+
+.bookPhoto {
+  width: 300px;
+  height: 250px;
+}
+
+.bookPhoto:hover {
+    opacity: 0.5;
+}
+
+.readingContainer {
+  margin: 20px 0;
+}
+
+.friendsContainer {
+  margin: 20px 0;
+}
+
+.friendsTitle {
+  font-size: 2em;
+}
+
+.readingTitle {
+  font-size: 2em;
+}
