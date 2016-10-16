@@ -6,9 +6,15 @@ const commonConfig = {
     filename: 'bundle.js',
     path: './server/public/'
   },
-  loaders: [
-
+  module: {
+    loaders: [
+    {
+      test: /\.jsx?/,
+      exclude: /node_modules/,
+      loader: 'babel'
+    }
   ]
+}
 }
 
 // this is the dev setup we want our webpack to have 
@@ -16,7 +22,7 @@ const devConfig = {
   devtool: 'source-maps',
   devServer: {
     inline: true,
-    historyApiFallback: true
+    historyApiFallback: true,
     contentBase: './server/public/'
   }
 }
@@ -30,10 +36,10 @@ const config = {};
 const TARGET = process.env.npm_lifecycle_event;
 switch (TARGET) {
   case 'dev' :
-    Object.assign(config, common, devConfig);
+    Object.assign(config, commonConfig, devConfig);
     break;
   default : 
-    Object.assign(config, common);
+    Object.assign(config, commonConfig);
 } 
 
 module.exports = config;
