@@ -1,9 +1,9 @@
 body {
-  background-color: #FFFEFD;
+  background: #FFFEFD;
 }
 
 .profileRow {
-
+  padding: 0 2em 0 2em;
 }
 
 .profileColumn {
@@ -16,6 +16,7 @@ body {
 
 .profilePhoto {
   border-radius: 50%;
+  border:.2em solid #e8e8e8;
 }
 
 .userInfoColumnn {
@@ -38,6 +39,10 @@ body {
 .currentColumn {
   padding: 1.2em 0;
 }
+
+/*.test {
+  background: #e8e8e8
+}*/
 
 .currentPhotoColumn img {
   width: 100%;
@@ -71,7 +76,7 @@ body {
 }
 
 .readingRow {
-  height: 280px;
+  height: 250px;
 }
 
 .readingHeader,
@@ -88,20 +93,30 @@ body {
 
 .readingColumn img {
   width: 100%;
-  height: 280px;
+  height: 250px;
 }
 
 .readingArrowColumn {
   color: #a0a0a0;
   font-size: 1.5em;
   height: inherit;
-  padding-top: 140px;
-  text-align: center;
-  background-color: #d6d6d6;
+  /*width: 60px;*/
+  padding-top: 120px;
+}
+
+.readingArrowColumnLeft {
+  text-align: right;
+  background: linear-gradient(90deg, #fff 50%, #e8e8e8 50%);
+}
+
+.readingArrowColumnRight {
+  text-align: left;
+  background: linear-gradient(90deg, #e8e8e8 50%, #fff 50%);
 }
 
 .friendsRow {
   height: 240px;
+  padding: 0 2em 0 2em;
 }
 
 .friendsColumn {
@@ -133,7 +148,7 @@ body {
 }
 
 .friendsArrowColumn {
-  padding-top:4em;
+  padding-top:3em;
 }
 
 .friendsArrowCircle {
@@ -143,5 +158,5 @@ body {
   width: 50px;
   height: 50px;
   text-align: center;
-  background-color: #d6d6d6;
+  background-color: #e8e8e8;
 }
