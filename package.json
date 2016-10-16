@@ -12,14 +12,6 @@
   },
   "author": "skbolton",
   "contributors": [
-    /*
-      Add yourselves here guys like this
-      {
-        "name": "Stephen Bolton"
-        "email": "stephenkbolton@gmail.com"
-        "githubHandle": "/skbolton"
-      }
-    */
   ],
   "license": "MIT",
   "bugs": {
