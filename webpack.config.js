@@ -1,5 +1,7 @@
 // this object is the common configuration for webpack whether it is
 // used in production or development
+const webpack = require('webpack');
+
 const commonConfig = {
   entry: './app/index.js',
   output: {
@@ -27,6 +29,15 @@ const devConfig = {
   }
 }
 
+// this would be production settings we would want webpack to use
+const prodConfig = {
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+      comments: false
+    })
+  ]
+}
+
 const config = {};
 
 // this is how we can see if webpack should be used in production mode
@@ -39,7 +50,7 @@ switch (TARGET) {
     Object.assign(config, commonConfig, devConfig);
     break;
   default : 
-    Object.assign(config, commonConfig);
+    Object.assign(config, commonConfig, prodConfig);
 } 
 
 module.exports = config;
