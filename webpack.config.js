@@ -11,6 +11,7 @@ const commonConfig = {
   ]
 }
 
+// this is the dev setup we want our webpack to have 
 const devConfig = {
   devtool: 'source-maps',
   devServer: {
@@ -20,13 +21,20 @@ const devConfig = {
   }
 }
 
+const config = {};
+
 // this is how we can see if webpack should be used in production mode
 // or if it should be used in a developer mode
 // if TARGET is 'build' -> production mode
-// if TARGET i  'dev' -> development mode
+// if TARGET is 'dev' -> development mode
 const TARGET = process.env.npm_lifecycle_event;
-if (TARGET === 'dev') {
-
+switch (TARGET) {
+  case 'dev' :
+    Object.assign(config, common, devConfig);
+    break;
+  default : 
+    Object.assign(config, common);
 } 
 
+module.exports = config;
 
