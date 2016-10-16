@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/skbolton/iLuddite#readme",
   "devDependencies": {
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.2"
   }
