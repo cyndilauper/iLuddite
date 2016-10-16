@@ -1,0 +1,29 @@
+{
+  "name": "iluddite",
+  "version": "1.0.0",
+  "description": "A booksharing platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skbolton/iLuddite.git"
+  },
+  "author": "skbolton",
+  "contributors": [
+    /*
+      Add yourselves here guys like this
+      {
+        "name": "Stephen Bolton"
+        "email": "stephenkbolton@gmail.com"
+        "githubHandle": "/skbolton"
+      }
+    */
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/skbolton/iLuddite/issues"
+  },
+  "homepage": "https://github.com/skbolton/iLuddite#readme"
+}
