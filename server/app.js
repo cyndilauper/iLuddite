@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const session = require('express-session');
 
+const db = require('./config/db');
+
 const routes = require('./routes/index');
 const users = require('./routes/users');
 const books = require('./routes/books');

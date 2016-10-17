@@ -1,7 +1,7 @@
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook');
 
-// const User = require('../../models/users');
+const User = require('../../models/users');
 
 module.exports = function() {
   passport.use(new FacebookStrategy({
@@ -11,29 +11,27 @@ module.exports = function() {
     passReqToCallback: true
   },
   (req, accessToken, refreshToken, profile, done) => {
-    // let query = {
-    //   'facebook.id': profile.id
-    // };
 
-    // User.findOne(query, (error, user) => {
-    //   if (user) {
-    //     console.log('User found');
-    //     done(null, user);
-    //   } else {
-    //     console.log('User not found - adding to DB');
-    //
-    //     let newUser = {};
-    //     newUser.id = profile.id;
-    //     newUser.displayName = profile.displayName;
-    //     newUser.image = ;
-    //     graph.facebook.com/10102043395845447/picture?width=400&height=400
-    //     new User(newUser).save();
-    //     done(null, user);
-    //   }
-    // })
+    let query = {
+      'id': profile.id
+    };
 
+    User.findOne(query, (error, user) => {
+      if (user) {
+        console.log('User found');
+        done(null, user);
+      } else {
+        console.log('User not found - adding to DB');
 
-    //done(null, user);
+        let newUser = {};
+        newUser.id = profile.id;
+        newUser.displayName = profile.displayName;
+        newUser.image = `http://graph.facebook.com/${profile.id}/picture?width=400&height=400`;
+        newUser.friends = `http://graph.facebook.com/${profile.id}/friends`;
+        new User(newUser).save();
+        done(null, user);
+      }
+    })
 
   }))
 }
