@@ -25,7 +25,7 @@ const Queue = (props) => {
   return (
     <div className="col-md-6">
       <h2>Queue:</h2>
-      <ul>
+      <ul className="list-group">
         {queue}
       </ul>
     </div>
