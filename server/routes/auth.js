@@ -1,8 +1,14 @@
 const express = require('express');
+const passport = require('passport');
 const router = express.Router();
 
-router.get('/', (req, res, next) => {
-  res.json({auth: 'test'});
-})
-
+router.route('/facebook')
+  .get(passport.authenticate('facebook', {
+      scope: ['email', 'user_friends']
+  }));
+router.route('/facebook/callback')
+  .get(passport.authenticate('facebook', {
+      successRedirect: '/users',
+      failureRedirect: '/error'
+  }));
 module.exports = router;

@@ -7,52 +7,42 @@ const router = express.Router();
 
 router.get('/:userid', (req, res, next) => {
   // GET user info (photo, friends, current book, queue, stats)
-  let userID = req.params.userid;
-  res.json({'userID': userID});
+  res.json({'userID': req.params.userid});
 })
 
 router.get('/:userid/queue', (req, res, next) => {
   // GET user queue
-  let userID = req.params.userid;
-  res.json({'userIDqueue': userID});
+  res.json({'userIDqueue': req.params.userid});
 })
 
-router.post('/:userid/queue/:bookid', (req, res, next) => {
-  // POST book to queue
-  let userID = req.params.userid;
-  let bookID = req.params.bookid;
-  if (req.param('current') === 'true') {
-    // if request ends in current=true, push to top of list
-    res.json({'bookIDz': bookID});
-  } else {
-    // else, post to bottom
-    res.json({'bookID': bookID});
-  }
-})
+router.route('/:userid/queue/:bookid')
+  // POST or DELETE book to queue
+  .post((req, res, next) => {
+    if (req.param('current') === 'true') {
+      // if request ends in current=true, push to top of list
+      res.json({'bookIDz': req.params.bookid});
+    } else {
+      // else, post to bottom
+      res.json({'bookID': req.params.bookid});
+    }
+  })
+  .delete((req, res, next) => {
+    res.json({'bookID': req.params.bookid});
+  })
 
-router.delete('/:userid/queue/:bookid', (req, res, next) => {
-  // DELETE book to queue
-  let userID = req.params.userid;
-  let bookID = req.params.bookid;
-  res.json({'bookID': bookID});
-})
-
-router.get('/:userid/favorites', (req, res, next) => {
+router.route('/:userid/favorites')
+  // GET, POST, or DELETE user's favorite books
+  .get((req, res, next) => {
   // GET user's favorite books
-  let userID = req.params.userid;
-  res.json({'favorites': userID});
-})
-
-router.post('/:userid/favorites', (req, res, next) => {
+  res.json({'favorites': req.params.userid});
+  })
+  .post((req, res, next) => {
   // POST to user's favorite books
-  let userID = req.params.userid;
-  res.json({'favorites': userID});
-})
-
-router.delete('/:userid/favorites', (req, res, next) => {
+  res.json({'favorites': req.params.userid});
+  })
+  .delete((req, res, next) => {
   // DELETE from user's favorite books
-  let userID = req.params.userid;
-  res.json({'favorites': userID});
-})
+  res.json({'favorites': req.params.userid});
+  })
 
 module.exports = router;
