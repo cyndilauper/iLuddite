@@ -3,7 +3,12 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const bookSchema = new Schema({
-  //setup book schema
+  name: String,
+  author: String,
+  isbn: Integer,
+  authorInfo: String,
+  summary: String,
+  coverPhoto: { data: Buffer, contentType: String }
 });
 
 var Book = mongoose.model('Book', bookSchema);

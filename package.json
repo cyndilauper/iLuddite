@@ -14,7 +14,7 @@
     "url": "git+https://github.com/skbolton/iLuddite.git"
   },
   "author": "skbolton",
-  "contributors": [],
+  "contributors": ["bartimez"],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/skbolton/iLuddite/issues"
