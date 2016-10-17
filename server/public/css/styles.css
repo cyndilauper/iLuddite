@@ -42,4 +42,21 @@
 	text-align: center;
 }
 
+@media (min-width: 768px) {
+  .bookContainer {
+    max-width: 730px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+
+.bookContainer-narrow > hr {
+  margin: 30px 0;
+}
+
+.bookImg {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
 
