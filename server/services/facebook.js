@@ -14,7 +14,7 @@ const Facebook = function (facebookKey, facebookSecret) {
 
   let getImage = function(userKey, done) {
     oauth.get(
-      'https://graph.facebook.com/me/picture?redirect=false&type=large',
+      'https://graph.facebook.com/me/picture?redirect=false&width=400&height=400',
       userKey, (error, results, res) => {
         if (error) {
           console.error('error: ' + e);
@@ -32,8 +32,7 @@ const Facebook = function (facebookKey, facebookSecret) {
         console.error('error: ' + e);
       }
       results = JSON.parse(results)
-      console.log('results', results);
-      done(results.summary);
+      done(results.data);
     });
   }
 

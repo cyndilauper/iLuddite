@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
   facebook.getImage(req.user.token, (imageUrl) => {
     req.user.image = imageUrl;
     facebook.getFriends(req.user.token, (results) => {
-      req.user.friends = results.total_count;
+      req.user.friends = results;
       res.json({ user: req.user });
     })
   });

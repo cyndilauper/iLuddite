@@ -27,12 +27,10 @@ module.exports = function() {
         newUser.id = profile.id;
         newUser.displayName = profile.displayName;
         newUser.image = `http://graph.facebook.com/${profile.id}/picture?width=400&height=400`;
-        newUser.friends = 'placeholder';
         newUser.token = accessToken;
         new User(newUser).save();
         done(null, user);
       }
     })
-
   }))
 }
