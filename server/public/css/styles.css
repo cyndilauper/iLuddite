@@ -15,7 +15,7 @@
 
 .main-body::after {
   content: "";
-  background: url(pexels-photo.jpg);
+  background: url(../assets/pexels-photo.jpg);
   opacity: 0.9;
   background-size: cover;
   top: 0;
