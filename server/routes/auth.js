@@ -9,7 +9,7 @@ router.route('/facebook')
   }));
 router.route('/facebook/callback')
   .get(passport.authenticate('facebook', {
-      successRedirect: '/',
+      successRedirect: '/users',
       failureRedirect: '/'
   }));
 

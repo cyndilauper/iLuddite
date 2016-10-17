@@ -7,6 +7,7 @@ const userSchema = new Schema({
   displayName: String,
   image: String,
   friends: Object,
+  token: String,
   created_at: { type: Date, default: Date.now }
 });
 

@@ -6,7 +6,7 @@ const User = require('../../models/users');
 module.exports = function() {
   passport.use(new FacebookStrategy({
     clientID: '1787582178167706',
-    clientSecret: '',
+    clientSecret: process.env.fbSecret,
     callbackURL: 'http://localhost:3000/auth/facebook/callback',
     passReqToCallback: true
   },
@@ -27,7 +27,8 @@ module.exports = function() {
         newUser.id = profile.id;
         newUser.displayName = profile.displayName;
         newUser.image = `http://graph.facebook.com/${profile.id}/picture?width=400&height=400`;
-        newUser.friends = `http://graph.facebook.com/${profile.id}/friends`;
+        newUser.friends = 'placeholder';
+        newUser.token = accessToken;
         new User(newUser).save();
         done(null, user);
       }
