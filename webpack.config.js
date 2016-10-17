@@ -8,15 +8,20 @@ const commonConfig = {
     filename: 'bundle.js',
     path: './server/public/'
   },
+
+  resolve: {
+    extensions: ['.jsx', '.js', '']
+  },
+
   module: {
     loaders: [
-    {
-      test: /\.jsx?/,
-      exclude: /node_modules/,
-      loader: 'babel'
-    }
-  ]
-}
+      {
+        test: /\.jsx?/,
+        exclude: /node_modules/,
+        loader: 'babel'
+      }
+    ]
+  }
 }
 
 // this is the dev setup we want our webpack to have 
