@@ -4,11 +4,13 @@ const router = express.Router();
 
 router.route('/facebook')
   .get(passport.authenticate('facebook', {
-      scope: ['email', 'user_friends']
+      scope: ['user_friends', 'user_location']
+      // eventually add 'user_actions.books' to scope list
   }));
 router.route('/facebook/callback')
   .get(passport.authenticate('facebook', {
-      successRedirect: '/users',
-      failureRedirect: '/error'
+      successRedirect: '/',
+      failureRedirect: '/'
   }));
+
 module.exports = router;

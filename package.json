@@ -14,7 +14,14 @@
     "url": "git+https://github.com/skbolton/iLuddite.git"
   },
   "author": "skbolton",
-  "contributors": [],
+  "contributors": [
+    {
+      "name": "Michael Lefkowitz"
+    },
+    {
+      "name": ""
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/skbolton/iLuddite/issues"
@@ -32,8 +39,10 @@
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
+    "express-session": "^1.14.1",
     "mongoose": "^4.6.4",
     "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-router": "^2.8.1"
