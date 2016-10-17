@@ -23,6 +23,7 @@ const Facebook = function (facebookKey, facebookSecret) {
         done(results.data.url);
     });
   }
+
   let getFriends = function(userKey, done) {
     oauth.get(
     'https://graph.facebook.com/me/friends?redirect=false',
