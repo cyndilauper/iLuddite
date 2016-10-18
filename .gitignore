@@ -45,3 +45,6 @@ jspm_packages
 
 # Apple stuff
 .DS_Store
+
+# mlab credentials
+./config/mongo.js

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "server/app.js",
+    "start": "nodemon server/app.js",
     "build": "webpack",
     "dev": "webpack-dev-server"
   },
@@ -14,14 +14,16 @@
     "url": "git+https://github.com/skbolton/iLuddite.git"
   },
   "author": "skbolton",
+
   "contributors": [
     {
       "name": "Michael Lefkowitz"
     },
     {
-      "name": ""
+      "name": "Brittany Artimez"
     }
   ],
+
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/skbolton/iLuddite/issues"
