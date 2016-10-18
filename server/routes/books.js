@@ -14,8 +14,8 @@ router.get('/', (req, res, next) => {
 })
 
 router.get('/:bookId', (req, res, next) => {
-  //check req.body for correct param, OR use getBookByISBN static method
-  Books.find({isbn: req.body.isbn}, function(err, book) {
+  //check req.params for correct param, OR use getBookByISBN static method
+  Books.find({isbn: req.params.isbn}, function(err, book) {
     if (err) console.log('get book err:', err);
     else res.send(book);
     next();

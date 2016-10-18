@@ -5,8 +5,8 @@ const mongoose = require('mongoose');
 mongoose.connect(connection);
 var db = mongoose.connection;
 
-var User = require('../models/users');
-var Book = require('../models/books');
+var Users = require('../models/users');
+var Books = require('../models/books');
 
 var fakeBookData = [
   {
@@ -81,19 +81,16 @@ var fakeUserData = [
 db.on('error', function(err){ console.log('db err:', err) });
 db.once('open', function() {
   console.log('mongo connection open');
-
-  Book.remove({});
-  User.remove({});
-
-  Book.create(fakeBookData, function(err, books) {
+  Books.create(fakeBookData, function(err, books) {
     if (err) console.log('book data insert err:', err);
     console.log('books created:', books);
   })
 
-  User.create(fakeUserData, function(err, users) {
+  Users.create(fakeUserData, function(err, users) {
     if (err) console.log('user data insert err:', err);
     console.log('users created:', users);
   })
 });
+
 
 module.exports = db;
