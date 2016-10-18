@@ -18,7 +18,8 @@ const usersSchema = new Schema({
 
   // friends is an array of instances of Users
   // all ids stored must be document _ids from the Users models
-  friends: [{ type: Schema.Types.ObjectId, ref: 'Users' }]
+  friends: [{ type: Schema.Types.ObjectId, ref: 'Users' }],
+  stats: Number
 });
 
 var Users = mongoose.model('Users', usersSchema);
