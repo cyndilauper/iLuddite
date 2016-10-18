@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const User= require('../users');
+const User = require('../users');
 
 
 // router.param('userid', (req, res, next, userid) => {
@@ -16,13 +16,17 @@ router.get('/:userid', (req, res, next) => {
       console.log('GET retrived ID:' + user._id);
     }
   })
-  res.json({'userID': req.params.userid});
+  res.json({
+    'userID': req.params.userid
+  });
   next();
 })
 
 router.get('/:userid/queue', (req, res, next) => {
   // GET user queue
-  res.json({'userIDqueue': req.params.userid});
+  res.json({
+    'userIDqueue': req.params.userid
+  });
 })
 
 router.route('/:userid/queue/:bookid')
@@ -30,29 +34,66 @@ router.route('/:userid/queue/:bookid')
   .post((req, res, next) => {
     if (req.param('current') === 'true') {
       // if request ends in current=true, push to top of list
-      res.json({'bookIDz': req.params.bookid});
+      res.json({
+        'bookIDz': req.params.bookid
+      });
     } else {
       // else, post to bottom
-      res.json({'bookID': req.params.bookid});
+      res.json({
+        'bookID': req.params.bookid
+      });
     }
   })
   .delete((req, res, next) => {
-    res.json({'bookID': req.params.bookid});
+    res.json({
+      'bookID': req.params.bookid
+    });
   })
 
 router.route('/:userid/favorites')
   // GET, POST, or DELETE user's favorite books
   .get((req, res, next) => {
-  // GET user's favorite books
-  res.json({'favorites': req.params.userid});
+    // GET user's favorite books
+    res.json({
+      'favorites': req.params.userid
+    });
   })
   .post((req, res, next) => {
-  // POST to user's favorite books
-  res.json({'favorites': req.params.userid});
+    // POST to user's favorite books
+    res.json({
+      'favorites': req.params.userid
+    });
   })
   .delete((req, res, next) => {
-  // DELETE from user's favorite books
-  res.json({'favorites': req.params.userid});
+    // DELETE from user's favorite books
+    mongoose.model('Users').findById(req.id, function(err, user) {
+      if (err) {
+        return console.err(err);
+      } else {
+        user.remove(function(err, user) {
+          if (err) {
+            return console.error(err);
+          } else {
+            console.log('DELETE removed ID:' + UserBooks.isbn);
+            res.format({
+              html: function() {
+                res.redirect('/user');
+              },
+              json: function() {
+                res.json({
+                  message: 'deleted',
+                  item: book
+                })
+              }
+            })
+          }
+        })
+      }
+    })
+    res.json({
+      'favorites': req.params.userid
+    });
+    next();
   })
 
 module.exports = router;
