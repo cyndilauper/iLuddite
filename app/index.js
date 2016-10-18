@@ -4,15 +4,21 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 
+// React router goodies
+import { Router, Route, browserHistory } from 'react-router';
+
 // this is all just an example of how to import other components
 
 const App = require('./components/App');
-const EditPage = require('./components/EditPage');
 
-// dummy data all components
-const dummyData = require('./dummyData');
+const Landing = require('./components/Landing');
 
-ReactDOM.render(<App data={dummyData} />, document.getElementById('app'));
-
-
+// and then render them out
+ReactDOM.render(
+  <Router>
+    <Route path="/" component={Landing} />
+    <Route path="/profile" component={App} />
+  </Router>,
+  document.getElementById('app')
+);
 
