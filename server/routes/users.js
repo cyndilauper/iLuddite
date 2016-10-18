@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const User= require('../users');
+
 
 // router.param('userid', (req, res, next, userid) => {
 //   next();
@@ -7,7 +9,15 @@ const router = express.Router();
 
 router.get('/:userid', (req, res, next) => {
   // GET user info (photo, friends, current book, queue, stats)
+  mongoose.model('Users').findById(req.id, function(err, user) {
+    if (err) {
+      console.log('You have a GET Error: There was a problem getting:' + err);
+    } else {
+      console.log('GET retrived ID:' + user._id);
+    }
+  })
   res.json({'userID': req.params.userid});
+  next();
 })
 
 router.get('/:userid/queue', (req, res, next) => {
