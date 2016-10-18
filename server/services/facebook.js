@@ -17,7 +17,7 @@ const Facebook = function (facebookKey, facebookSecret) {
       'https://graph.facebook.com/me/picture?redirect=false&width=400&height=400',
       userKey, (error, results, res) => {
         if (error) {
-          console.error('error: ' + e);
+          console.error('error: ' + error);
         }
         results = JSON.parse(results)
         done(results.data.url);
@@ -29,7 +29,7 @@ const Facebook = function (facebookKey, facebookSecret) {
     'https://graph.facebook.com/me/friends?redirect=false',
     userKey, (error, results, res) => {
       if (error) {
-        console.error('error: ' + e);
+        console.error('error: ' + error);
       }
       results = JSON.parse(results)
       done(results.data);
