@@ -15,8 +15,5 @@ var userSchema = mongoose.Schema({
 
 var User = mongoose.model('User', userSchema);
 
-User.getBooks= function(res, req){
-
-}
 
 module.exports= User;

@@ -31,29 +31,55 @@ router.put('/:userid/', function(req, res) {
 
 	mongoose.model('Users').findById(req.id, function(error, user) {
 		user.update({
-				username: username,
-				currentBook: currentBook,
-				bookQueue: bookQueue,
-				favoriteBooks: favoriteBooks
-			}, function(err, userId) {
-				if (err) {
-					res.send("There was a problem updating the information to the database:"
-						err);
-				} else {
-					res.format({
-						html: function() {
-							res.redirect('/user/' + user._id);
-						},
-						json: function() {
-							res.json(user)
-						}
-					})
-				}
-			})
+			username: username,
+			currentBook: currentBook,
+			bookQueue: bookQueue,
+			favoriteBooks: favoriteBooks
+		}, function(err, userId) {
+			if (err) {
+				res.send("There was a problem updating the information to the database:"
+					err);
+			} else {
+				res.format({
+					html: function() {
+						res.redirect('/user/' + user._id);
+					},
+					json: function() {
+						res.json(user)
+					}
+				})
+			}
+		})
 	})
 })
 
 
+router.delete('/:id/edit', function(req, res) {
+	mongoose.model('Users').findById(req.id, function(err, user) {
+		if (err) {
+			return console.error(err);
+		} else {
+			user.remove(function(err, user) {
+				if (err) {
+					return console.error(err)
+				} else {
+					console.log('DELETE removed ID: ' + user._id)
+					res.format({
+						html: function() {
+							res.redirect('/users');
+						},
+						json: function() {
+							res.json({
+								message: 'deleted',
+								item: user
+							});
+						}
+					});
+				}
+			});
+		}
+	});
+});
 
 
 module.exports = router;
