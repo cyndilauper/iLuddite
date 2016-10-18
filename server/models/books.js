@@ -11,8 +11,12 @@ const bookSchema = new Schema({
   coverPhoto: { data: Buffer, contentType: String }
 });
 
-bookSchema.methods.getBookByTitle = function(title){
-  
+bookSchema.statics.getBookByTitle = function(title){
+  Book.findOne({title: title}, function(err, book) {
+    if (err) console.log('get book error:', err);
+    //TODO: do stuff with the book
+    console.log(book);
+  })
 }
 
 var Book = mongoose.model('Book', bookSchema);
