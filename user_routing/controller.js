@@ -22,28 +22,38 @@ router.get('/:userid/edit', function(req, res) {
 	})
 })
 
-router.put('/:userid/', function(req, res){
-	var username= req.body.username;
-	var currentBook= req.body.currentBook;
-	var bookQueue= req.body.bookQueue;
-	var friendsList= req.body.friendsList;
-	var favoriteBooks= req.body.favoriteBooks; 
+router.put('/:userid/', function(req, res) {
+	var username = req.body.username;
+	var currentBook = req.body.currentBook;
+	var bookQueue = req.body.bookQueue;
+	var friendsList = req.body.friendsList;
+	var favoriteBooks = req.body.favoriteBooks;
 
-	mongoose.model('Users').findById(req.id, function (error, user){
+	mongoose.model('Users').findById(req.id, function(error, user) {
 		user.update({
-			username: username,
-			currentBook: currentBook,
-			bookQueue: bookQueue,
-			favoriteBooks: favoriteBooks
-		} function(err, userId){
-			if(err){
-				res.send("There was a problem updating the information to the database:" err);
-			} else{
-				
-			}
-		})
+				username: username,
+				currentBook: currentBook,
+				bookQueue: bookQueue,
+				favoriteBooks: favoriteBooks
+			}, function(err, userId) {
+				if (err) {
+					res.send("There was a problem updating the information to the database:"
+						err);
+				} else {
+					res.format({
+						html: function() {
+							res.redirect('/user/' + user._id);
+						},
+						json: function() {
+							res.json(user)
+						}
+					})
+				}
+			})
 	})
 })
+
+
 
 
 module.exports = router;
