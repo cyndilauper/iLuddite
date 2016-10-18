@@ -36,9 +36,19 @@ router.get('/:userid/queue', (req, res, next) => {
 router.route('/:userid/queue/:bookid')
   // POST or DELETE book to queue
   .post((req, res, next) => {
-    if (req.param('current') === 'true') {
-      // TODO if request ends in current=true, push to top of list
-      res.json({'bookIDz': req.params.bookid});
+    if (req.query.current === 'true') {
+      // if request ends in current=true, push to top of list
+      User.findOneAndUpdate({ id: req.params.userid },
+        {$push: {queue: {$each: [req.params.bookid], $position: 0}}})
+        .then(done => {
+          if (done) {
+            res.send(done);
+          } else {
+            res.send('user and/or queue not found')
+          }
+      }).catch(err => {
+        throw err;
+      });
     } else {
       // else, post to bottom
       User.findOneAndUpdate({ id: req.params.userid },
@@ -55,7 +65,18 @@ router.route('/:userid/queue/:bookid')
     }
   })
   .delete((req, res, next) => {
-    res.json({'bookID': req.params.bookid});
+    // delete book from queue
+    User.update( { id: req.params.userid },
+      { $pullAll: {queue: [req.params.bookid] } } )
+      .then(done => {
+        if (done) {
+          res.send(done);
+        } else {
+          res.send('user and/or queue not found')
+        }
+    }).catch(err => {
+      throw err;
+    })
   })
 
 router.route('/:userid/favorites')
@@ -89,8 +110,18 @@ router.route('/:userid/favorites')
     });
   })
   .delete((req, res, next) => {
-  // TODO DELETE from user's favorite books
-  res.json({'favorites': req.params.userid});
+  // DELETE from user's favorite books
+    User.update( { id: req.params.userid },
+      { $pullAll: {favorites: [req.params.bookid] } } )
+      .then(done => {
+        if (done) {
+          res.send(done);
+        } else {
+          res.send('user and/or favorite not found')
+        }
+    }).catch(err => {
+      throw err;
+    })
   })
 
 module.exports = router;
