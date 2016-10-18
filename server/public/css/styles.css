@@ -120,3 +120,37 @@ nav span.glyphicon.glyphicon-search {
 }
 
 
+.profileRow {
+  padding: 0 2em 0 2em;
+}
+
+.profileColumn {
+
+}
+
+.profilePhotoColumn {
+  padding-top: 2em;
+}
+
+.profilePhoto {
+  border-radius: 50%;
+  border:.2em solid #e8e8e8;
+}
+
+.userInfoColumnn {
+  padding: 10em 0 8em .5em;
+}
+
+.userName {
+  font-size: 1.6em;
+  font-weight: 600;
+}
+
+.userLocation {
+  font-size: 1.2em;
+}
+
+.userBooksRead {
+
+
+}
