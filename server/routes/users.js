@@ -24,6 +24,12 @@ router.get('/:userid', (req, res, next) => {
 
 router.get('/:userid/queue', (req, res, next) => {
   // GET user queue
+  if(err){
+    console.log('You have a GET Error: There was a problem getting:' + err);
+  } else {
+    
+  }
+
   res.json({
     'userIDqueue': req.params.userid
   });
