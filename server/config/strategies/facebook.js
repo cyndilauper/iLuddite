@@ -28,6 +28,9 @@ module.exports = function() {
         newUser.displayName = profile.displayName;
         newUser.image = `http://graph.facebook.com/${profile.id}/picture?width=400&height=400`;
         newUser.token = accessToken;
+        newUser.stats = 0;
+        newUser.favorites = [];
+        newUser.queue = [];
         new User(newUser).save();
         done(null, user);
       }

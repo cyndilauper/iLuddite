@@ -7,6 +7,9 @@ const userSchema = new Schema({
   displayName: String,
   image: String,
   token: String,
+  favorites: Array,
+  queue: Array,
+  stats: Number,
   created_at: { type: Date, default: Date.now }
 });
 
