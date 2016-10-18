@@ -82,3 +82,41 @@ nav span.glyphicon.glyphicon-search {
   width: 100%;
 }
 
+/* Search results styling */
+
+.search-list-item {
+  padding: 0;
+}
+
+.search-list-item img {
+  display: block;
+  width: 100%;
+}
+
+.search-list-item h4,
+.search-list-item p {
+  text-align: left;
+}
+
+.search-list-item h4 {
+  margin: 0;
+  padding: 5px 0;
+  margin-bottom: 5px;
+}
+
+.search-list-item button {
+  display: block;
+  margin: 15px auto;
+  width: 90%;
+}
+
+.button-container {
+  transform: translateY(50%);
+}
+
+.no-gutter > [class*='col-'] {
+    padding-right:0;
+    padding-left:0;
+}
+
+
