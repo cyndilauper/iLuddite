@@ -1,5 +1,5 @@
 # iLuddite
-Makersquare greenfield project brought to you by Brittany Artimez, Michael Lefkowitz, Stephen Bolton, Joey Steinburger, and Rachel DePriest. 
+Makersquare greenfield project brought to you by Brittany Artimez, Michael Lefkowitz, Stephen Bolton, Joey Steinberger, and Rachel DePriest. 
 
 ## Up and Running
 First grab the project and install the node dependencies.
