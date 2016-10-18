@@ -20,7 +20,7 @@ router.route('/:userid/queue/:bookid')
   .post((req, res, next) => {
     if (req.param('current') === 'true') {
       // if request ends in current=true, push to top of list
-      res.json({'bookIDz': req.params.bookid});
+      res.json({'bookID': req.params.bookid});
     } else {
       // else, post to bottom
       res.json({'bookID': req.params.bookid});
