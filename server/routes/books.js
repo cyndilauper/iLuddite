@@ -5,6 +5,7 @@ const Books = require('../models/books');
 const db = require('../config/db');
 
 router.get('/', (req, res, next) => {
+  console.log('req.params:', req.params);
   //returns all books
   Books.find({}, function(err, books) {
     if (err) console.log('get all books err:', err);

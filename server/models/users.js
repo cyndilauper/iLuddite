@@ -9,11 +9,11 @@ const usersSchema = new Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   userPhoto: { data: Buffer, contentType: String },
-  // //queue & favorites are arrays of instances of the UserBooks sub-document model
-  queue: [UserBooks.Schema],
-  favorites: [UserBooks.Schema],
-  // friends is an array of instances of the UserFriends sub-document model
-  friends: [UserFriends.Schema]
+  // queue & favorites are arrays of ids of instances of Books
+  queue: [{ type: Schema.Types.ObjectId, ref: 'Books' }],
+  favorites: [{ type: Schema.Types.ObjectId, ref: 'Books' }],
+  // friends is an array of instances of Users
+  friends: [{ type: Schema.Types.ObjectId, ref: 'Users' }]
 });
 
 var Users = mongoose.model('Users', usersSchema);
