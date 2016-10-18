@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
-const Book = require('./books');
+const Books = require('./books');
 
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
+const usersSchema = new Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   userPhoto: { data: Buffer, contentType: String },
@@ -14,5 +14,5 @@ const userSchema = new Schema({
   // friends: [User]
 });
 
-var User = mongoose.model('User', userSchema);
-module.exports = User;
+var Users = mongoose.model('Users', usersSchema);
+module.exports = Users;

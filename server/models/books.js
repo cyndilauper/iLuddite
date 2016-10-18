@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const bookSchema = new Schema({
+const booksSchema = new Schema({
   title: String,
   author: String,
   isbn: Number,
@@ -11,13 +11,13 @@ const bookSchema = new Schema({
   coverPhoto: { data: Buffer, contentType: String }
 });
 
-bookSchema.statics.getBookByISBN = function(isbn){
-  Book.findOne({isbn: isbn}, function(err, book) {
+booksSchema.statics.getBookByISBN = function(isbn){
+  Books.findOne({isbn: isbn}, function(err, book) {
     if (err) console.log('get book error:', err);
     //TODO: do stuff with the book
     console.log(book);
   })
 }
 
-var Book = mongoose.model('Book', bookSchema);
-module.exports = Book;
+var Books = mongoose.model('Books', booksSchema);
+module.exports = Books;
