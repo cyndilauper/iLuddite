@@ -2,15 +2,15 @@ const express = require('express');
 const passport = require('passport');
 const router = express.Router();
 
-router.route('/facebook')
+router.route('/')
   .get(passport.authenticate('facebook', {
       scope: ['user_friends', 'user_location']
       // eventually add 'user_actions.books' to scope list
   }));
-router.route('/facebook/callback')
+router.route('/return')
   .get(passport.authenticate('facebook', {
-      successRedirect: '/',
-      failureRedirect: '/login'
+      successRedirect: '/home',
+      failureRedirect: '/'
   }));
 
 module.exports = router;

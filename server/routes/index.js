@@ -12,11 +12,15 @@ function authCheck(req, res, next) {
   if (req.user) {
     next();
   } else {
-    res.redirect('/login');
+    res.redirect('/');
   }
 }
 
-router.get('/', authCheck, (req, res, next) => {
+router.get('/', (req, res, next) => {
+  res.send('Welcome to iLuddite. <a href="./auth">Login with FB</a>')
+})
+
+router.get('/home', authCheck, (req, res, next) => {
   facebook.getImage(req.user.token, (imageUrl) => {
     req.user.image = imageUrl;
     facebook.getFriends(req.user.token, (results) => {
@@ -24,10 +28,6 @@ router.get('/', authCheck, (req, res, next) => {
       res.json({ index: 'this is the user\'s homepage', user: req.user });
     })
   });
-})
-
-router.get('/login', (req, res, next) => {
-  res.send('to view this site you must <a href="./auth/facebook">login with fb</a>')
 })
 
 module.exports = router;
