@@ -1,9 +1,16 @@
 const React = require('react');
+const Navbar = require('./Navbar');
 
 class App extends React.Component {
   render () {
     return (
-      <h1>Hello iLuddite!</h1>
+      <div>
+        <Navbar />
+        {
+          /* this.props.children is how react router drops components in our app based on different routes*/
+        }
+        {this.props.children}
+      </div>
     );
   }
 }
