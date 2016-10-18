@@ -13,6 +13,6 @@ module.exports = function (app) {
       done(null, user);
   });
 
-  require('./strategies/facebook.strategy')();
+  require('./strategies/facebook')();
 
 };
