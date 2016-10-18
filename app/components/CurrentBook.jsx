@@ -1,5 +1,5 @@
 const React = require('react');
-
+const
 
 const CurrentBook = (props) => {
   return (
@@ -11,22 +11,22 @@ const CurrentBook = (props) => {
                 </div>
                 <div className="row">
                     <div className="col-xs-4 currentPhotoColumn">
-                        <a href="#"><img src={props.book.image}className="img-responsive bookPhoto"/></a>
+                        <a href="#"><img src={props.currentBook.image}className="img-responsive bookPhoto"/></a>
                     </div>
                     <div className="col-xs-8 currentInfoColumn">
                         <div className="row">
                             <div className="col-xs-12 currentTitle">
-                                {props.book.title}
+                                {props.currentBook.title}
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-xs-12 currentAuthor">
-                                {props.book.author}
+                                {props.currentBook.author}
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-xs-12 currentBio">
-                                {props.book.description}
+                                {props.currentBook.description}
                             </div>
                         </div>
                     </div>
