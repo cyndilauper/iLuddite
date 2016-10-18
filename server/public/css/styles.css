@@ -54,11 +54,31 @@ nav h2 {
   font-size: 22px;
 }
 
+nav ul {
+  list-style: none;
+}
+
 nav input {
-  margin: 5px 0 0 0;
+  height: 48px;
+  display: block;
+  width: 100%;
+  padding-left: 40px;
 }
 
 nav .glyphicon-cog {
   padding-top: 14px;
+}
+
+nav span.glyphicon.glyphicon-search {
+  position: absolute;
+  left: 10px;
+  top: 12px;
+  font-size: 20px;
+  color: lightgray;
+}
+
+.search-box {
+  position: absolute;
+  width: 100%;
 }
 
