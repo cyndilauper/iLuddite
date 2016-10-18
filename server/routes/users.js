@@ -1,27 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const facebook = require('../services/facebook')('1787582178167706', process.env.fbSecret);
-
-// router.param('userid', (req, res, next, userid) => {
-//   next();
-// })
-
-router.use('/', (req, res, next) => {
-  if (!req.user) {
-    res.redirect('/');
-  }
-  next();
-})
-
-router.get('/', (req, res) => {
-  facebook.getImage(req.user.token, (imageUrl) => {
-    req.user.image = imageUrl;
-    facebook.getFriends(req.user.token, (results) => {
-      req.user.friends = results;
-      res.json({ user: req.user });
-    })
-  });
-})
 
 router.get('/:userid', (req, res, next) => {
   // GET user info (photo, friends, current book, queue, stats)

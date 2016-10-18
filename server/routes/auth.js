@@ -9,8 +9,8 @@ router.route('/facebook')
   }));
 router.route('/facebook/callback')
   .get(passport.authenticate('facebook', {
-      successRedirect: '/users',
-      failureRedirect: '/'
+      successRedirect: '/',
+      failureRedirect: '/login'
   }));
 
 module.exports = router;

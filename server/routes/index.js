@@ -4,8 +4,9 @@ const router = express.Router();
 const path = require('path');
 const app = express();
 
+const facebook = require('../services/facebook')('1787582178167706', process.env.fbSecret);
+
 app.use(express.static(path.join(__dirname, '../public')));
-//this should work
 
 function authCheck(req, res, next) {
   if (req.user) {
@@ -16,7 +17,13 @@ function authCheck(req, res, next) {
 }
 
 router.get('/', authCheck, (req, res, next) => {
-  res.json({index: 'this should only be viewable by logged in users'});
+  facebook.getImage(req.user.token, (imageUrl) => {
+    req.user.image = imageUrl;
+    facebook.getFriends(req.user.token, (results) => {
+      req.user.friends = results;
+      res.json({ index: 'this is the user\'s homepage', user: req.user });
+    })
+  });
 })
 
 router.get('/login', (req, res, next) => {
