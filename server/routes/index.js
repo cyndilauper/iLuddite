@@ -9,11 +9,10 @@ const facebook = require('../services/facebook')('1787582178167706', process.env
 app.use(express.static(path.join(__dirname, '../public')));
 
 function authCheck(req, res, next) {
-  if (req.user) {
-    next();
-  } else {
-    res.redirect('/');
+  if (req.isAuthenticated()) {
+    return next();
   }
+  res.redirect('/');
 }
 
 router.get('/', (req, res, next) => {

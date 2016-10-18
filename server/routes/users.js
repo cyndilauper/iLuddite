@@ -39,7 +39,7 @@ router.route('/:userid/queue/:bookid')
     if (req.query.current === 'true') {
       // if request ends in current=true, push to top of list
       User.findOneAndUpdate({ id: req.params.userid },
-        {$push: {queue: {$each: [req.params.bookid], $position: 0}}})
+        { $push: { queue: { $each: [req.params.bookid], $position: 0 } } } )
         .then(done => {
           if (done) {
             res.send(done);
@@ -52,7 +52,7 @@ router.route('/:userid/queue/:bookid')
     } else {
       // else, post to bottom
       User.findOneAndUpdate({ id: req.params.userid },
-        {$push: {queue: req.params.bookid}})
+        { $push: { queue: req.params.bookid } } )
         .then(done => {
           if (done) {
             res.send(done);
@@ -98,7 +98,7 @@ router.route('/:userid/favorites')
   .post((req, res, next) => {
   // POST to user's favorite books
     User.findOneAndUpdate({ id: req.params.userid },
-      {$push: {favorites: req.params.bookid}})
+      { $push: { favorites: req.params.bookid } } )
       .then(done => {
         if (done) {
           res.send(done);
@@ -112,7 +112,7 @@ router.route('/:userid/favorites')
   .delete((req, res, next) => {
   // DELETE from user's favorite books
     User.update( { id: req.params.userid },
-      { $pullAll: {favorites: [req.params.bookid] } } )
+      { $pullAll: { favorites: [req.params.bookid] } } )
       .then(done => {
         if (done) {
           res.send(done);
