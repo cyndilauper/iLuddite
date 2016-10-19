@@ -7,7 +7,6 @@ const ReactDOM = require('react-dom');
 // this is all just an example of how to import other components
 
 const App = require('./components/App');
-const EditPage = require('./components/EditPage');
 
 // dummy data all components
 const dummyData = require('./dummyData');

@@ -38,7 +38,17 @@ const devConfig = {
 const prodConfig = {
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
-      comments: false
+      beautify: false,
+      comments: false,
+      compress: {
+        warnings: false,
+        drop_console: true
+      },
+      mangle: {
+        except: ['$'],
+        screw_ie8: true,
+        keep_fnames: true
+      }
     })
   ]
 }
