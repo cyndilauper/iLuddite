@@ -41,7 +41,16 @@ const data = {
 }
 
 // and then render them out
-ReactDOM.render(
-  <EditPage favorites={data.favorites} queue={data.queue} />, 
-  document.getElementById('app')
-);
+
+var user = {
+  image: '/assets/user.jpg',
+  name: 'Luddington Beasley',
+  location: 'Austin, Tx',
+  booksRead: '43'
+}
+
+// to test user set const App = require('./components/UserBox');
+// and  ReactDOM.render(<App user={user}/>, document.getElementById('app'));
+
+ReactDOM.render(<App/>, document.getElementById('app'));
+

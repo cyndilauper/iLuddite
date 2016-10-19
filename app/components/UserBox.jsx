@@ -20,7 +20,7 @@ const UserBox = (props) => {
           </div>
           <div className="row">
             <div className="col-xs-12 userBooksRead">
-              {props.user.bookCount}
+              {props.user.booksRead}
             </div>
           </div>
         </div>
