@@ -50,25 +50,27 @@ next();
 })
 
 router.route('/:userid/queue/:bookid')
+router.route('/:userid/queue/:bookid')
   // POST or DELETE book to queue
   .post((req, res, next) => {
-      if (req.param('current') === 'true') {
-        // if request ends in current=true, push to top of list
-        var queue = [{
-            "schema": require('/models/book.js'),
-            "query": {
-              bookid: req.body.bookid
-            }
-          }, {
-            "schema": require('/models/user.js'),
-            "query": {
-              username: req.body.userid
-            }
-          }],
-          bookData = [];
-        var currentBook = 0
+      function recurse() {
+        if (req.param('current') === 'true') {
+          // if request ends in current=true, push to top of list
 
-        function recurse() {
+          var queue = [{
+              "schema": require('/models/book.js'),
+              "query": {
+                bookid: req.body.bookid
+              }
+            }, {
+              "schema": require('/models/user.js'),
+              "query": {
+                username: req.body.userid
+              }
+            }],
+            bookData = [];
+          var currentBook = 0
+
           if (currentBook < queue.length) {
             var task = queue[currentBook];
             task.schema.findOne(task.query, function(err, data) {
@@ -79,22 +81,19 @@ router.route('/:userid/queue/:bookid')
           } else {
             res.json(bookData);
           }
+        } else {
+          // else, post to bottom
+          res.json({
+            'bookID': req.params.bookid
+          });
         }
-        recurse();
-        next();
-      });
-    /* res.json({
-       'bookIDz': req.params.bookid*/
-  });
-}
-else {
-  // else, post to bottom
-  res.json({
-    'bookID': req.params.bookid
-  });
-}
-})
-.delete((req, res, next) => {
+      }
+      /* res.json({
+           'bookIDz': req.params.bookid*/
+    }
+
+
+  }).delete((req, res, next) => {
   if (err) {
     console.log(err)
     res.send('error')
