@@ -83,6 +83,7 @@ router.route('/:userid/queue/:bookid')
           }
         } else {
           // else, post to bottom
+          bookData.push(book)
           res.json({
             'bookID': req.params.bookid
           });
