@@ -76,6 +76,27 @@ module.exports = {
     {
       image: '/assets/book6.jpg'
     },
+  ],
+
+  friends:[
+    {
+      image: '/assets/friend1.jpg'
+    },
+    {
+      image: '/assets/friend2.jpg'
+    },
+    {
+      image: '/assets/friend3.jpg'
+    },
+    {
+      image: '/assets/friend4.jpg'
+    },
+    {
+      image: '/assets/friend5.jpg'
+    },
+    {
+      image: '/assets/friend6.jpg'
+    },
   ]
 
 }

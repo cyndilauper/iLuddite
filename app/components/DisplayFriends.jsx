@@ -1,6 +1,19 @@
 const React = require('react');
 
-const Friends = (friendArray) => {
+const Friends = (props) => {
+
+  console.log('props.queue is', props.queue);
+
+const friendQueue = props.queue.map((friend, idx) => {
+    console.log('friend is', friend);
+    return (
+    <div className="col-md-2 friendsColumn">
+      <a href="#"><img src={friend.image} className='img-responsive profilePhoto friendsPhoto'/></a> 
+    </div>
+    );
+  })
+
+  console.log('hey friendQueue is', friendQueue);
   return (
    <div className="wrapping div">
     <div className="row friendsTitleRow">
@@ -9,50 +22,11 @@ const Friends = (friendArray) => {
       </div>
     </div>
     <div className="row friendsRow">
-      {/*<div className="col-xs-1 friendsArrowColumn">
-          <div className="friendsArrowCircle">
-               <span className="glyphicon glyphicon-chevron-left"></span>
-          </div>
-      </div>*/}
-      <div className="col-xs-10">
         <div className="row">
-          <div className="col-sm-4">
             <div className="row">
-              <div className="col-xs-6 friendsColumn">
-                <a href="#"><img src={friendArray[0].image} className='img-responsive profilePhoto friendsPhoto'/></a> 
-              </div>
-              <div className="col-xs-6 friendsColumn">
-                <a href="#"><img src={friendArray[1].image} className='img-responsive profilePhoto friendsPhoto'/></a>
-              </div>
+              {friendQueue}
             </div>
-          </div>
-          <div className="col-sm-4">
-            <div className="row">
-              <div className="col-xs-6 friendsColumn">
-                <a href="#"><img src={friendArray[2].image} className='img-responsive profilePhoto friendsPhoto'/></a>
-              </div>
-              <div className="col-xs-6 friendsColumn">
-                <a href="#"><img src={friendArray[3].image} className='img-responsive profilePhoto friendsPhoto'/></a>
-              </div>
-            </div>
-          </div>
-          <div className="col-sm-4">
-            <div className="row">
-              <div className="col-xs-6 friendsColumn">
-                <a href="#"><img src={friendArray[4].image} className='img-responsive profilePhoto friendsPhoto'/></a>
-              </div>
-              <div className="col-xs-6 friendsColumn">
-                <a href="#"><img src={friendArray[5].image} className='img-responsive profilePhoto friendsPhoto'/></a>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
-      {/*<div className="col-xs-1 friendsArrowColumn">
-          <div className="friendsArrowCircle">
-              <span className="glyphicon glyphicon-chevron-right"></span>
-          </div>
-      </div>*/}
     </div>
    </div>
   );
