@@ -52,5 +52,30 @@ module.exports = {
     authorDescription: 'Michael Chabon is a totally rad dude who writes books that will break your heart.',
     description: 'Kav & Clay is probably the best book I\'ve read in the last five years.  Blah blah blah blah Donec id elit non mi porta gravida at eget metus. \
      Maecenas faucibus mollis interdum.  Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.'
-  }
+  },
+
+  profileQueue: [ 
+    {
+      image: '/assets/book0.jpg'
+    },
+    {
+      image: '/assets/book1.jpg'
+    },
+    {
+      image: '/assets/book2.jpg'
+    },
+    {
+      image: '/assets/book3.jpg'
+    },
+    {
+      image: '/assets/book4.jpg'
+    },
+    {
+      image: '/assets/book5.jpg'
+    },
+    {
+      image: '/assets/book6.jpg'
+    },
+  ]
+
 }
