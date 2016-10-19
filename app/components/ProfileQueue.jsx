@@ -17,50 +17,50 @@ const profileQueue = queue.filter((book, idx) => {
   });
   return (
     <div className ="wrappingDiv">
-     <div className="row readingTitleRow">
-                <div className="col-xs-12 readingHeader">
-                    Reading Queue
-                </div>
-            </div>
-            <div className="row readingRow">
-                {/*<div className="col-xs-1 readingArrowColumn readingArrowColumnLeft">
-                    <span className="glyphicon glyphicon-chevron-left"></span>
-                </div>*/}
-                <div className="col-xs-10">
-                    <div className="row">
-                        <div className="col-sm-6">
-                            <div className="row">
-                                <div className="col-xs-4 readingColumn">
-                                    <a href="#"><img src={profileQueue[1].image} className='img-responsive bookPhoto'/></a>
-                                </div>
-                                <div className="col-xs-4 readingColumn">
-                                    <a href="#"><img src={profileQueue[2].image} className='img-responsive bookPhoto'/></a>
-                                </div>
-                                <div className="col-xs-4 readingColumn">
-                                    <a href="#"><img src={profileQueue[3].image} className='img-responsive bookPhoto'/></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-sm-6">
-                            <div className="row">
-                                <div className="col-xs-4 readingColumn">
-                                    <a href="#"><img src={queue[4].image} className='img-responsive bookPhoto'/></a>
-                                </div>
-                                <div className="col-xs-4 readingColumn">
-                                    <a href="#"><img src={queue[5].image} className='img-responsive bookPhoto'/></a>
-                                </div>
-                                <div className="col-xs-4 readingColumn">
-                                    <a href="#"><img src={queue[6].image}className='img-responsive bookPhoto'/></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {/*<div className="col-xs-1 readingArrowColumn readingArrowColumnRight">
-                    <span className="glyphicon glyphicon-chevron-right"></span>
-                </div>*/}
-            </div>
+      <div className="row readingTitleRow">
+        <div className="col-xs-12 readingHeader">
+          Reading Queue
+        </div>
       </div>
+      <div className="row readingRow">
+        {/*<div className="col-xs-1 readingArrowColumn readingArrowColumnLeft">
+            <span className="glyphicon glyphicon-chevron-left"></span>
+        </div>*/}
+        <div className="col-xs-10">
+          <div className="row">
+            <div className="col-sm-6">
+              <div className="row">
+                <div className="col-xs-4 readingColumn">
+                  <a href="#"><img src={profileQueue[1].image} className='img-responsive bookPhoto'/></a>
+                </div>
+                <div className="col-xs-4 readingColumn">
+                  <a href="#"><img src={profileQueue[2].image} className='img-responsive bookPhoto'/></a>
+                </div>
+                <div className="col-xs-4 readingColumn">
+                  <a href="#"><img src={profileQueue[3].image} className='img-responsive bookPhoto'/></a>
+                </div>
+              </div>
+            </div>
+              <div className="col-sm-6">
+                <div className="row">
+                  <div className="col-xs-4 readingColumn">
+                    <a href="#"><img src={queue[4].image} className='img-responsive bookPhoto'/></a>
+                  </div>
+                  <div className="col-xs-4 readingColumn">
+                    <a href="#"><img src={queue[5].image} className='img-responsive bookPhoto'/></a>
+                  </div>
+                  <div className="col-xs-4 readingColumn">
+                    <a href="#"><img src={queue[6].image}className='img-responsive bookPhoto'/></a>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+        {/*<div className="col-xs-1 readingArrowColumn readingArrowColumnRight">
+            <span className="glyphicon glyphicon-chevron-right"></span>
+        </div>*/}
+      </div>
+    </div>
   );
 };
 
