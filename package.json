@@ -14,7 +14,9 @@
     "url": "git+https://github.com/skbolton/iLuddite.git"
   },
   "author": "skbolton",
-  "contributors": ["bartimez"],
+  "contributors": [
+    "bartimez"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/skbolton/iLuddite/issues"
@@ -32,6 +34,7 @@
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
+    "http": "0.0.0",
     "mongoose": "^4.6.4",
     "passport": "^0.3.2",
     "react": "^15.3.2",
