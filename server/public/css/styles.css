@@ -193,3 +193,50 @@ nav span.glyphicon.glyphicon-search {
   text-align: left;
   background: linear-gradient(90deg, #e8e8e8 50%, #fff 50%);
 }
+
+.friendsRow {
+  height: 240px;
+  padding: 0 2em 0 2em;
+}
+
+.friendsColumn {
+  max-height: 240px;
+}
+
+/*.friendsColumn .friendsCurrent {
+  position: relative;
+  bottom: 100px;
+  left: 0px;
+  visibility: hidden;
+}
+
+.friendsColumn:hover .friendsCurrent {
+  visibility:visible;
+}*/
+
+.friendsPhoto {
+  width: 100%;
+  max-height: inherit;
+}
+
+.friendsPhoto:hover {
+  opacity: 0.2;
+}
+
+.friendsCurrent {
+  text-align: center;
+}
+
+.friendsArrowColumn {
+  padding-top:3em;
+}
+
+.friendsArrowCircle {
+  color: #a0a0a0;
+  padding-top:15px;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  background-color: #e8e8e8;
+}
