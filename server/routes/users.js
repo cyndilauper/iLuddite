@@ -96,8 +96,8 @@ router.route('/:userid/queue/:bookid')
 
   }).delete((req, res, next) => {
   if (err) {
-    console.log(err)
-    res.send('error')
+    console.log(err);
+    res.send(err);
   }
   res.json({
     'bookID': req.params.bookid
@@ -112,7 +112,7 @@ router.route('/:userid/favorites')
       if (err) {
         res.send(err);
       } else {
-        res.send(user.favorites)
+        res.send(user.favorites);
       }
     })
     res.json({
