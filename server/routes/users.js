@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const Books = require('./books');
-const Users = require('./users');
+const Books = require('../models/books');
+const Users = require('./models/users');
 
 
 // router.param('userid', (req, res, next, userid) => {
@@ -27,10 +27,18 @@ router.get('/:userid/queue', (req, res, next) => {
   if (err) {
     console.log('You have a GET Error: There was a problem getting:' + err);
   } else {
+    var shapedFiveBooks= firstFiveBooks.map(function(book){
+      return{
+        title: book.volumeInfo.title,
+        author: book.volumeInfo.authors,
+        thumbnail: book.volumeInfo.imageLinks.thumbnail
+      }
+    })
+    res.send(shapedFiveBooks);
     console.log('GET retrived queue for:' + user._id);
   }
-  res.json({
-    'userIDqueue': req.params.userid
+  /*res.json({
+    'userIDqueue': req.params.userid*/
   });
   next();
 })
@@ -52,10 +60,7 @@ router.route('/:userid/queue/:bookid')
             }
           }],
           bookData = [];
-
-        var currentBook = 0.
-
-
+        var currentBook = 0
         function recurse() {
           if (currentBook < queue.length) {
             var task = queue[currentBook];
@@ -71,8 +76,8 @@ router.route('/:userid/queue/:bookid')
         recurse();
         next();
       });
-    res.json({
-      'bookIDz': req.params.bookid
+   /* res.json({
+      'bookIDz': req.params.bookid*/
     });
   }
 else {
@@ -92,6 +97,13 @@ router.route('/:userid/favorites')
   // GET, POST, or DELETE user's favorite books
   .get((req, res, next) => {
     // GET user's favorite books
+    Users.favorite({}, function(err, books){
+      if(err){
+        res.send(err);
+      } else {
+        res.send(user.favorites)
+      }
+    })
     res.json({
       'favorites': req.params.userid
     });
