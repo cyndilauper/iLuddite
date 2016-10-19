@@ -14,7 +14,6 @@
     "url": "git+https://github.com/skbolton/iLuddite.git"
   },
   "author": "skbolton",
-
   "contributors": [
     {
       "name": "Michael Lefkowitz"
@@ -23,7 +22,6 @@
       "name": "Brittany Artimez"
     }
   ],
-
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/skbolton/iLuddite/issues"
@@ -38,6 +36,7 @@
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
+    "axios": "^0.15.2",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "express-session": "^1.14.1",
