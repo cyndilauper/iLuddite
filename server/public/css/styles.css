@@ -42,6 +42,7 @@
 	text-align: center;
 }
 
+
 /* Navbar styling */
 nav {
   text-align: center;
@@ -103,6 +104,25 @@ nav span.glyphicon.glyphicon-search {
   padding: 5px 0;
   margin-bottom: 5px;
 }
+
+@media (min-width: 768px) {
+  .bookContainer {
+    max-width: 730px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+
+.bookContainer-narrow > hr {
+  margin: 30px 0;
+}
+
+.bookImg {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+
 
 .search-list-item button {
   display: block;
