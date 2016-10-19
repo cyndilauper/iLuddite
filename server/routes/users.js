@@ -9,26 +9,32 @@ const Users = require('./models/users');
 
 router.get('/:userid', (req, res, next) => {
   // GET user info (photo, friends, current book, queue, stats)
-  mongoose.model('Users').findById(req.id, function(err, user) {
-    if (err) {
-      console.log('You have a GET Error: There was a problem getting:' + err);
-    } else {
-      console.log('GET retrived ID:' + user._id);
+  var userSearched = req.params.userid;
+
+  function callback(err, resp, body) {
+    if (!err && res.statusCode === 200) {
+      return {
+        username: user.username,
+        queue: user.queue,
+        currentBook: user.currentBook,
+        stats: user.stats,
+        photo: user.photo
+      }
     }
-  })
+  }
+  console.log('GET retrived:' + user);
   res.json({
     'userID': req.params.userid
-  });
-  next();
+  })
 })
 
 router.get('/:userid/queue', (req, res, next) => {
   // GET user queue
   if (err) {
-    console.log('You have a GET Error: There was a problem getting:' + err);
+    return console.error('You have a GET Error: There was a problem getting:' + err);
   } else {
-    var shapedFiveBooks= firstFiveBooks.map(function(book){
-      return{
+    var shapedFiveBooks = firstFiveBooks.map(function(book) {
+      return {
         title: book.volumeInfo.title,
         author: book.volumeInfo.authors,
         thumbnail: book.volumeInfo.imageLinks.thumbnail
@@ -39,8 +45,8 @@ router.get('/:userid/queue', (req, res, next) => {
   }
   /*res.json({
     'userIDqueue': req.params.userid*/
-  });
-  next();
+});
+next();
 })
 
 router.route('/:userid/queue/:bookid')
@@ -61,6 +67,7 @@ router.route('/:userid/queue/:bookid')
           }],
           bookData = [];
         var currentBook = 0
+
         function recurse() {
           if (currentBook < queue.length) {
             var task = queue[currentBook];
@@ -76,10 +83,10 @@ router.route('/:userid/queue/:bookid')
         recurse();
         next();
       });
-   /* res.json({
-      'bookIDz': req.params.bookid*/
-    });
-  }
+    /* res.json({
+       'bookIDz': req.params.bookid*/
+  });
+}
 else {
   // else, post to bottom
   res.json({
@@ -88,6 +95,10 @@ else {
 }
 })
 .delete((req, res, next) => {
+  if (err) {
+    console.log(err)
+    res.send('error')
+  }
   res.json({
     'bookID': req.params.bookid
   });
@@ -97,8 +108,8 @@ router.route('/:userid/favorites')
   // GET, POST, or DELETE user's favorite books
   .get((req, res, next) => {
     // GET user's favorite books
-    Users.favorite({}, function(err, books){
-      if(err){
+    Users.favorite({}, function(err, books) {
+      if (err) {
         res.send(err);
       } else {
         res.send(user.favorites)
