@@ -37,7 +37,6 @@ router.get('/search/:searchterm', (req, res) => {
           title: book.volumeInfo.title,
           author: book.volumeInfo.authors,
           summary: book.volumeInfo.description,
-          //we use the ISBN-13
           isbn: (book.volumeInfo.industryIdentifiers)[0].identifier,
           //the imageLinks (formerly thumbnail) property is behaving very strangely. book.volumeInfo.imageLinks is an object with two properties, 'smallThumbnail' and 'thumbnail', and inserts fine this way, but book.volumeInfo.imageLinks.thumbnail throws an error "cannot read property thumbnail of undefined"
           imageLinks: book.volumeInfo.imageLinks
