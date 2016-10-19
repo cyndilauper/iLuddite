@@ -2,8 +2,7 @@ const mongoose = require('mongoose');
 const Books = require('./books');
 // const UserBooks = require('./userBooks');
 // const UserFriends = require('./userFriends');
-
-
+ 
 const Schema = mongoose.Schema;
 
 const usersSchema = new Schema({
