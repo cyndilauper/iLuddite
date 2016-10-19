@@ -4,26 +4,26 @@ const React = require('react');
 const Book = (book) => {
   return (
     <div className="bookContainer">
-        <div className="bookRow">
-          <div className="bookCol col-md-6">
-              <img className="bookImg" src={book.image} alt=""/> {/* using this image for testing*/}
-          </div>
-
-          <div className="bookCol2 col-md-6">
-              <h2>{book.title}</h2>
-              <h3>{book.author}</h3>
-              <br/>
-              <h4>About the Author</h4>
-              <p>{book.author.description}</p>
-              <h4>About the Book</h4>
-              <p>{book.description}</p>
-              <br/>
-              <a className="btn btn-default btn-info" href="#" role="button">Add to Queue</a>
-              <a className="btn btn-default btn-info" href="#" role="button">Add to Favorites</a>
-          </div>
+      <div className="bookRow">
+        <div className="bookCol col-md-6">
+          <img className="bookImg" src={book.image} alt=""/> {/* using this image for testing*/}
         </div>
 
+        <div className="bookCol2 col-md-6">
+          <h2>{book.title}</h2>
+          <h3>{book.author}</h3>
+          <br/>
+          <h4>About the Author</h4>
+          <p>{book.author.description}</p>
+          <h4>About the Book</h4>
+          <p>{book.description}</p>
+          <br/>
+          <a className="btn btn-default btn-info" href="#" role="button">Add to Queue</a>
+          <a className="btn btn-default btn-info" href="#" role="button">Add to Favorites</a>
+        </div>
       </div>
+
+    </div>
   );
 };
 
