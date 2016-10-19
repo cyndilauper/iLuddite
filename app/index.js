@@ -12,6 +12,6 @@ const EditPage = require('./components/EditPage');
 // dummy data all components
 const dummyData = require('./dummyData');
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App data={dummyData} />, document.getElementById('app'));
 
 
