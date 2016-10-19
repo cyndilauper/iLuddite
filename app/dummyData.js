@@ -54,7 +54,7 @@ module.exports = {
      Maecenas faucibus mollis interdum.  Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.'
   },
 
-  queue: [ 
+  profileQueue: [ 
     {
       image: '/assets/book0.jpg'
     },
