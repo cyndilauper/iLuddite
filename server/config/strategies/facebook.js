@@ -10,30 +10,32 @@ module.exports = function() {
     callbackURL: 'http://localhost:3000/auth/return',
     passReqToCallback: true
   },
-  (req, accessToken, refreshToken, profile, done) => {
+  (req, token, refreshToken, profile, done) => {
 
     let query = {
       'id': profile.id
     };
 
-    User.findOne(query, (error, user) => {
+    User.findOne(query).then(user => {
       if (user) {
         console.log('User found');
         done(null, user);
+
       } else {
         console.log('User not found - adding to DB');
-
         let newUser = {};
         newUser.id = profile.id;
         newUser.displayName = profile.displayName;
         newUser.image = `http://graph.facebook.com/${profile.id}/picture?width=400&height=400`;
-        newUser.token = accessToken;
+        newUser.token = token;
         newUser.stats = 0;
         newUser.favorites = [];
         newUser.queue = [];
         new User(newUser).save();
         done(null, user);
       }
+    }).catch(err => {
+      throw err;
     })
   }))
 }
