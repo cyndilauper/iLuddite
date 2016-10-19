@@ -122,6 +122,41 @@ nav span.glyphicon.glyphicon-search {
   padding-bottom: 20px;
 }
 
+.currentColumn {
+  padding: 1.2em 0;
+}
+
+.currentPhotoColumn img {
+  width: 100%;
+}
+
+.bookPhoto:hover {
+  opacity: 0.5;
+}
+
+.currentInfoColumnn {
+
+}
+
+.currentHeader {
+  font-size:2em;
+  padding-bottom: .5em;
+}
+
+.currentTitle {
+  font-size: 1.3em;
+}
+
+.currentAuthor {
+  font-size: 1.1em;
+  font-weight: 300;
+  margin-bottom: 1.1em;
+}
+
+.currentBio {
+  font-size: .9em;
+}
+
 
 
 .search-list-item button {
