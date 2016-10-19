@@ -6,6 +6,7 @@ const User = require('../models/users');
 const facebook = require('../services/facebook')('1787582178167706', process.env.fbSecret);
 
 router.get('/:userid', (req, res, next) => {
+  console.log(req.session)
   // GET user info (photo, current book, queue, stats)
   User.findOne({
         id: req.params.userid
