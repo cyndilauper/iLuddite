@@ -3,13 +3,22 @@ const router = express.Router();
 
 const User = require('../models/users');
 
+const facebook = require('../services/facebook')('1787582178167706', process.env.fbSecret);
+
 router.get('/:userid', (req, res, next) => {
   // GET user info (photo, current book, queue, stats)
   User.findOne({
         id: req.params.userid
     }).then(found => {
       if (found) {
-        res.send(found);
+        // if user is found - pass their id to the getFriends function
+        facebook.getFriends(req.user.token, found.id, results => {
+          // convert the found object to a JSON object
+          found = found.toJSON();
+          // add the friends array
+          found.friends = results;
+          res.send(found);
+        })
       } else {
         res.send('user not found')
       }

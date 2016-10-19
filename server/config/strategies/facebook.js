@@ -11,7 +11,7 @@ module.exports = function() {
     passReqToCallback: true
   },
   (req, token, refreshToken, profile, done) => {
-
+    console.log('refreshToken:',refreshToken)
     let query = {
       'id': profile.id
     };

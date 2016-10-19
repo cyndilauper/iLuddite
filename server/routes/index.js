@@ -22,7 +22,7 @@ router.get('/', (req, res, next) => {
 router.get('/home', authCheck, (req, res, next) => {
   // facebook.getImage(req.user.token, (imageUrl) => {
   //   req.user.image = imageUrl;
-    facebook.getFriends(req.user.token, (results) => {
+    facebook.getFriends(req.user.token, 'me', results => {
       req.user.friends = results;
       res.json({ index: 'this is the user\'s homepage', user: req.user });
     })
