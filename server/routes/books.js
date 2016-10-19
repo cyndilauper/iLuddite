@@ -7,7 +7,7 @@ const request = require('request');
 const google = require('../config/googleBooksAPI');
 
 router.get('/', (req, res, next) => {
-  console.log('req.params:', req.params);
+  // console.log('req.params:', req.params);
 
   //returns all books
   Books.find({}, function(err, books) {
@@ -17,16 +17,34 @@ router.get('/', (req, res, next) => {
 })
 
 //endpoint for navbar search of 3P API by title
-router.get('/:title', (req, res) => {
-  console.log('req:', req);
-  var titleSearched = req.params.title;
+router.get('/search/:searchterm', (req, res) => {
+  //hard-coding req.params.title for now.
+  // req.params.searchterm = "Kavalier and Clay";
+  // var titleSearched = req.params.searchterm;
+  // console.log('req.params:', req.params);
   var options = {
     url: 'https://www.googleapis.com/books/v1/volumes?q=' + titleSearched + '&key=' + google
   }
-  function callback(err, res, body) {
+  function callback(err, resp, body) {
     if (!err && res.statusCode == 200) {
-      var book = JSON.parse(body);
-      console.log('book:', book);
+      var allResult = JSON.parse(body);
+      var firstBook = allResult.items[0];
+      console.log(firstBook);
+      var firstFiveBooks = allResult.items.slice(0,6);
+
+      //shape the data returned for the first five books for the navbar and for insertion into the db
+      var shapedFiveBooks = firstFiveBooks.map(function(book){
+        return {
+          title: book.volumeInfo.title,
+          author: book.volumeInfo.authors,
+          summary: book.volumeInfo.description,
+          //we use the ISBN-13
+          isbns: book.volumeInfo.industryIdentifiers,
+          thumbnail: book.volumeInfo.imageLinks.thumbnail,
+          smallThumbnail: book.volumeInfo.imageLinks.smallThumbnail
+        }
+      })
+      res.send(shapedFiveBooks);
     }
   }
   request(options, callback);
