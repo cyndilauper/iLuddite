@@ -51,7 +51,7 @@ router.get('/search/:searchterm', (req, res) => {
 })
 
 //endpoint for retrieving books from db
-router.get('/db/:isbn', (req, res, next) => {
+router.get('/:isbn', (req, res, next) => {
 
   //check req.params for correct param, OR use getBookByISBN static method
   Books.find({isbn: req.params.isbn}, function(err, book) {
