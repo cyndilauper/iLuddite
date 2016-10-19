@@ -5,6 +5,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 
 // this is all just an example of how to import other components
+
 const App = require('./components/App');
 const EditPage = require('./components/EditPage');
 
@@ -65,4 +66,18 @@ var currentBook = {
 // to test currentBook set write const App = require('./components/CurrentBook');
 // and render: ReactDOM.render(<App currentBook={currentBook}/>, document.getElementById('app'));
 
+
 ReactDOM.render(<App />, document.getElementById('app'));
+
+var book = {
+  image: '/assets/kavclay.jpg',
+  title: 'The Amazing Adventures of Kavalier & Clay',
+  author: 'Michael Chabon',
+  authorDescription: 'Michael Chabon is a totally rad dude who writes books that will break your heart.',
+  description: 'Kav & Clay is probably the best book I\'ve read in the last five years.  Blah blah blah blah Donec id elit non mi porta gravida at eget metus. \
+   Maecenas faucibus mollis interdum.  Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.'
+}
+
+//to test book write const App = require('./components/Book'); 
+// and render ReactDOM.render(<App book={book}/>, document.getElementById('app'));
+
