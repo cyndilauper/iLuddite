@@ -10,7 +10,11 @@ const Navbar = (props) => {
           <h2>iLuddite</h2>
         </div>
         <div className="col-md-8">
-          <SearchBox searchResults={false}/>
+          <SearchBox 
+            changeSearchText={props.changeSearchText}
+            searchText={props.searchText}
+            searchResults={props.searchResults}
+          />
         </div>
         <div className="col-md-2">
           <span className="glyphicon glyphicon-cog"></span>
