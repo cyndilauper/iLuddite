@@ -5,7 +5,6 @@ const Books = require('../models/books');
 const db = require('../config/db');
 const request = require('request');
 const requestPromise = require('request-promise');
-const google = require('../config/googleBooksAPI');
 const async = require('async');
 
 router.get('/', (req, res, next) => {
@@ -20,7 +19,7 @@ router.get('/', (req, res, next) => {
 router.get('/search/:searchterm', (req, res) => {
   let titleSearched = req.params.searchterm;
   let options = {
-    url: 'https://www.googleapis.com/books/v1/volumes?q=' + titleSearched + '&key=' + google,
+    url: `https://www.googleapis.com/books/v1/volumes?q=${titleSearched}&key=${process.env.gbKey}`,
     json: true
   }
 

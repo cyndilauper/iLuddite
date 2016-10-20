@@ -14,6 +14,7 @@ router.get('/:userid', (req, res, next) => {
     }).then(found => {
       if (found) {
         // if user is found - pass their fbid to the getFriends function
+        try {
         facebook.getFriends(req.user.token, found.fbid, results => {
           // convert the found object to a JSON object
           found = found.toJSON();
@@ -21,6 +22,10 @@ router.get('/:userid', (req, res, next) => {
           found.friends = results;
           res.send(found);
         })
+      }
+      catch(err) {
+        res.send('no token - you must not be signed in')
+      }
       } else {
         res.send('user not found')
       }
@@ -80,23 +85,6 @@ router.route('/:userid/queue/:bookid')
       }).catch(err => {
         throw err;
       });
-
-      User.findOne({ fbid: req.params.userid },
-        { $push: { queue: req.params.bookid } } )
-        // .populate('queue')
-        // .exec(function(err, post) {
-        // console.log(post)
-        // });
-        .then(done => {
-          if (done) {
-            res.json(done);
-          } else {
-            res.json({error: 'user and/or queue not found'})
-          }
-      }).catch(err => {
-        throw err;
-      });
-
     }
   })
   .delete((req, res, next) => {
@@ -122,7 +110,12 @@ router.route('/:userid/favorites')
         fbid: req.params.userid
     }).then(found => {
       if (found) {
-        res.send(found.favorites);
+        Book.find()
+          .where('_id')
+          .in(found.favorites)
+          .then(found => {
+            res.send(found);
+          })
       } else {
         res.send('user and/or favorites not found')
       }
