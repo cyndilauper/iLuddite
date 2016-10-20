@@ -9,11 +9,11 @@ router.get('/:userid', (req, res, next) => {
   console.log(req.session)
   // GET user info (photo, current book, queue, stats)
   User.findOne({
-        id: req.params.userid
+        fbid: req.params.userid
     }).then(found => {
       if (found) {
-        // if user is found - pass their id to the getFriends function
-        facebook.getFriends(req.user.token, found.id, results => {
+        // if user is found - pass their fbid to the getFriends function
+        facebook.getFriends(req.user.token, found.fbid, results => {
           // convert the found object to a JSON object
           found = found.toJSON();
           // add the friends array
@@ -31,7 +31,7 @@ router.get('/:userid', (req, res, next) => {
 router.get('/:userid/queue', (req, res, next) => {
   // GET user queue
   User.findOne({
-        id: req.params.userid
+        fbid: req.params.userid
     }).then(found => {
       if (found) {
         res.send(found.queue);
@@ -48,7 +48,7 @@ router.route('/:userid/queue/:bookid')
   .post((req, res, next) => {
     if (req.query.current === 'true') {
       // if request ends in current=true, push to top of list
-      User.findOneAndUpdate({ id: req.params.userid },
+      User.findOneAndUpdate({ fbid: req.params.userid },
         { $push: { queue: { $each: [req.params.bookid], $position: 0 } } } )
         .then(done => {
           if (done) {
@@ -61,7 +61,7 @@ router.route('/:userid/queue/:bookid')
       });
     } else {
       // else, post to bottom
-      User.findOneAndUpdate({ id: req.params.userid },
+      User.findOneAndUpdate({ fbid: req.params.userid },
         { $push: { queue: req.params.bookid } } )
         .then(done => {
           if (done) {
@@ -76,7 +76,7 @@ router.route('/:userid/queue/:bookid')
   })
   .delete((req, res, next) => {
     // delete book from queue
-    User.update( { id: req.params.userid },
+    User.update( { fbid: req.params.userid },
       { $pullAll: {queue: [req.params.bookid] } } )
       .then(done => {
         if (done) {
@@ -94,7 +94,7 @@ router.route('/:userid/favorites')
   .get((req, res, next) => {
   // GET user's favorite books
   User.findOne({
-        id: req.params.userid
+        fbid: req.params.userid
     }).then(found => {
       if (found) {
         res.send(found.favorites);
@@ -107,7 +107,7 @@ router.route('/:userid/favorites')
   })
   .post((req, res, next) => {
   // POST to user's favorite books
-    User.findOneAndUpdate({ id: req.params.userid },
+    User.findOneAndUpdate({ fbid: req.params.userid },
       { $push: { favorites: req.params.bookid } } )
       .then(done => {
         if (done) {
@@ -121,7 +121,7 @@ router.route('/:userid/favorites')
   })
   .delete((req, res, next) => {
   // DELETE from user's favorite books
-    User.update( { id: req.params.userid },
+    User.update( { fbid: req.params.userid },
       { $pullAll: { favorites: [req.params.bookid] } } )
       .then(done => {
         if (done) {

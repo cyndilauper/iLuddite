@@ -6,8 +6,6 @@ const app = express();
 
 const facebook = require('../services/facebook')('1787582178167706', process.env.fbSecret);
 
-app.use(express.static(path.join(__dirname, '../public')));
-
 function authCheck(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
@@ -16,7 +14,7 @@ function authCheck(req, res, next) {
 }
 
 router.get('/', (req, res, next) => {
-  res.send('Welcome to iLuddite. <a href="./auth">Login with FB</a>')
+  res.sendFile('index')
 })
 
 router.get('/home', authCheck, (req, res, next) => {

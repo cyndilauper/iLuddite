@@ -13,7 +13,7 @@ module.exports = function() {
   (req, token, refreshToken, profile, done) => {
     console.log('refreshToken:',refreshToken)
     let query = {
-      'id': profile.id
+      'fbid': profile.id
     };
 
     User.findOne(query).then(user => {
@@ -24,7 +24,7 @@ module.exports = function() {
       } else {
         console.log('User not found - adding to DB');
         let newUser = {};
-        newUser.id = profile.id;
+        newUser.fbid = profile.id;
         newUser.displayName = profile.displayName;
         newUser.image = `http://graph.facebook.com/${profile.id}/picture?width=400&height=400`;
         newUser.token = token;

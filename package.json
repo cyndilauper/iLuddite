@@ -36,15 +36,19 @@
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
+    "async": "^2.1.2",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "express-session": "^1.14.1",
+    "http": "0.0.0",
     "mongoose": "^4.6.4",
     "oauth": "^0.9.14",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
-    "react-router": "^2.8.1"
+    "react-router": "^2.8.1",
+    "request": "^2.75.0",
+    "request-promise": "^4.1.1"
   }
 }
