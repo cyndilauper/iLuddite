@@ -8,10 +8,10 @@ class App extends React.Component {
     super(props);
     this.state = {
       loggedInUserId: '',
-      loggedInUserQueue: [],
-      loggedInUserFavorites: [],
+      loggedInUserQueue: this.props.data.queue,
+      loggedInUserFavorites: this.props.data.queue,
       navbarSearchText: '',
-      navbarSearchResults: [1,1,1]
+      navbarSearchResults: []
     }
   }
 
@@ -28,6 +28,7 @@ class App extends React.Component {
           <EditPage 
             queue={this.props.data.queue} 
             favorites={this.props.data.favorites}
+
           />
         </div>
       </div>
@@ -51,6 +52,22 @@ class App extends React.Component {
     this.setState({
       navbarSearchResults: []
     });
+  }
+
+  removeBookFromQueue (isbn) {
+    
+  }
+
+  addBookToQueue (isbn) {
+
+  }
+
+  removeBookFromFavorites (isbn) {
+
+  }
+
+  addBookToFavorites (isbn) {
+    
   }
 }
 
