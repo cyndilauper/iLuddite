@@ -2,9 +2,9 @@ const React = require('react');
 
 const Friends = (props) => {
 
-  console.log('props.queue is', props.queue);
+  console.log('props.friendQueue is', props.friendQueue);
 
-const friendQueue = props.queue.map((friend, idx) => {
+const friendQueue = props.friendQueue.map((friend, idx) => {
     console.log('friend is', friend);
     return (
     <div className="col-md-2 friendsColumn">
