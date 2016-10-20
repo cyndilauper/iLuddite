@@ -17,18 +17,29 @@ class App extends React.Component {
 
   render () {
     const style = { height: '100vh' };
-    return (
-      <div style={style} onClick={this.clearSearchResults.bind(this)}>
-        <Navbar 
-          changeSearchText={this.changeSearchText.bind(this)}
-          searchText={this.state.navbarSearchText}
-          searchResults={this.state.navbarSearchResults}
-        />
-        <div className="container">
+    // if we are at route don't show navbar just the landing page
+    if (this.props.location.pathname === '/') {
+      return (
+        <div>
           {this.renderChildrenWithProps()}
         </div>
-      </div>
-    );
+      )
+    } else {
+      // otherwise show the navbar and any children that the router gives 
+      // app
+      return (
+        <div style={style} onClick={this.clearSearchResults.bind(this)}>
+          <Navbar 
+              changeSearchText={this.changeSearchText.bind(this)}
+              searchText={this.state.navbarSearchText}
+              searchResults={this.state.navbarSearchResults}
+            />
+          <div className="container">
+            {this.renderChildrenWithProps()}
+          </div>
+        </div>
+      );
+    }
   }
 
 
@@ -109,8 +120,8 @@ class App extends React.Component {
           queue: this.state.loggedInUserQueue,
           favorites: this.state.loggedInUserFavorites
         })
-      return child;
       }
+      return child;
     });
   }
 
