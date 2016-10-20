@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Books = require('../models/books');
-const Users = require('./models/users');
+const Users = require('../models/users');
 
 
 // router.param('userid', (req, res, next, userid) => {
@@ -41,7 +41,7 @@ router.get('/:userid/queue', (req, res, next) => {
       }
     })
     res.send(shapedFiveBooks);
-    console.log('GET retrived queue for:' + user._id);
+    console.log('GET retrived queue for:' + user.id);
   }
   /*res.json({
     'userIDqueue': req.params.userid*/
