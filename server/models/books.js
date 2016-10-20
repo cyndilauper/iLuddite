@@ -8,7 +8,8 @@ const booksSchema = new Schema({
   isbn: { type: String, required: true },
   authorInfo: String,
   summary: String,
-  coverPhoto: { data: Buffer, contentType: String }
+  coverPhoto: { data: Buffer, contentType: String },
+  thumbnail: { data: Buffer, contentType: String}
 });
 
 booksSchema.statics.getBookByISBN = function(isbn){

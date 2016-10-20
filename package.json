@@ -31,6 +31,7 @@
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
+    "async": "^2.1.2",
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
@@ -39,6 +40,7 @@
     "passport": "^0.3.2",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
-    "request": "^2.75.0"
+    "request": "^2.75.0",
+    "request-promise": "^4.1.1"
   }
 }

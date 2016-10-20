@@ -4,7 +4,9 @@ const mongoose = require('mongoose');
 const Books = require('../models/books');
 const db = require('../config/db');
 const request = require('request');
+const requestPromise = require('request-promise');
 const google = require('../config/googleBooksAPI');
+const async = require('async');
 
 router.get('/', (req, res, next) => {
   // console.log('req.params:', req.params);
@@ -20,41 +22,90 @@ router.get('/', (req, res, next) => {
 router.get('/search/:searchterm', (req, res) => {
   var titleSearched = req.params.searchterm;
   var options = {
-    url: 'https://www.googleapis.com/books/v1/volumes?q=' + titleSearched + '&key=' + google
+    url: 'https://www.googleapis.com/books/v1/volumes?q=' + titleSearched + '&key=' + google,
+    json: true
   }
-  function callback(err, resp, body) {
-    if (!err && res.statusCode == 200) {
-      var allResult = JSON.parse(body);
-      // var firstBook = allResult.items[0];
-      var firstFiveBooks = allResult.items.slice(0,6);
 
-      //shape the data returned for the first five books for the navbar and for insertion into the db
-      var shapedFiveBooks = firstFiveBooks.map(function(book){
-        console.log(book.volumeInfo.industryIdentifiers);
-        // var isbnTen = book.volumeInfo.industryIdentifiers
+  function getBooks(body) {
+    var firstFiveBooks = body.items.slice(0,6);
 
-        return {
-          title: book.volumeInfo.title,
-          author: book.volumeInfo.authors,
-          summary: book.volumeInfo.description,
-          isbn: (book.volumeInfo.industryIdentifiers)[0].identifier,
-          //the imageLinks (formerly thumbnail) property is behaving very strangely. book.volumeInfo.imageLinks is an object with two properties, 'smallThumbnail' and 'thumbnail', and inserts fine this way, but book.volumeInfo.imageLinks.thumbnail throws an error "cannot read property thumbnail of undefined"
-          imageLinks: book.volumeInfo.imageLinks
-          // smallThumbnail: book.volumeInfo.imageLinks.smallThumbnail
+    //shape the data returned for the first five books for the navbar and for insertion into the db
+    var shapedFiveBooks = firstFiveBooks.map(function(book){
+      function isbnTenGetter(){
+        var isbns = book.volumeInfo.industryIdentifiers;
+        if (isbns[0].type == 'ISBN_10') {
+          return isbns[0].identifier;
+        } else {
+          return isbns[1].identifier;
+        }
+      }
+
+      var isbn = isbnTenGetter();
+
+      return {
+        title: book.volumeInfo.title,
+        author: book.volumeInfo.authors,
+        summary: book.volumeInfo.description,
+        isbn: isbn,
+        coverPhoto: { contentType: 'image/png' },
+        thumbnail: { contentType: 'image/png' }
+      }
+    })
+    return shapedFiveBooks;
+  }
+
+  //okay here's where the magic begins.  make the starter API call to get the book list
+  requestPromise(options)
+  .then(function(rawBooks){ return getBooks(rawBooks) })
+  .then(function(fiveBooks){
+    //mmmkay now we're going to get the cover photos for the books and store them
+    //this silly done function is req'd by the async module.  the second argument to async.map is an iteratee that takes as *its* second argument a (req'd) done callback
+    var done = function(err, book) { return book; }
+    var booksWithCover = async.map(fiveBooks, function(book, done) {
+      var coverPath = 'http://covers.openlibrary.org/b/isbn/' + book.isbn + '-L.jpg';
+      var options = {
+        url: coverPath,
+        encoding: 'binary'
+      }
+
+      request(options, function(err, res, body) {
+        //pop that binary data into the book.coverPhoto.data property, son
+        if (!err && res.statusCode == 200) {
+          body = new Buffer(body, 'binary');
+          book.coverPhoto.data = body;
+          done(null, book);
         }
       })
+    }, function(err, result) {
+      //the third argument to the async.map call is a function that does something with the result.  the .then chain from our original request-promise (rp) wasn't playing nicely so we're going to nest the call for the thumbnails here
+      var thumbBooks = async.map(result, function(book, done) {
+        var thumbnailPath = 'http://covers.openlibrary.org/b/isbn/' + book.isbn + '-S.jpg';
+        var options = {
+          url: thumbnailPath,
+          encoding: 'binary'
+        }
 
-      //insert the five shaped books into the db
-      shapedFiveBooks.forEach(function(book, idx){
-        Books.create(book, function(err) {
-          if (err) console.log('book insert err:', err);
-          else console.log('book' + idx + ' inserted!');
+        request(options, function(err, res, body) {
+          //pop that binary data into the book.thumbnail.data property, son
+          if (!err && res.statusCode == 200) {
+            body = new Buffer(body, 'binary');
+            book.thumbnail.data = body;
+            done(null, book);
+          }
         })
+      }, function(err, result) {
+        //bomb.  same deal, this function is the third argument to the async.map that grabbed our thumbnails.  so 'result' here is errythang we need, primed for db insertion
+        result.forEach(function(book, idx){
+          Books.create(book, function(err) {
+            if (err) console.log('book insert err:', err);
+            else console.log('book' + idx + ' inserted!');
+          })
+        })
+        res.send(result);
       })
-      res.send(shapedFiveBooks);
-    }
-  }
-  request(options, callback);
+    })
+  })
+  //jesus, the nesting, it hurts.  sorry
 })
 
 //endpoint for retrieving books from db
