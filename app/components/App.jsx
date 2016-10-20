@@ -45,6 +45,9 @@ class App extends React.Component {
       .then(response => this.setState({ navbarSearchResults: response }));
   }
 
+  // this function would be needed anytime the user clicks on one of the books
+  // in the navbarSearchResults dropdown. In that case the user would get 
+  // sent to that book and then the list needs to be destroyed.
   clearSearchResults () {
     this.setState({
       navbarSearchResults: []
