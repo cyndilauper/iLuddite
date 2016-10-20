@@ -9,8 +9,6 @@ import { Router, Route, browserHistory } from 'react-router';
 
 // this is all just an example of how to import other components
 
-const App = require('./components/App');
-
 const Landing = require('./components/Landing');
 const EditPage = require('./components/EditPage');
 

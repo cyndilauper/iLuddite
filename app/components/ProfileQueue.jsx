@@ -3,27 +3,13 @@ const React = require('react');
 const ProfileQueue = (props) => {
 
 
-console.log('props is this here', props.ProfileQueue);
-const profileQueue1 = props.ProfileQueue.queue.map((book, idx) => {
-  console.log('book here is', book);
-  if (idx > 0 && idx < 4){
+const profileQueue = props.bookQueue.slice(1, 7).map((book, idx) => {
+  console.log('book hesdssadre is', book);
     return (
-      <div className="col-xs-4 readingColumn">
+      <div className="col-md-2 col-sm-2 col-xs-2 readingColumn">
         <a href="#"><img src={book.image} className='img-responsive bookPhoto'/></a>
       </div>
     );
-  }
-  });
-
-const profileQueue2 = props.ProfileQueue.queue.map((book, idx) => {
-  console.log('book here is', book);
-  if (idx > 3 && idx < 7){
-    return (
-      <div className="col-xs-4 readingColumn">
-        <a href="#"><img src={book.image} className='img-responsive bookPhoto'/></a>
-      </div>
-    );
-  }
   });
 
   return(
@@ -34,26 +20,15 @@ const profileQueue2 = props.ProfileQueue.queue.map((book, idx) => {
         </div>
       </div>
       <div className="row readingRow">
-        <div className="col-xs-10">
+        <div className="col-xs-12">
           <div className="row">
-            <div className="col-sm-6">
-              <div className="row">
-                {profileQueue1}
-              </div>
-            </div>
-              <div className="col-sm-6">
-                <div className="row">
-                  {profileQueue2}
-                </div>
-              </div>
+            {profileQueue}
           </div>
-        </div>
+        </div> 
       </div>
     </div>
   );
 
-
-console.log('profileQueue here now is', profileQueue);
 };
 
 module.exports = ProfileQueue;

@@ -296,3 +296,7 @@ nav span.glyphicon.glyphicon-search {
   text-align: center;
   background-color: #e8e8e8;
 }
+
+.bookCountTitle {
+  font-weight: 500;
+}
