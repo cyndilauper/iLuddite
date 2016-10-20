@@ -2,14 +2,6 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-<<<<<<< HEAD
-const booksSchema = new Schema({
-  title: String,
-  author: String,
-  isbn: { type: String, required: true },
-  authorInfo: String,
-  summary: String,
-=======
 const bookSchema = new Schema({
   _id: { type: String, required: true, unique: true },
   title: String,
@@ -17,7 +9,6 @@ const bookSchema = new Schema({
   summary: String,
   coverPath: String,
   thumbnailPath: String,
->>>>>>> fb-auth-v2
   coverPhoto: { data: Buffer, contentType: String },
   thumbnail: { data: Buffer, contentType: String}
 });
