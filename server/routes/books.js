@@ -31,6 +31,7 @@ router.get('/search/:searchterm', (req, res) => {
 
     //shape the data returned for the first five books for the navbar and for insertion into the db
     var shapedFiveBooks = firstFiveBooks.map(function(book){
+      // console.log(book.volumeInfo.imageLinks);
       function isbnTenGetter(){
         var isbns = book.volumeInfo.industryIdentifiers;
         if (isbns[0].type == 'ISBN_10') {
@@ -47,8 +48,10 @@ router.get('/search/:searchterm', (req, res) => {
         author: book.volumeInfo.authors,
         summary: book.volumeInfo.description,
         isbn: isbn,
-        coverPhoto: { contentType: 'image/png' },
-        thumbnail: { contentType: 'image/png' }
+        coverPath: book.volumeInfo.imageLinks.thumbnail,
+        thumbnailPath: book.volumeInfo.imageLinks.smallThumbnail,
+        coverPhoto: { contentType: 'image/jpg' },
+        thumbnail: { contentType: 'image/jpg' }
       }
     })
     return shapedFiveBooks;
@@ -62,7 +65,8 @@ router.get('/search/:searchterm', (req, res) => {
     //this silly done function is req'd by the async module.  the second argument to async.map is an iteratee that takes as *its* second argument a (req'd) done callback
     var done = function(err, book) { return book; }
     var booksWithCover = async.map(fiveBooks, function(book, done) {
-      var coverPath = 'http://covers.openlibrary.org/b/isbn/' + book.isbn + '-L.jpg';
+      // var coverPath = 'http://covers.openlibrary.org/b/isbn/' + book.isbn + '-L.jpg';
+      var coverPath = book.coverPath;
       var options = {
         url: coverPath,
         encoding: 'binary'
@@ -72,6 +76,8 @@ router.get('/search/:searchterm', (req, res) => {
         //pop that binary data into the book.coverPhoto.data property, son
         if (!err && res.statusCode == 200) {
           body = new Buffer(body, 'binary');
+          //convert into a base64 string
+          body = body.toString('base64');
           book.coverPhoto.data = body;
           done(null, book);
         }
@@ -79,7 +85,8 @@ router.get('/search/:searchterm', (req, res) => {
     }, function(err, result) {
       //the third argument to the async.map call is a function that does something with the result.  the .then chain from our original request-promise (rp) wasn't playing nicely so we're going to nest the call for the thumbnails here
       var thumbBooks = async.map(result, function(book, done) {
-        var thumbnailPath = 'http://covers.openlibrary.org/b/isbn/' + book.isbn + '-S.jpg';
+        // var thumbnailPath = 'http://covers.openlibrary.org/b/isbn/' + book.isbn + '-S.jpg';
+        var thumbnailPath = book.thumbnailPath;
         var options = {
           url: thumbnailPath,
           encoding: 'binary'
@@ -89,6 +96,8 @@ router.get('/search/:searchterm', (req, res) => {
           //pop that binary data into the book.thumbnail.data property, son
           if (!err && res.statusCode == 200) {
             body = new Buffer(body, 'binary');
+            //convert into a base64 string
+            body = body.toString('base64');
             book.thumbnail.data = body;
             done(null, book);
           }
