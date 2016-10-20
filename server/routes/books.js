@@ -11,7 +11,7 @@ const async = require('async');
 router.get('/', (req, res, next) => {
   //returns all books
   Books.find({}, (err, books) => {
-    if (err) res.send(err);
+    if (err) res.statusCode(500).send(err);
     else res.send(books);
   })
 })
@@ -97,7 +97,7 @@ router.get('/search/:searchterm', (req, res) => {
         })
       }, function(err, result) {
         //bomb.  same deal, this function is the third argument to the async.map that grabbed our thumbnails.  so 'result' here is errythang we need, primed for db insertion
-        Books.insertMany(result, answer => {
+        Books.insertMany(result, (err, answer) => {
           console.log(`Data Inserted:`, answer)
         })
         res.send(result);
