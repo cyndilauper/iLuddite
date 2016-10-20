@@ -1,6 +1,12 @@
 const React = require('react');
+import { browserHistory } from 'react-router';
+const axios = require('axios');
 
 class Landing extends React.Component {
+  constructor (props) {
+    super(props);
+  }
+
   render () {
     return (
     <div>
@@ -22,13 +28,20 @@ class Landing extends React.Component {
 
               <div className="button">
 
-              <button>Sign-in/Sign up with facebook </button>  
+              <button onClick={this.signIn.bind(this)}>Sign-in/Sign up with facebook </button>  
             </div>
           </div>
         </div>
 
   </div>
     );
+  }
+
+  // this function sends a request to server to authorize user with facebook
+  // once a request comes back with a user id send them to /users/:userid
+  signIn () {
+    const path = '/users/12345';
+    browserHistory.push(path);
   }
 }
 

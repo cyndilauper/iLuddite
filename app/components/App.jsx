@@ -28,12 +28,12 @@ class App extends React.Component {
           <EditPage 
             queue={this.props.data.queue} 
             favorites={this.props.data.favorites}
-
           />
         </div>
       </div>
     );
   }
+
 
   // allow navbar input field to change navbarSearchText
   changeSearchText (newText) {
@@ -69,6 +69,25 @@ class App extends React.Component {
   addBookToFavorites (isbn) {
     
   }
+
+  // This function is used to render out children given to App by router
+  // before rendering them we inspect what type of component they are
+  // and inject properties into them so that they can display all the data
+  // they need.
+  renderChildrenWithProps () {
+    // loop through the children of App and add properties to component
+    // and return a copy of it with new props.
+    return React.Children.map(this.props.children, (child) => {
+      if (child.type.name === "EditPage") {
+        return React.cloneElement(child, {
+          queue: this.state.queue,
+          favorites: this.state.favorites
+        })
+      return child;
+      }
+    });
+  }
+
 }
 
 // export the class so other files can work with it.

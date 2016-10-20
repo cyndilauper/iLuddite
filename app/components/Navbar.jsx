@@ -1,4 +1,5 @@
 const React = require('react');
+import { Link } from 'react-router';
 
 const SearchBox = require('./SearchBox');
 
@@ -17,7 +18,9 @@ const Navbar = (props) => {
           />
         </div>
         <div className="col-md-2">
-          <span className="glyphicon glyphicon-cog"></span>
+          <Link to="/users/12345/edit">
+            <span className="glyphicon glyphicon-cog"></span>
+          </Link>
         </div>
       </div>
     </nav>
