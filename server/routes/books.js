@@ -31,7 +31,7 @@ router.get('/search/:searchterm', (req, res) => {
           _id: book.id,
           title: book.volumeInfo.title,
           author: book.volumeInfo.authors[0],
-          description: book.volumeInfo.description,
+          summary: book.volumeInfo.description,
           coverPath: book.volumeInfo.imageLinks.thumbnail,
           thumbnailPath: book.volumeInfo.imageLinks.thumbnail,
           coverPhoto: { contentType: 'image/jpg' },
