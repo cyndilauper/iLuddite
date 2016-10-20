@@ -27,9 +27,9 @@ const Facebook = function (facebookKey, facebookSecret) {
   }
 
   // this function will get a list of all friends who are also using this app
-  let getFriends = function(userKey, done) {
+  let getFriends = function(userKey, profile, done) {
     oauth.get(
-    'https://graph.facebook.com/me/friends?redirect=false',
+    `https://graph.facebook.com/${profile}/friends?redirect=false`,
     userKey, (error, results, res) => {
       if (error) {
         console.log(`error: ${error}`);

@@ -18,6 +18,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(session({
     secret: 'booksyall',
     resave: true,
@@ -38,7 +40,13 @@ app.use((req, res, next) => {
   next(err);
 });
 
-// TODO - implement more error handlers
+app.use((err, req, res, next) => {
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
+});
 
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {
