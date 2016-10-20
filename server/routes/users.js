@@ -31,7 +31,8 @@ router.get('/:userid', (req, res, next) => {
 router.get('/:userid/queue', (req, res, next) => {
   // GET user queue
   if (err) {
-    return console.error('You have a GET Error: There was a problem getting:' + err);
+    res.send(err);
+     console.error('You have a GET Error: There was a problem getting:' + err);
   } else {
     var shapedFiveBooks = firstFiveBooks.map(function(book) {
       return {
@@ -49,7 +50,6 @@ router.get('/:userid/queue', (req, res, next) => {
 next();
 })
 
-router.route('/:userid/queue/:bookid')
 router.route('/:userid/queue/:bookid')
   // POST or DELETE book to queue
   .post((req, res, next) => {
@@ -96,8 +96,8 @@ router.route('/:userid/queue/:bookid')
 
   }).delete((req, res, next) => {
   if (err) {
-    console.log(err);
     res.send(err);
+    console.log(err);
   }
   res.json({
     'bookID': req.params.bookid
@@ -120,41 +120,54 @@ router.route('/:userid/favorites')
     });
   })
   .post((req, res, next) => {
-    // POST to user's favorite books
-    res.json({
-      'favorites': req.params.userid
-    });
-  })
-  .delete((req, res, next) => {
-    // DELETE from user's favorite books
-    mongoose.model('Users').findById(req.id, function(err, user) {
-      if (err) {
-        return console.err(err);
-      } else {
-        user.remove(function(err, user) {
-          if (err) {
-            return console.error(err);
-          } else {
-            console.log('DELETE removed ID:' + UserBooks.isbn);
-            res.format({
-              html: function() {
-                res.redirect('/user');
-              },
-              json: function() {
-                res.json({
-                  message: 'deleted',
-                  item: book
-                })
-              }
-            })
-          }
-        })
+      // POST to user's favorite books
+          Users.favorites({}, function(err, book){
+            if(err){
+              res.send(err);
+              console.error('There was an error posting to favorites')
+            } else {
+              user.favorites.push(book)
+            }
+          })
+        }
       }
-    })
+    }
     res.json({
       'favorites': req.params.userid
     });
-    next();
   })
+.delete((req, res, next) => {
+  // DELETE from user's favorite books
+  mongoose.model('Users').findById(req.id, function(err, user) {
+    if (err) {
+      res.send(err);
+      console.error(err);
+    } else {
+      user.remove(function(err, user) {
+        if (err) {
+          res.send(err);
+          console.error(err);
+        } else {
+          console.log('DELETE removed ID:' + UserBooks.isbn);
+          res.format({
+            html: function() {
+              res.redirect('/user');
+            },
+            json: function() {
+              res.json({
+                message: 'deleted',
+                item: book
+              })
+            }
+          })
+        }
+      })
+    }
+  })
+  res.json({
+    'favorites': req.params.userid
+  });
+  next();
+})
 
 module.exports = router;
