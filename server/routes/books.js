@@ -12,7 +12,7 @@ router.get('/', (req, res, next) => {
 
   //returns all books
   Books.find({}, function(err, books) {
-    if (err) res.send(err);
+    if (err) res.json({error: 'error'});
     else res.send(books);
   })
 })

@@ -52,9 +52,9 @@ router.route('/:userid/queue/:bookid')
         { $push: { queue: { $each: [req.params.bookid], $position: 0 } } } )
         .then(done => {
           if (done) {
-            res.send(done);
+            res.json(done);
           } else {
-            res.send('user and/or queue not found')
+            res.json({error: 'user and/or queue not found'})
           }
       }).catch(err => {
         throw err;
@@ -65,9 +65,9 @@ router.route('/:userid/queue/:bookid')
         { $push: { queue: req.params.bookid } } )
         .then(done => {
           if (done) {
-            res.send(done);
+            res.json(done);
           } else {
-            res.send('user and/or queue not found')
+            res.json({error: 'user and/or queue not found'})
           }
       }).catch(err => {
         throw err;
@@ -80,9 +80,9 @@ router.route('/:userid/queue/:bookid')
       { $pullAll: {queue: [req.params.bookid] } } )
       .then(done => {
         if (done) {
-          res.send(done);
+          res.json(done);
         } else {
-          res.send('user and/or queue not found')
+          res.json({error: 'user and/or queue not found'})
         }
     }).catch(err => {
       throw err;

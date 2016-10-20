@@ -14,7 +14,7 @@ function authCheck(req, res, next) {
 }
 
 router.get('/', (req, res, next) => {
-  res.sendFile('index')
+  res.sendFile('index');
 })
 
 router.get('/home', authCheck, (req, res, next) => {
