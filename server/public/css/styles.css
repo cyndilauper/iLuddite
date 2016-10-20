@@ -81,17 +81,19 @@ nav span.glyphicon.glyphicon-search {
 .search-box {
   position: absolute;
   width: 100%;
+  z-index: 5;
 }
 
 /* Search results styling */
 
 .search-list-item {
   padding: 0;
+  height: 80px;
 }
 
-.search-list-item img {
-  display: block;
-  width: 100%;
+.search-list-item button.btn.btn-primary {
+  margin-right: 20px;
+  margin-top: 20px;
 }
 
 .search-list-item h4,
@@ -101,7 +103,6 @@ nav span.glyphicon.glyphicon-search {
 
 .search-list-item h4 {
   margin: 0;
-  padding: 5px 0;
   margin-bottom: 5px;
 }
 
@@ -161,12 +162,12 @@ nav span.glyphicon.glyphicon-search {
 
 .search-list-item button {
   display: block;
-  margin: 15px auto;
+  margin: 0 auto;
   width: 90%;
 }
 
 .button-container {
-  transform: translateY(50%);
+  padding-top: 5px;
 }
 
 .no-gutter > [class*='col-'] {
