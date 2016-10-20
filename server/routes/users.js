@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const User = require('../models/users');
+const Book = require('../models/books');
 
 const facebook = require('../services/facebook')('1787582178167706', process.env.fbSecret);
 
@@ -34,7 +35,12 @@ router.get('/:userid/queue', (req, res, next) => {
         fbid: req.params.userid
     }).then(found => {
       if (found) {
-        res.send(found.queue);
+        Book.find()
+          .where('_id')
+          .in(found.queue)
+          .then(found => {
+            res.send(found);
+          })
       } else {
         res.send('user and/or queue not found')
       }
@@ -72,6 +78,23 @@ router.route('/:userid/queue/:bookid')
       }).catch(err => {
         throw err;
       });
+
+      User.findOne({ fbid: req.params.userid },
+        { $push: { queue: req.params.bookid } } )
+        // .populate('queue')
+        // .exec(function(err, post) {
+        // console.log(post)
+        // });
+        .then(done => {
+          if (done) {
+            res.json(done);
+          } else {
+            res.json({error: 'user and/or queue not found'})
+          }
+      }).catch(err => {
+        throw err;
+      });
+
     }
   })
   .delete((req, res, next) => {

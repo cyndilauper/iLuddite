@@ -7,6 +7,8 @@ const bookSchema = new Schema({
   title: String,
   author: String,
   summary: String,
+  coverPath: String,
+  thumbnailPath: String,
   coverPhoto: { data: Buffer, contentType: String },
   thumbnail: { data: Buffer, contentType: String}
 });
