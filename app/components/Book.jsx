@@ -1,5 +1,5 @@
 const React = require('react');
-
+const Link = require('react-router').Link;
 
 const Book = (props) => {
   return (
@@ -18,8 +18,8 @@ const Book = (props) => {
           <h4>About the Book</h4>
           <p>{props.book.description}</p>
           <br/>
-          <a className="btn btn-default btn-info" href="#" role="button">Add to Queue</a>
-          <a className="btn btn-default btn-info" href="#" role="button">Add to Favorites</a>
+          <Link className="btn btn-default btn-info" to="#" role="button">Add to Queue</Link>
+          <Link className="btn btn-default btn-info" to="#" role="button">Add to Favorites</Link>
         </div>
       </div>
 

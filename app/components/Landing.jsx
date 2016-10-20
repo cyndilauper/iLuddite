@@ -27,7 +27,6 @@ class Landing extends React.Component {
             something on your reading list when you reach the end of that page-turner.
             <div class="tryout"> <br/>Want to try it out? </div>
               <div className="button">
-
               <button className="btn btn-primary" onClick={this.signIn.bind(this)}>Sign-in/Sign up with facebook </button>  
             </div>
           </div>
