@@ -8,8 +8,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       loggedInUserId: '',
-      loggedInUserQueue: this.props.data.queue,
-      loggedInUserFavorites: this.props.data.queue,
+      loggedInUserQueue: this.props.route.data.queue,
+      loggedInUserFavorites: this.props.route.data.favorites,
       navbarSearchText: '',
       navbarSearchResults: []
     }
@@ -25,10 +25,7 @@ class App extends React.Component {
           searchResults={this.state.navbarSearchResults}
         />
         <div className="container">
-          <EditPage 
-            queue={this.props.data.queue} 
-            favorites={this.props.data.favorites}
-          />
+          {this.renderChildrenWithProps()}
         </div>
       </div>
     );
@@ -55,7 +52,10 @@ class App extends React.Component {
   }
 
   removeBookFromQueue (isbn) {
-    
+    // go through current queue and filter out isbn
+    const filtered = 
+      this.state.loggedInUserQueue.filter(book => book.isbn !== isbn);
+    axios.delete(`/users/${userid}/queue/${isbn}`)
   }
 
   addBookToQueue (isbn) {
@@ -80,8 +80,8 @@ class App extends React.Component {
     return React.Children.map(this.props.children, (child) => {
       if (child.type.name === "EditPage") {
         return React.cloneElement(child, {
-          queue: this.state.queue,
-          favorites: this.state.favorites
+          queue: this.state.loggedInUserQueue,
+          favorites: this.state.loggedInUserFavorites
         })
       return child;
       }
