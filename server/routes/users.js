@@ -11,7 +11,13 @@ router.get('/:userid', (req, res, next) => {
   // GET user info (photo, current book, queue, stats)
   User.findOne({
         fbid: req.params.userid
-    }).then(found => {
+    })
+    .populate(queue, favorites)
+    .exec((err, result) => {
+      if (err) throw err;
+      else console.log('populated: ', result);
+    })
+    .then(found => {
       if (found) {
         // if user is found - pass their fbid to the getFriends function
         facebook.getFriends(req.user.token, found.fbid, results => {
