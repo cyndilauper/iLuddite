@@ -5,6 +5,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const session = require('express-session');
+require('dot-env');
 
 const db = require('./config/db');
 
