@@ -5,13 +5,16 @@ const Books = require('../models/books');
 const db = require('../config/db');
 const request = require('request');
 const requestPromise = require('request-promise');
-const async = require('async');
 
 router.get('/', (req, res, next) => {
   //returns all books
   Books.find({}, (err, books) => {
-    if (err) res.statusCode(500).send(err);
-    else res.send(books);
+    if (err) {
+      res.send(err);
+      console.log(`Find all books error: ${err}`);
+    } else {
+      res.send(books);
+    }
   })
 })
 
@@ -23,87 +26,36 @@ router.get('/search/:searchterm', (req, res) => {
     json: true
   }
 
-  function getBooks(body) {
-    body = body.items.slice(0,5);
-    let five = body.map(book => {
-      try {
-        return {
-          _id: book.id,
-          title: book.volumeInfo.title,
-          author: book.volumeInfo.authors[0],
-          summary: book.volumeInfo.description,
-          coverPath: book.volumeInfo.imageLinks.thumbnail,
-          thumbnailPath: book.volumeInfo.imageLinks.thumbnail,
-          coverPhoto: { contentType: 'image/jpg' },
-          thumbnail: { contentType: 'image/jpg' }
-        };
-      }
-      catch(err) {
-        return null;
-      }
-    }).filter(book => {
-      if (book) {
-        return book;
-      }
-    })
-    return five;
-  }
-
-  //okay here's where the magic begins.  make the starter API call to get the book list
-  requestPromise(options)
-  .then((rawBooks) => getBooks(rawBooks))
-  .then((fiveBooks) => {
-    //mmmkay now we're going to get the cover photos for the books and store them
-    //this silly done function is req'd by the async module.  the second argument to async.map is an iteratee that takes as *its* second argument a (req'd) done callback
-    let done = (err, book) => book;
-    let booksWithCover = async.map(fiveBooks, (book, done) => {
-      // let coverPath = 'http://covers.openlibrary.org/b/isbn/' + book.isbn + '-L.jpg';
-      let coverPath = book.coverPath;
-      let options = {
-        url: coverPath,
-        encoding: 'binary'
-      }
-
-      request(options, (err, res, body) => {
-        //pop that binary data into the book.coverPhoto.data property, son
-        if (!err && res.statusCode == 200) {
-          body = new Buffer(body, 'binary');
-          //convert into a base64 string
-          body = body.toString('base64');
-          book.coverPhoto.data = body;
-          done(null, book);
-        }
-      })
-    }, function(err, result) {
-      //the third argument to the async.map call is a function that does something with the result.  the .then chain from our original request-promise (rp) wasn't playing nicely so we're going to nest the call for the thumbnails here
-      let thumbBooks = async.map(result, (book, done) => {
-        // let thumbnailPath = 'http://covers.openlibrary.org/b/isbn/' + book.isbn + '-S.jpg';
-        let thumbnailPath = book.thumbnailPath;
-        let options = {
-          url: thumbnailPath,
-          encoding: 'binary'
-        }
-
-        request(options, (err, res, body) => {
-          //pop that binary data into the book.thumbnail.data property, son
-          if (!err && res.statusCode == 200) {
-            body = new Buffer(body, 'binary');
-            //convert into a base64 string
-            body = body.toString('base64');
-            book.thumbnail.data = body;
-            done(null, book);
-          }
-        })
-      }, function(err, result) {
-        //bomb.  same deal, this function is the third argument to the async.map that grabbed our thumbnails.  so 'result' here is errythang we need, primed for db insertion
-        Books.insertMany(result, (err, answer) => {
-          console.log(`Data Inserted:`, answer)
-        })
-        res.send(result);
-      })
-    })
+  requestPromise(options).then(response => {
+  response = response.items.slice(0,5);
+  let five = response.map(book => {
+    try {
+      return {
+        _id: book.id,
+        title: book.volumeInfo.title,
+        author: book.volumeInfo.authors[0],
+        summary: book.volumeInfo.description,
+        coverPath: book.volumeInfo.imageLinks.thumbnail,
+        thumbnailPath: book.volumeInfo.imageLinks.thumbnail
+      };
+    }
+    catch(err) {
+      return null;
+    }
+  }).filter(book => {
+    if (book) {
+      return book;
+    }
   })
-  //jesus, the nesting, it hurts.  sorry
+  Books.insertMany(five, (err, docs) => {
+    if (err) {
+      throw err;
+    } else {
+      console.log(docs);
+    }
+  });
+  res.json(five);
+  })
 })
 
 //endpoint for retrieving books from db
@@ -111,6 +63,7 @@ router.get('/:isbn', (req, res, next) => {
   Books.find({_id: req.params.isbn}, (err, book) => {
     if (err) {
       res.send(err);
+      console.log(`Error in finding book: ${err}`);
     } else {
       res.send(book);
     }
