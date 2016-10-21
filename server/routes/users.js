@@ -7,7 +7,7 @@ const Book = require('../models/books');
 const facebook = require('../services/facebook')('1787582178167706', process.env.fbSecret);
 
 router.get('/:userid', (req, res, next) => {
-  console.log(req.session)
+  // console.log(req.session)
   // GET user info (photo, current book, queue, stats)
   User.findOne({
         fbid: req.params.userid
@@ -19,8 +19,33 @@ router.get('/:userid', (req, res, next) => {
           // convert the found object to a JSON object
           found = found.toJSON();
           // add the friends array
-          found.friends = results;
-          res.send(found);
+
+          function getImage(fbid) {
+            return new Promise((resolve, reject) => {
+              User.findOne({fbid}, (err,obj) => {
+                if (err) {
+                  reject(err);
+                }
+                resolve( {fbid: obj.fbid,
+                  image: obj.image,
+                  name: obj.displayName } );
+              });
+            })
+          }
+
+          let mapped = results.map(friend => {
+            return getImage(friend.id)
+          })
+
+          Promise.all(mapped)
+            .then(result => {
+              found.friends = result;
+              res.send(found);
+            })
+            .catch(e => {
+              console.error(e);
+            })
+
         })
       }
       catch(err) {

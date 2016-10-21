@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-const path = require('path');
 const app = express();
 
 const facebook = require('../services/facebook')('1787582178167706', process.env.fbSecret);
@@ -10,6 +9,7 @@ function authCheck(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
+  console.log('Not Authenticated')
   res.redirect('/');
 }
 
