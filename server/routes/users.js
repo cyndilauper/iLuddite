@@ -12,7 +12,7 @@ router.get('/:userid', (req, res, next) => {
   User.findOne({
         fbid: req.params.userid
     })
-    .populate(queue favorites)
+    .populate('queue favorites')
     .exec((err, result) => {
       if (err) throw err;
       else console.log('populated: ', result);

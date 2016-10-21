@@ -1,6 +1,6 @@
-var creds = require('./mongo');
+// var creds = require('./mongo');
 // mongoDB connection settings
-const connection = `mongodb://${creds.dbHost}/${creds.dbName}`;
+const connection = `mongodb://${process.env.dbHost}/${process.env.dbName}`;
 // const connection = 'mongodb://localhost:27017/iLuddite';
 const mongoose = require('mongoose');
 mongoose.connect(connection);
