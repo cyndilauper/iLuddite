@@ -23,16 +23,19 @@ npm install
 Before creating an account with iLuddite, we require that all potential users have an active Facebook account. This allows for us to gather the users profile picture, name, and friends that use iLuddite. In addition this allows for an easy authorization process for both the user and the developers.
 
 ###Search Bar
-The current version of iLuddite will only search for book titles. We are currently working on expanding our efforts to allow for users to also search by authors.  
+The current version of iLuddite will only search for book titles. We are currently working on expanding our efforts to allow for users to also search by authors. Once the user has selected the book, they will be redirected to that book's page, at which time they will be able to add the book to their queue or to their favorite books.     
 
 ###Routes
 
+###Models
 
+###Components 
+
+###APIs Used
+Facebook: https://developers.facebook.com/docs/graph-api, 
+Google Books: https://developers.google.com/books/docs/v1/using
 
 ##Built With
-Mongoose
-React
-Boostrap
-Passport
+Mongoose, React, Boostrap, Webpack, and Passport
 
 
