@@ -142,6 +142,7 @@ class App extends React.Component {
           return React.cloneElement(child, {
             handleUserLogin: this.loginUser.bind(this)
           })
+          break;
         case "EditPage" :
           return React.cloneElement(child, {
             queue: this.state.loggedInUser.queue,

@@ -51,6 +51,7 @@ class Landing extends React.Component {
     // first setState
     this.props.handleUserLogin(this.props.route.data);
     const path = `/users/${this.props.route.data.fbid}`;
+
     browserHistory.push(path);
   }
 }
