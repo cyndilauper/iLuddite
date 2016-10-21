@@ -19,8 +19,8 @@ const dummyData = require('./dummyData');
 // and then render them out
 ReactDOM.render(
   <Router history={browserHistory}>
-    <Route path='/' component={App} data={dummyData}>
-      <IndexRoute component={Landing} />
+    <Route path='/' component={App}>
+      <IndexRoute component={Landing} data={dummyData}/>
       <Route path="users/:userid" component={UserProfile}/>
       <Route path="users/:userid/edit" component={EditPage}/>
     </Route>
