@@ -1,4 +1,5 @@
 const React = require('react');
+import { Link } from 'react-router';
 
 const ProfileQueue = (props) => {
 
