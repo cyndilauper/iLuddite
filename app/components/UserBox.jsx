@@ -10,7 +10,7 @@ const UserBox = (props) => {
         <div className="col-xs-5 userInfoColumnn">
           <div className="row">
             <div className="col-xs-12 userName">
-              {props.user.name}
+              {props.user.displayName}
             </div>
           </div>
           <div className="row">
@@ -22,7 +22,7 @@ const UserBox = (props) => {
             <div className="col-xs-12 userBooksRead">
               <br></br>
               <div className="bookCountTitle"> Book Count</div>
-              {props.user.booksRead}
+              {props.user.stats}
             </div>
           </div>
         </div>
