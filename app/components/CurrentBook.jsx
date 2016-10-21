@@ -26,7 +26,7 @@ const CurrentBook = (props) => {
                 </div>
                 <div className="row">
                   <div className="col-xs-12 currentBio">
-                    {props.currentBook.description}
+                    {props.currentBook.summary}
                   </div>
                 </div>
             </div>
