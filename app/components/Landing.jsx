@@ -20,15 +20,14 @@ class Landing extends React.Component {
 
           <div className ="well">
             <h2 className="header">Preface</h2>
-            Welcome to ILuddite, the reading application.  Lorem ipsum yada yada yada.  We have books.  
-            Lots of books, the best books You wouldn't believe the kind of books we have.  
-            Anyway what was I saying I like books because they have lots of pages.  Pages are the foundation of books. 
-             America needs to make more books because we need to make more pages. 
-              1 + 1 = 2, right? It's so simple but crooked Hilary would never think that.
-
+            Welcome to ILuddite, a place for you and your reading habit.  
+            From our site you can keep track of the books you're reading,
+            what your friends are reading, and what your favorite books are. 
+            We're making reading social for bookworms, so you'll always have
+            something on your reading list when you reach the end of that page-turner.
+            <div class="tryout"> <br/>Want to try it out? </div>
               <div className="button">
-
-              <button onClick={this.signIn.bind(this)}>Sign-in/Sign up with facebook </button>  
+              <button className="btn btn-primary" onClick={this.signIn.bind(this)}>Sign-in/Sign up with facebook </button>  
             </div>
           </div>
         </div>

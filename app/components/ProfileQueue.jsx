@@ -4,10 +4,9 @@ const ProfileQueue = (props) => {
 
 
 const profileQueue = props.bookQueue.slice(1, 7).map((book, idx) => {
-  console.log('book hesdssadre is', book);
     return (
       <div className="col-md-2 col-sm-2 col-xs-2 readingColumn">
-        <a href="#"><img src={book.image} className='img-responsive bookPhoto'/></a>
+        <Link to="#"><img src={book.image} className='img-responsive bookPhoto'/></Link>
       </div>
     );
   });

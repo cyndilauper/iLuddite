@@ -5,15 +5,13 @@ const Friends = (props) => {
   console.log('props.friendQueue is', props.friendQueue);
 
 const friendQueue = props.friendQueue.map((friend, idx) => {
-    console.log('friend is', friend);
     return (
     <div className="col-md-2 friendsColumn">
-      <a href="#"><img src={friend.image} className='img-responsive profilePhoto friendsPhoto'/></a> 
+      <Link to="#"><img src={friend.image} className='img-responsive profilePhoto friendsPhoto'/></Link> 
     </div>
     );
   })
 
-  console.log('hey friendQueue is', friendQueue);
   return (
    <div className="wrapping div">
     <div className="row friendsTitleRow">

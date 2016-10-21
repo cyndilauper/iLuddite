@@ -1,4 +1,5 @@
 const React = require('react');
+const Link = require('react-router').Link;
 
 const CurrentBook = (props) => {
   return (
@@ -10,7 +11,7 @@ const CurrentBook = (props) => {
       </div>
         <div className="row">
             <div className="col-xs-4 currentPhotoColumn">
-                <a href="#"><img src={props.currentBook.image}className="img-responsive bookPhoto"/></a>
+                <Link to="#"><img src={props.currentBook.image}className="img-responsive bookPhoto"/></Link>
             </div>
             <div className="col-xs-8 currentInfoColumn">
                 <div className="row">
