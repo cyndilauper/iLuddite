@@ -1,5 +1,5 @@
 # iLuddite
-iLuddite is a Makersquare Greenfield project created by Brittany Artimez, Michael Lefkowitz, Stephen Bolton, Joey Steinburger, and Rachel DePriest. Our application is meant for anybody who loves to read, but wants a more social experience for a traditionally solo exercise.  
+iLuddite is a Makersquare Greenfield project created by Brittany Artimez, Michael Lefkowitz, Stephen Bolton, Joey Steinburger, and Rachel DePriest. Our application is meant for anybody who loves to read, and wants a more social experience for a traditionally solo exercise.  
 
 ##Getting Started
 To get stared working with iLuddite, please clone the iLuddite repository to your computer: 
@@ -29,7 +29,7 @@ The current version of iLuddite will only search for book titles. We are current
 The user model's information is primarily gathered from the Facebook API, which gives iLuddite access to the user's name, Facebook id, friends, and profile picture. In addition iLuddite adds the user's queue, favorite books, token, reading stats, and time when user's account was activated to the user model schema. 	
 
 ###Book Model
-The book model's information is primarily gathered from the Google API, which gives iLuddite acces to the book's title, isbn, author, summary, cover, and thumbnail. iLuddite only adds a book id to the book model schema. 
+The book model's information is primarily gathered from the Google API, which gives iLuddite access to the book's title, ISBN, author, summary, cover, and thumbnail. iLuddite only adds a book id to the book model schema. 
 
 ###APIs Used
 Facebook: https://developers.facebook.com/docs/graph-api 	
@@ -37,6 +37,12 @@ Facebook: https://developers.facebook.com/docs/graph-api
 Google Books: https://developers.google.com/books/docs/v1/using
 
 ##Built With
-Mongoose, React, Boostrap, Webpack, and Passport. 
+Mongoose, React, Bootstrap, Web pack, and Passport.
+
+##Contributors
+Front-End: Stephen Bolton and Joey Steinburger
+
+Back-End: Brittany Artimez, Michael Lefkowitz, and Rachel DePriest
+
 
 
