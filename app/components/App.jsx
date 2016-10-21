@@ -62,15 +62,38 @@ class App extends React.Component {
   }
 
   addBookToQueue (isbn) {
+    // adds the clicked book to back of queue.  
+    axios.post(`/users/${userid}/queue/${isbn}`)
+    .then( book => {
+      this.setState({
+        loggedInUserQueue:this.state.loggedInUserQueue.concat(book)
+      })
+    })
+  }
 
+  makeCurrentBook (isbn){
+    // makes the clicked book your current Book.
+    axios.post(`/users/${userid}/queue/${isbn}?current=true`)
+    .then( book => {
+      this.setState({
+        loggedInUserQueue: [book].concat(this.state.loggedInUserQueue)
+      })
+    })
   }
 
   removeBookFromFavorites (isbn) {
+    // removesBookFromFavorites
+    const filtered = 
+    this.state.loggedInUserFavorites.filter(book => {
+      return book.isbn !== isbn;
+    });
+    axios.delete(`/users/${userid}/favorites/${isbn}`)
 
   }
 
   addBookToFavorites (isbn) {
-    
+    // adds book to Favorites
+
   }
 
   // This function is used to render out children given to App by router
