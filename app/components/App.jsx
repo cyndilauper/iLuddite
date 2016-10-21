@@ -7,17 +7,31 @@ class App extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      loggedInUserId: '',
-      loggedInUserQueue: this.props.route.data.queue,
-      loggedInUserFavorites: this.props.route.data.favorites,
       navbarSearchText: '',
-      navbarSearchResults: []
+      navbarSearchResults: [],
+      loggedInUser: {
+        /* when populated
+          fbid: '',
+          displayName: '',
+          favorites: [],
+          queue: [ { _id, title, author, summary, thumbnail, coverPhoto }],
+          stats: '',
+          friends: [ { name: fbid: image: } ]
+        */
+      }
     }
+  }
+
+  componentDidMount () {
+    this.setState({
+      loggedInUser: this.props.route.data
+    });
   }
 
   render () {
     const style = { height: '100vh' };
-    // if we are at route don't show navbar just the landing page
+    // if we are at if we are at '/' route don't render navbar
+    // simply render children
     if (this.props.location.pathname === '/') {
       return (
         <div>
@@ -92,13 +106,21 @@ class App extends React.Component {
     // loop through the children of App and add properties to component
     // and return a copy of it with new props.
     return React.Children.map(this.props.children, (child) => {
-      if (child.type.name === "EditPage") {
-        return React.cloneElement(child, {
-          queue: this.state.loggedInUserQueue,
-          favorites: this.state.loggedInUserFavorites
-        })
+      switch (child.type.name) {
+        case "EditPage" :
+          return React.cloneElement(child, {
+            queue: this.state.loggedInUser.queue,
+            favorites: this.state.loggedInUser.favorites
+          });
+          break;
+        case "UserProfile" :
+          return React.cloneElement(child, {
+            loggedInUser: this.state.loggedInUser
+          });
+          break;
+        default :
+          return child;
       }
-      return child;
     });
   }
 
