@@ -40,7 +40,7 @@ class Landing extends React.Component {
   // this function sends a request to server to authorize user with facebook
   // once a request comes back with a user id send them to /users/:userid
   signIn () {
-    const path = '/users/12345';
+    const path = '/users/1';
     browserHistory.push(path);
   }
 }
