@@ -121,6 +121,13 @@ class App extends React.Component {
 
   }
 
+  // used from the landing page once auth is successful.
+  loginUser (user) {
+    this.setState({
+      loggedInUser: user
+    });
+  }
+
   // This function is used to render out children given to App by router
   // before rendering them we inspect what type of component they are
   // and inject properties into them so that they can display all the data
@@ -130,6 +137,11 @@ class App extends React.Component {
     // and return a copy of it with new props.
     return React.Children.map(this.props.children, (child) => {
       switch (child.type.name) {
+        case "Landing" :
+          // we need the landing page to be able to login a user
+          return React.cloneElement(child, {
+            handleUserLogin: this.loginUser.bind(this)
+          })
         case "EditPage" :
           return React.cloneElement(child, {
             queue: this.state.loggedInUser.queue,
