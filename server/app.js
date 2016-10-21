@@ -41,9 +41,9 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-  res.status(err.status || 500);
   //changing this from res.render to res.json fixes the Terminal error "Error: No default engine was specified and no extension was provided." 
-  res.json('error', {
+  //also fixes deprecation error
+  res.status(err.status || 500).json({
     message: err.message,
     error: err
   });
