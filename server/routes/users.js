@@ -7,20 +7,54 @@ const Book = require('../models/books');
 const facebook = require('../services/facebook')('1787582178167706', process.env.fbSecret);
 
 router.get('/:userid', (req, res, next) => {
-  console.log(req.session)
+  // console.log(req.session)
   // GET user info (photo, current book, queue, stats)
   User.findOne({
         fbid: req.params.userid
     }).then(found => {
       if (found) {
         // if user is found - pass their fbid to the getFriends function
+        try {
         facebook.getFriends(req.user.token, found.fbid, results => {
           // convert the found object to a JSON object
           found = found.toJSON();
           // add the friends array
-          found.friends = results;
-          res.send(found);
+
+          // this function will get the photo from a user's profile
+          function getImage(fbid) {
+            return new Promise((resolve, reject) => {
+              User.findOne({fbid}, (err, obj) => {
+                if (err) {
+                  reject(err);
+                }
+                resolve( {fbid: obj.fbid,
+                  image: obj.image,
+                  name: obj.displayName } );
+              });
+            })
+          }
+
+          // map over the results object and add images
+          let mapped = results.map(friend => {
+            return getImage(friend.id)
+          })
+
+          // once all async mapping functions have resolved, add the array to
+          // the found object and return it
+          Promise.all(mapped)
+            .then(result => {
+              found.friends = result;
+              res.send(found);
+            })
+            .catch(e => {
+              console.error(e);
+            })
+
         })
+      }
+      catch(err) {
+        res.send('no token - you must not be signed in')
+      }
       } else {
         res.send('user not found')
       }
@@ -80,23 +114,6 @@ router.route('/:userid/queue/:bookid')
       }).catch(err => {
         throw err;
       });
-
-      User.findOne({ fbid: req.params.userid },
-        { $push: { queue: req.params.bookid } } )
-        // .populate('queue')
-        // .exec(function(err, post) {
-        // console.log(post)
-        // });
-        .then(done => {
-          if (done) {
-            res.json(done);
-          } else {
-            res.json({error: 'user and/or queue not found'})
-          }
-      }).catch(err => {
-        throw err;
-      });
-
     }
   })
   .delete((req, res, next) => {
@@ -122,7 +139,12 @@ router.route('/:userid/favorites')
         fbid: req.params.userid
     }).then(found => {
       if (found) {
-        res.send(found.favorites);
+        Book.find()
+          .where('_id')
+          .in(found.favorites)
+          .then(found => {
+            res.send(found);
+          })
       } else {
         res.send('user and/or favorites not found')
       }

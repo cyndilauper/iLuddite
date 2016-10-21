@@ -11,7 +11,6 @@ module.exports = function() {
     passReqToCallback: true
   },
   (req, token, refreshToken, profile, done) => {
-    console.log('refreshToken:',refreshToken)
     let query = {
       'fbid': profile.id
     };
@@ -23,15 +22,16 @@ module.exports = function() {
 
       } else {
         console.log('User not found - adding to DB');
-        let newUser = {};
-        newUser.fbid = profile.id;
-        newUser.displayName = profile.displayName;
-        newUser.image = `http://graph.facebook.com/${profile.id}/picture?width=400&height=400`;
-        newUser.token = token;
-        newUser.stats = 0;
-        newUser.favorites = [];
-        newUser.queue = [];
-        new User(newUser).save();
+
+        new User({ fbid: profile.id,
+          displayName: profile.displayName,
+          image: `http://graph.facebook.com/${profile.id}/picture?width=400&height=400`,
+          token: token,
+          stats: 0,
+          favorites: [],
+          queue: [] }).save(err => {
+          console.log(err);
+        });
         done(null, user);
       }
     }).catch(err => {
