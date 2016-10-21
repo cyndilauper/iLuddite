@@ -29,7 +29,7 @@ The current version of iLuddite will only search for book titles. We are current
 The user model's information is primarily gathered from the Facebook API, which gives iLuddite access to the user's name, Facebook id, friends, and profile picture. In addition iLuddite adds the user's queue, favorite books, token, reading stats, and time when user's account was activated to the user model schema. 	
 
 ###Book Model
-
+The book model's information is primarily gathered from the Google API, which gives iLuddite acces to the book's title, isbn, author, summary, cover, and thumbnail. iLuddite only adds a book id to the book model schema. 
 
 ###APIs Used
 Facebook: https://developers.facebook.com/docs/graph-api 	
