@@ -7,7 +7,6 @@ const Book = require('../models/books');
 const facebook = require('../services/facebook')('1787582178167706', process.env.fbSecret);
 
 router.get('/:userid', (req, res, next) => {
-  console.log(req.session)
   // GET user info (photo, current book, queue, stats)
   User.findOne({
     fbid: req.params.userid
@@ -18,7 +17,6 @@ router.get('/:userid', (req, res, next) => {
       else console.log('populated: ', result);
     })
     .then(found => {
-      console.log("found:", found);
       if (found) {
         // if user is found - pass their fbid to the getFriends function
         facebook.getFriends(found.token, found.fbid, results => {
