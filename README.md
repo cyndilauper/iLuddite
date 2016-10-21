@@ -25,18 +25,18 @@ Before creating an account with iLuddite, we require that all potential users ha
 ###Search Bar
 The current version of iLuddite will only search for book titles. We are currently working on expanding our efforts to allow for users to also search by authors. Once the user has selected the book, they will be redirected to that book's page, at which time they will be able to add the book to their queue or to their favorite books.     
 
-###Routes
+###User Model
+The user model's information is primarily gathered from the Facebook API, which gives iLuddite access to the user's name, Facebook id, friends, and profile picture. In addition iLuddite adds the user's queue, favorite books, token, reading stats, and time when user's account was activated to the user model schema. 	
 
-###Models
+###Book Model
 
-###Components 
 
 ###APIs Used
-Facebook: https://developers.facebook.com/docs/graph-api, 	
+Facebook: https://developers.facebook.com/docs/graph-api 	
 
 Google Books: https://developers.google.com/books/docs/v1/using
 
 ##Built With
-Mongoose, React, Boostrap, Webpack, and Passport
+Mongoose, React, Boostrap, Webpack, and Passport. 
 
 
