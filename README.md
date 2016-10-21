@@ -6,17 +6,31 @@ Before creating an account with iLuddite, we require that all potential users ha
 
 
 ##Getting Started
+To get stared working with iLuddite, please clone the iLuddite repository to your computer: 
+```
+$ git clone https://github.com/skbolton/iLuddite
+```
+Next, change the directory on the terminal to the iLuddite repository:
 
+```
+cd iLuddite
+```
+
+Finally install the node dependencies in the iLuddite repository: 
+
+```
+npm install
+```
 
 ##Running the Tests
 
 
 ##Built With
+Mongoose
+React.js
 
 ## Up and Running
 First grab the project and install the node dependencies.
-```
-$ git clone https://github.com/skbolton/iLuddite
 $ cd iLuddite
 $ npm install
 ```
