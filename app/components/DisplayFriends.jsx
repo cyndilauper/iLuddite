@@ -1,8 +1,7 @@
 const React = require('react');
+import { Link } from 'react-router';
 
 const Friends = (props) => {
-
-  console.log('props.friendQueue is', props.friendQueue);
 
 const friendQueue = props.friendQueue.map((friend, idx) => {
     return (

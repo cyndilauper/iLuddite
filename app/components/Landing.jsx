@@ -27,7 +27,12 @@ class Landing extends React.Component {
             something on your reading list when you reach the end of that page-turner.
             <div class="tryout"> <br/>Want to try it out? </div>
               <div className="button">
-              <button className="btn btn-primary" onClick={this.signIn.bind(this)}>Sign-in/Sign up with facebook </button>  
+              <button
+                className="btn btn-primary" 
+                onClick={this.signIn.bind(this)}
+              >
+                Sign-in/Sign up with facebook
+              </button>  
             </div>
           </div>
         </div>
@@ -39,7 +44,14 @@ class Landing extends React.Component {
   // this function sends a request to server to authorize user with facebook
   // once a request comes back with a user id send them to /users/:userid
   signIn () {
-    const path = '/users/12345';
+    // this would be the action to execute to auth the user with facebook
+    // once we get back a response we set the state of app with the user
+    // and move to the next route.
+    
+    // first setState
+    this.props.handleUserLogin(this.props.route.data);
+    const path = `/users/${this.props.route.data.fbid}`;
+
     browserHistory.push(path);
   }
 }
