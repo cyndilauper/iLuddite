@@ -20,9 +20,10 @@ router.get('/:userid', (req, res, next) => {
           found = found.toJSON();
           // add the friends array
 
+          // this function will get the photo from a user's profile
           function getImage(fbid) {
             return new Promise((resolve, reject) => {
-              User.findOne({fbid}, (err,obj) => {
+              User.findOne({fbid}, (err, obj) => {
                 if (err) {
                   reject(err);
                 }
@@ -33,10 +34,13 @@ router.get('/:userid', (req, res, next) => {
             })
           }
 
+          // map over the results object and add images
           let mapped = results.map(friend => {
             return getImage(friend.id)
           })
 
+          // once all async mapping functions have resolved, add the array to
+          // the found object and return it
           Promise.all(mapped)
             .then(result => {
               found.friends = result;
