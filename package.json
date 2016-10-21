@@ -48,7 +48,6 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
     "express-session": "^1.14.1",
-    "http": "0.0.0",
     "mongoose": "^4.6.4",
     "oauth": "^0.9.14",
     "passport": "^0.3.2",
@@ -57,6 +56,5 @@
     "react-dom": "^15.3.2",
     "react-router": "^2.8.1",
     "request": "^2.75.0",
-    "request-promise": "^4.1.1"
   }
 }

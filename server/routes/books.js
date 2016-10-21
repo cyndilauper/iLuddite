@@ -4,15 +4,15 @@ const mongoose = require('mongoose');
 const Books = require('../models/books');
 const db = require('../config/db');
 const request = require('request');
-const requestPromise = require('request-promise');
 
 router.get('/', (req, res, next) => {
   //returns all books
   Books.find({}, (err, books) => {
     if (err) {
-      res.send(err);
       console.log(`Find all books error: ${err}`);
+      res.send(err);
     } else {
+      console.log(`Find all books: ${books}`);
       res.send(books);
     }
   })
@@ -26,45 +26,60 @@ router.get('/search/:searchterm', (req, res) => {
     json: true
   }
 
-  requestPromise(options).then(response => {
-  response = response.items.slice(0,5);
-  let five = response.map(book => {
-    try {
-      return {
-        _id: book.id,
-        title: book.volumeInfo.title,
-        author: book.volumeInfo.authors[0],
-        summary: book.volumeInfo.description,
-        coverPath: book.volumeInfo.imageLinks.thumbnail,
-        thumbnailPath: book.volumeInfo.imageLinks.thumbnail
-      };
-    }
-    catch(err) {
-      return null;
-    }
-  }).filter(book => {
-    if (book) {
-      return book;
-    }
-  })
-  Books.insertMany(five, (err, docs) => {
-    if (err) {
-      throw err;
+  function getBooks(err, response, body) {
+    if (!err && response.statusCode == 200) {
+      //grab the first five books
+      body = body.items.slice(0,5);
+      let five = body.map(book => {
+        //try to grab the properties we want, otherwise return null
+        try {
+          return {
+            _id: book.id,
+            title: book.volumeInfo.title,
+            author: book.volumeInfo.authors[0],
+            summary: book.volumeInfo.description,
+            coverPath: book.volumeInfo.imageLinks.thumbnail,
+            thumbnailPath: book.volumeInfo.imageLinks.thumbnail
+          };
+        }
+        catch(err) {
+          return null;
+        }
+        //get rid of the null books
+      }).filter(book => {
+        if (book) {
+          return book;
+        }
+      })
+      //insert all into the books collection
+      Books.insertMany(five, (err, docs) => {
+        if (err) {
+          console.log(`Error in book insert: ${err}`);
+        } else {
+          console.log(`Books inserted: ${docs}`);
+        }
+      });
+      //respond with the inserted books
+      res.json(five);
     } else {
-      console.log(docs);
+      //error handler for request module attempt
+      console.log(`Error in API call: ${err}`);
     }
-  });
-  res.json(five);
-  })
+  }
+
+  //call the request module
+  request(options, getBooks);
+
 })
 
 //endpoint for retrieving books from db
 router.get('/:isbn', (req, res, next) => {
   Books.find({_id: req.params.isbn}, (err, book) => {
     if (err) {
-      res.send(err);
       console.log(`Error in finding book: ${err}`);
+      res.send(err);
     } else {
+      console.log(`Book found: ${book}`);
       res.send(book);
     }
   })
