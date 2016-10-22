@@ -51,14 +51,20 @@ router.get('/search/:searchterm', (req, res) => {
           return book;
         }
       })
-      //insert all into the books collection
-      Books.insertMany(five, (err, docs) => {
-        if (err) {
-          console.log(`Error in book insert: ${err}`);
-        } else {
-          console.log(`Books inserted: ${docs}`);
-        }
-      });
+      //handle the case in which the book is already in the db
+      five.forEach((book) => {
+        Books.findOneAndUpdate({_id: book._id}, {
+          _id: book._id,
+          title: book.title,
+          author: book.author,
+          summary: book.summary,
+          coverPath: book.coverPath,
+          thumbnailPath: book.thumbnailPath
+        }, {upsert:true, new:true}, (err, book) => {
+          if (err) console.log(err);
+          else console.log('book inserted or updated: ', book);
+        })
+      })
       //respond with the inserted books
       res.send(five);
     } else {

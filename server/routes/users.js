@@ -75,7 +75,7 @@ router.get('/:userid', (req, res, next) => {
 router.get('/:userid/queue', (req, res, next) => {
   // GET user queue
   User.findOne({
-        fbid: req.params.userid
+    fbid: req.params.userid
     }).then(found => {
       if (found) {
         Book.find()
@@ -99,10 +99,12 @@ router.route('/:userid/queue/:bookid')
       // if request ends in current=true, push to top of list
 
       User.findOneAndUpdate({ fbid: req.params.userid },
-        { $push: { queue: { $each: [req.params.bookid], $position: 0 } } } )
-        .then(done => {
-          if (done) {
-            res.json(done);
+        { $push: { queue: { $each: [req.params.bookid], $position: 0 } } })
+        .then(user => {
+          if (user) {
+            Book.findOne({_id: req.params.bookid}).then(book => {
+              res.json(book);
+            })
           } else {
             res.json({error: 'user and/or queue not found'})
           }
@@ -114,9 +116,12 @@ router.route('/:userid/queue/:bookid')
       // else, post to bottom
       User.findOneAndUpdate({ fbid: req.params.userid },
         { $push: { queue: req.params.bookid } } )
-        .then(done => {
-          if (done) {
-            res.json(done);
+        .then(user => {
+          if (user) {
+            Book.findOne({_id: req.params.bookid})
+            .then(book => {
+              res.json(book);
+            })
           } else {
             res.json({error: 'user and/or queue not found'})
           }
