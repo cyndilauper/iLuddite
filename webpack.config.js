@@ -36,7 +36,6 @@ const devConfig = {
 
 // this would be production settings we would want webpack to use
 const prodConfig = {
-  devtool: 'source-maps',
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
       beautify: false,
