@@ -15,37 +15,31 @@ router.get('/search/:author', (req, res) => {
 
   function getAuthorInfo(err, response, body) {
     if (!err && response.statusCode == 200) {
+      //goodreads returns XML so we've gotta parse it to JSON
       body = xml('' + body, (err, result) => {
         let authorId = result.GoodreadsResponse.author[0].$.id;
         let options = {
           url: `https://www.goodreads.com/author/show/${authorId}?key=${process.env.goodreads}`
         }
+        //once we've got the goodreads author id, perform a separate query to get the author info since goodreads makes us do that
         request(options, (err, response, body) => {
           if (!err && response.statusCode == 200) {
             body = xml('' + body, (err, result) => {
-              // var books = [];
-              // Books.find({
-              //   author: result.GoodreadsResponse.author[0].name[0]
-              // }, (err, books) => {
-              //   books.forEach((book) => {
-              //     books.push(book._id)
-              //   });
-              // })
-
+              //TODO: what if author is already in the db?
               var author = new Author({
+                _id: result.GoodreadsResponse.author[0].id,
                 name: result.GoodreadsResponse.author[0].name[0],
                 description: result.GoodreadsResponse.author[0].about[0],
                 photoPath: result.GoodreadsResponse.author[0].large_image_url[0],
               })
-
+              //insert new author into db
               author.save((err, docs) => {
                 if (err) {
                   console.log(`Error in author insert: ${err}`);
                 } else {
                   console.log(`Author inserted: ${docs}`);
                 }
-              });              
-
+              })                
               res.send(author);
             })
           }
@@ -56,15 +50,14 @@ router.get('/search/:author', (req, res) => {
       console.log(`Error in API call: ${err}`);
     }
   }
-
   //call the request module
   request(options, getAuthorInfo);
-
 })
 
 //endpoint for retrieving author from db
-router.get('/:authorid', (req, res, next) => {
-  Authors.find({_id: req.params.authorid}, (err, author) => {
+router.get('/:authorId', (req, res, next) => {
+  //find by name
+  Author.findOne({_id: req.params.authorId}, (err, author) => {
     if (err) {
       console.log(`Error in finding author: ${err}`);
       res.send(err);
