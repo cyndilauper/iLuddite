@@ -32,6 +32,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/books', books);
 app.use('/auth', auth);
+app.use('/authors', authors)
 
 // 404 catcher
 app.use((req, res, next) => {
