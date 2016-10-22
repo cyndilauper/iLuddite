@@ -32,14 +32,14 @@ module.exports = function() {
             stats: 0,
             location: results.location.name,
             favorites: [],
-            queue: [] }).save(err => {
-            console.log(err);
+            queue: [] }).save(error => {
+            console.log(error);
           });
           done(null, user);
         })
       }
-    }).catch(err => {
-      throw err;
+    }).catch(error => {
+      throw error;
     })
   }))
 }

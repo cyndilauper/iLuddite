@@ -13,7 +13,6 @@ router.get('/:userid', (req, res, next) => {
         fbid: req.params.userid
     }).then(found => {
       if (found) {
-        console.log('found:',found)
         // if user is found - pass their fbid to the getFriends function
         try {
         facebook.getFriends(req.user.token, found.fbid, results => {
@@ -24,13 +23,14 @@ router.get('/:userid', (req, res, next) => {
           // this function will get the photo from a user's profile
           function getImage(fbid) {
             return new Promise((resolve, reject) => {
-              User.findOne({fbid}, (err, obj) => {
-                if (err) {
-                  reject(err);
+              User.findOne({fbid}, (error, obj) => {
+                if (error) {
+                  reject(error);
+                } else {
+                  resolve( {fbid: obj.fbid,
+                    image: obj.image,
+                    name: obj.displayName } );
                 }
-                resolve( {fbid: obj.fbid,
-                  image: obj.image,
-                  name: obj.displayName } );
               });
             })
           }
@@ -47,20 +47,20 @@ router.get('/:userid', (req, res, next) => {
               found.friends = result;
               res.send(found);
             })
-            .catch(e => {
-              console.error(e);
+            .catch(error => {
+              console.log(error);
             })
 
         })
       }
-      catch(err) {
-        res.send(`Error: ${err} \n Maybe no token?`)
+      catch(error) {
+        res.send(`Error: ${error} \n Maybe no token?`)
       }
       } else {
         res.send('user not found')
       }
-    }).catch(err => {
-      throw err;
+    }).catch(error => {
+      throw error;
     })
 })
 
@@ -79,8 +79,8 @@ router.get('/:userid/queue', (req, res, next) => {
       } else {
         res.send('user and/or queue not found')
       }
-    }).catch(err => {
-      throw err;
+    }).catch(error => {
+      throw error;
     })
 })
 
@@ -98,8 +98,8 @@ router.route('/:userid/queue/:bookid')
           } else {
             res.json({error: 'user and/or queue not found'})
           }
-      }).catch(err => {
-        throw err;
+      }).catch(error => {
+        throw error;
       });
 
     } else {
@@ -112,8 +112,8 @@ router.route('/:userid/queue/:bookid')
           } else {
             res.json({error: 'user and/or queue not found'})
           }
-      }).catch(err => {
-        throw err;
+      }).catch(error => {
+        throw error;
       });
     }
   })
@@ -127,8 +127,8 @@ router.route('/:userid/queue/:bookid')
         } else {
           res.json({error: 'user and/or queue not found'})
         }
-    }).catch(err => {
-      throw err;
+    }).catch(error => {
+      throw error;
     })
   })
 
@@ -149,8 +149,8 @@ router.route('/:userid/favorites')
       } else {
         res.send('user and/or favorites not found')
       }
-    }).catch(err => {
-      throw err;
+    }).catch(error => {
+      throw error;
     })
   })
   .post((req, res, next) => {
@@ -163,8 +163,8 @@ router.route('/:userid/favorites')
         } else {
           res.send('user and/or favorites not found')
         }
-    }).catch(err => {
-      throw err;
+    }).catch(error => {
+      throw error;
     });
   })
   .delete((req, res, next) => {
@@ -177,8 +177,8 @@ router.route('/:userid/favorites')
         } else {
           res.send('user and/or favorite not found')
         }
-    }).catch(err => {
-      throw err;
+    }).catch(error => {
+      throw error;
     })
   })
 
