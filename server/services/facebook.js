@@ -26,6 +26,18 @@ const Facebook = function (facebookKey, facebookSecret) {
     });
   }
 
+  let getLocation = function(userKey, done) {
+    oauth.get(
+    'https://graph.facebook.com/me?fields=location',
+      userKey, (error, results, res) => {
+        if (error) {
+          console.log(`error: ${error}`);
+        }
+        results = JSON.parse(results);
+        done(results);
+    });
+  }
+
   // this function will get a list of all friends who are also using this app
   let getFriends = function(userKey, profile, done) {
     oauth.get(
@@ -41,7 +53,8 @@ const Facebook = function (facebookKey, facebookSecret) {
 
   return {
       getImage: getImage,
-      getFriends: getFriends
+      getFriends: getFriends,
+      getLocation: getLocation
   }
 }
 
