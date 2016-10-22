@@ -46,11 +46,12 @@ class App extends React.Component {
   render () {
     const style = { height: '100vh' };
     return (
-      <div style={style} onClick={this.clearSearchResults.bind(this)}>
+      <div style={style}>
         <Navbar 
           changeSearchText={this.changeSearchText.bind(this)}
           searchText={this.state.navbarSearchText}
           searchResults={this.state.navbarSearchResults}
+          handleSearchSubmit={this.searchForBook.bind(this)}
         />
         <div className="container">
           {this.renderChildrenWithProps()}
@@ -70,7 +71,11 @@ class App extends React.Component {
   // uses the navbarSearchText to do an api call and search for a book.
   searchForBook () {
     axios.get(`/books/search/${this.state.navbarSearchText}`)
-      .then(response => this.setState({ navbarSearchResults: response }));
+      .then(response => {
+        this.setState({
+          navbarSearchResults: response.data
+        })
+      });
   }
 
   // this function would be needed anytime the user clicks on one of the books
