@@ -97,8 +97,12 @@ nav span.glyphicon.glyphicon-search {
 /* Search results styling */
 
 .search-list-item {
-  padding: 0;
-  height: 80px;
+  padding: 10px 0;
+  height: 120px;
+}
+
+.search-list-item img {
+  max-height: 100px;
 }
 
 .search-list-item button.btn.btn-primary {
