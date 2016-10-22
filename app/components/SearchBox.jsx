@@ -22,6 +22,7 @@ class SearchBox extends React.Component {
             summary={`${book.summary.substr(0, 250)}...`}
             addBookToQueue={this.props.addBookToQueue}
             addBookToFavorites={this.props.addBookToFavorites}
+            makeCurrentBook={this.props.makeCurrentBook}
           />
         )
       })
