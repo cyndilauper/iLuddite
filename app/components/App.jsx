@@ -1,6 +1,7 @@
 const React = require('react');
 const Navbar = require('./Navbar');
 const EditPage = require('./EditPage');
+import { browserHistory } from 'react-router';
 const axios = require('axios');
 
 class App extends React.Component {
@@ -23,37 +24,31 @@ class App extends React.Component {
   }
 
   componentDidMount () {
-    this.setState({
-      loggedInUser: this.props.route.data
-    });
+    // check to see if state has logged in user and redirect to profile
+    if (this.state.loggedInUser) {
+      const path = `/users/${this.state.loggedInUser.fbid}`;
+      browserHistory.push(path);
+    } else {
+      // component needs to get logged in user
+      axios.get('/loggedin')
+        .then();
+    }
   }
 
   render () {
     const style = { height: '100vh' };
-    // if we are at if we are at '/' route don't render navbar
-    // simply render children
-    if (this.props.location.pathname === '/') {
-      return (
-        <div>
+    return (
+      <div style={style} onClick={this.clearSearchResults.bind(this)}>
+        <Navbar 
+          changeSearchText={this.changeSearchText.bind(this)}
+          searchText={this.state.navbarSearchText}
+          searchResults={this.state.navbarSearchResults}
+        />
+        <div className="container">
           {this.renderChildrenWithProps()}
         </div>
-      )
-    } else {
-      // otherwise show the navbar and any children that the router gives 
-      // app
-      return (
-        <div style={style} onClick={this.clearSearchResults.bind(this)}>
-          <Navbar 
-              changeSearchText={this.changeSearchText.bind(this)}
-              searchText={this.state.navbarSearchText}
-              searchResults={this.state.navbarSearchResults}
-            />
-          <div className="container">
-            {this.renderChildrenWithProps()}
-          </div>
-        </div>
-      );
-    }
+      </div>
+    );
   }
 
 
@@ -121,13 +116,6 @@ class App extends React.Component {
 
   }
 
-  // used from the landing page once auth is successful.
-  loginUser (user) {
-    this.setState({
-      loggedInUser: user
-    });
-  }
-
   // This function is used to render out children given to App by router
   // before rendering them we inspect what type of component they are
   // and inject properties into them so that they can display all the data
@@ -137,12 +125,6 @@ class App extends React.Component {
     // and return a copy of it with new props.
     return React.Children.map(this.props.children, (child) => {
       switch (child.type.name) {
-        case "Landing" :
-          // we need the landing page to be able to login a user
-          return React.cloneElement(child, {
-            handleUserLogin: this.loginUser.bind(this)
-          })
-          break;
         case "EditPage" :
           return React.cloneElement(child, {
             queue: this.state.loggedInUser.queue,

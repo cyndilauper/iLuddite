@@ -7,9 +7,8 @@ const DisplayFriends = require('./DisplayFriends');
 class UserProfile extends React.Component {
   constructor (props) {
     super(props);
-    // if the current profile is the logged in user
-    // we already have their info otherwise 
-    // it needs to be fetched when component is mounted
+    // if the current logged in user id matches the route :userid then 
+    // make current user this components user state object
     if (this.props.params.userid == this.props.loggedInUser.fbid) {
       this.state = {
         user: this.props.loggedInUser
@@ -22,8 +21,10 @@ class UserProfile extends React.Component {
   }
 
   componentDidMount () {
-    // fetch the user from server
-    // in our case we are only going to set the initial user.
+    // if we don't have user in state fetch the user info.
+    if (!this.state.user) {
+      axios.get(`users/${this.props.params.userid}`)
+    }
   }
 
   render () {
