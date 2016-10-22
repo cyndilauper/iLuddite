@@ -53,6 +53,7 @@ class App extends React.Component {
           searchResults={this.state.navbarSearchResults}
           handleSearchSubmit={this.searchForBook.bind(this)}
           addBookToQueue={this.addBookToQueue.bind(this)}
+          addBookToFavorites={this.addBookToFavorites.bind(this)}
         />
         <div className="container">
           {this.renderChildrenWithProps()}
@@ -95,7 +96,7 @@ class App extends React.Component {
     axios.delete(`/users/${this.state.loggedInUser.fbid}/queue/${isbn}`)
       .then(book => {
         const newState = Object.assign({}, this.state.loggedInUser);
-        const newState.queue = filtered;
+        newState.queue = filtered;
         this.setState({
           loggedInUser: newState
         })
@@ -135,8 +136,14 @@ class App extends React.Component {
   }
 
   addBookToFavorites (isbn) {
-    // adds book to Favorites
-
+    axios.post(`/users/${this.state.loggedInUser.fbid}/favorites/${isbn}`)
+      .then(book => {
+        const newState = Object.assign({}, this.state.loggedInUser);
+        newState.favorites = newState.favorites.concat(isbn);
+        this.setState({
+          loggedInUser: newState
+        })
+      })
   }
 
   // This function is used to render out children given to App by router

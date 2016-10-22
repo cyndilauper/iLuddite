@@ -21,7 +21,10 @@ const SearchListItem = (props) => {
           </button>
         </div>
         <div className="col-md-2">
-          <button className="btn btn-primary">
+          <button 
+            className="btn btn-primary"
+            onClick={props.addBookToFavorites.bind(null, props.bookid)}
+          >
             <span className="glyphicon glyphicon-book">&nbsp;</span>
             Make my Current
           </button>

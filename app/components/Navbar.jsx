@@ -17,6 +17,7 @@ const Navbar = (props) => {
             searchResults={props.searchResults}
             handleSearchSubmit={props.handleSearchSubmit}
             addBookToQueue={props.addBookToQueue}
+            addBookToFavorites={props.addBookToFavorites}
           />
         </div>
         <div className="col-md-2">
