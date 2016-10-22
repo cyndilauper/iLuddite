@@ -6,7 +6,7 @@ const Friends = (props) => {
 const friendQueue = props.friendQueue.map((friend, idx) => {
     return (
     <div className="col-md-2 friendsColumn">
-      <Link to="#"><img src={friend.image} className='img-responsive profilePhoto friendsPhoto'/></Link> 
+      <Link to={`/users/${friend.fbid}`}><img src={friend.image} className='img-responsive profilePhoto friendsPhoto'/></Link> 
     </div>
     );
   })
