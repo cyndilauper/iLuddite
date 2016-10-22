@@ -5,7 +5,7 @@ const path = require('path');
 
 const User = require('../models/users');
 
-const facebook = require('../services/facebook')('1787582178167706', process.env.fbSecret);
+const facebook = require('../services/facebook')();
 
 function authCheck(req, res, next) {
   if (req.isAuthenticated()) {
@@ -34,13 +34,14 @@ router.get('/loggedin', (req, res, next) => {
           // this function will get the photo from a user's profile
           function getImage(fbid) {
             return new Promise((resolve, reject) => {
-              User.findOne({fbid}, (err, obj) => {
-                if (err) {
-                  reject(err);
+              User.findOne({fbid}, (error, obj) => {
+                if (error) {
+                  reject(error);
+                } else {
+                  resolve( {fbid: obj.fbid,
+                    image: obj.image,
+                    name: obj.displayName } );
                 }
-                resolve( {fbid: obj.fbid,
-                  image: obj.image,
-                  name: obj.displayName } );
               });
             })
           }
@@ -57,20 +58,20 @@ router.get('/loggedin', (req, res, next) => {
               found.friends = result;
               res.send(found);
             })
-            .catch(e => {
-              console.error(e);
+            .catch(error => {
+              console.log(error);
             })
 
         })
       }
-      catch(err) {
-        res.send('no token - you must not be signed in')
+      catch(error) {
+        res.send(`Error: ${error} \n Maybe you don't have a token?`)
       }
       } else {
         res.send('user not found')
       }
-    }).catch(err => {
-      throw err;
+    }).catch(error => {
+      throw error;
     })
 })
 

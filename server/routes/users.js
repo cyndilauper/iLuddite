@@ -4,7 +4,7 @@ const router = express.Router();
 const User = require('../models/users');
 const Book = require('../models/books');
 
-const facebook = require('../services/facebook')('1787582178167706', process.env.fbSecret);
+const facebook = require('../services/facebook')();
 
 router.get('/:userid', (req, res, next) => {
   // GET user info (photo, current book, queue, stats)
@@ -31,13 +31,14 @@ router.get('/:userid', (req, res, next) => {
           // this function will get the photo from a user's profile
           function getImage(fbid) {
             return new Promise((resolve, reject) => {
-              User.findOne({fbid}, (err, obj) => {
-                if (err) {
-                  reject(err);
+              User.findOne({fbid}, (error, obj) => {
+                if (error) {
+                  reject(error);
+                } else {
+                  resolve( {fbid: obj.fbid,
+                    image: obj.image,
+                    name: obj.displayName } );
                 }
-                resolve( {fbid: obj.fbid,
-                  image: obj.image,
-                  name: obj.displayName } );
               });
             })
           }
@@ -54,20 +55,20 @@ router.get('/:userid', (req, res, next) => {
               found.friends = result;
               res.send(found);
             })
-            .catch(e => {
-              console.error(e);
+            .catch(error => {
+              console.log(error);
             })
 
         })
       }
-      catch(err) {
-        res.send('no token - you must not be signed in')
+      catch(error) {
+        res.send(`Error: ${error} \n Maybe no token?`)
       }
       } else {
         res.send('user not found')
       }
-    }).catch(err => {
-      throw err;
+    }).catch(error => {
+      throw error;
     })
 })
 
@@ -86,8 +87,8 @@ router.get('/:userid/queue', (req, res, next) => {
       } else {
         res.send('user and/or queue not found')
       }
-    }).catch(err => {
-      throw err;
+    }).catch(error => {
+      throw error;
     })
 })
 
@@ -105,8 +106,8 @@ router.route('/:userid/queue/:bookid')
           } else {
             res.json({error: 'user and/or queue not found'})
           }
-      }).catch(err => {
-        throw err;
+      }).catch(error => {
+        throw error;
       });
 
     } else {
@@ -119,8 +120,8 @@ router.route('/:userid/queue/:bookid')
           } else {
             res.json({error: 'user and/or queue not found'})
           }
-      }).catch(err => {
-        throw err;
+      }).catch(error => {
+        throw error;
       });
     }
   })
@@ -134,8 +135,8 @@ router.route('/:userid/queue/:bookid')
         } else {
           res.json({error: 'user and/or queue not found'})
         }
-    }).catch(err => {
-      throw err;
+    }).catch(error => {
+      throw error;
     })
   })
 
@@ -156,8 +157,8 @@ router.route('/:userid/favorites')
       } else {
         res.send('user and/or favorites not found')
       }
-    }).catch(err => {
-      throw err;
+    }).catch(error => {
+      throw error;
     })
   })
   .post((req, res, next) => {
@@ -170,8 +171,8 @@ router.route('/:userid/favorites')
         } else {
           res.send('user and/or favorites not found')
         }
-    }).catch(err => {
-      throw err;
+    }).catch(error => {
+      throw error;
     });
   })
   .delete((req, res, next) => {
@@ -184,8 +185,8 @@ router.route('/:userid/favorites')
         } else {
           res.send('user and/or favorite not found')
         }
-    }).catch(err => {
-      throw err;
+    }).catch(error => {
+      throw error;
     })
   })
 

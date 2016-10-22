@@ -10,6 +10,7 @@ const usersSchema = new Schema({
   // queue: Array,
   queue: [{ type: Schema.Types.ObjectId, ref: 'Books' }],
   favorites: [{ type: Schema.Types.ObjectId, ref: 'Books' }],
+  location: String,
   stats: Number,
   created_at: { type: Date, default: Date.now }
 });

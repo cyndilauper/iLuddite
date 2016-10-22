@@ -3,6 +3,8 @@ const FacebookStrategy = require('passport-facebook');
 
 const User = require('../../models/users');
 
+const facebook = require('../../services/facebook')();
+
 module.exports = function() {
   passport.use(new FacebookStrategy({
     clientID: '1787582178167706',
@@ -22,20 +24,22 @@ module.exports = function() {
 
       } else {
         console.log('User not found - adding to DB');
-
-        new User({ fbid: profile.id,
-          displayName: profile.displayName,
-          image: `http://graph.facebook.com/${profile.id}/picture?width=400&height=400`,
-          token: token,
-          stats: 0,
-          favorites: [],
-          queue: [] }).save(err => {
-          console.log(err);
-        });
-        done(null, user);
+        facebook.getLocation(token, results => {
+          new User({ fbid: profile.id,
+            displayName: profile.displayName,
+            image: `http://graph.facebook.com/${profile.id}/picture?width=400&height=400`,
+            token: token,
+            stats: 0,
+            location: results.location.name,
+            favorites: [],
+            queue: [] }).save(error => {
+            console.log(error);
+          });
+          done(null, user);
+        })
       }
-    }).catch(err => {
-      throw err;
+    }).catch(error => {
+      throw error;
     })
   }))
 }
