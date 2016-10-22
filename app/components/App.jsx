@@ -53,7 +53,7 @@ class App extends React.Component {
           searchResults={this.state.navbarSearchResults}
           handleSearchSubmit={this.searchForBook.bind(this)}
           addBookToQueue={this.addBookToQueue.bind(this)}
-          addBookToFavorites={this.addBookToFavorites.bind(this)}
+          makeCurrentBook={this.makeCurrentBook.bind(this)}
         />
         <div className="container">
           {this.renderChildrenWithProps()}
@@ -117,10 +117,13 @@ class App extends React.Component {
 
   makeCurrentBook (isbn){
     // makes the clicked book your current Book.
-    axios.post(`/users/${userid}/queue/${isbn}?current=true`)
+    axios.post(`/users/${this.state.loggedInUser.fbid}/queue/${isbn}?current=true`)
     .then( book => {
+      book = book.data
+      const newState = Object.assign({}, this.state.loggedInUser);
+      newState.queue = [book._id].concat(newState.queue);
       this.setState({
-        loggedInUserQueue: [book].concat(this.state.loggedInUserQueue)
+        loggedInUser: newState
       })
     })
   }
