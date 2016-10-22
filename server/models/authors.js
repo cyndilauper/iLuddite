@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const authorsSchema = new Schema({
   name: String,
+  description: String,
   photoPath: String,
   titlesBy: [{ type: Schema.Types.ObjectId, ref: 'Books' }]
 });

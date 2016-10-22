@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const Authors = require('../models/authors');
+const Author = require('../models/authors');
+const Books = require('../models/books');
 const db = require('../config/db');
 const request = require('request');
 const xml = require('xml2js').parseString;
@@ -22,7 +23,30 @@ router.get('/search/:author', (req, res) => {
         request(options, (err, response, body) => {
           if (!err && response.statusCode == 200) {
             body = xml('' + body, (err, result) => {
-              res.send(result);
+              // var books = [];
+              // Books.find({
+              //   author: result.GoodreadsResponse.author[0].name[0]
+              // }, (err, books) => {
+              //   books.forEach((book) => {
+              //     books.push(book._id)
+              //   });
+              // })
+
+              var author = new Author({
+                name: result.GoodreadsResponse.author[0].name[0],
+                description: result.GoodreadsResponse.author[0].about[0],
+                photoPath: result.GoodreadsResponse.author[0].large_image_url[0],
+              })
+
+              author.save((err, docs) => {
+                if (err) {
+                  console.log(`Error in author insert: ${err}`);
+                } else {
+                  console.log(`Author inserted: ${docs}`);
+                }
+              });              
+
+              res.send(author);
             })
           }
         })
