@@ -12,6 +12,7 @@ const routes = require('./routes/index');
 const users = require('./routes/users');
 const books = require('./routes/books');
 const auth = require('./routes/auth');
+const authors = require('./routes/authors');
 
 const app = express();
 
