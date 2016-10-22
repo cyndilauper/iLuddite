@@ -25,13 +25,19 @@ class App extends React.Component {
 
   componentDidMount () {
     // check to see if state has logged in user and redirect to profile
-    if (this.state.loggedInUser) {
+    if (this.state.loggedInUser.fbid) {
       const path = `/users/${this.state.loggedInUser.fbid}`;
       browserHistory.push(path);
     } else {
       // component needs to get logged in user
       axios.get('/loggedin')
-        .then();
+        .then((response) => {
+          this.setState({
+            loggedInUser: response.data
+          });
+          const path = `/users/${this.state.loggedInUser.fbid}`;
+          browserHistory.push(path);
+        });
     }
   }
 
