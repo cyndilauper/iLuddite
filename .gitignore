@@ -51,3 +51,7 @@ jspm_packages
 
 # dot env file for environment variable loading
 .env.json
+
+# ignore bundle
+bundle.js
+*.map

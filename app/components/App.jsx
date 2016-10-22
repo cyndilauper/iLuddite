@@ -116,7 +116,6 @@ class App extends React.Component {
   }
 
   makeCurrentBook (isbn){
-    // makes the clicked book your current Book.
     axios.post(`/users/${userid}/queue/${isbn}?current=true`)
     .then( book => {
       this.setState({
