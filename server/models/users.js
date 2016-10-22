@@ -8,8 +8,8 @@ const usersSchema = new Schema({
   token: String,
   // favorites: Array,
   // queue: Array,
-  queue: [{ type: Schema.Types.ObjectId, ref: 'Books' }],
-  favorites: [{ type: Schema.Types.ObjectId, ref: 'Books' }],
+  queue: [{ type: Schema.Types.String, ref: 'Books' }],
+  favorites: [{ type: Schema.Types.String, ref: 'Books' }],
   location: String,
   stats: Number,
   created_at: { type: Date, default: Date.now }

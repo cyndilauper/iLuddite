@@ -33,8 +33,7 @@ module.exports = function() {
             stats: 0,
             // location: results.location.name,
             location: '',
-            favorites: [],
-            queue: [] }).save(error => {
+            }).save(error => {
             console.log(error);
           });
           done(null, user);
