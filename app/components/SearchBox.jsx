@@ -12,9 +12,17 @@ class SearchBox extends React.Component {
     // otherwise it is simply an input box
     if (this.props.searchResults.length) {
       // make a SearchListItem for each book in searchResults
-      const searchResults = this.props.searchResults.map(book => (
-        <SearchListItem />
-      ))
+      const searchResults = this.props.searchResults.map(book => {
+        return (
+          <SearchListItem
+            bookid={book._id}
+            title={book.title}
+            author={book.author}
+            image={book.thumbnailPath}
+            summary={`${book.summary.substr(0, 250)}...`}
+          />
+        )
+      })
       return (
         <ul className="search-box">
           <span className="glyphicon glyphicon-search"></span>
@@ -23,6 +31,7 @@ class SearchBox extends React.Component {
             placeholder="Search for Books"
             value={this.props.searchText}
             onChange={this.handleTextChange.bind(this)}
+            onKeyPress={this.checkForEnter.bind(this)}
           />
           {searchResults}
         </ul>
@@ -36,9 +45,17 @@ class SearchBox extends React.Component {
             placeholder="Search for Books"
             value={this.props.searchText}
             onChange={this.handleTextChange.bind(this)}
+            onKeyPress={this.checkForEnter.bind(this)}
           />
         </div>
       );
+    }
+  }
+
+  checkForEnter (evt) {
+    // if the user presses enter execute the search
+    if (evt.which === 13) {
+      this.props.handleSearchSubmit();
     }
   }
 
