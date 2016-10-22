@@ -14,7 +14,7 @@ class Landing extends React.Component {
 
       </div>
 
-      <p className="title">ILuddite</p>
+      <p className="title">iLuddite</p>
 
         <div className="intro col-md-4 col-md-offset-7 ">
 

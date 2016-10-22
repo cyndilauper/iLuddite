@@ -18,8 +18,9 @@ const Favorites = (props) => {
   );
 };
 
-Favorites.defaultProps = {
-  favorites: []
-};
+// shouldn't be necessary because we have default props in favoriteListItem
+// Favorites.defaultProps = { 
+
+// };
 
 module.exports = Favorites;
