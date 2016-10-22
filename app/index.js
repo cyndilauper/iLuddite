@@ -14,7 +14,6 @@ const EditPage = require('./components/EditPage');
 const UserProfile = require('./components/UserProfile');
 const Book = require('./components/Book');
 
-const dummyData = require('./dummyData');
 
 // and then render them out
 ReactDOM.render(
