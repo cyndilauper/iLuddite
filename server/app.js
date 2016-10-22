@@ -5,6 +5,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const session = require('express-session');
+const morgan= require('morgan');
 require('dot-env');
 
 const db = require('./config/db');
@@ -15,7 +16,7 @@ const books = require('./routes/books');
 const auth = require('./routes/auth');
 
 const app = express();
-
+app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
