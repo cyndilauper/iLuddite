@@ -13,6 +13,7 @@ router.get('/:userid', (req, res, next) => {
         fbid: req.params.userid
     }).then(found => {
       if (found) {
+        console.log('found:',found)
         // if user is found - pass their fbid to the getFriends function
         try {
         facebook.getFriends(req.user.token, found.fbid, results => {
@@ -53,7 +54,7 @@ router.get('/:userid', (req, res, next) => {
         })
       }
       catch(err) {
-        res.send('no token - you must not be signed in')
+        res.send(`Error: ${err} \n Maybe no token?`)
       }
       } else {
         res.send('user not found')

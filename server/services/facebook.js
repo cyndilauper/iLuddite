@@ -14,7 +14,7 @@ module.exports = function() {
       'https://graph.facebook.com/me/picture?redirect=false&width=400&height=400',
       userKey, (error, results, res) => {
         if (error) {
-          console.log(`error: ${error}`);
+          console.log(`getImage error: ${error}`);
         }
         results = JSON.parse(results);
         done(results.data.url);
@@ -26,7 +26,7 @@ module.exports = function() {
     'https://graph.facebook.com/me?fields=location',
       userKey, (error, results, res) => {
         if (error) {
-          console.log(`error: ${error}`);
+          console.log(`getLocation error: ${error}`);
         }
         results = JSON.parse(results);
         done(results);
@@ -39,7 +39,7 @@ module.exports = function() {
     `https://graph.facebook.com/${profile}/friends?redirect=false`,
     userKey, (error, results, res) => {
       if (error) {
-        console.log(`error: ${error}`);
+        console.log(`getFriends error: ${error}`);
       }
       results = JSON.parse(results);
       done(results.data);
