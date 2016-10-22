@@ -6,10 +6,10 @@ const usersSchema = new Schema({
   displayName: String,
   image: String,
   token: String,
-  favorites: Array,
-  queue: Array,
-  // queue: [{ type: Schema.Types.ObjectId, ref: 'Books' }],
-  // favorites: [{ type: Schema.Types.ObjectId, ref: 'Books' }],
+  // favorites: Array,
+  // queue: Array,
+  queue: [{ type: Schema.Types.ObjectId, ref: 'Books' }],
+  favorites: [{ type: Schema.Types.ObjectId, ref: 'Books' }],
   stats: Number,
   created_at: { type: Date, default: Date.now }
 });

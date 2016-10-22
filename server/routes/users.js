@@ -7,15 +7,23 @@ const Book = require('../models/books');
 const facebook = require('../services/facebook')('1787582178167706', process.env.fbSecret);
 
 router.get('/:userid', (req, res, next) => {
-  // console.log(req.session)
   // GET user info (photo, current book, queue, stats)
   User.findOne({
-        fbid: req.params.userid
-    }).then(found => {
+    fbid: req.params.userid
+    })
+    .populate('queue favorites')
+    .exec((err, result) => {
+      if (err) throw err;
+      else console.log('populated: ', result);
+    })
+    .then(found => {
       if (found) {
         // if user is found - pass their fbid to the getFriends function
+
         try {
         facebook.getFriends(req.user.token, found.fbid, results => {
+        // facebook.getFriends(found.token, found.fbid, results => {
+
           // convert the found object to a JSON object
           found = found.toJSON();
           // add the friends array

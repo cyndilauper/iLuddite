@@ -60,7 +60,7 @@ router.get('/search/:searchterm', (req, res) => {
         }
       });
       //respond with the inserted books
-      res.json(five);
+      res.send(five);
     } else {
       //error handler for request module attempt
       console.log(`Error in API call: ${err}`);
@@ -73,8 +73,8 @@ router.get('/search/:searchterm', (req, res) => {
 })
 
 //endpoint for retrieving books from db
-router.get('/:isbn', (req, res, next) => {
-  Books.find({_id: req.params.isbn}, (err, book) => {
+router.get('/:bookid', (req, res, next) => {
+  Books.find({_id: req.params.bookid}, (err, book) => {
     if (err) {
       console.log(`Error in finding book: ${err}`);
       res.send(err);
