@@ -25,7 +25,6 @@ router.get('/search/:author', (req, res) => {
         request(options, (err, response, body) => {
           if (!err && response.statusCode == 200) {
             body = xml('' + body, (err, result) => {
-              //TODO: what if author is already in the db?
               Author.findOneAndUpdate({
                 _id: result.GoodreadsResponse.author[0].id
               }, {
