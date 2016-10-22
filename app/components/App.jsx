@@ -30,7 +30,7 @@ class App extends React.Component {
       browserHistory.push(path);
     } else {
       // component needs to get logged in user
-      axios.get('/loggenin')
+      axios.get('/loggedin')
         .then();
     }
   }
