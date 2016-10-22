@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/app.js",
+    "start:dev": "nodemon server/app.js",
     "build": "webpack",
+    "build:watch": "webpack --watch",
     "dev": "webpack-dev-server"
   },
   "repository": {
@@ -49,6 +51,7 @@
     "express": "^4.14.0",
     "express-session": "^1.14.1",
     "mongoose": "^4.6.4",
+    "morgan": "^1.7.0",
     "oauth": "^0.9.14",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
