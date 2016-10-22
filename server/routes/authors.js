@@ -26,21 +26,24 @@ router.get('/search/:author', (req, res) => {
           if (!err && response.statusCode == 200) {
             body = xml('' + body, (err, result) => {
               //TODO: what if author is already in the db?
-              var author = new Author({
+              Author.findOneAndUpdate({
+                _id: result.GoodreadsResponse.author[0].id
+              }, {
                 _id: result.GoodreadsResponse.author[0].id,
                 name: result.GoodreadsResponse.author[0].name[0],
                 description: result.GoodreadsResponse.author[0].about[0],
                 photoPath: result.GoodreadsResponse.author[0].large_image_url[0],
-              })
-              //insert new author into db
-              author.save((err, docs) => {
+              }, 
+              //adds the document if it doesn't exist, returns the new document
+              {upsert: true, new: true},
+              (err, author) => {
                 if (err) {
                   console.log(`Error in author insert: ${err}`);
                 } else {
-                  console.log(`Author inserted: ${docs}`);
+                  console.log(`Author inserted: ${author}`);
+                  res.send(author);
                 }
-              })                
-              res.send(author);
+              })
             })
           }
         })
