@@ -14,14 +14,14 @@ router.get('/search/:author', (req, res) => {
 
   function getAuthorInfo(err, response, body) {
     if (!err && response.statusCode == 200) {
-      body = xml('' + body, function(err, result) {
+      body = xml('' + body, (err, result) => {
         let authorId = result.GoodreadsResponse.author[0].$.id;
         let options = {
           url: `https://www.goodreads.com/author/show/${authorId}?key=${process.env.goodreads}`
         }
         request(options, (err, response, body) => {
           if (!err && response.statusCode == 200) {
-            body = xml('' + body, function(err, result) {
+            body = xml('' + body, (err, result) => {
               res.send(result);
             })
           }
