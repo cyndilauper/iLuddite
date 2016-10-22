@@ -64,7 +64,7 @@ router.get('/loggedin', (req, res, next) => {
         })
       }
       catch(err) {
-        res.send(`Error: {err} \n Maybe you don't have a token?`)
+        res.send(`Error: ${err} \n Maybe you don't have a token?`)
       }
       } else {
         res.send('user not found')
