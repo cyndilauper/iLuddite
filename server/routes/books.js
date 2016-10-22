@@ -48,6 +48,15 @@ router.get('/search/:searchterm', (req, res) => {
         //get rid of the null books
       }).filter(book => {
         if (book) {
+          // if (!book.title) {
+          //   book.title = 'Title Unavailable'
+          // }
+          // if (!book.author) {
+          //   book.author = 'Author Unavailable'
+          // }
+          // if (!book.summary) {
+          //   book.title = 'Summary Unavailable'
+          // }
           return book;
         }
       })

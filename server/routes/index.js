@@ -37,6 +37,10 @@ router.get('/loggedin', (req, res, next) => {
               User.findOne({fbid}, (error, obj) => {
                 if (error) {
                   reject(error);
+                } else if (!obj) {
+                  resolve( {fbid: 0,
+                    image: 'http://i.imgur.com/xt8MjZ5.jpg',
+                    name: 'Not Found' } );
                 } else {
                   resolve( {fbid: obj.fbid,
                     image: obj.image,

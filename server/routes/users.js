@@ -14,7 +14,7 @@ router.get('/:userid', (req, res, next) => {
     .populate('queue favorites')
     .exec((err, result) => {
       if (err) throw err;
-      else console.log('populated: ', result);
+      // else console.log('populated: ', result);
     })
     .then(found => {
       if (found) {
@@ -22,7 +22,6 @@ router.get('/:userid', (req, res, next) => {
 
         try {
         facebook.getFriends(req.user.token, found.fbid, results => {
-        // facebook.getFriends(found.token, found.fbid, results => {
 
           // convert the found object to a JSON object
           found = found.toJSON();
@@ -34,6 +33,10 @@ router.get('/:userid', (req, res, next) => {
               User.findOne({fbid}, (error, obj) => {
                 if (error) {
                   reject(error);
+                } else if (!obj) {
+                  resolve( {fbid: 0,
+                    image: 'http://i.imgur.com/xt8MjZ5.jpg',
+                    name: 'Not Found' } );
                 } else {
                   resolve( {fbid: obj.fbid,
                     image: obj.image,
