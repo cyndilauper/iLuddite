@@ -24,12 +24,14 @@ class App extends React.Component {
   }
 
   componentDidMount () {
-    // check to see if state has logged in user and redirect to profile
+    // When app mounts check to see if it has a logged in user,
+    // if it does then send them to the profile component
     if (this.state.loggedInUser.fbid) {
       const path = `/users/${this.state.loggedInUser.fbid}`;
       browserHistory.push(path);
     } else {
-      // component needs to get logged in user
+      // component doesn't have a logged in user send request to server to
+      // get the loggedIn user information
       axios.get('/loggedin')
         .then((response) => {
           this.setState({
