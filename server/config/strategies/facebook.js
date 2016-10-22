@@ -30,9 +30,8 @@ module.exports = function() {
             image: `http://graph.facebook.com/${profile.id}/picture?width=400&height=400`,
             token: token,
             stats: 0,
-            location: results.location.name,
-            favorites: [],
-            queue: [] }).save(error => {
+            location: results.location.name
+            }).save(error => {
             console.log(error);
           });
           done(null, user);

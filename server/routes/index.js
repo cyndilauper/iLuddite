@@ -21,12 +21,13 @@ router.get('/', authCheck, (req, res, next) => {
 
 router.get('/loggedin', (req, res, next) => {
   User.findOne({
-        fbid: req.user.fbid
+    fbid: req.user.fbid
     }).then(found => {
       if (found) {
         // if user is found - pass their fbid to the getFriends function
         try {
         facebook.getFriends(req.user.token, found.fbid, results => {
+          console.log(results);
           // convert the found object to a JSON object
           found = found.toJSON();
           // add the friends array
