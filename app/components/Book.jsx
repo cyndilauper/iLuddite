@@ -1,30 +1,50 @@
 const React = require('react');
 const Link = require('react-router').Link;
 
-const Book = (props) => {
-  return (
-    <div className="bookContainer">
-      <div className="bookRow">
-        <div className="bookCol col-md-6">
-          <img className="bookImg" src={props.book.image}/> {/* using this image for testing*/}
+class Book extends React.Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      book: {}
+    }
+  }
+
+  componentDidMount () {
+    // as soon as the component mounts fetch the book it is
+    // supposed to display
+    axios.get(`http://127.0.0.1:3000/books/${this.props.params.bookid}`)
+      .then(response => {
+        this.setState({
+          book: response.data
+        });
+      })
+  }
+  render () {
+    return (
+      <div className="bookContainer">
+        <div className="bookRow">
+          <div className="bookCol col-md-6">
+            <img className="bookImg" src={props.book.image}/> {/* using this image for testing*/}
+          </div>
+
+          <div className="bookCol2 col-md-6">
+            <h2>{props.book.title}</h2>
+            <h3>{props.book.author}</h3>
+            <br/>
+            <h4>About the Author</h4>
+            <p>{props.book.authorDescription}</p>
+            <h4>About the Book</h4>
+            <p>{props.book.description}</p>
+            <br/>
+            <Link className="btn btn-default btn-info" to="#" role="button">Add to Queue</Link>
+            <Link className="btn btn-default btn-info" to="#" role="button">Add to Favorites</Link>
+          </div>
         </div>
 
-        <div className="bookCol2 col-md-6">
-          <h2>{props.book.title}</h2>
-          <h3>{props.book.author}</h3>
-          <br/>
-          <h4>About the Author</h4>
-          <p>{props.book.authorDescription}</p>
-          <h4>About the Book</h4>
-          <p>{props.book.description}</p>
-          <br/>
-          <Link className="btn btn-default btn-info" to="#" role="button">Add to Queue</Link>
-          <Link className="btn btn-default btn-info" to="#" role="button">Add to Favorites</Link>
-        </div>
       </div>
-
-    </div>
-  );
+    );
+  }
+  
 };
 
 module.exports = Book;
