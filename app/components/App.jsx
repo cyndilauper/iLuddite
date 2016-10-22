@@ -52,6 +52,7 @@ class App extends React.Component {
           searchText={this.state.navbarSearchText}
           searchResults={this.state.navbarSearchResults}
           handleSearchSubmit={this.searchForBook.bind(this)}
+          addBookToQueue={this.addBookToQueue.bind(this)}
         />
         <div className="container">
           {this.renderChildrenWithProps()}
@@ -91,15 +92,24 @@ class App extends React.Component {
     // go through current queue and filter out isbn
     const filtered = 
       this.state.loggedInUserQueue.filter(book => book.isbn !== isbn);
-    axios.delete(`/users/${userid}/queue/${isbn}`)
+    axios.delete(`/users/${this.state.loggedInUser.fbid}/queue/${isbn}`)
+      .then(book => {
+        const newState = Object.assign({}, this.state.loggedInUser);
+        const newState.queue = filtered;
+        this.setState({
+          loggedInUser: newState
+        })
+      })
   }
 
   addBookToQueue (isbn) {
     // adds the clicked book to back of queue.  
-    axios.post(`/users/${userid}/queue/${isbn}`)
+    axios.post(`/users/${this.state.loggedInUser.fbid}/queue/${isbn}`)
     .then( book => {
+      const newState = Object.assign({}, this.state.loggedInUser);
+      newState.queue = newState.queue.concat(isbn);
       this.setState({
-        loggedInUserQueue:this.state.loggedInUserQueue.concat(book)
+        loggedInUser: newState
       })
     })
   }

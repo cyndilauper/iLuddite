@@ -1,7 +1,6 @@
 const React = require('react');
 
 const SearchListItem = (props) => {
-  console.log(props);
   return (
     <li className="search-list-item list-group-item">
       <div className="row">
@@ -13,7 +12,10 @@ const SearchListItem = (props) => {
           <p>{props.summary}</p>
         </div>
         <div className="col-md-2">
-          <button className="btn btn-primary">
+          <button 
+            className="btn btn-primary"
+            onClick={props.addBookToQueue.bind(null, props.bookid)}
+          >
             <span className="glyphicon glyphicon-plus">&nbsp;</span>
             Add to Queue
           </button>

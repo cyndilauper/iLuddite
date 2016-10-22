@@ -20,6 +20,7 @@ class SearchBox extends React.Component {
             author={book.author}
             image={book.thumbnailPath}
             summary={`${book.summary.substr(0, 250)}...`}
+            addBookToQueue={this.props.addBookToQueue}
           />
         )
       })

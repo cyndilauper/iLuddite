@@ -16,6 +16,7 @@ const Navbar = (props) => {
             searchText={props.searchText}
             searchResults={props.searchResults}
             handleSearchSubmit={props.handleSearchSubmit}
+            addBookToQueue={props.addBookToQueue}
           />
         </div>
         <div className="col-md-2">
