@@ -13,13 +13,14 @@ class SearchBox extends React.Component {
     if (this.props.searchResults.length) {
       // make a SearchListItem for each book in searchResults
       const searchResults = this.props.searchResults.map(book => {
+        let summary = book.summary || "Summary not available";
         return (
           <SearchListItem
             bookid={book._id}
             title={book.title}
             author={book.author}
             image={book.thumbnailPath}
-            summary={`${book.summary.substr(0, 250)}...`}
+            summary={summary.substr(0, 250)}
             addBookToQueue={this.props.addBookToQueue}
             addBookToFavorites={this.props.addBookToFavorites}
             makeCurrentBook={this.props.makeCurrentBook}
