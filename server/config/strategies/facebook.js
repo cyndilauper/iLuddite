@@ -25,12 +25,14 @@ module.exports = function() {
       } else {
         console.log('User not found - adding to DB');
         facebook.getLocation(token, results => {
+          console.log('results:',results)
           new User({ fbid: profile.id,
             displayName: profile.displayName,
             image: `http://graph.facebook.com/${profile.id}/picture?width=400&height=400`,
             token: token,
             stats: 0,
-            location: results.location.name,
+            // location: results.location.name,
+            location: '',
             favorites: [],
             queue: [] }).save(error => {
             console.log(error);
