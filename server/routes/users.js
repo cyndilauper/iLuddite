@@ -64,8 +64,9 @@ router.route('/:userid/queue/:bookid')
         { $push: { queue: { $each: [req.params.bookid], $position: 0 } } })
         .then(user => {
           if (user) {
-
-            res.json(user.queue[user.queue[0]]);
+            Book.findOne({_id: req.params.bookid}).then(book => {
+              res.json(book);
+            })
           } else {
             res.json({error: 'user and/or queue not found'})
           }
@@ -79,7 +80,10 @@ router.route('/:userid/queue/:bookid')
         { $push: { queue: req.params.bookid } } )
         .then(user => {
           if (user) {
-            res.json(user.queue[user.queue.length - 1]);
+            Book.findOne({_id: req.params.bookid})
+            .then(book => {
+              res.json(book);
+            })
           } else {
             res.json({error: 'user and/or queue not found'})
           }
