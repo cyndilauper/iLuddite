@@ -15,4 +15,11 @@ const FavoriteListItem = (props) => {
   );
 };
 
+FavoriteListItem.defaultProps = {
+  book:{
+    title: 'Couldn\'t find title',
+    author: 'Couldn\'t find author',
+  }
+}
+
 module.exports = FavoriteListItem;

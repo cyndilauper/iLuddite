@@ -38,10 +38,10 @@ const CurrentBook = (props) => {
 // defaults
 CurrentBook.defaultProps = {
   currentBook: {
-    image: '/assets/book0.jpg',
-    title: 'Gone With The Wind',
-    author: 'Carly Rae Jepson',
-    summary: 'What what'
+      image: './assets/webpack.config.jpg',
+    title: 'Can\'t find your gosh-darned book!',
+    author: 'Who the heck knows?',
+    summary: 'Try making a different book yr current book, doofus'
   }
 }
 

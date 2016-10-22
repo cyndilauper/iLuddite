@@ -34,4 +34,10 @@ const SearchListItem = (props) => {
   )
 }
 
+SearchListItem.defaultProps = {
+  image: './assets/webpack.config.jpg',
+  title: 'IDK ask some other app',
+  author: 'Ducky McDuckerson'
+}
+
 module.exports = SearchListItem;

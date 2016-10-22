@@ -30,5 +30,29 @@ const profileQueue = props.bookQueue.slice(0, 6).map((book, idx) => {
 
 };
 
+ProfileQueue.defaultProps = {
+  bookQueue: [
+    {
+      image: './assets/webpack.config.jpg'
+    },
+    {
+
+    },
+    {
+
+    },
+    {
+
+    },
+    {
+
+    },
+    {
+
+    },
+
+  ]
+}
+
 module.exports = ProfileQueue;
 
