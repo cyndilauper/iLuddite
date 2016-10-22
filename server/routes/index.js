@@ -5,7 +5,7 @@ const path = require('path');
 
 const User = require('../models/users');
 
-const facebook = require('../services/facebook')('1787582178167706', process.env.fbSecret);
+const facebook = require('../services/facebook')();
 
 function authCheck(req, res, next) {
   if (req.isAuthenticated()) {
@@ -64,7 +64,7 @@ router.get('/loggedin', (req, res, next) => {
         })
       }
       catch(err) {
-        res.send('no token - you must not be signed in')
+        res.send(`Error: {err} \n Maybe you don't have a token?`)
       }
       } else {
         res.send('user not found')

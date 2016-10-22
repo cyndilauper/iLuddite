@@ -3,7 +3,7 @@ const FacebookStrategy = require('passport-facebook');
 
 const User = require('../../models/users');
 
-const facebook = require('../../services/facebook')('1787582178167706', process.env.fbSecret);
+const facebook = require('../../services/facebook')();
 
 module.exports = function() {
   passport.use(new FacebookStrategy({

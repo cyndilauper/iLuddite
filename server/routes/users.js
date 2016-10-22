@@ -4,7 +4,7 @@ const router = express.Router();
 const User = require('../models/users');
 const Book = require('../models/books');
 
-const facebook = require('../services/facebook')('1787582178167706', process.env.fbSecret);
+const facebook = require('../services/facebook')();
 
 router.get('/:userid', (req, res, next) => {
   // console.log(req.session)

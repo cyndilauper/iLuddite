@@ -1,15 +1,10 @@
 const OAuth = require('OAuth').OAuth2;
 
-const Facebook = function (facebookKey, facebookSecret) {
-
-  let key = facebookKey;
-  let secret = facebookSecret;
+module.exports = function() {
 
   let oauth = new OAuth(
-    key, secret, 'https://graph.facebook.com',
-    null,
-    'oauth2/token',
-    null
+    '1787582178167706', process.env.fbSecret, 'https://graph.facebook.com',
+    null, 'oauth2/token', null
   );
 
   // this function will get a user's profile image. we will be storing their
@@ -57,5 +52,3 @@ const Facebook = function (facebookKey, facebookSecret) {
       getLocation: getLocation
   }
 }
-
-module.exports = Facebook;
