@@ -12,6 +12,7 @@ import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 const App = require('./components/App');
 const EditPage = require('./components/EditPage');
 const UserProfile = require('./components/UserProfile');
+const Book = require('./components/Book');
 
 const dummyData = require('./dummyData');
 
@@ -21,6 +22,7 @@ ReactDOM.render(
     <Route path='/' component={App}>
       <Route path="users/:userid" component={UserProfile}/>
       <Route path="users/:userid/edit" component={EditPage}/>
+      <Route path="books/:bookid" component={Book} />
     </Route>
   </Router>,
   document.getElementById('app')
