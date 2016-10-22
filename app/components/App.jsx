@@ -2,7 +2,7 @@ const React = require('react');
 const Navbar = require('./Navbar');
 const EditPage = require('./EditPage');
 import { browserHistory } from 'react-router';
-const axios = require('axios');
+const axios = require('../axios');
 
 class App extends React.Component {
   constructor (props) {
@@ -104,7 +104,15 @@ class App extends React.Component {
   }
 
   addBookToQueue (isbn) {
-    // adds the clicked book to back of queue.  
+    // first check to see if the book is already in the users queue
+    for (let i = 0; i < this.state.loggedInUser.queue; i++) {
+      if (this.state.loggedInUser.queue[i].fbid === isbn) {
+        // we already have the isbn return out of function
+        // and do nothing
+        return;
+      }
+    }
+    // The book is not already in queue post to db to add it
     axios.post(`/users/${this.state.loggedInUser.fbid}/queue/${isbn}`)
     .then( book => {
       const newState = Object.assign({}, this.state.loggedInUser);
