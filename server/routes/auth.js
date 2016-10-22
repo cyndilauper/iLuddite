@@ -10,7 +10,7 @@ router.route('/')
 router.route('/return')
   .get(passport.authenticate('facebook', {
       successRedirect: '/',
-      failureRedirect: '/login'
+      failureRedirect: '/about'
   }));
 
 module.exports = router;
