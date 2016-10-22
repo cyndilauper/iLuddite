@@ -35,4 +35,14 @@ const CurrentBook = (props) => {
   );
 };
 
+// defaults
+CurrentBook.defaultProps = {
+  currentBook: {
+    image: '/assets/book0.jpg',
+    title: 'Gone With The Wind',
+    author: 'Carly Rae Jepson',
+    summary: 'What what'
+  }
+}
+
 module.exports = CurrentBook;
