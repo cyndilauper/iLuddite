@@ -18,4 +18,8 @@ const Favorites = (props) => {
   );
 };
 
+Favorites.defaultProps = {
+  favorites: []
+};
+
 module.exports = Favorites;

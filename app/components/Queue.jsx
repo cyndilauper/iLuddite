@@ -32,4 +32,8 @@ const Queue = (props) => {
   );
 };
 
+Queue.defaultProps = {
+  queue: []
+};
+
 module.exports = Queue;
