@@ -25,6 +25,12 @@ const UserBox = (props) => {
               {props.user.stats}
             </div>
           </div>
+          <div className="row">
+            <div className="col-xs-12 incrementBookCount">
+              <button className="btn btn-default btn-info btn-sm" role="button">
+              Increase Book Count</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
