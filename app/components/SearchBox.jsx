@@ -67,12 +67,6 @@ class SearchBox extends React.Component {
     this.props.changeSearchText(evt.target.value);
   }
 
-  // anytime the user moves away from the input clear
-  clearSearchText () {
-
-  }
-
-
   // anytime the searchbox is clicked we don't want the event to bubble
   // up to App component (App component has a click event so that when
   // you click off to the side of search results it dismisses them. This

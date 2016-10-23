@@ -17,8 +17,7 @@ class UserProfile extends React.Component {
   }
 
   componentDidMount () {
-    // if for whatever reason we don't have a user then using the
-    // params in the url bar make a request for the user.
+    // fetch the user to display
     if (!this.state.user.fbid) {
       axios.get(`/users/${this.props.params.userid}`)
         .then((response => {
@@ -31,8 +30,8 @@ class UserProfile extends React.Component {
 
   // This lifecycle method will get called anytime the user is already on
   // this component and clicks one of their friends which shows this same
-  // component with their data. When this happens this component needs
-  // to do a get request to get the new users information.
+  // component with the friends data. When this happens this component needs
+  // to do a get request to get the new users information, and change state.
   componentWillReceiveProps(nextProps) {
     axios.get(`/users/${nextProps.params.userid}`)
       .then(response => {

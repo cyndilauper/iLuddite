@@ -75,9 +75,8 @@ class App extends React.Component {
       });
   }
 
-  // this function would be needed anytime the user clicks on one of the books
-  // in the navbarSearchResults dropdown. In that case the user would get
-  // sent to that book and then the list needs to be destroyed.
+  // this function is used in several places throughout the app to dismiss
+  // the dropdown from the navbar showing search results.
   clearSearchResults () {
     this.setState({
       navbarSearchResults: [],
@@ -206,6 +205,8 @@ class App extends React.Component {
     return React.Children.map(this.props.children, (child) => {
       switch (child.type.name) {
         case "EditPage" :
+          // edit page needs queue and favorites lists and also how to 
+          // modify them
           return React.cloneElement(child, {
             queue: this.state.loggedInUser.queue,
             favorites: this.state.loggedInUser.favorites,
@@ -215,6 +216,8 @@ class App extends React.Component {
           });
           break;
         case "Book" :
+          // book needs to be able to add books to users queue and favorites
+          // and be able to clear search bar
           return React.cloneElement(child, {
             clearSearchResults: this.clearSearchResults.bind(this),
             addBookToFavorites: this.addBookToFavorites.bind(this),
@@ -223,6 +226,7 @@ class App extends React.Component {
           })
           break;
         case "UserProfile" :
+          // userprofile needs information about the currently logged in user
           return React.cloneElement(child, {
             loggedInUser: this.state.loggedInUser
           });
