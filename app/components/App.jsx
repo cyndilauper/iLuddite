@@ -11,14 +11,7 @@ class App extends React.Component {
       navbarSearchText: '',
       navbarSearchResults: [],
       loggedInUser: {
-        /* when populated
-          fbid: '',
-          displayName: '',
-          favorites: [],
-          queue: [ { _id, title, author, summary, thumbnail, coverPhoto }],
-          stats: '',
-          friends: [ { name: fbid: image: } ]
-        */
+        
       }
     }
   }
@@ -49,6 +42,7 @@ class App extends React.Component {
       <div style={style}>
         <Navbar 
           changeSearchText={this.changeSearchText.bind(this)}
+          loggedInUserId={this.state.loggedInUser.fbid}
           searchText={this.state.navbarSearchText}
           searchResults={this.state.navbarSearchResults}
           handleSearchSubmit={this.searchForBook.bind(this)}
@@ -114,9 +108,9 @@ class App extends React.Component {
     }
     // The book is not already in queue post to db to add it
     axios.post(`/users/${this.state.loggedInUser.fbid}/queue/${isbn}`)
-    .then( book => {
+    .then( response => {
       const newState = Object.assign({}, this.state.loggedInUser);
-      newState.queue = newState.queue.concat(isbn);
+      newState.queue = newState.queue.concat(response.data);
       this.setState({
         loggedInUser: newState
       })

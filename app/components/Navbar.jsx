@@ -21,7 +21,7 @@ const Navbar = (props) => {
           />
         </div>
         <div className="col-md-2">
-          <Link to="/users/12345/edit">
+          <Link to={`/users/${props.loggedInUserId}/edit`}>
             <span className="glyphicon glyphicon-cog"></span>
           </Link>
         </div>

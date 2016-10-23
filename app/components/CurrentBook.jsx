@@ -11,7 +11,7 @@ const CurrentBook = (props) => {
       </div>
         <div className="row">
             <div className="col-xs-4 currentPhotoColumn">
-                <Link to="#"><img src={props.currentBook.image}className="img-responsive bookPhoto"/></Link>
+                <Link to="#"><img src={props.currentBook.coverPath}className="img-responsive bookPhoto"/></Link>
             </div>
             <div className="col-xs-8 currentInfoColumn">
                 <div className="row">
@@ -26,7 +26,7 @@ const CurrentBook = (props) => {
                 </div>
                 <div className="row">
                   <div className="col-xs-12 currentBio">
-                    {props.currentBook.summary}
+                    {`${props.currentBook.summary.substr(0, 300)}...`}
                   </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@ const CurrentBook = (props) => {
 // defaults
 CurrentBook.defaultProps = {
   currentBook: {
-      image: 'http://127.0.0.1:3000/assets/webpack.config.jpg',
+    image: 'http://127.0.0.1:3000/assets/webpack.config.jpg',
     title: 'Can\'t find your gosh-darned book!',
     author: 'Who the heck knows?',
     summary: 'Try making a different book yr current book, doofus'

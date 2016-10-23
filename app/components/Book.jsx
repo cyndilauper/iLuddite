@@ -1,5 +1,6 @@
 const React = require('react');
 const Link = require('react-router').Link;
+const axios = require('../axios');
 
 class Book extends React.Component {
   constructor (props) {
@@ -12,10 +13,11 @@ class Book extends React.Component {
   componentDidMount () {
     // as soon as the component mounts fetch the book it is
     // supposed to display
-    axios.get(`http://127.0.0.1:3000/books/${this.props.params.bookid}`)
+    axios.get(`/books/${this.props.params.bookid}`)
       .then(response => {
+        console.log(response)
         this.setState({
-          book: response.data
+          book: response.data[0]
         });
       })
   }
@@ -24,17 +26,17 @@ class Book extends React.Component {
       <div className="bookContainer">
         <div className="bookRow">
           <div className="bookCol col-md-6">
-            <img className="bookImg" src={props.book.image}/> {/* using this image for testing*/}
+            <img className="bookImg" src={this.state.book.thumbnailPath}/> {/* using this image for testing*/}
           </div>
 
           <div className="bookCol2 col-md-6">
-            <h2>{props.book.title}</h2>
-            <h3>{props.book.author}</h3>
+            <h2>{this.state.book.title}</h2>
+            <h3>{this.state.book.author}</h3>
             <br/>
             <h4>About the Author</h4>
-            <p>{props.book.authorDescription}</p>
+            <p>{this.state.book.authorDescription}</p>
             <h4>About the Book</h4>
-            <p>{props.book.description}</p>
+            <p>{this.state.book.summary}</p>
             <br/>
             <Link className="btn btn-default btn-info" to="#" role="button">Add to Queue</Link>
             <Link className="btn btn-default btn-info" to="#" role="button">Add to Favorites</Link>
@@ -53,24 +55,9 @@ Book.defaultProps = {
     title: 'I bet this book has a great title, but we have no idea what it is',
     author: 'The person who wrote this is probably a good writer.  Probably',
     authorDescription: 'Whoever this is probably lead an interesting life, go wikipedia them.',
-    description: 'we can only guess what this book is about.  My guess? Zombies'
+    summary: 'we can only guess what this book is about.  My guess? Zombies'
   }
 }
 
 module.exports = Book;
-
-
-
-        {/*}  <div className="bookCol2 col-md-6">
-              <h2>The Amazing Adventures of Kavalier &amp; Clay</h2>
-              <h3>Michael Chabon</h3>
-              <br/>
-              <h4>About the Author</h4>
-              <p><a href="https://en.wikipedia.org/wiki/Michael_Chabon">Michael Chabon</a> is a totally rad dude who writes books that will break your heart.</p>
-              <h4>About the Book</h4>
-              <p>Kav &amp; Clay is probably the best book I've read in the last five years.  Blah blah blah blah Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.  Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-              <br/>
-              <a className="btn btn-default btn-info" href="#" role="button">Add to Queue</a>
-              <a className="btn btn-default btn-info" href="#" role="button">Add to Favorites</a>
-          </div> */ }
 

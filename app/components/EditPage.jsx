@@ -11,4 +11,9 @@ const EditPage = (props) => {
   );
 };
 
+EditPage.defaultProps = {
+  queue: [],
+  favorites: []
+};
+
 module.exports = EditPage;

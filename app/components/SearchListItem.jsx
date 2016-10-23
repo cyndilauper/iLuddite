@@ -1,11 +1,14 @@
 const React = require('react');
+import { Link } from 'react-router';
 
 const SearchListItem = (props) => {
   return (
     <li className="search-list-item list-group-item">
       <div className="row">
         <div className="col-md-1">
-          <img src={props.image} alt={props.title}/>
+          <Link to={`/books/${props.bookid}`}>
+            <img src={props.image} alt={props.title}/>
+          </Link>
         </div>
         <div className="col-md-7">
           <h4>{props.title} <small> - {props.author} </small></h4>
