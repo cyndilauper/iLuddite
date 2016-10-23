@@ -1,9 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
 const Author = require('../models/authors');
 const Books = require('../models/books');
-const db = require('../config/db');
 const request = require('request');
 const xml = require('xml2js').parseString;
 
@@ -32,7 +30,7 @@ router.get('/search/:author', (req, res) => {
                 name: result.GoodreadsResponse.author[0].name[0],
                 description: result.GoodreadsResponse.author[0].about[0],
                 photoPath: result.GoodreadsResponse.author[0].large_image_url[0],
-              }, 
+              },
               //adds the document if it doesn't exist, returns the new document
               {upsert: true, new: true},
               (err, author) => {

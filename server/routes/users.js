@@ -4,7 +4,7 @@ const router = express.Router();
 const User = require('../models/users');
 const Book = require('../models/books');
 
-const facebook = require('../services/facebook')();
+const facebook = require('../services/facebook');
 
 router.get('/:userid', (req, res, next) => {
   // GET user info (photo, current book, queue, stats)
@@ -34,9 +34,10 @@ router.get('/:userid', (req, res, next) => {
                 if (error) {
                   reject(error);
                 } else if (!obj) {
-                  resolve( {fbid: 0,
-                    image: 'http://i.imgur.com/xt8MjZ5.jpg',
-                    name: 'Not Found' } );
+                  // if user is a friend that uses the app, but is not found
+                  // in the database, return null
+                  console.log('Error: FB friend missing from database')
+                  resolve( null );
                 } else {
                   resolve( {fbid: obj.fbid,
                     image: obj.image,
@@ -55,6 +56,12 @@ router.get('/:userid', (req, res, next) => {
           // the found object and return it
           Promise.all(mapped)
             .then(result => {
+              result = result.filter(friend => {
+                // filter out any null friends
+                if (friend) {
+                  return friend;
+                }
+              })
               found.friends = result;
               res.send(found);
             })

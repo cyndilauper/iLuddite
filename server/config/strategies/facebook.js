@@ -3,7 +3,7 @@ const FacebookStrategy = require('passport-facebook');
 
 const User = require('../../models/users');
 
-const facebook = require('../../services/facebook')();
+const facebook = require('../../services/facebook');
 
 module.exports = function() {
   passport.use(new FacebookStrategy({
@@ -25,14 +25,20 @@ module.exports = function() {
       } else {
         console.log('User not found - adding to DB');
         facebook.getLocation(token, results => {
-          console.log('results:',results)
+          let location;
+          try {
+            location = results.location.name;
+          }
+          catch(error){
+            console.log(`Error: ${error}\nSetting location to unknown`)
+            location = 'Anywhere, USA'
+          }
           new User({ fbid: profile.id,
             displayName: profile.displayName,
             image: `http://graph.facebook.com/${profile.id}/picture?width=400&height=400`,
             token: token,
             stats: 0,
-            // location: results.location.name,
-            location: '',
+            location: location,
             }).save(error => {
             console.log(error);
           });
