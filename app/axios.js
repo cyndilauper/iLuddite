@@ -1,8 +1,15 @@
 const axios = require('axios');
 
-// configure axios to have a base url of localhost
+// if in production set the url to localhost, otherwise production url
+let baseUrl;
+if (process.env.NODE_ENV === "production") {
+  baseUrl = 'some heroku address'
+} else {
+  baseUrl = 'http://localhost:3000'
+}
+
 const instance = axios.create({
-  baseURL: 'http://localhost:3000'
+  baseURL: baseUrl
 });
 
 module.exports = instance;
