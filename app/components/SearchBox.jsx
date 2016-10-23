@@ -28,7 +28,7 @@ class SearchBox extends React.Component {
         )
       })
       return (
-        <ul className="search-box">
+        <ul className="search-box" onClick={this.stopBubbling.bind(this)}>
           <span className="glyphicon glyphicon-search"></span>
           <input 
             type="text"
@@ -42,7 +42,7 @@ class SearchBox extends React.Component {
       );
     } else {
       return (
-        <div className="search-box">
+        <div className="search-box" onClick={this.stopBubbling.bind(this)}>
           <span className="glyphicon glyphicon-search"></span>
           <input 
             type="text"
@@ -70,6 +70,14 @@ class SearchBox extends React.Component {
   // anytime the user moves away from the input clear
   clearSearchText () {
 
+  }
+
+  // anytime the searchbox is clicked we don't want the event to bubble
+  // up to App component (App component has a click event so that when
+  // you click off to the side of search results it dismisses them. This
+  // function is put on the search results DOM element).
+  stopBubbling (evt) {
+    evt.stopPropagation();
   }
   
 }

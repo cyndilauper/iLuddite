@@ -37,7 +37,7 @@ class App extends React.Component {
   render () {
     const style = { height: '100vh' };
     return (
-      <div style={style}>
+      <div style={style} onClick={this.clearSearchResults.bind(this)}>
         <Navbar 
           changeSearchText={this.changeSearchText.bind(this)}
           loggedInUserId={this.state.loggedInUser.fbid}
@@ -47,7 +47,10 @@ class App extends React.Component {
           addBookToQueue={this.addBookToQueue.bind(this)}
           makeCurrentBook={this.makeCurrentBook.bind(this)}
         />
-        <div className="container">
+        <div 
+          className="container" 
+          
+        >
           {this.renderChildrenWithProps()}
         </div>
       </div>
@@ -77,7 +80,8 @@ class App extends React.Component {
   // sent to that book and then the list needs to be destroyed.
   clearSearchResults () {
     this.setState({
-      navbarSearchResults: []
+      navbarSearchResults: [],
+      navbarSearchText: ''
     });
   }
 
