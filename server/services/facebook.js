@@ -49,7 +49,7 @@ module.exports = function() {
 
   return {
       getImage: getImage,
-      getFriends: getFriends,
-      getLocation: getLocation
+      getLocation: getLocation,
+      getFriends: getFriends
   }
 }
