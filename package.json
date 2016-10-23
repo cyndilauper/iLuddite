@@ -1,6 +1,9 @@
 {
   "name": "iluddite",
   "version": "1.0.0",
+  "engines": {
+    "node": "6.6.0"
+  },
   "description": "A booksharing platform",
   "main": "index.js",
   "scripts": {
