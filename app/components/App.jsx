@@ -126,13 +126,18 @@ class App extends React.Component {
         // if we find the book delete it and then add it at the front
         axios.delete(`/users/${userid}/queue/${isbn}`)
           // on success of deleting send an add to queue query
-          .then(deleted =>
-            axios.post(`/users/${userid}/queue/${isbn}?current=true`)
-          )
+          .then(deleted => {
+            return axios.post(`/users/${userid}/queue/${isbn}?current=true`)
+          })
           .then(added => {
             const book = added.data;
             const newState = Object.assign({}, this.state.loggedInUser);
-            newState.queue = [book._id].concat(newState.queue);
+            // make a filtered array that doesn't have originial book in it
+            const filtered = this.state.loggedInUser.queue.filter(book => {
+              return book._id !== isbn;
+            });
+            // concat the added book to the front of filtered
+            newState.queue = [book].concat(filtered);
             this.setState({
               loggedInUser: newState
             });
@@ -147,7 +152,7 @@ class App extends React.Component {
     .then( book => {
       book = book.data
       const newState = Object.assign({}, this.state.loggedInUser);
-      newState.queue = [book._id].concat(newState.queue);
+      newState.queue = [book].concat(newState.queue);
       this.setState({
         loggedInUser: newState
       })
