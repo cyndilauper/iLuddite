@@ -200,6 +200,7 @@ class App extends React.Component {
           break;
         case "Book" :
           return React.cloneElement(child, {
+            clearSearchResults: this.clearSearchResults.bind(this),
             addBookToFavorites: this.addBookToFavorites.bind(this),
             addBookToQueue: this.addBookToQueue.bind(this)
           })

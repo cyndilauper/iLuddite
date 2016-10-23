@@ -11,6 +11,10 @@ class Book extends React.Component {
   }
 
   componentDidMount () {
+    // clear out any search results that might still 
+    // be showing (this is kinda hacky and probably
+    // needs to be done a little differently TODO)
+    this.props.clearSearchResults();
     // as soon as the component mounts fetch the book it is
     // supposed to display
     axios.get(`/books/${this.props.params.bookid}`)
