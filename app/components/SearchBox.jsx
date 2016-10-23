@@ -20,7 +20,7 @@ class SearchBox extends React.Component {
             title={book.title}
             author={book.author}
             image={book.thumbnailPath}
-            summary={summary.substr(0, 120)}
+            summary={summary.substr(0, 200)}
             addBookToQueue={this.props.addBookToQueue}
             addBookToFavorites={this.props.addBookToFavorites}
             makeCurrentBook={this.props.makeCurrentBook}
@@ -30,7 +30,7 @@ class SearchBox extends React.Component {
       return (
         <ul className="search-box">
           <span className="glyphicon glyphicon-search"></span>
-          <input 
+          <input
             type="text"
             placeholder="Search for Books"
             value={this.props.searchText}
@@ -44,7 +44,7 @@ class SearchBox extends React.Component {
       return (
         <div className="search-box">
           <span className="glyphicon glyphicon-search"></span>
-          <input 
+          <input
             type="text"
             placeholder="Search for Books"
             value={this.props.searchText}
@@ -71,7 +71,7 @@ class SearchBox extends React.Component {
   clearSearchText () {
 
   }
-  
+
 }
 
 module.exports = SearchBox;

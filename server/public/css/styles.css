@@ -96,6 +96,14 @@ nav span.glyphicon.glyphicon-search {
 
 /* Search results styling */
 
+.current-button-col {
+	padding: 0 10px 0 0;
+}
+
+.queue-button-col {
+	padding: 0;
+}
+
 .search-list-item {
   padding: 10px 0;
   height: 120px;
@@ -109,6 +117,7 @@ nav span.glyphicon.glyphicon-search {
 .search-list-item button.btn.btn-primary {
   margin-right: 20px;
   margin-top: 20px;
+	font-size: 10px;
 }
 
 .search-list-item h4,
