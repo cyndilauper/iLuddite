@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
 const path = require('path');
-
 const profile = require('../services/profile');
 
 function authCheck(req, res, next) {
