@@ -1,5 +1,5 @@
 const React = require('react');
-const Link = require('react-router').Link;
+import { Link } from 'react-router';
 
 const CurrentBook = (props) => {
   return (
@@ -11,12 +11,16 @@ const CurrentBook = (props) => {
       </div>
         <div className="row">
             <div className="col-xs-4 currentPhotoColumn">
-                <Link to="#"><img src={props.currentBook.coverPath}className="img-responsive bookPhoto"/></Link>
+                <Link to={`/books/${props.currentBook._id}`}>
+                  <img src={props.currentBook.coverPath}className="img-responsive bookPhoto"/>
+                </Link>
             </div>
             <div className="col-xs-8 currentInfoColumn">
                 <div className="row">
                   <div className="col-xs-12 currentTitle">
-                    {props.currentBook.title}
+                    <Link to={`/books/${props.currentBook._id}`}>
+                      {props.currentBook.title}
+                    </Link>
                   </div>
                 </div>
                 <div className="row">
@@ -26,7 +30,7 @@ const CurrentBook = (props) => {
                 </div>
                 <div className="row">
                   <div className="col-xs-12 currentBio">
-                    {`${props.currentBook.summary.substr(0, 300)}...`}
+                    {`${props.currentBook.summary.substr(0, 500)}...`}
                   </div>
                 </div>
             </div>
