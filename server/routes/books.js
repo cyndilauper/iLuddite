@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
 const Books = require('../models/books');
-const db = require('../config/db');
 const request = require('request');
 
 router.get('/', (req, res, next) => {
