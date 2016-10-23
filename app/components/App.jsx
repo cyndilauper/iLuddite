@@ -117,8 +117,8 @@ class App extends React.Component {
   makeCurrentBook (isbn) {
     const userid = this.state.loggedInUser.fbid;
     // see if the queue already has the book
-    for (let i = 0; i < this.state.queue; i++) {
-      if (this.state.queue[i]._id === isbin) {
+    for (let i = 0; i < this.state.loggedInUser.queue.length; i++) {
+      if (this.state.loggedInUser.queue[i]._id === isbn) {
         // if we find the book delete it and then add it at the front
         axios.delete(`/users/${userid}/queue/${isbn}`)
           // on success of deleting send an add to queue query
