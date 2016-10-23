@@ -9,7 +9,7 @@ module.exports = function() {
   passport.use(new FacebookStrategy({
     clientID: '1787582178167706',
     clientSecret: process.env.fbSecret,
-    callbackURL: 'http://localhost:3000/auth/return',
+    callbackURL: `${process.env.host}/auth/return`,
     passReqToCallback: true
   },
   (req, token, refreshToken, profile, done) => {
