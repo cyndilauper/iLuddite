@@ -35,6 +35,7 @@ class App extends React.Component {
   }
 
   render () {
+    // this style is needed to make the app as tall as the screen
     const style = { height: '100vh' };
     return (
       <div style={style} onClick={this.clearSearchResults.bind(this)}>
