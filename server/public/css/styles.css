@@ -23,7 +23,7 @@
   bottom: 0;
   right: 0;
   position: absolute;
-  z-index: -1;   
+  z-index: -1;
 }
 
 .intro{
@@ -103,6 +103,7 @@ nav span.glyphicon.glyphicon-search {
 
 .search-list-item img {
   max-height: 100px;
+	max-width: 65px;
 }
 
 .search-list-item button.btn.btn-primary {
