@@ -45,7 +45,6 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-  // res.status(err.status || 500);
   res.status(500).send({
     message: err.message,
     error: err

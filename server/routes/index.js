@@ -1,10 +1,7 @@
 const express = require('express');
 const router = express.Router();
-
 const path = require('path');
-
 const User = require('../models/users');
-
 const facebook = require('../services/facebook');
 
 function authCheck(req, res, next) {
@@ -23,10 +20,10 @@ router.get('/loggedin', (req, res, next) => {
   User.findOne({
     fbid: req.user.fbid
     })
+    //populate the user's queue and favorites
     .populate('queue favorites')
     .exec((err, result) => {
       if (err) throw err;
-      // else console.log('populated: ', result);
     })  
     .then(found => {
       if (found) {
@@ -94,15 +91,5 @@ router.get('/logout', (req, res, next) => {
   req.logout();
   res.redirect('/about');
 });
-
-// router.get('/home', authCheck, (req, res, next) => {
-//   // facebook.getImage(req.user.token, (imageUrl) => {
-//   //   req.user.image = imageUrl;
-//     facebook.getFriends(req.user.token, 'me', results => {
-//       req.user.friends = results;
-//       res.json({ index: 'this is the user\'s homepage', user: req.user });
-//     })
-//   // });
-// })
 
 module.exports = router;

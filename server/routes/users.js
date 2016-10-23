@@ -1,9 +1,7 @@
 const express = require('express');
 const router = express.Router();
-
 const User = require('../models/users');
 const Book = require('../models/books');
-
 const facebook = require('../services/facebook');
 
 router.get('/:userid', (req, res, next) => {
@@ -11,10 +9,10 @@ router.get('/:userid', (req, res, next) => {
   User.findOne({
     fbid: req.params.userid
     })
+    //populate the user's queue and favorites
     .populate('queue favorites')
     .exec((err, result) => {
       if (err) throw err;
-      // else console.log('populated: ', result);
     })
     .then(found => {
       if (found) {
@@ -183,6 +181,7 @@ router.route('/:userid/favorites/:bookid')
     User.findOneAndUpdate({ fbid: req.params.userid },
       { $push: { favorites: req.params.bookid } } )
       .then(user => {
+        //send the book back, not the user
         if (user) {
           Book.findOne({_id: req.params.bookid})
           .then(book => {

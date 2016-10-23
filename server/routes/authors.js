@@ -1,3 +1,5 @@
+//These routes are fully functional but we didn't have time to implement the authors feature in its entirety.  Enjoy!
+
 const express = require('express');
 const router = express.Router();
 const Author = require('../models/authors');
@@ -31,7 +33,7 @@ router.get('/search/:author', (req, res) => {
                 description: result.GoodreadsResponse.author[0].about[0],
                 photoPath: result.GoodreadsResponse.author[0].large_image_url[0],
               },
-              //adds the document if it doesn't exist, returns the new document
+              //adds the document if it doesn't exist, returns the new, rather than the found, document
               {upsert: true, new: true},
               (err, author) => {
                 if (err) {

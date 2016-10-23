@@ -6,8 +6,6 @@ const usersSchema = new Schema({
   displayName: String,
   image: String,
   token: String,
-  // favorites: Array,
-  // queue: Array,
   queue: [{ type: Schema.Types.String, ref: 'Books' }],
   favorites: [{ type: Schema.Types.String, ref: 'Books' }],
   location: String,
