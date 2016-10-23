@@ -8,7 +8,9 @@ const Navbar = (props) => {
     <nav className="navbar navbar-default">
       <div className="row">
         <div className="col-md-2">
-          <h2>iLuddite</h2>
+          <a href="/">
+            <h2>iLuddite</h2>
+          </a>
         </div>
         <div className="col-md-8">
           <SearchBox 
