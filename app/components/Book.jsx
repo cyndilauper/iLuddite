@@ -38,8 +38,10 @@ class Book extends React.Component {
             <h4>About the Book</h4>
             <p>{this.state.book.summary}</p>
             <br/>
-            <Link className="btn btn-default btn-info" to="#" role="button">Add to Queue</Link>
-            <Link className="btn btn-default btn-info" to="#" role="button">Add to Favorites</Link>
+            <button className="btn btn-default btn-info" to="#" role="button">Add to Queue
+            </button>
+            <button className="btn btn-default btn-info" to="#" role="button">Add to Favorites
+            </button>
           </div>
         </div>
 

@@ -164,10 +164,18 @@ class App extends React.Component {
   }
 
   addBookToFavorites (isbn) {
+    // first make sure book is not already in favorites
+    for (let i = 0; i < this.state.loggedInUser.favorites) {
+      if (this.state.loggedInUser.favorites[i]._id === isbn) {
+        // book already in favorites just return 
+        return;
+      }
+    }
+    // book is not already in list. Go ahead and add it
     axios.post(`/users/${this.state.loggedInUser.fbid}/favorites/${isbn}`)
       .then(book => {
         const newState = Object.assign({}, this.state.loggedInUser);
-        newState.favorites = newState.favorites.concat(isbn);
+        newState.favorites = newState.favorites.concat(book.data);
         this.setState({
           loggedInUser: newState
         })
