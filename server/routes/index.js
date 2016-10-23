@@ -5,7 +5,7 @@ const path = require('path');
 
 const User = require('../models/users');
 
-const facebook = require('../services/facebook')();
+const facebook = require('../services/facebook');
 
 function authCheck(req, res, next) {
   if (req.isAuthenticated()) {

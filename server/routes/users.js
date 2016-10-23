@@ -4,7 +4,7 @@ const router = express.Router();
 const User = require('../models/users');
 const Book = require('../models/books');
 
-const facebook = require('../services/facebook')();
+const facebook = require('../services/facebook');
 
 router.get('/:userid', (req, res, next) => {
   // GET user info (photo, current book, queue, stats)
