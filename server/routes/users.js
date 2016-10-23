@@ -1,9 +1,7 @@
 const express = require('express');
 const router = express.Router();
-
 const User = require('../models/users');
 const Book = require('../models/books');
-
 const profile = require('../services/profile');
 
 router.get('/:userid', (req, res, next) => {
@@ -114,6 +112,7 @@ router.route('/:userid/favorites/:bookid')
     User.findOneAndUpdate({ fbid: req.params.userid },
       { $push: { favorites: req.params.bookid } } )
       .then(user => {
+        //send the book back, not the user
         if (user) {
           Book.findOne({_id: req.params.bookid})
           .then(book => {
