@@ -117,10 +117,32 @@ class App extends React.Component {
     })
   }
 
-  makeCurrentBook (isbn){
-
-    // makes the clicked book your current Book.
-    axios.post(`/users/${this.state.loggedInUser.fbid}/queue/${isbn}?current=true`)
+  makeCurrentBook (isbn) {
+    const userid = this.state.loggedInUser.fbid;
+    // see if the queue already has the book
+    for (let i = 0; i < this.state.queue; i++) {
+      if (this.state.queue[i]._id === isbin) {
+        // if we find the book delete it and then add it at the front
+        axios.delete(`/users/${userid}/queue/${isbn}`)
+          // on success of deleting send an add to queue query
+          .then(deleted => 
+            axios.post(`/users/${userid}/queue/${isbn}?current=true`)
+          )
+          .then(added => {
+            const book = added.data;
+            const newState = Object.assign({}, this.state.loggedInUser);
+            newState.queue = [book._id].concat(newState.queue);
+            this.setState({
+              loggedInUser: newState
+            });
+          })
+        // return so below code doesn't get hit
+        // (work below has already been done in last block)
+        return;
+      }
+    }
+    // book wasn't already in the queue so it needs to be added.
+    axios.post(`/users/${userid}/queue/${isbn}?current=true`)
     .then( book => {
       book = book.data
       const newState = Object.assign({}, this.state.loggedInUser);
