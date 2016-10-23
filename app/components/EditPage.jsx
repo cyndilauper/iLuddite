@@ -17,7 +17,7 @@ class EditPage extends React.Component {
         />
         <Favorites 
           favorites={this.props.favorites}
-          removeBookFromFavorites={this.removeBookFromFavorites}
+          removeBookFromFavorites={this.props.removeBookFromFavorites}
         />
       </div>
     );

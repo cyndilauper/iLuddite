@@ -165,8 +165,9 @@ class App extends React.Component {
   }
 
   addBookToFavorites (isbn) {
+    console.log(isbn)
     // first make sure book is not already in favorites
-    for (let i = 0; i < this.state.loggedInUser.favorites; i++) {
+    for (let i = 0; i < this.state.loggedInUser.favorites.length; i++) {
       if (this.state.loggedInUser.favorites[i]._id === isbn) {
         // book already in favorites just return
         return;

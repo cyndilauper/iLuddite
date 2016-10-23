@@ -30,7 +30,7 @@ class Book extends React.Component {
       <div className="bookContainer">
         <div className="bookRow">
           <div className="bookCol col-md-6">
-            <img className="bookImg" src={this.state.book.thumbnailPath}/> {/* using this image for testing*/}
+            <img className="bookImg" src={this.state.book.thumbnailPath}/>
           </div>
 
           <div className="bookCol2 col-md-6">
@@ -56,7 +56,7 @@ class Book extends React.Component {
             </button>
             <button
               className="btn btn-default btn-info" role="button"
-              onClick={addBookToFavorites.bind(null, this.state.book_id)}
+              onClick={addBookToFavorites.bind(null, this.state.book._id)}
             >
             Add to Favorites
             </button>
