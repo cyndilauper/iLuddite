@@ -11,7 +11,9 @@ const SearchListItem = (props) => {
           </Link>
         </div>
         <div className="col-md-7">
-          <h4>{props.title} <small> - {props.author} </small></h4>
+          <Link to={`/books/${props.bookid}`}>
+            <h4>{props.title} <small> - {props.author} </small></h4>
+          </Link>
           <p>{props.summary}</p>
         </div>
         <div className="col-md-2">
