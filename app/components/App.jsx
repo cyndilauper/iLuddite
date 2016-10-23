@@ -25,6 +25,7 @@ class App extends React.Component {
       // get the loggedIn user information
       axios.get('/loggedin')
         .then((response) => {
+          console.log(response.data)
           this.setState({
             loggedInUser: response.data
           });

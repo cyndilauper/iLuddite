@@ -29,6 +29,10 @@ class UserProfile extends React.Component {
     }
   }
 
+  // This lifecycle method will get called anytime the user is already on
+  // this component and clicks one of their friends which shows this same
+  // component with their data. When this happens this component needs
+  // to do a get request to get the new users information.
   componentWillReceiveProps(nextProps) {
     axios.get(`/users/${nextProps.params.userid}`)
       .then(response => {
