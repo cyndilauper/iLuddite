@@ -42,7 +42,6 @@ const CurrentBook = (props) => {
 // defaults
 CurrentBook.defaultProps = {
   currentBook: {
-    image: 'http://127.0.0.1:3000/assets/webpack.config.jpg',
     title: 'Can\'t find your gosh-darned book!',
     author: 'Who the heck knows?',
     summary: 'Try making a different book yr current book, doofus'
