@@ -161,22 +161,22 @@ class App extends React.Component {
 
   removeBookFromFavorites (isbn) {
     // removesBookFromFavorites
-    axios.delete(`/users/${this.state.loggedInUser.fbid}/favorites/${isbn}`)
+    const loggedInUser = this.state.loggedInUser;
+    axios.delete(`/users/${loggedInUser.fbid}/favorites/${isbn}`)
       .then(deleted => {
-        const filtered =
-          this.state.loggedInUser.favorites.filter(book => {
-            return book.isbn !== isbn;
-          });
+        const filtered = loggedInUser.favorites.filter(book => {
+          return book._id !== isbn;
+        });
         const newState = Object.assign({}, this.state.loggedInUser);
         newState.favorites = filtered;
         this.setState({
           loggedInUser: newState
         });
-      });
+      })
+      .catch(console.log)
   }
 
   addBookToFavorites (isbn) {
-    console.log(isbn)
     // first make sure book is not already in favorites
     for (let i = 0; i < this.state.loggedInUser.favorites.length; i++) {
       if (this.state.loggedInUser.favorites[i]._id === isbn) {
