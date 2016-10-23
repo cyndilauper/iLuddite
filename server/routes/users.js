@@ -176,19 +176,24 @@ router.route('/:userid/favorites')
       throw error;
     })
   })
+
 router.route('/:userid/favorites/:bookid')
   .post((req, res, next) => {
   // POST to user's favorite books
     User.findOneAndUpdate({ fbid: req.params.userid },
       { $push: { favorites: req.params.bookid } } )
-      .then(done => {
-        if (done) {
-          res.send(done);
+      .then(user => {
+        if (user) {
+          Book.findOne({_id: req.params.bookid})
+          .then(book => {
+            res.json(book);
+          })
         } else {
           res.send('user and/or favorites not found')
         }
     }).catch(error => {
       throw error;
+      console.log('error:', error);
     });
   })
   .delete((req, res, next) => {
