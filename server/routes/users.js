@@ -176,6 +176,7 @@ router.route('/:userid/favorites')
       throw error;
     })
   })
+router.route('/:userid/favorites/:bookid')
   .post((req, res, next) => {
   // POST to user's favorite books
     User.findOneAndUpdate({ fbid: req.params.userid },
