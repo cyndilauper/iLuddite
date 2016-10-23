@@ -6,7 +6,9 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const session = require('express-session');
 const morgan= require('morgan');
-require('dot-env');
+if (process.env.NODE_ENV !== 'production') {
+  require('dot-env');
+}
 
 const db = require('./config/db');
 

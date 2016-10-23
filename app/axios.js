@@ -13,7 +13,7 @@ if (process.env.NODE_ENV === "production") {
 // typed instead of the full path
 // like get(/users/12345) instead of get(http://localhost:3000/users/12345)
 const instance = axios.create({
-  baseURL: baseUrl
+  baseURL: process.env.host
 });
 
 module.exports = instance;
