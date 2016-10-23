@@ -10,9 +10,7 @@ class App extends React.Component {
     this.state = {
       navbarSearchText: '',
       navbarSearchResults: [],
-      loggedInUser: {
-        
-      }
+      loggedInUser: {}
     }
   }
 
@@ -98,15 +96,14 @@ class App extends React.Component {
   }
 
   addBookToQueue (isbn) {
-    // first check to see if the book is already in the users queue
-    for (let i = 0; i < this.state.loggedInUser.queue; i++) {
+    // check to see if book is already in users queue
+    for (let i = 0; i < this.state.loggedInUser.queue.length; i++) {
       if (this.state.loggedInUser.queue[i]._id === isbn) {
-        // we already have the isbn return out of function
-        // and do nothing
+        // book already is in queue do not add again
         return;
       }
     }
-    // The book is not already in queue post to db to add it
+    // book is not in queue go ahead and add
     axios.post(`/users/${this.state.loggedInUser.fbid}/queue/${isbn}`)
     .then( response => {
       const newState = Object.assign({}, this.state.loggedInUser);
@@ -165,7 +162,7 @@ class App extends React.Component {
 
   addBookToFavorites (isbn) {
     // first make sure book is not already in favorites
-    for (let i = 0; i < this.state.loggedInUser.favorites) {
+    for (let i = 0; i < this.state.loggedInUser.favorites; i++) {
       if (this.state.loggedInUser.favorites[i]._id === isbn) {
         // book already in favorites just return 
         return;
@@ -196,6 +193,12 @@ class App extends React.Component {
             queue: this.state.loggedInUser.queue,
             favorites: this.state.loggedInUser.favorites
           });
+          break;
+        case "Book" :
+          return React.cloneElement(child, {
+            addBookToFavorites: this.addBookToFavorites.bind(this),
+            addBookToQueue: this.addBookToQueue.bind(this)
+          })
           break;
         case "UserProfile" :
           return React.cloneElement(child, {

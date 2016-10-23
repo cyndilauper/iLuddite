@@ -15,13 +15,13 @@ class Book extends React.Component {
     // supposed to display
     axios.get(`/books/${this.props.params.bookid}`)
       .then(response => {
-        console.log(response)
         this.setState({
           book: response.data[0]
         });
       })
   }
   render () {
+    const { addBookToQueue, addBookToFavorites } = this.props;
     return (
       <div className="bookContainer">
         <div className="bookRow">
@@ -38,9 +38,17 @@ class Book extends React.Component {
             <h4>About the Book</h4>
             <p>{this.state.book.summary}</p>
             <br/>
-            <button className="btn btn-default btn-info" to="#" role="button">Add to Queue
+            <button 
+              className="btn btn-default btn-info" role="button"
+              onClick={addBookToQueue.bind(null, this.state.book._id)}
+            >
+              Add to Queue
             </button>
-            <button className="btn btn-default btn-info" to="#" role="button">Add to Favorites
+            <button
+              onClick={addBookToFavorites.bind(null, this.state.book_id)}
+              className="btn btn-default btn-info" role="button"
+            >
+            Add to Favorites
             </button>
           </div>
         </div>

@@ -22,7 +22,6 @@ class UserProfile extends React.Component {
     if (!this.state.user.fbid) {
       axios.get(`/users/${this.props.params.userid}`)
         .then((response => {
-          console.log(response)
           this.setState({
             user: response.data
           });
