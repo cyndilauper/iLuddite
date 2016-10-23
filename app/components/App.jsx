@@ -88,15 +88,15 @@ class App extends React.Component {
   removeBookFromQueue (isbn) {
     // go through current queue and filter out isbn
     const filtered = 
-      this.state.loggedInUserQueue.filter(book => book.isbn !== isbn);
+      this.state.loggedInUser.queue.filter(book => book._id !== isbn);
     axios.delete(`/users/${this.state.loggedInUser.fbid}/queue/${isbn}`)
       .then(book => {
         const newState = Object.assign({}, this.state.loggedInUser);
         newState.queue = filtered;
         this.setState({
           loggedInUser: newState
-        })
-      })
+        });
+      });
   }
 
   addBookToQueue (isbn) {
@@ -195,7 +195,10 @@ class App extends React.Component {
         case "EditPage" :
           return React.cloneElement(child, {
             queue: this.state.loggedInUser.queue,
-            favorites: this.state.loggedInUser.favorites
+            favorites: this.state.loggedInUser.favorites,
+            removeBookFromFavorites: this.removeBookFromFavorites.bind(this),
+            removeBookFromQueue: this.removeBookFromQueue.bind(this),
+            makeCurrentBook: this.makeCurrentBook.bind(this)
           });
           break;
         case "Book" :

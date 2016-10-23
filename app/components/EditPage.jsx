@@ -10,8 +10,15 @@ class EditPage extends React.Component {
   render () {
     return (
       <div className="row">
-        <Queue queue={this.props.queue} />
-        <Favorites favorites={this.props.favorites} />
+        <Queue 
+          queue={this.props.queue}
+          removeBookFromQueue={this.props.removeBookFromQueue}
+          makeCurrentBook={this.props.makeCurrentBook}
+        />
+        <Favorites 
+          favorites={this.props.favorites}
+          removeBookFromFavorites={this.removeBookFromFavorites}
+        />
       </div>
     );
   }

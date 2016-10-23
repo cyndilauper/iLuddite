@@ -7,8 +7,11 @@ const Queue = (props) => {
   // so it needs different styling.
   const queue = props.queue.map((book, idx) => {
     if (idx === 0) {
+      // the first book dowsn't need a makeCurrentBook function
+      // since it already is the currentBook
       return (
-        <QueueListItem 
+        <QueueListItem
+          removeBookFromQueue={props.removeBookFromQueue}
           currentBook={true}
           book={book}
         />
@@ -16,6 +19,8 @@ const Queue = (props) => {
     } else {
       return (
         <QueueListItem
+          removeBookFromQueue={props.removeBookFromQueue}
+          makeCurrentBook={props.makeCurrentBook}
           currentBook={false}
           book={book}
         />

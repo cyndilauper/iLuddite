@@ -9,17 +9,27 @@ const QueueListItem = (props) => {
     <li className={className}>
       <div className="row">
         <div className="col-md-1">
-          <span className="glyphicon glyphicon-remove"></span>
+          <span 
+            className="glyphicon glyphicon-remove"
+            onClick={props.removeBookFromQueue.bind(null, props.book._id)}
+          />
         </div>
         <div className="col-md-10">
           {props.book.title} - {props.book.author}
         </div>
         <div className="col-md-1">
-          <span className="glyphicon glyphicon-book"></span>
+          <span 
+            className="glyphicon glyphicon-book"
+            onClick={props.makeCurrentBook.bind(null, props.book._id)}
+          />
         </div>
       </div>
     </li>
   );
 };
+
+QueueListItem.defaultProps = {
+  makeCurrentBook: function() {}
+}
 
 module.exports = QueueListItem;
