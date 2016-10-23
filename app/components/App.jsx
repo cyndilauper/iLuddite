@@ -76,7 +76,7 @@ class App extends React.Component {
   }
 
   // this function would be needed anytime the user clicks on one of the books
-  // in the navbarSearchResults dropdown. In that case the user would get 
+  // in the navbarSearchResults dropdown. In that case the user would get
   // sent to that book and then the list needs to be destroyed.
   clearSearchResults () {
     this.setState({
@@ -126,7 +126,7 @@ class App extends React.Component {
         // if we find the book delete it and then add it at the front
         axios.delete(`/users/${userid}/queue/${isbn}`)
           // on success of deleting send an add to queue query
-          .then(deleted => 
+          .then(deleted =>
             axios.post(`/users/${userid}/queue/${isbn}?current=true`)
           )
           .then(added => {
@@ -156,7 +156,7 @@ class App extends React.Component {
 
   removeBookFromFavorites (isbn) {
     // removesBookFromFavorites
-    const filtered = 
+    const filtered =
     this.state.loggedInUserFavorites.filter(book => {
       return book.isbn !== isbn;
     });
@@ -168,7 +168,7 @@ class App extends React.Component {
     // first make sure book is not already in favorites
     for (let i = 0; i < this.state.loggedInUser.favorites; i++) {
       if (this.state.loggedInUser.favorites[i]._id === isbn) {
-        // book already in favorites just return 
+        // book already in favorites just return
         return;
       }
     }
@@ -205,6 +205,7 @@ class App extends React.Component {
           return React.cloneElement(child, {
             clearSearchResults: this.clearSearchResults.bind(this),
             addBookToFavorites: this.addBookToFavorites.bind(this),
+            makeCurrentBook: this.makeCurrentBook.bind(this),
             addBookToQueue: this.addBookToQueue.bind(this)
           })
           break;

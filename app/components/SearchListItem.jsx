@@ -12,12 +12,12 @@ const SearchListItem = (props) => {
         </div>
         <div className="col-md-7">
           <Link to={`/books/${props.bookid}`}>
-            <h4>{props.title} <small> - {props.author} </small></h4>
+            <h4>{`${props.title.substr(0, 50)}`}<br /><small>by {`${props.author.substr(0, 65)}`}</small></h4>
           </Link>
           <p>{props.summary}</p>
         </div>
-        <div className="col-md-2">
-          <button 
+        <div className="col-md-2 queue-button-col">
+          <button
             className="btn btn-primary"
             onClick={props.addBookToQueue.bind(null, props.bookid)}
           >
@@ -25,8 +25,8 @@ const SearchListItem = (props) => {
             Add to Queue
           </button>
         </div>
-        <div className="col-md-2">
-          <button 
+        <div className="col-md-2 current-button-col">
+          <button
             className="btn btn-primary"
             onClick={props.makeCurrentBook.bind(null, props.bookid)}
           >

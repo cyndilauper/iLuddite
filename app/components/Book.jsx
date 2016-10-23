@@ -25,7 +25,7 @@ class Book extends React.Component {
       })
   }
   render () {
-    const { addBookToQueue, addBookToFavorites } = this.props;
+    const { addBookToQueue, addBookToFavorites, makeCurrentBook } = this.props;
     return (
       <div className="bookContainer">
         <div className="bookRow">
@@ -42,15 +42,21 @@ class Book extends React.Component {
             <h4>About the Book</h4>
             <p>{this.state.book.summary}</p>
             <br/>
-            <button 
+            <button
               className="btn btn-default btn-info" role="button"
               onClick={addBookToQueue.bind(null, this.state.book._id)}
             >
               Add to Queue
             </button>
             <button
-              onClick={addBookToFavorites.bind(null, this.state.book_id)}
               className="btn btn-default btn-info" role="button"
+              onClick={makeCurrentBook.bind(null, this.state.book._id)}
+            >
+              Make my Current
+            </button>
+            <button
+              className="btn btn-default btn-info" role="button"
+              onClick={addBookToFavorites.bind(null, this.state.book_id)}
             >
             Add to Favorites
             </button>
@@ -60,7 +66,7 @@ class Book extends React.Component {
       </div>
     );
   }
-  
+
 };
 
 Book.defaultProps = {
@@ -74,4 +80,3 @@ Book.defaultProps = {
 }
 
 module.exports = Book;
-

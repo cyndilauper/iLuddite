@@ -20,7 +20,7 @@ class SearchBox extends React.Component {
             title={book.title}
             author={book.author}
             image={book.thumbnailPath}
-            summary={summary.substr(0, 120)}
+            summary={summary.substr(0, 200)}
             addBookToQueue={this.props.addBookToQueue}
             addBookToFavorites={this.props.addBookToFavorites}
             makeCurrentBook={this.props.makeCurrentBook}
@@ -30,7 +30,7 @@ class SearchBox extends React.Component {
       return (
         <ul className="search-box" onClick={this.stopBubbling.bind(this)}>
           <span className="glyphicon glyphicon-search"></span>
-          <input 
+          <input
             type="text"
             placeholder="Search for Books"
             value={this.props.searchText}
@@ -44,7 +44,7 @@ class SearchBox extends React.Component {
       return (
         <div className="search-box" onClick={this.stopBubbling.bind(this)}>
           <span className="glyphicon glyphicon-search"></span>
-          <input 
+          <input
             type="text"
             placeholder="Search for Books"
             value={this.props.searchText}
@@ -72,6 +72,7 @@ class SearchBox extends React.Component {
 
   }
 
+
   // anytime the searchbox is clicked we don't want the event to bubble
   // up to App component (App component has a click event so that when
   // you click off to the side of search results it dismisses them. This
@@ -79,7 +80,6 @@ class SearchBox extends React.Component {
   stopBubbling (evt) {
     evt.stopPropagation();
   }
-  
 }
 
 module.exports = SearchBox;
