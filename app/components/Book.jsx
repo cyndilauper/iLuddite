@@ -24,6 +24,25 @@ class Book extends React.Component {
         });
       })
   }
+
+  // if the user searches for a book in the navbar
+  // and then selects one while they are alreay on the
+  // book component then this function will get called
+  // use it as a chance to dismiss the dropdown and fetch
+  // the new book the user is trying to view
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.params.bookid !== this.props.params.bookid) {
+      this.props.clearSearchResults();
+      // fetch the new book
+      axios.get(`/books/${nextProps.params.bookid}`)
+        .then(response => {
+          this.setState({
+            book: response.data[0]
+          });
+        });
+    }
+  }
+
   render () {
     const { addBookToQueue, addBookToFavorites, makeCurrentBook } = this.props;
     return (
