@@ -22,7 +22,13 @@ router.get('/', authCheck, (req, res, next) => {
 router.get('/loggedin', (req, res, next) => {
   User.findOne({
     fbid: req.user.fbid
-    }).then(found => {
+    })
+    .populate('queue favorites')
+    .exec((err, result) => {
+      if (err) throw err;
+      // else console.log('populated: ', result);
+    })  
+    .then(found => {
       if (found) {
         // if user is found - pass their fbid to the getFriends function
         try {
