@@ -53,5 +53,5 @@ jspm_packages
 .env.json
 
 # ignore bundle
-bundle.js
+# bundle.js -- keeping bundle for heroku
 *.map
