@@ -4,6 +4,7 @@
 	font-size: 30px;
 	padding-left: 50px;
 	padding-top: 30px;
+  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
 }
 
 .main-body {
@@ -63,7 +64,8 @@ nav h2 {
   margin: 0;
   padding-left: 8px;
   padding-top: 10px;
-  font-size: 24px;
+  font-size: 26px;
+  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
 }
 
 nav ul {
@@ -88,6 +90,7 @@ nav span.glyphicon.glyphicon-search {
   top: 12px;
   font-size: 20px;
   color: lightgray;
+  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
 }
 
 .search-box {
@@ -120,6 +123,7 @@ nav span.glyphicon.glyphicon-search {
   margin-right: 20px;
   margin-top: 20px;
 	font-size: 10px;
+  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
 }
 
 .search-list-item h4,
@@ -168,20 +172,24 @@ nav span.glyphicon.glyphicon-search {
 .currentHeader {
   font-size:2em;
   padding-bottom: .5em;
+  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
 }
 
 .currentTitle {
   font-size: 1.3em;
+  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
 }
 
 .currentAuthor {
   font-size: 1.1em;
   font-weight: 300;
   margin-bottom: 1.1em;
+  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
 }
 
 .currentBio {
   font-size: .9em;
+  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
 }
 
 
@@ -226,15 +234,16 @@ nav span.glyphicon.glyphicon-search {
 .userName {
   font-size: 1.6em;
   font-weight: 600;
+  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
 }
 
 .userLocation {
   font-size: 1.2em;
+  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;  
 }
 
 .userBooksRead {
-
-
+  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
 }
 
 .readingRow {
@@ -246,6 +255,7 @@ nav span.glyphicon.glyphicon-search {
   text-align: center;
   font-size: 2em;
   padding: 1.4em 0 .5em 0;
+  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
 }
 
 .readingColumn {
