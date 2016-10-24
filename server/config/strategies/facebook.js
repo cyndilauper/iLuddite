@@ -8,8 +8,8 @@ const facebook = require('../../services/facebook');
 module.exports = function() {
   passport.use(new FacebookStrategy({
     clientID: '1787582178167706',
-    clientSecret: process.env.fbSecret,
-    callbackURL: `${process.env.host}/auth/return`,
+    clientSecret: process.env.FB_SECRET,
+    callbackURL: `${process.env.HOST}/auth/return`,
     passReqToCallback: true
   },
   (req, token, refreshToken, profile, done) => {
@@ -35,7 +35,7 @@ module.exports = function() {
           }
           new User({ fbid: profile.id,
             displayName: profile.displayName,
-            image: `http://graph.facebook.com/${profile.id}/picture?width=400&height=400`,
+            image: `https://graph.facebook.com/${profile.id}/picture?width=400&height=400`,
             token: token,
             stats: 0,
             location: location,

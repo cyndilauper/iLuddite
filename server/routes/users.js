@@ -4,82 +4,13 @@ const router = express.Router();
 const User = require('../models/users');
 const Book = require('../models/books');
 
-const facebook = require('../services/facebook');
+const profile = require('../services/profile');
 
 router.get('/:userid', (req, res, next) => {
   // GET user info (photo, current book, queue, stats)
-  User.findOne({
-    fbid: req.params.userid
-    })
-    .populate('queue favorites')
-    .exec((err, result) => {
-      if (err) throw err;
-      // else console.log('populated: ', result);
-    })
-    .then(found => {
-      if (found) {
-        // if user is found - pass their fbid to the getFriends function
-
-        try {
-        facebook.getFriends(req.user.token, found.fbid, results => {
-
-          // convert the found object to a JSON object
-          found = found.toJSON();
-          // add the friends array
-
-          // this function will get the photo from a user's profile
-          function getImage(fbid) {
-            return new Promise((resolve, reject) => {
-              User.findOne({fbid}, (error, obj) => {
-                if (error) {
-                  reject(error);
-                } else if (!obj) {
-                  // if user is a friend that uses the app, but is not found
-                  // in the database, return null
-                  console.log('Error: FB friend missing from database')
-                  resolve( null );
-                } else {
-                  resolve( {fbid: obj.fbid,
-                    image: obj.image,
-                    name: obj.displayName } );
-                }
-              });
-            })
-          }
-
-          // map over the results object and add images
-          let mapped = results.map(friend => {
-            return getImage(friend.id)
-          })
-
-          // once all async mapping functions have resolved, add the array to
-          // the found object and return it
-          Promise.all(mapped)
-            .then(result => {
-              result = result.filter(friend => {
-                // filter out any null friends
-                if (friend) {
-                  return friend;
-                }
-              })
-              found.friends = result;
-              res.send(found);
-            })
-            .catch(error => {
-              console.log(error);
-            })
-
-        })
-      }
-      catch(error) {
-        res.send(`Error: ${error} \n Maybe no token?`)
-      }
-      } else {
-        res.send('user not found')
-      }
-    }).catch(error => {
-      throw error;
-    })
+  profile(req, req.params.userid).then(answer => {
+    res.send(answer);
+  })
 })
 
 router.get('/:userid/queue', (req, res, next) => {

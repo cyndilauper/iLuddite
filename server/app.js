@@ -1,14 +1,11 @@
 #! /usr/bin/env node
+require('dotenv').config({silent: true});
 
 const express = require('express');
 const path = require('path');
-const bodyParser = require('body-parser');
 const passport = require('passport');
 const session = require('express-session');
 const morgan= require('morgan');
-if (process.env.NODE_ENV !== 'production') {
-  require('dot-env');
-}
 
 const db = require('./config/db');
 
@@ -20,8 +17,6 @@ const authors = require('./routes/authors');
 
 const app = express();
 app.use(morgan('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
