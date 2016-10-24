@@ -196,6 +196,20 @@ class App extends React.Component {
       })
   }
 
+  // function to increase a users book read total
+  increaseBookCount () {
+    axios.post(`/users/${this.state.loggedInUser.fbid}/count`)
+      .then(res => {
+        console.log('res: ', res);
+        let newState = Object.assign({}, this.state.loggedInUser);
+        newState.stats++;
+        this.setState({
+          loggedInUser: newState
+        })
+      })
+      .catch(console.log)
+  }
+
   // This function is used to render out children given to App by router
   // before rendering them we inspect what type of component they are
   // and inject properties into them so that they can display all the data
@@ -229,7 +243,8 @@ class App extends React.Component {
         case "UserProfile" :
           // userprofile needs information about the currently logged in user
           return React.cloneElement(child, {
-            loggedInUser: this.state.loggedInUser
+            loggedInUser: this.state.loggedInUser,
+            increaseBookCount: this.increaseBookCount.bind(this)
           });
           break;
         default :
