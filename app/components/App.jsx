@@ -173,7 +173,7 @@ class App extends React.Component {
           loggedInUser: newState
         });
       })
-      .catch(console.log)
+      
   }
 
   addBookToFavorites (isbn) {
@@ -187,7 +187,6 @@ class App extends React.Component {
     // book is not already in list. Go ahead and add it
     axios.post(`/users/${this.state.loggedInUser.fbid}/favorites/${isbn}`)
       .then(book => {
-        console.log(book.data)
         const newState = Object.assign({}, this.state.loggedInUser);
         newState.favorites = newState.favorites.concat(book.data);
         this.setState({
