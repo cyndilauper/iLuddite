@@ -87,7 +87,7 @@ class Book extends React.Component {
 
 Book.defaultProps = {
   book: {
-    image: './assets/webpack.config.jpg',
+    image: '../public/assets/default-img.jpg',
     title: 'I bet this book has a great title, but we have no idea what it is',
     author: 'The person who wrote this is probably a good writer.  Probably',
     authorDescription: 'Whoever this is probably lead an interesting life, go wikipedia them.',
