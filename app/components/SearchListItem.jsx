@@ -40,7 +40,7 @@ const SearchListItem = (props) => {
 }
 
 SearchListItem.defaultProps = {
-  image: './assets/webpack.config.jpg',
+  image: '../public/assets/default-img.jpg',
   title: 'Unknown Title',
   author: 'Unknown Author',
 }

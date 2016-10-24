@@ -78,6 +78,7 @@ nav input {
   width: 100%;
   padding-left: 40px;
   font-size: 1em;
+  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
 }
 
 nav .glyphicon-cog {
