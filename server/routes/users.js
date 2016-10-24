@@ -210,4 +210,19 @@ router.route('/:userid/favorites/:bookid')
     })
   })
 
+//update current book count
+router.post('/:userid/count', (req, res, next) => {
+  User.findOneAndUpdate( { fbid: req.params.userid },
+    { $set: { stats: stats++ } } )
+    .then(user => {
+      if (user) {
+        res.send(user.stats);
+      } else {
+        res.send('user and/or stats not found')
+      }
+    }).catch(error => {
+      res.send(error)
+    })  
+})
+
 module.exports = router;
