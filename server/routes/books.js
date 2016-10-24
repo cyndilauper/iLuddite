@@ -20,7 +20,7 @@ router.get('/', (req, res, next) => {
 router.get('/search/:searchterm', (req, res) => {
   let titleSearched = req.params.searchterm;
   let options = {
-    url: `https://www.googleapis.com/books/v1/volumes?q=${titleSearched}&key=${process.env.gbKey}`,
+    url: `https://www.googleapis.com/books/v1/volumes?q=${titleSearched}&key=${process.env.GB_KEY}`,
     json: true
   }
 

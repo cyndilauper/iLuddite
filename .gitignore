@@ -50,7 +50,7 @@ jspm_packages
 ./config/mongo.js
 
 # dot env file for environment variable loading
-.env.json
+.env
 
 # ignore bundle
 # bundle.js -- keeping bundle for heroku
