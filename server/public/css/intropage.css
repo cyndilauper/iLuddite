@@ -2,6 +2,7 @@
 .title{
 	color: white;
 	font-size: 30px;
+  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
 	padding-left: 50px;
 	padding-top: 30px;
 }
@@ -38,6 +39,10 @@
 
 .header {
 	text-align: center;
+}
+
+.well {
+  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
 }
 
 
