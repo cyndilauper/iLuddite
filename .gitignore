@@ -51,6 +51,7 @@ jspm_packages
 
 # dot env file for environment variable loading
 .env
+.env.json
 
 # ignore bundle
 # bundle.js -- keeping bundle for heroku
