@@ -5,22 +5,6 @@ const fbAuth = new OAuth2(
   null, 'oauth2/token', null
 );
 
-// this function will get a user's profile image. we will be storing their
-// profile image once their account is created - so for now it will not be used.
-// at a later date - we can use this to either dynamically display their current
-// photo, or update their profile photo in the database.
-exports.getImage = function(userKey, done) {
-  fbAuth.get(
-    'https://graph.facebook.com/me/picture?redirect=false&width=400&height=400',
-    userKey, (error, results, res) => {
-      if (error) {
-        console.log(`getImage error: ${error}`);
-      }
-      results = JSON.parse(results);
-      done(results.data.url);
-  });
-}
-
 // this function gets a user's location. currently, it is called once on account
 // creation.
 exports.getLocation = function(userKey, done) {

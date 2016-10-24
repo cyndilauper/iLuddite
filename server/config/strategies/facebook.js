@@ -35,7 +35,7 @@ module.exports = function() {
           }
           new User({ fbid: profile.id,
             displayName: profile.displayName,
-            image: `http://graph.facebook.com/${profile.id}/picture?width=400&height=400`,
+            image: `https://graph.facebook.com/${profile.id}/picture?width=400&height=400`,
             token: token,
             stats: 0,
             location: location,
