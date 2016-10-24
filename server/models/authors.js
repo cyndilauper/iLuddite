@@ -11,5 +11,5 @@ const authorsSchema = new Schema({
   titlesBy: [{ type: Schema.Types.ObjectId, ref: 'Books' }]
 });
 
-var Authors = mongoose.model('Authors', authorsSchema);
+const Authors = mongoose.model('Authors', authorsSchema);
 module.exports = Authors;

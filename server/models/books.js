@@ -11,5 +11,5 @@ const booksSchema = new Schema({
   thumbnailPath: String
 });
 
-var Books = mongoose.model('Books', booksSchema);
+const Books = mongoose.model('Books', booksSchema);
 module.exports = Books;
