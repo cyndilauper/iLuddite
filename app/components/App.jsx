@@ -28,6 +28,7 @@ class App extends React.Component {
           this.setState({
             loggedInUser: response.data
           });
+          console.log(response)
           const path = `/users/${this.state.loggedInUser.fbid}`;
           browserHistory.push(path);
         });
@@ -133,13 +134,10 @@ class App extends React.Component {
     .then( response => {
       console.log('RESPONSE: ', response)
       const newState = Object.assign({}, this.state.loggedInUser);
-      newState.pastReads = newState.queue.concat(response.data);
+      newState.pastReads = newState.pastReads.concat(response.data);
       this.setState({
         loggedInUser: newState
       })
-    })
-    .catch(error => {
-      console.log('error is: ', error)
     })
   }
 

@@ -1,5 +1,6 @@
 const React = require('react');
 const ProfileQueue = require('./ProfileQueue');
+const ProfilePastReads = require('./ProfilePastReads');
 const UserBox = require('./UserBox');
 const CurrentBook = require('./CurrentBook');
 const DisplayFriends = require('./DisplayFriends');
@@ -11,7 +12,7 @@ class UserProfile extends React.Component {
     this.state = {
       user: {
         queue: [],
-
+        pastReads: []
       }
     }
   }
@@ -35,9 +36,11 @@ class UserProfile extends React.Component {
   componentWillReceiveProps(nextProps) {
     axios.get(`/users/${nextProps.params.userid}`)
       .then(response => {
+        console.log('WILL RECEIVE PROPS: ', response)
         this.setState({
           user: response.data
         });
+        console.log(this.state.user)
       });
   }
 
@@ -45,12 +48,13 @@ class UserProfile extends React.Component {
   render () {
     return (
       <div className="container">
-        <UserBox 
+        <UserBox
           increaseBookCount={this.props.increaseBookCount}
           user={this.state.user}
           />
         <CurrentBook currentBook={this.state.user.queue[0]}/>
         <ProfileQueue bookQueue={this.state.user.queue.slice(1)}/>
+        <ProfilePastReads pastReads={this.state.user.pastReads}/>
         <DisplayFriends friendQueue={this.state.user.friends}/>
       </div>
     );

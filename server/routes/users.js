@@ -86,13 +86,16 @@ router.route('/:userid/queue/:bookid')
 
   router.route('/:userid/pastReads/:bookid')
     .post((req, res, next) => {
-    User.findOneAndUpdate( { fbid: req.params.userid },
-      { $push: { pastReads: req.params.bookid } } )
+    User.findOne( { fbid: req.params.userid })
       .then(user => {
-        console.log(user)
-        res.send(user);
+        user.update({ $push: { pastReads: req.params.bookid } } )
+        .then(() => {
+          Book.findOne({_id: req.params.bookid}).then(book => {
+            console.log('USER: ', user)
+            res.json(book);
+          })
+        })
       }).catch(error => {
-        console.log('MUNCHY')
         res.send(error)
       })
   })
