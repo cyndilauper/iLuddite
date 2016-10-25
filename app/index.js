@@ -11,6 +11,7 @@ const App = require('./components/App');
 const EditPage = require('./components/EditPage');
 const UserProfile = require('./components/UserProfile');
 const Book = require('./components/Book');
+const Author = require('./components/Author')
 
 ReactDOM.render(
   <Router history={browserHistory}>
@@ -18,6 +19,7 @@ ReactDOM.render(
       <Route path="users/:userid" component={UserProfile}/>
       <Route path="users/:userid/edit" component={EditPage}/>
       <Route path="books/:bookid" component={Book} />
+      <Route path="authors/:authorid" component={Author} />
     </Route>
   </Router>,
   document.getElementById('app')

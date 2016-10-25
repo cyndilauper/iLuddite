@@ -19,16 +19,17 @@ router.get('/search/:author', (req, res) => {
       body = xml('' + body, (err, result) => {
         let authorId = result.GoodreadsResponse.author[0].$.id;
         let options = {
-          url: `https://www.goodreads.com/author/show/${authorId}?key=${process.env.goodreads}`
+          url: `https://www.goodreads.com/author/list/${authorId}?key=${process.env.goodreads}`
         }
         //once we've got the goodreads author id, perform a separate query to get the author info since goodreads makes us do that
         request(options, (err, response, body) => {
           if (!err && response.statusCode == 200) {
             body = xml('' + body, (err, result) => {
+              console.log(result.GoodreadsResponse.author[0].books[0])
               Author.findOneAndUpdate({
                 _id: result.GoodreadsResponse.author[0].id
               }, {
-                _id: result.GoodreadsResponse.author[0].id,
+                _id: result.GoodreadsResponse.author[0].id[0],
                 name: result.GoodreadsResponse.author[0].name[0],
                 description: result.GoodreadsResponse.author[0].about[0],
                 photoPath: result.GoodreadsResponse.author[0].large_image_url[0],
@@ -61,8 +62,7 @@ router.get('/:authorId', (req, res, next) => {
   //find by name
   Author.findOne({_id: req.params.authorId}, (err, author) => {
     if (err) {
-      console.log(`Error in finding author: ${err}`);
-      res.send(err);
+      request()
     } else {
       console.log(`Author found: ${author}`);
       res.send(author);
