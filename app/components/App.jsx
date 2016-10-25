@@ -46,6 +46,7 @@ class App extends React.Component {
           searchResults={this.state.navbarSearchResults}
           handleSearchSubmit={this.searchForBook.bind(this)}
           addBookToQueue={this.addBookToQueue.bind(this)}
+          addBookToPastReads={this.addBookToPastReads.bind(this)}
           makeCurrentBook={this.makeCurrentBook.bind(this)}
         />
         <div
@@ -255,7 +256,8 @@ class App extends React.Component {
             clearSearchResults: this.clearSearchResults.bind(this),
             addBookToFavorites: this.addBookToFavorites.bind(this),
             makeCurrentBook: this.makeCurrentBook.bind(this),
-            addBookToQueue: this.addBookToQueue.bind(this)
+            addBookToQueue: this.addBookToQueue.bind(this),
+            addBookToPastReads: this.addBookToPastReads.bind(this)
           })
           break;
         case "UserProfile" :
