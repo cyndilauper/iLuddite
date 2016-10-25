@@ -38,7 +38,7 @@ router.route('/:userid/queue/:bookid')
       // if request ends in current=true, push to top of list
 
       User.findOneAndUpdate({ fbid: req.params.userid },
-        { $push: { queue: { $each: [req.params.bookid], $position: 0 } } })
+        { $push: { queue: { $each: [req.params.bookid], $position: 0 } } }) //No idea what this is, ES6 magic?
         .then(user => {
           if (user) {
             Book.findOne({_id: req.params.bookid}).then(book => {

@@ -5,7 +5,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 
 // React router goodies
-import { Router, Route, browserHistory, IndexRoute } from 'react-router';
+import { Router, Route, browserHistory, IndexRoute } from 'react-router'; //All pieces of the router object
 
 const App = require('./components/App');
 const EditPage = require('./components/EditPage');
