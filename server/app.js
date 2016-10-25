@@ -14,6 +14,7 @@ const users = require('./routes/users');
 const books = require('./routes/books');
 const auth = require('./routes/auth');
 const authors = require('./routes/authors');
+const reviews = require('./routes/reviews');
 
 const app = express();
 app.use(morgan('dev'));
@@ -33,6 +34,7 @@ app.use('/users', users);
 app.use('/books', books);
 app.use('/auth', auth);
 app.use('/authors', authors)
+app.use('/reviews', reviews)
 
 // 404 catcher
 app.use((req, res, next) => {
