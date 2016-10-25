@@ -1,5 +1,5 @@
 #! /usr/bin/env node
-require('dotenv').config({silent: true});
+require('dotenv').config({silent: false});
 
 const express = require('express');
 const path = require('path');
