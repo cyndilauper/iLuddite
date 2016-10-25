@@ -96,7 +96,9 @@ class Book extends React.Component {
             </button>
           </div>
         </div>
-
+        <div className="reviewRow">
+          <Review />
+        </div>
       </div>
     );
   }
