@@ -149,7 +149,19 @@ router.post('/:userid/count', (req, res, next) => {
       res.send(user);
     }).catch(error => {
       res.send(error)
-    })  
+    })
+})
+
+router.post('/:userid/pastReads/:bookid', (req, res, next) => {
+  console.log(req.params.userid)
+  User.findOneAndUpdate( { fbid: req.params.userid },
+    { $push: { pastReads: req.params.bookid } } )
+    .then(user => {
+      res.send(user);
+    }).catch(error => {
+      console.log('')
+      res.send(error)
+    })
 })
 
 module.exports = router;
