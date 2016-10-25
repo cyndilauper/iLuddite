@@ -18,15 +18,24 @@ router.route('/:bookid')
   })
 
   .post((req, res, next) => {
-    console.log(req)
-    var newReview = {
+
+    var review = {
       book_id: req.params.bookid,
-      user_id: "idk",
-      content: "idk",
-      rating: "idk" 
+      user_id: req.user.fbid,
+      content: req.body.content,
+      rating: req.body.rating
     }
-    // new Review({})
-    res.end(req)
+
+    console.log("GOT POST", review)
+
+    // var newReview = {
+    //   book_id: req.params.bookid,
+    //   user_id: "idk",
+    //   content: "idk",
+    //   rating: "idk" 
+    // }
+    // // new Review({})
+    // res.end(req)
   })
 
 
