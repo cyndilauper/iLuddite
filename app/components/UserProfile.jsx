@@ -1,5 +1,6 @@
 const React = require('react');
 const ProfileQueue = require('./ProfileQueue');
+const ProfileFavorites = require('./ProfileFavorites');
 const ProfilePastReads = require('./ProfilePastReads');
 const UserBox = require('./UserBox');
 const CurrentBook = require('./CurrentBook');
@@ -12,7 +13,8 @@ class UserProfile extends React.Component {
     this.state = {
       user: {
         queue: [],
-        pastReads: []
+        pastReads: [],
+        favorites: []
       }
     }
   }
@@ -55,6 +57,7 @@ class UserProfile extends React.Component {
         <CurrentBook currentBook={this.state.user.queue[0]}/>
         <ProfileQueue bookQueue={this.state.user.queue.slice(1)}/>
         <ProfilePastReads pastReads={this.state.user.pastReads}/>
+        <ProfileFavorites favorites={this.state.user.favorites}/>
         <DisplayFriends friendQueue={this.state.user.friends}/>
       </div>
     );
