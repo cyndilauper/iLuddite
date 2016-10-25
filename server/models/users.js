@@ -7,7 +7,6 @@ const usersSchema = new Schema({
   image: String,
   token: String,
   queue: [{ type: Schema.Types.String, ref: 'Books' }],
-  pastReads: [{ type: Schema.Types.String, ref: 'Books' }],
   favorites: [{ type: Schema.Types.String, ref: 'Books' }],
   location: String,
   stats: Number,
