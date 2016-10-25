@@ -7,6 +7,7 @@ const reviewsSchema = new Schema({
   book_id: { type: Schema.Types.String, ref: 'Books' },
   user_id: { type: Schema.Types.String, ref: 'Users' },
   content: String,
+  rating: Number,
   created_at: {type: Date, default: Date.now}
 });
 
