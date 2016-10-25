@@ -141,6 +141,20 @@ class App extends React.Component {
     })
 }
 
+removeBookFromFinished (isbn) {
+  // go through current finished list and filter out isbn
+  const filtered = 
+  this.state.loggedInUser.finished.filter(book => book._id !== isbn);
+  axios.delete(`/users/${this.state.loggedInUser.fbid}/finished/${isbn}`)
+    .then(book => {
+      const newState = Object.assign({}, this.state.loggedInUser);
+      newState.finished = filtered;
+      this.setState({
+        loggedInUser: newState
+      });
+    });
+}
+
   makeCurrentBook (isbn) {
     const userid = this.state.loggedInUser.fbid;
     // see if the queue already has the book
