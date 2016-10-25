@@ -25,7 +25,6 @@ router.get('/search/:author', (req, res) => {
         request(options, (err, response, body) => {
           if (!err && response.statusCode == 200) {
             body = xml('' + body, (err, result) => {
-              console.log(result.GoodreadsResponse.author[0].books[0])
               Author.findOneAndUpdate({
                 _id: result.GoodreadsResponse.author[0].id
               }, {
@@ -55,6 +54,30 @@ router.get('/search/:author', (req, res) => {
   }
   //call the request module
   request(options, getAuthorInfo);
+})
+
+router.get('/:authorId/books', (req, res) => {
+  let authorId = req.params.authorId
+  let options = {
+    url: `https://www.goodreads.com/author/list/${authorId}?key=${process.env.goodreads}`
+  }
+  console.log('author id',authorId)
+  function getAuthorBooks(err, response, body) {
+    body = xml('' + body, (err, result) => {
+      let books = result.GoodreadsResponse.author[0].books[0].book.splice(0, 15)
+      books = books.map(book => (
+        {
+          id: book.id[0]._,
+          title: book.title,
+          image: book.image_url,
+          link: book.link
+        }
+      ))
+      res.send(books)
+    })
+  }
+
+  request(options, getAuthorBooks)
 })
 
 //endpoint for retrieving author from db
