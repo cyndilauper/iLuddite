@@ -118,6 +118,29 @@ class App extends React.Component {
     })
   }
 
+  addBookToFinished (isbn) {
+        // check to see if book is already in user's finished list
+    for (let i = 0; i < this.state.loggedInUser.queue.length; i++) {
+      if (this.state.loggedInUser.finished[i]._id === isbn) {
+        // book already is in finished, do not add again
+        return;
+      }
+  }
+  // book is not in finished, go ahead and add
+    axios.post(`/users/${this.state.loggedInUser.fbid}/finished/${isbn}`)
+    .then( response => {
+      const newState = Object.assign({}, this.state.loggedInUser);
+      newState.finished = newState.finished.concat(response.data);
+      this.setState({
+        loggedInUser: newState
+      })
+    })
+    //Afterwards, remove the book from the user's queue
+    .then ( response => {
+      removeBookFromQueue (isbn)
+    })
+}
+
   makeCurrentBook (isbn) {
     const userid = this.state.loggedInUser.fbid;
     // see if the queue already has the book

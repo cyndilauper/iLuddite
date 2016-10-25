@@ -7,7 +7,7 @@ router.get('/', (req, res, next) => {
   //returns all books
   Books.find({}, (err, books) => {
     if (err) {
-      console.log(`Find all books error: ${err}`);
+      console.log(`Find all books error: ${err}`); //ES6 query strings at work, the '$' signifies a JS variable
       res.send(err);
     } else {
       console.log(`Find all books: ${books}`);
@@ -51,8 +51,8 @@ router.get('/search/:searchterm', (req, res) => {
       })
       //handle the case in which the book is already in the db
       five.forEach((book) => {
-        Books.findOneAndUpdate({_id: book._id}, {
-          _id: book._id,
+        Books.findOneAndUpdate({_id: book._id}, { //Takes 4 parameters: query, doc, options, callback
+          _id: book._id, // This is the doc 
           title: book.title,
           author: book.author,
           summary: book.summary,
@@ -61,7 +61,7 @@ router.get('/search/:searchterm', (req, res) => {
         }, {upsert:true, new:true}, (err, book) => {
           if (err) console.log(err);
           else console.log('book inserted or updated: ', book);
-        })
+        }) //This is the callback
       })
       //respond with the inserted books
       res.send(five);
@@ -72,7 +72,7 @@ router.get('/search/:searchterm', (req, res) => {
   }
 
   //call the request module
-  request(options, getBooks);
+  request(options, getBooks); 
 
 })
 

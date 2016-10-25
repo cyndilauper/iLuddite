@@ -1,7 +1,7 @@
 const OAuth = require('oauth');
 const OAuth2 = OAuth.OAuth2;
 const fbAuth = new OAuth2(
-  '1787582178167706', process.env.FB_SECRET, 'https://graph.facebook.com',
+  '1597564450548474', process.env.FB_SECRET, 'https://graph.facebook.com',
   null, 'oauth2/token', null
 );
 
