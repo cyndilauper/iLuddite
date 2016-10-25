@@ -13,8 +13,7 @@ const Queue = (props) => {
         <QueueListItem
           removeBookFromQueue={props.removeBookFromQueue}
           currentBook={true}
-          book={book}
-        />
+          book={book}/>
       );
     } else {
       return (
@@ -22,8 +21,7 @@ const Queue = (props) => {
           removeBookFromQueue={props.removeBookFromQueue}
           makeCurrentBook={props.makeCurrentBook}
           currentBook={false}
-          book={book}
-        />
+          book={book}/>
       );
     }
   });

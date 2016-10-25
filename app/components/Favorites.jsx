@@ -7,8 +7,7 @@ const Favorites = (props) => {
   const favorites = props.favorites.map(book => 
     <FavoriteListItem 
       book={book}
-      removeBookFromFavorites={props.removeBookFromFavorites}
-    />
+      removeBookFromFavorites={props.removeBookFromFavorites}/>
   );
 
   return (

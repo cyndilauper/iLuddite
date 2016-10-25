@@ -8,6 +8,7 @@ const usersSchema = new Schema({
   token: String,
   queue: [{ type: Schema.Types.String, ref: 'Books' }],
   favorites: [{ type: Schema.Types.String, ref: 'Books' }],
+  finished: [{ type: Schema.Types.String, ref: 'Books' }], //Added this to implement finished books feature
   location: String,
   stats: Number,
   created_at: { type: Date, default: Date.now }
