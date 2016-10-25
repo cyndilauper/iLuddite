@@ -7,6 +7,7 @@ const request = require('request');
 
 router.route('/:bookid')
 
+  
   .get((req, res, next) => {
     Review.find({book_id: req.params.bookid})
     .then( reviews => {
@@ -19,22 +20,15 @@ router.route('/:bookid')
 
   .post((req, res, next) => {
 
-    var review = {
-      book_id: req.params.bookid,
-      user_id: req.user.fbid,
-      content: req.body.content,
-      rating: req.body.rating
-    }
-
-    console.log("GOT POST", review)
-
-    // var newReview = {
+    // var review = {
     //   book_id: req.params.bookid,
-    //   user_id: "idk",
-    //   content: "idk",
-    //   rating: "idk" 
+    //   user_id: req.user.fbid,
+    //   content: req.body.content,
+    //   rating: req.body.rating
     // }
-    // // new Review({})
+
+    console.log("GOT POST")
+
     // res.end(req)
   })
 

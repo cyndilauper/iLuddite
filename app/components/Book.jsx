@@ -54,11 +54,10 @@ class Book extends React.Component {
   }
 
   handleSubmit(e){
-    e.preventDefault()
-
-    var review = {}
+    e.preventDefault();
 
     axios.post(`/reviews/${this.props.params.bookid}`)
+
   }
 
   handleChange(e){
