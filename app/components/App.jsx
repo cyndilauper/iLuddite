@@ -128,13 +128,18 @@ class App extends React.Component {
       }
     }
     // book is not in pastReads go ahead and add
-    axios.post(`/${this.state.loggedInUser.fbid}/pastReads/${isbn}`)
+
+    axios.post(`/users/${this.state.loggedInUser.fbid}/pastReads/${isbn}`)
     .then( response => {
+      console.log('RESPONSE: ', response)
       const newState = Object.assign({}, this.state.loggedInUser);
       newState.pastReads = newState.queue.concat(response.data);
       this.setState({
         loggedInUser: newState
       })
+    })
+    .catch(error => {
+      console.log('error is: ', error)
     })
   }
 

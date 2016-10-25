@@ -84,6 +84,19 @@ router.route('/:userid/queue/:bookid')
     })
   })
 
+  router.route('/:userid/pastReads/:bookid')
+    .post((req, res, next) => {
+    User.findOneAndUpdate( { fbid: req.params.userid },
+      { $push: { pastReads: req.params.bookid } } )
+      .then(user => {
+        console.log(user)
+        res.send(user);
+      }).catch(error => {
+        console.log('MUNCHY')
+        res.send(error)
+      })
+  })
+
 router.route('/:userid/favorites')
   // GET, POST, or DELETE user's favorite books
   .get((req, res, next) => {
@@ -148,18 +161,6 @@ router.post('/:userid/count', (req, res, next) => {
     .then(user => {
       res.send(user);
     }).catch(error => {
-      res.send(error)
-    })
-})
-
-router.post('/:userid/pastReads/:bookid', (req, res, next) => {
-  console.log(req.params.userid)
-  User.findOneAndUpdate( { fbid: req.params.userid },
-    { $push: { pastReads: req.params.bookid } } )
-    .then(user => {
-      res.send(user);
-    }).catch(error => {
-      console.log('')
       res.send(error)
     })
 })
