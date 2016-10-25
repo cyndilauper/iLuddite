@@ -1,12 +1,14 @@
 const React = require('react');
 const Link = require('react-router').Link;
 const axios = require('../axios');
+const Review = require('./Review')
 
 class Book extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      book: {}
+      book: {},
+      review: ""
     }
   }
 
@@ -41,6 +43,18 @@ class Book extends React.Component {
           });
         });
     }
+  }
+
+  handleSubmit(e){
+    e.preventDefault()
+
+    axios.post(`/reviews/${this.props.bookID}`, review)
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+  }
+
+  handleChange(e){
+    this.setState({review: e.target.value})
   }
 
   render () {
@@ -97,7 +111,7 @@ class Book extends React.Component {
           </div>
         </div>
         <div className="reviewRow">
-          <Review />
+          <Review handleChange={this.handleChange.bind(this)} handleSubmit={this.handleSubmit.bind(this)}/>
         </div>
       </div>
     );
