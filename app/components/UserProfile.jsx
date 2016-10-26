@@ -47,8 +47,7 @@ class UserProfile extends React.Component {
       <div className="container">
         <UserBox 
           increaseBookCount={this.props.increaseBookCount}
-          user={this.state.user}
-          />
+          user={this.state.user} />
         <CurrentBook currentBook={this.state.user.queue[0]}/>
         <ProfileQueue bookQueue={this.state.user.queue.slice(1)}/>
         <DisplayFriends friendQueue={this.state.user.friends}/>

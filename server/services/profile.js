@@ -63,7 +63,7 @@ module.exports = function(req, fbid) {
         })
       }
       catch(error) {
-        reject(`Error: ${error} \n Maybe you don't have a token?`);
+        reject(`Error: ${error} \n Maybe you dont have a token?`);
       }
       } else {
         reject('user not found');
