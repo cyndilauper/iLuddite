@@ -28,6 +28,7 @@ class App extends React.Component {
           this.setState({
             loggedInUser: response.data
           });
+          console.log(response)
           const path = `/users/${this.state.loggedInUser.fbid}`;
           browserHistory.push(path);
         });
@@ -39,18 +40,20 @@ class App extends React.Component {
     const style = { height: '100vh' };
     return (
       <div style={style} onClick={this.clearSearchResults.bind(this)}>
-        <Navbar 
+        <Navbar
           changeSearchText={this.changeSearchText.bind(this)}
           loggedInUserId={this.state.loggedInUser.fbid}
           searchText={this.state.navbarSearchText}
           searchResults={this.state.navbarSearchResults}
           handleSearchSubmit={this.searchForBook.bind(this)}
           addBookToQueue={this.addBookToQueue.bind(this)}
+          addBookToPastReads={this.addBookToPastReads.bind(this)}
+          addBookToFavorites={this.addBookToFavorites.bind(this)}
           makeCurrentBook={this.makeCurrentBook.bind(this)}
         />
-        <div 
-          className="container" 
-          
+        <div
+          className="container"
+
         >
           {this.renderChildrenWithProps()}
         </div>
@@ -87,7 +90,7 @@ class App extends React.Component {
 
   removeBookFromQueue (isbn) {
     // go through current queue and filter out isbn
-    const filtered = 
+    const filtered =
       this.state.loggedInUser.queue.filter(book => book._id !== isbn);
     axios.delete(`/users/${this.state.loggedInUser.fbid}/queue/${isbn}`)
       .then(book => {
@@ -112,6 +115,27 @@ class App extends React.Component {
     .then( response => {
       const newState = Object.assign({}, this.state.loggedInUser);
       newState.queue = newState.queue.concat(response.data);
+      this.setState({
+        loggedInUser: newState
+      })
+    })
+  }
+
+  addBookToPastReads (isbn) {
+    // check to see if book is already in users pastReads
+    for (let i = 0; i < this.state.loggedInUser.pastReads.length; i++) {
+      if (this.state.loggedInUser.pastReads[i]._id === isbn) {
+        // book already is in pastReads do not add again
+        return;
+      }
+    }
+    // book is not in pastReads go ahead and add
+
+    axios.post(`/users/${this.state.loggedInUser.fbid}/pastReads/${isbn}`)
+    .then( response => {
+      console.log('RESPONSE: ', response)
+      const newState = Object.assign({}, this.state.loggedInUser);
+      newState.pastReads = newState.pastReads.concat(response.data);
       this.setState({
         loggedInUser: newState
       })
@@ -173,7 +197,23 @@ class App extends React.Component {
           loggedInUser: newState
         });
       })
-      
+
+  }
+
+  removeBookFromPastReads (isbn) {
+    // removesBookFromPastReads
+    const loggedInUser = this.state.loggedInUser;
+    axios.delete(`/users/${loggedInUser.fbid}/pastReads/${isbn}`)
+      .then(deleted => {
+        const filtered = loggedInUser.pastReads.filter(book => {
+          return book._id !== isbn;
+        });
+        const newState = Object.assign({}, this.state.loggedInUser);
+        newState.pastReads = filtered;
+        this.setState({
+          loggedInUser: newState
+        });
+      })
   }
 
   addBookToFavorites (isbn) {
@@ -219,14 +259,16 @@ class App extends React.Component {
     return React.Children.map(this.props.children, (child) => {
       switch (child.type.name) {
         case "EditPage" :
-          // edit page needs queue and favorites lists and also how to 
+          // edit page needs queue and favorites lists and also how to
           // modify them
           return React.cloneElement(child, {
             queue: this.state.loggedInUser.queue,
             favorites: this.state.loggedInUser.favorites,
+            pastReads: this.state.loggedInUser.pastReads,
             removeBookFromFavorites: this.removeBookFromFavorites.bind(this),
             removeBookFromQueue: this.removeBookFromQueue.bind(this),
-            makeCurrentBook: this.makeCurrentBook.bind(this)
+            makeCurrentBook: this.makeCurrentBook.bind(this),
+            removeBookFromPastReads: this.removeBookFromPastReads.bind(this)
           });
           break;
         case "Book" :
@@ -236,7 +278,8 @@ class App extends React.Component {
             clearSearchResults: this.clearSearchResults.bind(this),
             addBookToFavorites: this.addBookToFavorites.bind(this),
             makeCurrentBook: this.makeCurrentBook.bind(this),
-            addBookToQueue: this.addBookToQueue.bind(this)
+            addBookToQueue: this.addBookToQueue.bind(this),
+            addBookToPastReads: this.addBookToPastReads.bind(this)
           })
           break;
         case "UserProfile" :
