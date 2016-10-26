@@ -20,6 +20,7 @@ const Navbar = (props) => {
             handleSearchSubmit={props.handleSearchSubmit}
             addBookToQueue={props.addBookToQueue}
             addBookToPastReads={props.addBookToPastReads}
+            addBookToFavorites={props.addBookToFavorites}
             makeCurrentBook={props.makeCurrentBook}
           />
         </div>

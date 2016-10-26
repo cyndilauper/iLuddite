@@ -48,6 +48,7 @@ class App extends React.Component {
           handleSearchSubmit={this.searchForBook.bind(this)}
           addBookToQueue={this.addBookToQueue.bind(this)}
           addBookToPastReads={this.addBookToPastReads.bind(this)}
+          addBookToFavorites={this.addBookToFavorites.bind(this)}
           makeCurrentBook={this.makeCurrentBook.bind(this)}
         />
         <div
