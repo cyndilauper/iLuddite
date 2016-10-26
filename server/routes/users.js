@@ -99,6 +99,20 @@ router.route('/:userid/queue/:bookid')
         res.send(error)
       })
   })
+  .delete((req, res, next) => {
+  // DELETE from user's pastReads
+    User.update( { fbid: req.params.userid },
+      { $pullAll: { pastReads: [req.params.bookid] } } )
+      .then(done => {
+        if (done) {
+          res.send(done);
+        } else {
+          res.send('user and/or favorite not found')
+        }
+    }).catch(error => {
+      throw error;
+    })
+  })
 
 router.route('/:userid/favorites')
   // GET, POST, or DELETE user's favorite books

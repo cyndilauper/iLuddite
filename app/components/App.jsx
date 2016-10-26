@@ -214,7 +214,6 @@ class App extends React.Component {
           loggedInUser: newState
         });
       })
-
   }
 
   addBookToFavorites (isbn) {
