@@ -115,6 +115,7 @@ class App extends React.Component {
       this.setState({
         loggedInUser: newState
       })
+      document.getElementById("addBookToQueueButton").classList.add("green-button")
     })
   }
 
@@ -136,6 +137,7 @@ class App extends React.Component {
       this.setState({
         loggedInUser: newState
       })
+      document.getElementById("addBookToPastReadsButton").classList.add("green-button")
     })
   }
 
@@ -178,6 +180,7 @@ class App extends React.Component {
         loggedInUser: newState
       })
     })
+    document.getElementById("addBookToCurrentButton").classList.add("green-button")
   }
 
   removeBookFromFavorites (isbn) {
@@ -229,6 +232,7 @@ class App extends React.Component {
         this.setState({
           loggedInUser: newState
         })
+        document.getElementById("addBookToFavoritesButton").classList.add("green-button")
       })
   }
 
@@ -276,7 +280,8 @@ class App extends React.Component {
             addBookToFavorites: this.addBookToFavorites.bind(this),
             makeCurrentBook: this.makeCurrentBook.bind(this),
             addBookToQueue: this.addBookToQueue.bind(this),
-            addBookToPastReads: this.addBookToPastReads.bind(this)
+            addBookToPastReads: this.addBookToPastReads.bind(this),
+            loggedInUser: this.state.loggedInUser
           })
           break;
         case "UserProfile" :

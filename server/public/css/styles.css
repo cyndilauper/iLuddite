@@ -448,3 +448,7 @@ nav span.glyphicon.glyphicon-search {
   height: 25px;
   width: auto;
 }
+
+.green-button {
+  background-color: green;
+}
