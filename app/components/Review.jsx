@@ -6,17 +6,20 @@ import { browserHistory } from 'react-router';
 var Review = ({reviews, handleSubmit, handleChange}) => {
   return (
     <div className="reviewContainer">
-      <div className="makeReview">
+      <div className="makeReview col-md-6">
         <h3>What Did You Think?</h3>
         <form>
-          <input className="reviewForm" type="text" onChange={(e) => handleChange(e)}
+          <textarea className="reviewForm" onChange={(e) => handleChange(e)}
            placeholder="Let Your Friends Know What You Thought!" />
-          <button className="reviewSubmit" onClick={(e) => handleSubmit(e)}>ADD REVIEW</button>
+          <button className="reviewBtn btn btn-info" onClick={(e) => handleSubmit(e)}>ADD REVIEW</button>
         </form>
       </div>
-      <div className="readReview">
+      <div className="readReview col-md-6">
         <h3>What Your Friends Thought:</h3>
-          <div className="reviewFeed">
+          <div className="reviewFeed"> 
+          { 
+            reviews.map(r => <h4>{r.content}</h4>)
+          }
           </div>
       </div>
     </div>

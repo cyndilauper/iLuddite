@@ -119,12 +119,13 @@ class Book extends React.Component {
           </div>
         </div>
         <div className="reviewRow">
-          <Review reviews={this.state.reviews} handleChange={this.handleChange.bind(this)} handleSubmit={this.handleSubmit.bind(this)}/>
+          <Review reviews={this.state.reviews} 
+            handleChange={this.handleChange.bind(this)}
+            handleSubmit={this.handleSubmit.bind(this)} />
         </div>
       </div>
     );
   }
-
 };
 
 Book.defaultProps = {
