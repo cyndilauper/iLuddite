@@ -30,7 +30,7 @@ class Book extends React.Component {
     this.props.clearSearchResults();
     // as soon as the component mounts fetch the book it is
     // supposed to display
-    axios.get(`/books/${this.props.params.bookid}`)
+    axios.get(`/api/books/${this.props.params.bookid}`)
       .then(response => {
         this.setState({
           book: response.data[0]
@@ -55,7 +55,7 @@ class Book extends React.Component {
     if (nextProps.params.bookid !== this.props.params.bookid) {
       this.props.clearSearchResults();
       // fetch the new book
-      axios.get(`/books/${nextProps.params.bookid}`)
+      axios.get(`/api/books/${nextProps.params.bookid}`)
         .then(response => {
           this.setState({
             book: response.data[0]
