@@ -289,6 +289,11 @@ class App extends React.Component {
             increaseBookCount: this.increaseBookCount.bind(this)
           });
           break;
+        case "Author" :
+          return React.cloneElement(child, {
+            clearSearchResults: this.clearSearchResults.bind(this)
+          })
+          break;
         default :
           return child;
       }

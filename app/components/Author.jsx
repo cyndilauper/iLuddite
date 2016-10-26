@@ -6,26 +6,29 @@ class Author extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      author: {}
+      author: null
     }
   }
 
   componentDidMount () {
-    // clear out any search results that might still 
-    // be showing (this is kinda hacky and probably
-    // needs to be done a little differently TODO)
     this.props.clearSearchResults();
     // as soon as the component mounts fetch the author it is
     // supposed to display
+    console.log(this.props)
     axios.get(`/authors/${this.props.params.authorid}`)
       .then(response => {
+        console.log(response.data)
         this.setState({
-          author: response.data[0]
+          author: response.data
         });
       })
   }
   render(){
-    return <div>{this.state}</div>  
+    if(!this.state.author){
+      return (<div>What?</div> ) 
+    } else{
+      return <div>{this.state.author.name}</div>
+    }
   }
 }
 
