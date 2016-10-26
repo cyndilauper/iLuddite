@@ -151,6 +151,9 @@ nav span.glyphicon.glyphicon-search {
 .bookImg {
   padding-top: 20px;
   padding-bottom: 20px;
+  height: 330px;
+  width: 220px;
+  margin: 0 40px;
 }
 
 .currentColumn {
@@ -382,6 +385,12 @@ nav span.glyphicon.glyphicon-search {
   width: 480px;
 }
 
+.reviewFeed{
+  width: 350px;
+  height: 500px;
+  display: block;
+}
+
 .reviewForm{
   width: 320px;
   height: 100px;
@@ -391,7 +400,23 @@ nav span.glyphicon.glyphicon-search {
   width:320px;
 }
 
+.oneRev{
+  width: 345px;
+  height: 60px;
+}
 .revImage{
-  height: 50px;
+  display: inline block;
+  height: 55px;
   border-radius: 50%;
+  float: left;
+}
+.revText{
+  display: inline block;
+  float: left;
+  margin: 5px;
+}
+
+.revRatings img{
+  height: 25px;
+  width: auto;
 }

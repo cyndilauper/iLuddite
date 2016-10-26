@@ -18,10 +18,14 @@ var Review = ({reviews, handleSubmit, handleChange}) => {
         <h3>What Your Friends Thought:</h3>
           <div className="reviewFeed"> 
           { 
-            reviews.map((r, i) => 
+            reviews.map((rev, i) => 
               <div className="oneRev" key={i}>
-                <img className="revImage" src={r.image} />
-                <h5>{r.content}</h5>
+                <img className="revImage" src={rev.image} />
+                <div className="revRatings">{
+                  [...Array(rev.rating)].map(r => 
+                    <img src="http://cliparting.com/wp-content/uploads/2016/06/Facebook-thumbs-up-image-clipart.jpeg"/>)
+                }</div>
+                <h5 className="revText">{rev.content}</h5>
               </div>
             )
           }
