@@ -19,6 +19,7 @@ const Navbar = (props) => {
             searchResults={props.searchResults}
             handleSearchSubmit={props.handleSearchSubmit}
             addBookToQueue={props.addBookToQueue}
+            addBookToPastReads={props.addBookToPastReads}
             makeCurrentBook={props.makeCurrentBook}
           />
         </div>

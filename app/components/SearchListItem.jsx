@@ -34,6 +34,15 @@ const SearchListItem = (props) => {
             Make my Current
           </button>
         </div>
+        <div className="col-md-2 current-button-col">
+          <button
+            className="btn btn-primary"
+            onClick={props.addBookToPastReads.bind(null, props.bookid)}
+          >
+            <span className="glyphicon glyphicon-book">&nbsp;</span>
+            Add to Past Reads
+          </button>
+        </div>
       </div>
     </li>
   )

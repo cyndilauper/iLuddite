@@ -22,7 +22,7 @@ class SearchBox extends React.Component {
             image={book.thumbnailPath}
             summary={summary.substr(0, 200)}
             addBookToQueue={this.props.addBookToQueue}
-            addBookToFavorites={this.props.addBookToFavorites}
+            addBookToPastReads={this.props.addBookToPastReads}
             makeCurrentBook={this.props.makeCurrentBook}
           />
         )
