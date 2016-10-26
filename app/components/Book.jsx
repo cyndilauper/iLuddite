@@ -60,6 +60,10 @@ class Book extends React.Component {
       content: this.state.makeRev,
       rating: this.state.rating
     })
+    this.setState({
+      rating: 0,
+      makeRev: ""
+    })
   }
 
   handleChange(e){
@@ -137,7 +141,8 @@ class Book extends React.Component {
             handleChange={this.handleChange.bind(this)}
             handleSubmit={this.handleSubmit.bind(this)} 
             incRating={this.incRating.bind(this)}
-            rating={this.state.rating} />
+            rating={this.state.rating}
+            text={this.state.makeRev} />
         </div>
       </div>
     );

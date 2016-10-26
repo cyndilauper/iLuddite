@@ -439,6 +439,7 @@ nav span.glyphicon.glyphicon-search {
   display: inline block;
   float: left;
   margin: 5px 10px;
+  bottom: 0px;
 }
 
 .revRatings{
