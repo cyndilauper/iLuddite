@@ -68,9 +68,9 @@ router.get('/:authorId/books', (req, res) => {
       books = books.map(book => (
         {
           id: book.id[0]._,
-          title: book.title,
-          image: book.image_url,
-          link: book.link
+          title: book.title[0],
+          image: book.image_url[0],
+          link: book.link[0]
         }
       ))
       res.send(books)
