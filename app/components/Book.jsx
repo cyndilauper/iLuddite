@@ -11,7 +11,7 @@ class Book extends React.Component {
   }
 
   componentDidMount () {
-    // clear out any search results that might still 
+    // clear out any search results that might still
     // be showing (this is kinda hacky and probably
     // needs to be done a little differently TODO)
     this.props.clearSearchResults();
@@ -44,7 +44,10 @@ class Book extends React.Component {
   }
 
   render () {
-    const { addBookToQueue, addBookToFavorites, makeCurrentBook } = this.props;
+    // if (this.state.book.authorId) {
+
+    // }
+    const { addBookToQueue, addBookToFavorites, makeCurrentBook, addBookToPastReads } = this.props;
     return (
       <div className="bookContainer">
         <div className="bookRow">
@@ -54,7 +57,16 @@ class Book extends React.Component {
 
           <div className="bookCol2 col-md-6">
             <h2>{this.state.book.title}</h2>
-            <h3>{this.state.book.author}</h3>
+
+            <h3>
+              {+this.state.book.authorId ?
+                (<Link to={`/authors/${this.state.book.authorId}`} >
+                  {this.state.book.author}
+                </Link>) :
+
+                  this.state.book.author
+              }
+            </h3>
             <h4>About the Book</h4>
             <p>{this.state.book.summary}</p>
             <br/>
@@ -75,6 +87,12 @@ class Book extends React.Component {
               onClick={addBookToFavorites.bind(null, this.state.book._id)}
             >
             Add to Favorites
+            </button>
+            <button
+              className="btn btn-default btn-info" role="button"
+              onClick={addBookToPastReads.bind(null, this.state.book._id)}
+            >
+            Add to Past Reads
             </button>
           </div>
         </div>

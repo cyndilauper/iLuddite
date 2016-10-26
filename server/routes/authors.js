@@ -56,16 +56,76 @@ router.get('/search/:author', (req, res) => {
   request(options, getAuthorInfo);
 })
 
+router.get('/:authorId/books', (req, res) => {
+  let authorId = req.params.authorId
+  let options = {
+    url: `https://www.goodreads.com/author/list/${authorId}?key=${process.env.goodreads}`
+  }
+  console.log('author id',authorId)
+  function getAuthorBooks(err, response, body) {
+    body = xml('' + body, (err, result) => {
+      let books = result.GoodreadsResponse.author[0].books[0].book.splice(0, 15)
+      books = books.map(book => (
+        {
+          id: book.id[0]._,
+          title: book.title[0],
+          image: book.image_url[0],
+          link: book.link[0]
+        }
+      ))
+      res.send(books)
+    })
+  }
+
+  request(options, getAuthorBooks)
+})
+
 //endpoint for retrieving author from db
 router.get('/:authorId', (req, res, next) => {
+  console.log(req.params.authorId)
+  function getAuthor(err,response,body){
+    if (!err && response.statusCode == 200) {
+    body = xml('' + body, (err, result) => {
+      if(result){
+      Author.findOneAndUpdate({
+        _id: result.GoodreadsResponse.author[0].id
+      }, {
+        _id: result.GoodreadsResponse.author[0].id,
+        name: result.GoodreadsResponse.author[0].name[0],
+        description: result.GoodreadsResponse.author[0].about[0],
+        photoPath: result.GoodreadsResponse.author[0].large_image_url[0],
+      },
+      //adds the document if it doesn't exist, returns the new, rather than the found, document
+      {upsert: true, new: true},
+      (err, author) => {
+        if (err) {
+          console.log(`Error in author insert: ${err}`);
+        } else {
+          console.log(`Author inserted: ${author}`);
+          return res.send(author);
+        }
+      })
+        
+      }
+    }) 
+    }
+  }
   //find by name
   Author.findOne({_id: req.params.authorId}, (err, author) => {
+    console.log(author)
     if (err) {
       console.log(`Error in finding author: ${err}`);
       res.send(err);
-    } else {
+    } 
+    if(author){
       console.log(`Author found: ${author}`);
       res.send(author);
+    } else {
+      let authorId = req.params.authorId
+      let options = {
+        url: `https://www.goodreads.com/author/show/${authorId}?key=${process.env.goodreads}`
+      }
+      request(options, getAuthor)
     }
   })
 })
