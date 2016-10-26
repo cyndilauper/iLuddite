@@ -390,3 +390,8 @@ nav span.glyphicon.glyphicon-search {
 .reviewBtn{
   width:320px;
 }
+
+.revImage{
+  height: 50px;
+  border-radius: 50%;
+}

@@ -18,7 +18,12 @@ var Review = ({reviews, handleSubmit, handleChange}) => {
         <h3>What Your Friends Thought:</h3>
           <div className="reviewFeed"> 
           { 
-            reviews.map(r => <h4>{r.content}</h4>)
+            reviews.map((r, i) => 
+              <div className="oneRev" key={i}>
+                <img className="revImage" src={r.image} />
+                <h5>{r.content}</h5>
+              </div>
+            )
           }
           </div>
       </div>

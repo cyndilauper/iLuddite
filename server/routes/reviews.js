@@ -1,14 +1,23 @@
 const express = require('express');
 const router = express.Router();
 const Review = require('../models/reviews');
+const User = require('../models/users');
 const request = require('request');
 
 router.route('/:bookid')
 
   .get((req, res, next) => {
     Review.find({book_id: req.params.bookid}, (err, reviews) => {
-      if (err) console.log(err);
-      else res.send(reviews)
+      Promise.all(reviews.map(rev => {
+        return User.findOne({fbid: rev.user_id})
+        .then(user => {
+          return {
+            content: rev.content,
+            rating: rev.rating,
+            image: user.image
+          }
+        })
+      })).then(reviews => res.send(reviews))
     })
   })
 
