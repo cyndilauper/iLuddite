@@ -84,6 +84,36 @@ router.route('/:userid/queue/:bookid')
     })
   })
 
+  router.route('/:userid/pastReads/:bookid')
+    .post((req, res, next) => {
+    User.findOne( { fbid: req.params.userid })
+      .then(user => {
+        user.update({ $push: { pastReads: req.params.bookid } } )
+        .then(() => {
+          Book.findOne({_id: req.params.bookid}).then(book => {
+            console.log('USER: ', user)
+            res.json(book);
+          })
+        })
+      }).catch(error => {
+        res.send(error)
+      })
+  })
+  .delete((req, res, next) => {
+  // DELETE from user's pastReads
+    User.update( { fbid: req.params.userid },
+      { $pullAll: { pastReads: [req.params.bookid] } } )
+      .then(done => {
+        if (done) {
+          res.send(done);
+        } else {
+          res.send('user and/or favorite not found')
+        }
+    }).catch(error => {
+      throw error;
+    })
+  })
+
 router.route('/:userid/favorites')
   // GET, POST, or DELETE user's favorite books
   .get((req, res, next) => {
@@ -149,7 +179,7 @@ router.post('/:userid/count', (req, res, next) => {
       res.send(user);
     }).catch(error => {
       res.send(error)
-    })  
+    })
 })
 
 module.exports = router;
