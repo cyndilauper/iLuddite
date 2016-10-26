@@ -4,6 +4,7 @@ const ProfileFavorites = require('./ProfileFavorites');
 const ProfilePastReads = require('./ProfilePastReads');
 const UserBox = require('./UserBox');
 const CurrentBook = require('./CurrentBook');
+const Favorites = require('./Favorites');
 const DisplayFriends = require('./DisplayFriends');
 const axios = require('../axios');
 

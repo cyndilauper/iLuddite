@@ -200,6 +200,23 @@ class App extends React.Component {
 
   }
 
+  removeBookFromPastReads (isbn) {
+    // removesBookFromPastReads
+    const loggedInUser = this.state.loggedInUser;
+    axios.delete(`/users/${loggedInUser.fbid}/pastReads/${isbn}`)
+      .then(deleted => {
+        const filtered = loggedInUser.pastReads.filter(book => {
+          return book._id !== isbn;
+        });
+        const newState = Object.assign({}, this.state.loggedInUser);
+        newState.pastReads = filtered;
+        this.setState({
+          loggedInUser: newState
+        });
+      })
+
+  }
+
   addBookToFavorites (isbn) {
     // first make sure book is not already in favorites
     for (let i = 0; i < this.state.loggedInUser.favorites.length; i++) {
@@ -248,9 +265,11 @@ class App extends React.Component {
           return React.cloneElement(child, {
             queue: this.state.loggedInUser.queue,
             favorites: this.state.loggedInUser.favorites,
+            pastReads: this.state.loggedInUser.pastReads,
             removeBookFromFavorites: this.removeBookFromFavorites.bind(this),
             removeBookFromQueue: this.removeBookFromQueue.bind(this),
-            makeCurrentBook: this.makeCurrentBook.bind(this)
+            makeCurrentBook: this.makeCurrentBook.bind(this),
+            removeBookFromPastReads: this.removeBookFromPastReads.bind(this)
           });
           break;
         case "Book" :
