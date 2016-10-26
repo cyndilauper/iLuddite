@@ -12,6 +12,7 @@ class Book extends React.Component {
       currReviews: [],
       makeRev: "",
       rating: 0
+      loggedInUser: this.props.loggedInUser
     }
 
     setInterval(() => {
@@ -24,6 +25,36 @@ class Book extends React.Component {
   }
 
   componentDidMount () {
+    console.log('user: ',this.state.loggedInUser)
+    
+    let alreadyQueued = this.state.loggedInUser.queue.map(book => 
+      book._id
+    )
+    
+    let alreadyRead = this.state.loggedInUser.pastReads.map(book => 
+      book._id
+    )
+    
+    let alreadyFavorite = this.state.loggedInUser.favorites.map(book =>
+      book._id
+    )
+
+    if (alreadyQueued.includes(this.props.params.bookid)) {
+      document.getElementById("addBookToQueueButton").classList.add("green-button")
+    }
+
+    if (alreadyQueued[0] === this.props.params.bookid) {
+      document.getElementById("addBookToCurrentButton").classList.add("green-button")
+    }
+
+    if (alreadyRead.includes(this.props.params.bookid)) {
+      document.getElementById("addBookToPastReadsButton").classList.add("green-button")
+    }
+    
+    if (alreadyFavorite.includes(this.props.params.bookid)) {
+      document.getElementById("addBookToFavoritesButton").classList.add("green-button")
+    }
+
     // clear out any search results that might still
     // be showing (this is kinda hacky and probably
     // needs to be done a little differently TODO)
@@ -129,24 +160,28 @@ class Book extends React.Component {
             <button
               className="btn btn-default btn-info" role="button"
               onClick={addBookToQueue.bind(null, this.state.book._id)}
+              id="addBookToQueueButton"
             >
               Add to Queue
             </button>
             <button
               className="btn btn-default btn-info" role="button"
               onClick={makeCurrentBook.bind(null, this.state.book._id)}
+              id="addBookToCurrentButton"
             >
               Make my Current
             </button>
             <button
               className="btn btn-default btn-info" role="button"
               onClick={addBookToFavorites.bind(null, this.state.book._id)}
+              id="addBookToFavoritesButton"
             >
             Add to Favorites
             </button>
             <button
               className="btn btn-default btn-info" role="button"
               onClick={addBookToPastReads.bind(null, this.state.book._id)}
+              id="addBookToPastReadsButton"
             >
             Add to Past Reads
             </button>
