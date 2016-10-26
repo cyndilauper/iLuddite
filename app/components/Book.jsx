@@ -9,7 +9,8 @@ class Book extends React.Component {
     this.state = {
       book: {},
       reviews: [],
-      makeRev: ""
+      makeRev: "",
+      rating: 0
     }
   }
 
@@ -57,12 +58,25 @@ class Book extends React.Component {
     e.preventDefault()
     axios.post(`/reviews/${this.props.params.bookid}`, {
       content: this.state.makeRev,
-      rating: 5
+      rating: this.state.rating
     })
   }
 
   handleChange(e){
     this.setState({makeRev: e.target.value})
+  }
+
+  incRating(e){
+    e.preventDefault()
+    if (this.state.rating < 5) {
+      this.setState({
+        rating: this.state.rating + 1 
+      })
+    } else if (this.state.rating === 5) {
+      this.setState({
+        rating: 0 
+      })
+    }
   }
 
   render () {
@@ -121,7 +135,9 @@ class Book extends React.Component {
         <div className="reviewRow">
           <Review reviews={this.state.reviews} 
             handleChange={this.handleChange.bind(this)}
-            handleSubmit={this.handleSubmit.bind(this)} />
+            handleSubmit={this.handleSubmit.bind(this)} 
+            incRating={this.incRating.bind(this)}
+            rating={this.state.rating} />
         </div>
       </div>
     );

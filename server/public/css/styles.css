@@ -387,19 +387,44 @@ nav span.glyphicon.glyphicon-search {
 
 .reviewFeed{
   width: 350px;
-  height: 500px;
+  height: 140px;
   display: block;
 }
 
 .reviewForm{
   width: 320px;
-  height: 100px;
+  height: 44px;
+  font-size: 32px;
+  border: solid 1px #fff;
+  box-shadow: inset 1px 1px 2px 0 #707070;
+  transition: box-shadow 0.3s;
+  outline: none;
 }
-
+.reviewForm::placeholder{
+  font-size: 24px;
+}
+.rateField{
+  height: 35px;
+  width: 280px;
+}
+.thumbBtn{
+  height: 30px;
+  width: 30px;
+  margin: 5px 10px;
+  float: left;
+  display: inline block;
+}
+.rateText{
+  font-size: 20px;
+  width: 200px;
+  float: left;
+  display: inline;
+  margin: 7px 10px;
+}
 .reviewBtn{
   width:320px;
+  height: 40px;
 }
-
 .oneRev{
   width: 345px;
   height: 60px;
@@ -413,7 +438,13 @@ nav span.glyphicon.glyphicon-search {
 .revText{
   display: inline block;
   float: left;
-  margin: 5px;
+  margin: 5px 10px;
+}
+
+.revRatings{
+  margin: 0px 10px;
+  float: left;
+  width: 270px;
 }
 
 .revRatings img{
