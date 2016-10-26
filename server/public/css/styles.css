@@ -198,7 +198,7 @@ nav span.glyphicon.glyphicon-search {
   font-size: .9em;
   font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
 }
-<<<<<<< 17cadd72a166d4f564c7d1f89ede9d9f0a4f2c55
+
 .listName{
   text-align: center;
 }
@@ -233,10 +233,6 @@ nav span.glyphicon.glyphicon-search {
     float: none;
     margin-right: 1em;
 }
-=======
-
-
->>>>>>> styles review
 
 .search-list-item button {
   display: block;
