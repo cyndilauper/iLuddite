@@ -3,7 +3,7 @@ const axios = require('../axios');
 import { browserHistory } from 'react-router';
 
 
-var Review = ({reviews, handleSubmit, handleChange, incRating, rating, text}) => {
+var Review = ({currReviews, handleSubmit, handleChange, incRating, rating, text}) => {
   return (
     <div className="reviewContainer">
       <div className="makeReview col-md-6">
@@ -23,12 +23,13 @@ var Review = ({reviews, handleSubmit, handleChange, incRating, rating, text}) =>
         <h3>What Your Friends Thought:</h3>
           <div className="reviewFeed"> 
           { 
-            reviews.map((rev, i) => 
+            currReviews.map((rev, i) => 
               <div className="oneRev" key={i}>
                 <img className="revImage" src={rev.image} />
                 <div className="revRatings">{
                   [...Array(rev.rating)].map(r => 
-                    <img src="http://cliparting.com/wp-content/uploads/2016/06/Facebook-thumbs-up-image-clipart.jpeg"/>)
+                    <img src="http://cliparting.com/wp-content/uploads/2016/06/Facebook-thumbs-up-image-clipart.jpeg"/>
+                  )
                 }</div>
                 <h5 className="revText">{rev.content}</h5>
               </div>

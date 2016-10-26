@@ -405,12 +405,12 @@ nav span.glyphicon.glyphicon-search {
 }
 .rateField{
   height: 35px;
-  width: 280px;
+  width: 320px;
 }
 .thumbBtn{
   height: 30px;
   width: 30px;
-  margin: 5px 10px;
+  margin: 5px 10px 5px 25px;
   float: left;
   display: inline block;
 }
