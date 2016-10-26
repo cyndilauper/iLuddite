@@ -1,13 +1,26 @@
 const React = require('react');
 const Link = require('react-router').Link;
 const axios = require('../axios');
+const Review = require('./Review')
 
 class Book extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      book: {}
+      book: {},
+      reviews: [],
+      currReviews: [],
+      makeRev: "",
+      rating: 0
     }
+
+    setInterval(() => {
+      var shuffled = this.state.reviews.sort(() => .5 - Math.random())  
+      this.setState({
+        currReviews: shuffled.slice(0,2)
+      })
+    }, 5000)
+
   }
 
   componentDidMount () {
@@ -22,6 +35,14 @@ class Book extends React.Component {
         this.setState({
           book: response.data[0]
         });
+      })
+
+    axios.get(`/reviews/${this.props.params.bookid}`)
+      .then(response => {
+        this.setState({
+          reviews: response.data,
+          currReviews: [response.data[0], response.data[1]]
+        })
       })
   }
 
@@ -40,6 +61,41 @@ class Book extends React.Component {
             book: response.data[0]
           });
         });
+    }
+  }
+
+  handleSubmit(e){
+    e.preventDefault()
+    axios.post(`/reviews/${this.props.params.bookid}`, {
+      content: this.state.makeRev,
+      rating: this.state.rating
+    })
+    .then(res => {
+      axios.get(`/reviews/${this.props.params.bookid}`)
+      .then(response => {
+        this.setState({
+          reviews: response.data,
+          rating: 0,
+          makeRev: ""
+        })
+      })
+    })
+  }
+
+  handleChange(e){
+    this.setState({makeRev: e.target.value})
+  }
+
+  incRating(e){
+    e.preventDefault()
+    if (this.state.rating < 5) {
+      this.setState({
+        rating: this.state.rating + 1 
+      })
+    } else if (this.state.rating === 5) {
+      this.setState({
+        rating: 0 
+      })
     }
   }
 
@@ -96,11 +152,17 @@ class Book extends React.Component {
             </button>
           </div>
         </div>
-
+        <div className="reviewRow">
+          <Review currReviews={this.state.currReviews} 
+            handleChange={this.handleChange.bind(this)}
+            handleSubmit={this.handleSubmit.bind(this)} 
+            incRating={this.incRating.bind(this)}
+            rating={this.state.rating}
+            text={this.state.makeRev} />
+        </div>
       </div>
     );
   }
-
 };
 
 Book.defaultProps = {
