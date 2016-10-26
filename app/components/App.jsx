@@ -120,11 +120,13 @@ class App extends React.Component {
 
   addBookToFinished (isbn) {
         // check to see if book is already in user's finished list
-    for (let i = 0; i < this.state.loggedInUser.queue.length; i++) {
+    if(this.state.loggedInUser.length) {
+    for (let i = 0; i < this.state.loggedInUser.finished.length; i++) {
       if (this.state.loggedInUser.finished[i]._id === isbn) {
         // book already is in finished, do not add again
         return;
       }
+    }
   }
   // book is not in finished, go ahead and add
     axios.post(`/users/${this.state.loggedInUser.fbid}/finished/${isbn}`)
@@ -253,7 +255,9 @@ removeBookFromFinished (isbn) {
   renderChildrenWithProps () {
     // loop through the children of App and add properties to component
     // and return a copy of it with new props.
+
     return React.Children.map(this.props.children, (child) => {
+
       switch (child.type.name) {
         case "EditPage" :
           // edit page needs queue and favorites lists and also how to 
@@ -261,9 +265,12 @@ removeBookFromFinished (isbn) {
           return React.cloneElement(child, {
             queue: this.state.loggedInUser.queue,
             favorites: this.state.loggedInUser.favorites,
+            finished: this.state.loggedInUser.finished, //Added this to make finished feature
+            addBookToFinished: this.addBookToFinished.bind(this),
             removeBookFromFavorites: this.removeBookFromFavorites.bind(this),
             removeBookFromQueue: this.removeBookFromQueue.bind(this),
-            makeCurrentBook: this.makeCurrentBook.bind(this)
+            makeCurrentBook: this.makeCurrentBook.bind(this),
+            removeBookFromFinished: this.removeBookFromFinished.bind(this) //Added this to make finished feature
           });
           break;
         case "Book" :
