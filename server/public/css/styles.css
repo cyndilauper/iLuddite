@@ -195,8 +195,40 @@ nav span.glyphicon.glyphicon-search {
   font-size: .9em;
   font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
 }
-
-
+.listName{
+  text-align: center;
+}
+.authorImg {
+    margin: 0 auto;
+    display: block;
+}
+.authorContainer .readingColumn p {
+    position: absolute;
+    z-index: 1;
+    bottom: .5em;
+    width: 100%;
+    text-align: center;
+    height: 3em;
+    background: rgba(255,255,255,.75);
+    margin: 0;
+    padding: .25em;
+    color: #333;
+}
+.author-books-list.col-md-12 {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    height: 250px;
+    white-space: nowrap;
+    background: rgba(233,233,233,.3);
+}
+.author-books-list .readingColumn {
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+    margin-right: 1em;
+}
 
 .search-list-item button {
   display: block;
