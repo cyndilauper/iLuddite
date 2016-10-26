@@ -3,7 +3,7 @@ const axios = require('../axios');
 import { browserHistory } from 'react-router';
 
 
-var Review = ({handleSubmit, handleChange}) => {
+var Review = ({reviews, handleSubmit, handleChange}) => {
   return (
     <div className="reviewContainer">
       <div className="makeReview">
@@ -16,6 +16,8 @@ var Review = ({handleSubmit, handleChange}) => {
       </div>
       <div className="readReview">
         <h3>What Your Friends Thought:</h3>
+          <div className="reviewFeed">
+          </div>
       </div>
     </div>
   )

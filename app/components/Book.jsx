@@ -9,7 +9,7 @@ class Book extends React.Component {
     this.state = {
       book: {},
       reviews: {},
-      revForm: ""
+      makeRev: ""
     }
   }
 
@@ -29,6 +29,7 @@ class Book extends React.Component {
 
     axios.get(`/reviews/${this.props.params.bookid}`)
       .then(response => {
+        console.log(response)
         this.setState({
           reviews: response.data[0]
         });
@@ -54,14 +55,15 @@ class Book extends React.Component {
   }
 
   handleSubmit(e){
-    e.preventDefault();
-
-    axios.post(`/reviews/${this.props.params.bookid}`)
-
+    e.preventDefault()
+    axios.post(`/reviews/${this.props.params.bookid}`, {
+      content: this.state.makeRev,
+      rating: 5
+    })
   }
 
   handleChange(e){
-    this.setState({review: e.target.value})
+    this.setState({makeRev: e.target.value})
   }
 
   render () {
@@ -118,7 +120,7 @@ class Book extends React.Component {
           </div>
         </div>
         <div className="reviewRow">
-          <Review handleChange={this.handleChange.bind(this)} handleSubmit={this.handleSubmit.bind(this)}/>
+          <Review reviews={this.state.reviews} handleChange={this.handleChange.bind(this)} handleSubmit={this.handleSubmit.bind(this)}/>
         </div>
       </div>
     );
