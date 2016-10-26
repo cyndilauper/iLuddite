@@ -55,28 +55,6 @@ router.get('/search/:author', (req, res) => {
   //call the request module
   request(options, getAuthorInfo);
 })
-router.get('/:authorId/books', (req,res,next) => {
-  let authorId = req.params.authorId
-  let options = {
-    url: `https://www.goodreads.com/author/list/${authorId}?key=${process.env.goodreads}`
-  }
-  function getAuthorBooks(err, response, body){
-    body = xml('' + body, (err, result) => {
-      console.log(result)
-      let books = result.GoodreadsResponse.author[0].books[0].book.splice(0,15)
-      books = books.map((book) => 
-      ({
-        id: book.id[0]._,
-        title: book.title,
-        image: book.image_url,
-        link: book.link
-      })
-      )
-      return res.send(books)
-    })
-  }
-  request(options, getAuthorBooks)
-})
 
 router.get('/:authorId/books', (req, res) => {
   let authorId = req.params.authorId
@@ -90,9 +68,9 @@ router.get('/:authorId/books', (req, res) => {
       books = books.map(book => (
         {
           id: book.id[0]._,
-          title: book.title,
-          image: book.image_url,
-          link: book.link
+          title: book.title[0],
+          image: book.image_url[0],
+          link: book.link[0]
         }
       ))
       res.send(books)

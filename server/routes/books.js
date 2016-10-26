@@ -58,19 +58,24 @@ router.get('/search/:searchterm', (req, res) => {
         }
         request(goodOptions, (err,response,body) => {
           body = xml('' + body, (err, result) => {
-            let authorId = result.GoodreadsResponse.author[0].$.id
-            Books.findOneAndUpdate({_id: book._id}, {
-              _id: book._id,
-              title: book.title,
-              author: book.author,
-              authorId: authorId,
-              summary: book.summary,
-              coverPath: book.coverPath,
-              thumbnailPath: book.thumbnailPath
-            }, {upsert:true, new:true}, (err, book) => {
-              if (err) console.log(err);
-              else console.log('book inserted or updated: ', book);
-            })
+            let authorId
+            if (result) {
+              authorId = result.GoodreadsResponse.author[0].$.id
+            } else {
+              authorId = 0
+            }
+              Books.findOneAndUpdate({_id: book._id}, {
+                _id: book._id,
+                title: book.title,
+                author: book.author,
+                authorId: authorId,
+                summary: book.summary,
+                coverPath: book.coverPath,
+                thumbnailPath: book.thumbnailPath
+              }, {upsert:true, new:true}, (err, book) => {
+                if (err) console.log(err);
+                else console.log('book inserted or updated: ', book);
+              })
           })
         })    
       })
