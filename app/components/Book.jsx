@@ -8,7 +8,7 @@ class Book extends React.Component {
     super(props);
     this.state = {
       book: {},
-      reviews: {},
+      reviews: [],
       makeRev: ""
     }
   }
@@ -29,10 +29,9 @@ class Book extends React.Component {
 
     axios.get(`/reviews/${this.props.params.bookid}`)
       .then(response => {
-        console.log(response)
         this.setState({
-          reviews: response.data[0]
-        });
+          reviews: response.data
+        })
       })
   }
 

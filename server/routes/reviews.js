@@ -1,13 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const Reviews = require('../models/reviews');
+const Review = require('../models/reviews');
 const request = require('request');
 
 router.route('/:bookid')
 
   .get((req, res, next) => {
-    Reviews.find({book_id: req.params.bookid}, (err, reviews) => {
-      console.log(reviews)
+    Review.find({book_id: req.params.bookid}, (err, reviews) => {
       if (err) console.log(err);
       else res.send(reviews)
     })
@@ -22,16 +21,15 @@ router.route('/:bookid')
         res(review)
       })
       .then(review => {
-        Reviews.findOneAndUpdate({}, {
+        new Review({
           book_id: review.book_id,
           user_id: review.user_id,
           content: review.content,
           rating: review.rating
-        }, {upsert:true, new:true}, (err, review) => {
-          if (err) console.log(err);
-          else console.log('review inserted or updated: ', review);
-         }
-        )
+        }).save()
+        .then(review => {
+          console.log("inserted to DB", review)
+        })
       })
     })
     res.status(200).send()
