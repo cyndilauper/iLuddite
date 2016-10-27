@@ -11,7 +11,8 @@ class Book extends React.Component {
       reviews: [],
       currReviews: [],
       makeRev: "",
-      rating: 0
+      rating: 0,
+      loggedInUser: this.props.loggedInUser
     }
 
     setInterval(() => {
@@ -24,6 +25,41 @@ class Book extends React.Component {
   }
 
   componentDidMount () {
+    // this.setState({
+    //   loggedInUser: this.props.loggedInUser
+    // })
+
+    console.log('user: ',this.state.loggedInUser)
+
+    
+    let alreadyQueued = this.state.loggedInUser.queue.map(book => 
+      book._id
+    )
+    
+    let alreadyRead = this.state.loggedInUser.pastReads.map(book => 
+      book._id
+    )
+    
+    let alreadyFavorite = this.state.loggedInUser.favorites.map(book =>
+      book._id
+    )
+
+    if (alreadyQueued.includes(this.props.params.bookid)) {
+      document.getElementById("addBookToQueueButton").classList.add("hide-button")
+    }
+
+    if (alreadyQueued[0] === this.props.params.bookid) {
+      document.getElementById("addBookToCurrentButton").classList.add("hide-button")
+    }
+
+    if (alreadyRead.includes(this.props.params.bookid)) {
+      document.getElementById("addBookToPastReadsButton").classList.add("hide-button")
+    }
+    
+    if (alreadyFavorite.includes(this.props.params.bookid)) {
+      document.getElementById("addBookToFavoritesButton").classList.add("hide-button")
+    }
+
     // clear out any search results that might still
     // be showing (this is kinda hacky and probably
     // needs to be done a little differently TODO)
@@ -100,9 +136,6 @@ class Book extends React.Component {
   }
 
   render () {
-    // if (this.state.book.authorId) {
-
-    // }
     const { addBookToQueue, addBookToFavorites, makeCurrentBook, addBookToPastReads } = this.props;
     return (
       <div className="bookContainer">
@@ -126,30 +159,36 @@ class Book extends React.Component {
             <h4>About the Book</h4>
             <p>{this.state.book.summary}</p>
             <br/>
-            <button
-              className="btn btn-default btn-info" role="button"
-              onClick={addBookToQueue.bind(null, this.state.book._id)}
-            >
-              Add to Queue
-            </button>
-            <button
-              className="btn btn-default btn-info" role="button"
-              onClick={makeCurrentBook.bind(null, this.state.book._id)}
-            >
-              Make my Current
-            </button>
-            <button
-              className="btn btn-default btn-info" role="button"
-              onClick={addBookToFavorites.bind(null, this.state.book._id)}
-            >
-            Add to Favorites
-            </button>
-            <button
-              className="btn btn-default btn-info" role="button"
-              onClick={addBookToPastReads.bind(null, this.state.book._id)}
-            >
-            Add to Past Reads
-            </button>
+            <div>
+              <button
+                className="btn btn-default btn-info" role="button"
+                onClick={addBookToQueue.bind(null, this.state.book._id)}
+                id="addBookToQueueButton"
+              >
+                Add to Queue
+              </button>
+              <button
+                className="btn btn-default btn-info" role="button"
+                onClick={makeCurrentBook.bind(null, this.state.book._id)}
+                id="addBookToCurrentButton"
+              >
+                Make my Current
+              </button>
+              <button
+                className="btn btn-default btn-info" role="button"
+                onClick={addBookToFavorites.bind(null, this.state.book._id)}
+                id="addBookToFavoritesButton"
+              >
+              Add to Favorites
+              </button>
+              <button
+                className="btn btn-default btn-info" role="button"
+                onClick={addBookToPastReads.bind(null, this.state.book._id)}
+                id="addBookToPastReadsButton"
+              >
+              Add to Past Reads
+              </button>
+            </div>
           </div>
         </div>
         <div className="reviewRow">
