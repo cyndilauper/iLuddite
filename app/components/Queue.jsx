@@ -13,6 +13,7 @@ const Queue = (props) => {
         <QueueListItem
           addBookToFinished={props.addBookToFinished}
           removeBookFromQueue={props.removeBookFromQueue}
+          increaseBookCount={props.increaseBookCount}
           currentBook={true}
           book={book}/>
       );
@@ -21,6 +22,7 @@ const Queue = (props) => {
         <QueueListItem
           addBookToFinished={props.addBookToFinished}
           removeBookFromQueue={props.removeBookFromQueue}
+          increaseBookCount={props.increaseBookCount}
           makeCurrentBook={props.makeCurrentBook}
           currentBook={false}
           book={book}/>

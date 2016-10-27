@@ -16,6 +16,7 @@ class EditPage extends React.Component {
           removeBookFromQueue={this.props.removeBookFromQueue}
           makeCurrentBook={this.props.makeCurrentBook}
           addBookToFinished={this.props.addBookToFinished}
+          increaseBookCount= {this.props.increaseBookCount}
         />
         <Favorites 
           favorites={this.props.favorites}

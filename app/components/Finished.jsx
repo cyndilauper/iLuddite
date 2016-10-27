@@ -7,7 +7,8 @@ const Finished = (props) => {
   const finished = props.finished.map(book => 
     <FinishedItem 
       book={book}
-      removeBookFromFinished={props.removeBookFromFinished}/>
+      removeBookFromFinished={props.removeBookFromFinished}
+      />
   );
 
   return (
