@@ -30,8 +30,8 @@ app.use(session({
 require('./config/passport')(app);
 
 app.use('/', routes);
-app.use('/users', users);
-app.use('/books', books);
+app.use('/api/users', users);
+app.use('/api/books', books);
 app.use('/auth', auth);
 app.use('/authors', authors)
 app.use('/reviews', reviews)

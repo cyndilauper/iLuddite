@@ -68,7 +68,7 @@ class App extends React.Component {
 
   // uses the navbarSearchText to do an api call and search for a book.
   searchForBook () {
-    axios.get(`/books/search/${this.state.navbarSearchText}`)
+    axios.get(`/api/books/search/${this.state.navbarSearchText}`)
       .then(response => {
         this.setState({
           navbarSearchResults: response.data
