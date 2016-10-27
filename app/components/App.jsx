@@ -128,7 +128,7 @@ class App extends React.Component {
     }
     // book is not in pastReads go ahead and add
 
-    axios.post(`/users/${this.state.loggedInUser.fbid}/pastReads/${isbn}`)
+    axios.post(`/api/users/${this.state.loggedInUser.fbid}/pastReads/${isbn}`)
     .then( response => {
       console.log('RESPONSE: ', response)
       const newState = Object.assign({}, this.state.loggedInUser);
@@ -148,7 +148,7 @@ class App extends React.Component {
         axios.delete(`/api/users/${userid}/queue/${isbn}`)
           // on success of deleting send an add to queue query
           .then(deleted => {
-            return axios.post(`/users/${userid}/queue/${isbn}?current=true`)
+            return axios.post(`/api/users/${userid}/queue/${isbn}?current=true`)
           })
           .then(added => {
             const book = added.data;
