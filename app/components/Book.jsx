@@ -26,6 +26,7 @@ class Book extends React.Component {
 
   componentDidMount () {
     console.log('user: ',this.state.loggedInUser)
+
     
     let alreadyQueued = this.state.loggedInUser.queue.map(book => 
       book._id
@@ -40,19 +41,19 @@ class Book extends React.Component {
     )
 
     if (alreadyQueued.includes(this.props.params.bookid)) {
-      document.getElementById("addBookToQueueButton").classList.add("green-button")
+      document.getElementById("addBookToQueueButton").classList.add("hide-button")
     }
 
     if (alreadyQueued[0] === this.props.params.bookid) {
-      document.getElementById("addBookToCurrentButton").classList.add("green-button")
+      document.getElementById("addBookToCurrentButton").classList.add("hide-button")
     }
 
     if (alreadyRead.includes(this.props.params.bookid)) {
-      document.getElementById("addBookToPastReadsButton").classList.add("green-button")
+      document.getElementById("addBookToPastReadsButton").classList.add("hide-button")
     }
     
     if (alreadyFavorite.includes(this.props.params.bookid)) {
-      document.getElementById("addBookToFavoritesButton").classList.add("green-button")
+      document.getElementById("addBookToFavoritesButton").classList.add("hide-button")
     }
 
     // clear out any search results that might still
@@ -131,9 +132,6 @@ class Book extends React.Component {
   }
 
   render () {
-    // if (this.state.book.authorId) {
-
-    // }
     const { addBookToQueue, addBookToFavorites, makeCurrentBook, addBookToPastReads } = this.props;
     return (
       <div className="bookContainer">

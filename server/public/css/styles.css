@@ -449,6 +449,6 @@ nav span.glyphicon.glyphicon-search {
   width: auto;
 }
 
-.green-button {
-  background-color: green;
+.hide-button {
+  display: none;
 }
