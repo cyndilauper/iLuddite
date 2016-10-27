@@ -115,7 +115,7 @@ class App extends React.Component {
       this.setState({
         loggedInUser: newState
       })
-      document.getElementById("addBookToQueueButton").classList.add("green-button")
+      document.getElementById("addBookToQueueButton").classList.add("hide-button")
     })
   }
 
@@ -137,7 +137,7 @@ class App extends React.Component {
       this.setState({
         loggedInUser: newState
       })
-      document.getElementById("addBookToPastReadsButton").classList.add("green-button")
+      document.getElementById("addBookToPastReadsButton").classList.add("hide-button")
     })
   }
 
@@ -164,7 +164,7 @@ class App extends React.Component {
             this.setState({
               loggedInUser: newState
             });
-            document.getElementById("addBookToCurrentButton").classList.add("green-button")
+            document.getElementById("addBookToCurrentButton").classList.add("hide-button")
           })
         // return so below code doesn't get hit
         // (work below has already been done in last block)
@@ -180,7 +180,7 @@ class App extends React.Component {
       this.setState({
         loggedInUser: newState
       })
-      document.getElementById("addBookToCurrentButton").classList.add("green-button")
+      document.getElementById("addBookToCurrentButton").classList.add("hide-button")
     })
   }
 
@@ -233,7 +233,7 @@ class App extends React.Component {
         this.setState({
           loggedInUser: newState
         })
-        document.getElementById("addBookToFavoritesButton").classList.add("green-button")
+        document.getElementById("addBookToFavoritesButton").classList.add("hide-button")
       })
   }
 
