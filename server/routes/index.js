@@ -23,6 +23,10 @@ router.get('/users/:userid', (req, res, next) => {
   res.sendFile(path.join(__dirname, '../public/app.html'));
 })
 
+router.get('/authors/:authorid', (req, res, next) => {
+  res.sendFile(path.join(__dirname, '../public/app.html'));
+})
+
 router.get('/loggedin', (req, res, next) => {
   profile(req, req.user.fbid).then(answer => {
     res.send(answer);

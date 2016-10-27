@@ -17,8 +17,8 @@ class Author extends React.Component {
     this.props.clearSearchResults();
     // as soon as the component mounts fetch the author it is
     // supposed to display
-    
-    axios.get(`/authors/${this.props.params.authorid}`)
+
+    axios.get(`/api/authors/${this.props.params.authorid}`)
     .then(response => {
       console.log(response.data)
       this.setState({
@@ -27,14 +27,14 @@ class Author extends React.Component {
       console.log(this.state.author.description)
       this.state.author.description.replace('<br><br>','\n')
     })
-    axios.get(`/authors/${this.props.params.authorid}/books`)
+    axios.get(`/api/authors/${this.props.params.authorid}/books`)
     .then(response => {
       this.setState({
         books: response.data
       })
       console.log(this.state.books)
     })
-      
+
   }
   render(){
     const authorBookList = this.state.books.map((book, idx) => {
@@ -48,7 +48,7 @@ class Author extends React.Component {
       );
     });
     if(!this.state.author ){
-      return (<div>What?</div> ) 
+      return (<div>What?</div> )
     } else{
       return (
       <div className="authorContainer">
