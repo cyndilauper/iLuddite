@@ -88,9 +88,10 @@ class App extends React.Component {
   removeBookFromQueue (isbn) {
     // go through current queue and filter out isbn
     const filtered = 
-      this.state.loggedInUser.queue.filter(book => book._id !== isbn);
+    this.state.loggedInUser.queue.filter(book => book._id !== isbn);
     axios.delete(`/users/${this.state.loggedInUser.fbid}/queue/${isbn}`)
       .then(book => {
+        console.log('queue after removing book', filtered)
         const newState = Object.assign({}, this.state.loggedInUser);
         newState.queue = filtered;
         this.setState({
@@ -110,6 +111,7 @@ class App extends React.Component {
     // book is not in queue go ahead and add
     axios.post(`/users/${this.state.loggedInUser.fbid}/queue/${isbn}`)
     .then( response => {
+      console.log('response after adding user to queue', response)
       const newState = Object.assign({}, this.state.loggedInUser);
       newState.queue = newState.queue.concat(response.data);
       this.setState({
@@ -131,15 +133,17 @@ class App extends React.Component {
   // book is not in finished, go ahead and add
     axios.post(`/users/${this.state.loggedInUser.fbid}/finished/${isbn}`)
     .then( response => {
+      console.log('response after adding book to finished', response)
       const newState = Object.assign({}, this.state.loggedInUser);
       newState.finished = newState.finished.concat(response.data);
       this.setState({
         loggedInUser: newState
       })
+      console.log(this.state)
     })
     //Afterwards, remove the book from the user's queue
     .then ( response => {
-      removeBookFromQueue (isbn)
+      this.removeBookFromQueue (isbn)
     })
 }
 
@@ -149,6 +153,8 @@ removeBookFromFinished (isbn) {
   this.state.loggedInUser.finished.filter(book => book._id !== isbn);
   axios.delete(`/users/${this.state.loggedInUser.fbid}/finished/${isbn}`)
     .then(book => {
+      console.log('logged in user', this.state.loggedInUser)
+      console.log('finished array after filtering', filtered)
       const newState = Object.assign({}, this.state.loggedInUser);
       newState.finished = filtered;
       this.setState({

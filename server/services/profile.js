@@ -4,7 +4,7 @@ const facebook = require('./facebook');
 module.exports = function(req, fbid) {
   return new Promise((resolve, reject) => {
     User.findOne({ fbid })
-    .populate('queue favorites')
+    .populate('queue favorites finished')
     .exec((err, result) => {
       if (err) {
         console.log(`Error: ${err}`)

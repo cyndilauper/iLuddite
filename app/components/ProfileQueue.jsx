@@ -2,6 +2,7 @@ const React = require('react');
 import { Link } from 'react-router';
 
 const ProfileQueue = (props) => {
+console.log(props)
 // since the queue could get really long we only want to display up to 6 books
 const profileQueue = props.bookQueue.slice(0, 6).map((book, idx) => {
     return (
