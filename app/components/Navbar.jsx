@@ -13,12 +13,14 @@ const Navbar = (props) => {
           </a>
         </div>
         <div className="col-md-8">
-          <SearchBox 
+          <SearchBox
             changeSearchText={props.changeSearchText}
             searchText={props.searchText}
             searchResults={props.searchResults}
             handleSearchSubmit={props.handleSearchSubmit}
             addBookToQueue={props.addBookToQueue}
+            addBookToPastReads={props.addBookToPastReads}
+            addBookToFavorites={props.addBookToFavorites}
             makeCurrentBook={props.makeCurrentBook}
           />
         </div>
