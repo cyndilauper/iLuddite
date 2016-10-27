@@ -91,7 +91,6 @@ class App extends React.Component {
     this.state.loggedInUser.queue.filter(book => book._id !== isbn);
     axios.delete(`/users/${this.state.loggedInUser.fbid}/queue/${isbn}`)
       .then(book => {
-        console.log('queue after removing book', filtered)
         const newState = Object.assign({}, this.state.loggedInUser);
         newState.queue = filtered;
         this.setState({
@@ -153,8 +152,6 @@ removeBookFromFinished (isbn) {
   this.state.loggedInUser.finished.filter(book => book._id !== isbn);
   axios.delete(`/users/${this.state.loggedInUser.fbid}/finished/${isbn}`)
     .then(book => {
-      console.log('logged in user', this.state.loggedInUser)
-      console.log('finished array after filtering', filtered)
       const newState = Object.assign({}, this.state.loggedInUser);
       newState.finished = filtered;
       this.setState({
@@ -276,7 +273,8 @@ removeBookFromFinished (isbn) {
             removeBookFromFavorites: this.removeBookFromFavorites.bind(this),
             removeBookFromQueue: this.removeBookFromQueue.bind(this),
             makeCurrentBook: this.makeCurrentBook.bind(this),
-            removeBookFromFinished: this.removeBookFromFinished.bind(this) //Added this to make finished feature
+            removeBookFromFinished: this.removeBookFromFinished.bind(this), //Added this to make finished feature
+            increaseBookCount: this.increaseBookCount.bind(this)
           });
           break;
         case "Book" :

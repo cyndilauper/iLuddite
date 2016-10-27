@@ -6,6 +6,10 @@ const QueueListItem = (props) => {
   const className = props.currentBook 
     ? 'list-group-item active'
     : 'list-group-item';
+  function finishAndIncrease() { //Compund function that adds to Finished queue and increments book count by one
+    props.addBookToFinished.call(null, props.book._id);
+    props.increaseBookCount();
+  }
   return (
     <li className={className}>
       <div className="row">
@@ -27,7 +31,7 @@ const QueueListItem = (props) => {
         <div className="col-md-1">
           <span 
             className="glyphicon glyphicon-ok"
-            onClick={props.addBookToFinished.bind(null, props.book._id)}
+            onClick={finishAndIncrease}
           />
         </div>
       </div>
