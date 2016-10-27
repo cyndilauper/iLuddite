@@ -30,6 +30,8 @@ router.get('/search/:searchterm', (req, res) => {
       //grab the first five books
       body = body.items.slice(0,5);
       let five = body.map(book => {
+        console.log('BOOKI BOOKI: ', book)
+        console.log('LINK: ', book.volumeInfo.infoLink)
         //try to grab the properties we want, otherwise return null
         try {
           return {
@@ -38,7 +40,8 @@ router.get('/search/:searchterm', (req, res) => {
             author: book.volumeInfo.authors[0],
             summary: book.volumeInfo.description,
             coverPath: book.volumeInfo.imageLinks.thumbnail,
-            thumbnailPath: book.volumeInfo.imageLinks.thumbnail
+            thumbnailPath: book.volumeInfo.imageLinks.thumbnail,
+            buyLink: book.volumeInfo.infoLink
           };
         }
         catch(err) {
@@ -71,13 +74,14 @@ router.get('/search/:searchterm', (req, res) => {
                 authorId: authorId,
                 summary: book.summary,
                 coverPath: book.coverPath,
-                thumbnailPath: book.thumbnailPath
+                thumbnailPath: book.thumbnailPath,
+                buyLink: book.buyLink
               }, {upsert:true, new:true}, (err, book) => {
                 if (err) console.log(err);
                 else console.log('book inserted or updated: ', book);
               })
           })
-        })    
+        })
       })
       //respond with the inserted books
       res.send(five);
