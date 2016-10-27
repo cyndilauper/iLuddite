@@ -40,10 +40,10 @@ class Author extends React.Component {
     const authorBookList = this.state.books.map((book, idx) => {
       return (
         <div className="col-md-2 col-sm-2 col-xs-2 readingColumn">
-          <Link to={book.link}>
+          <a href={book.link}>
             <img src={book.image} className='img-responsive bookPhoto'/>
             <p>{book.title}</p>
-          </Link>
+          </a>
         </div>
       );
     });
