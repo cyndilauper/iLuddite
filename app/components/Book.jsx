@@ -2,6 +2,7 @@ const React = require('react');
 const Link = require('react-router').Link;
 const axios = require('../axios');
 const Review = require('./Review')
+const Preview = require('./Preview')
 
 class Book extends React.Component {
   constructor (props) {
@@ -12,7 +13,8 @@ class Book extends React.Component {
       currReviews: [],
       makeRev: "",
       rating: 0,
-      loggedInUser: {}
+      loggedInUser: {},
+      showPreview: false
     }
     setInterval(() => {
       var shuffled = this.state.reviews.sort(() => .5 - Math.random())  
@@ -28,7 +30,8 @@ class Book extends React.Component {
         reviews: [],
         currReviews: [],
         makeRev: "",
-        rating: 0
+        rating: 0,
+        showPreview: false
       })
     }
   }
@@ -156,6 +159,13 @@ class Book extends React.Component {
     }
   }
 
+  showPreview(e){
+    e.preventDefault()
+    this.setState({
+      showPreview: true
+    })
+  }
+
   render () {
     const { addBookToQueue, addBookToFavorites, makeCurrentBook, addBookToPastReads } = this.props;
 
@@ -218,7 +228,12 @@ class Book extends React.Component {
                 >
                 Add to Past Reads
                 </button>
-              </div>
+                { this.state.showPreview ?
+                  <Preview showPreview={this.showPreview.bind(this)}/> :
+                  <button className='btn btn-default btn-info' 
+                  onClick={this.showPreview.bind(this)}> 
+                  Show Preview </button>
+                }
             </div>
           </div>
           <div className="reviewRow">
