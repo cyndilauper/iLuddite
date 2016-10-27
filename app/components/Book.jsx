@@ -11,7 +11,7 @@ class Book extends React.Component {
       reviews: [],
       currReviews: [],
       makeRev: "",
-      rating: 0
+      rating: 0,
       loggedInUser: this.props.loggedInUser
     }
 
