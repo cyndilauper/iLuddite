@@ -1,27 +1,84 @@
 const React = require('react');
 const Link = require('react-router').Link;
 const axios = require('../axios');
+const Review = require('./Review')
 
 class Book extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      book: {}
+      book: {},
+      reviews: [],
+      currReviews: [],
+      makeRev: "",
+      rating: 0,
+      loggedInUser: this.props.loggedInUser
     }
+
+    setInterval(() => {
+      var shuffled = this.state.reviews.sort(() => .5 - Math.random())  
+      this.setState({
+        currReviews: shuffled.slice(0,2)
+      })
+    }, 5000)
+
   }
 
   componentDidMount () {
-    // clear out any search results that might still 
+    // this.setState({
+    //   loggedInUser: this.props.loggedInUser
+    // })
+
+    console.log('user: ',this.state.loggedInUser)
+
+    
+    let alreadyQueued = this.state.loggedInUser.queue.map(book => 
+      book._id
+    )
+    
+    let alreadyRead = this.state.loggedInUser.pastReads.map(book => 
+      book._id
+    )
+    
+    let alreadyFavorite = this.state.loggedInUser.favorites.map(book =>
+      book._id
+    )
+
+    if (alreadyQueued.includes(this.props.params.bookid)) {
+      document.getElementById("addBookToQueueButton").classList.add("hide-button")
+    }
+
+    if (alreadyQueued[0] === this.props.params.bookid) {
+      document.getElementById("addBookToCurrentButton").classList.add("hide-button")
+    }
+
+    if (alreadyRead.includes(this.props.params.bookid)) {
+      document.getElementById("addBookToPastReadsButton").classList.add("hide-button")
+    }
+    
+    if (alreadyFavorite.includes(this.props.params.bookid)) {
+      document.getElementById("addBookToFavoritesButton").classList.add("hide-button")
+    }
+
+    // clear out any search results that might still
     // be showing (this is kinda hacky and probably
     // needs to be done a little differently TODO)
     this.props.clearSearchResults();
     // as soon as the component mounts fetch the book it is
     // supposed to display
-    axios.get(`/books/${this.props.params.bookid}`)
+    axios.get(`/api/books/${this.props.params.bookid}`)
       .then(response => {
         this.setState({
           book: response.data[0]
         });
+      })
+
+    axios.get(`/reviews/${this.props.params.bookid}`)
+      .then(response => {
+        this.setState({
+          reviews: response.data,
+          currReviews: [response.data[0], response.data[1]]
+        })
       })
   }
 
@@ -34,7 +91,7 @@ class Book extends React.Component {
     if (nextProps.params.bookid !== this.props.params.bookid) {
       this.props.clearSearchResults();
       // fetch the new book
-      axios.get(`/books/${nextProps.params.bookid}`)
+      axios.get(`/api/books/${nextProps.params.bookid}`)
         .then(response => {
           this.setState({
             book: response.data[0]
@@ -43,8 +100,43 @@ class Book extends React.Component {
     }
   }
 
+  handleSubmit(e){
+    e.preventDefault()
+    axios.post(`/reviews/${this.props.params.bookid}`, {
+      content: this.state.makeRev,
+      rating: this.state.rating
+    })
+    .then(res => {
+      axios.get(`/reviews/${this.props.params.bookid}`)
+      .then(response => {
+        this.setState({
+          reviews: response.data,
+          rating: 0,
+          makeRev: ""
+        })
+      })
+    })
+  }
+
+  handleChange(e){
+    this.setState({makeRev: e.target.value})
+  }
+
+  incRating(e){
+    e.preventDefault()
+    if (this.state.rating < 5) {
+      this.setState({
+        rating: this.state.rating + 1 
+      })
+    } else if (this.state.rating === 5) {
+      this.setState({
+        rating: 0 
+      })
+    }
+  }
+
   render () {
-    const { addBookToQueue, addBookToFavorites, makeCurrentBook } = this.props;
+    const { addBookToQueue, addBookToFavorites, makeCurrentBook, addBookToPastReads } = this.props;
     return (
       <div className="bookContainer">
         <div className="bookRow">
@@ -54,35 +146,62 @@ class Book extends React.Component {
 
           <div className="bookCol2 col-md-6">
             <h2>{this.state.book.title}</h2>
-            <h3>{this.state.book.author}</h3>
+
+            <h3>
+              {+this.state.book.authorId ?
+                (<Link to={`/authors/${this.state.book.authorId}`} >
+                  {this.state.book.author}
+                </Link>) :
+
+                  this.state.book.author
+              }
+            </h3>
             <h4>About the Book</h4>
             <p>{this.state.book.summary}</p>
             <br/>
-            <button
-              className="btn btn-default btn-info" role="button"
-              onClick={addBookToQueue.bind(null, this.state.book._id)}
-            >
-              Add to Queue
-            </button>
-            <button
-              className="btn btn-default btn-info" role="button"
-              onClick={makeCurrentBook.bind(null, this.state.book._id)}
-            >
-              Make my Current
-            </button>
-            <button
-              className="btn btn-default btn-info" role="button"
-              onClick={addBookToFavorites.bind(null, this.state.book._id)}
-            >
-            Add to Favorites
-            </button>
+            <div>
+              <button
+                className="btn btn-default btn-info" role="button"
+                onClick={addBookToQueue.bind(null, this.state.book._id)}
+                id="addBookToQueueButton"
+              >
+                Add to Queue
+              </button>
+              <button
+                className="btn btn-default btn-info" role="button"
+                onClick={makeCurrentBook.bind(null, this.state.book._id)}
+                id="addBookToCurrentButton"
+              >
+                Make my Current
+              </button>
+              <button
+                className="btn btn-default btn-info" role="button"
+                onClick={addBookToFavorites.bind(null, this.state.book._id)}
+                id="addBookToFavoritesButton"
+              >
+              Add to Favorites
+              </button>
+              <button
+                className="btn btn-default btn-info" role="button"
+                onClick={addBookToPastReads.bind(null, this.state.book._id)}
+                id="addBookToPastReadsButton"
+              >
+              Add to Past Reads
+              </button>
+            </div>
           </div>
         </div>
-
+        <div className="reviewRow">
+          <Review currReviews={this.state.currReviews} 
+            handleChange={this.handleChange.bind(this)}
+            handleSubmit={this.handleSubmit.bind(this)} 
+            incRating={this.incRating.bind(this)}
+            rating={this.state.rating}
+            text={this.state.makeRev} />
+        </div>
       </div>
     );
   }
-
 };
 
 Book.defaultProps = {

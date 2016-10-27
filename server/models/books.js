@@ -8,6 +8,7 @@ const booksSchema = new Schema({
   author: String,
   summary: String,
   coverPath: String,
+  authorId: { type: Schema.Types.String, ref: 'Authors' },
   thumbnailPath: String
 });
 
