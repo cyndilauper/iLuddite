@@ -23,7 +23,7 @@ class UserProfile extends React.Component {
   componentDidMount () {
     // fetch the user to display
     if (!this.state.user.fbid) {
-      axios.get(`/users/${this.props.params.userid}`)
+      axios.get(`/api/users/${this.props.params.userid}`)
         .then((response => {
           this.setState({
             user: response.data
@@ -37,7 +37,7 @@ class UserProfile extends React.Component {
   // component with the friends data. When this happens this component needs
   // to do a get request to get the new users information, and change state.
   componentWillReceiveProps(nextProps) {
-    axios.get(`/users/${nextProps.params.userid}`)
+    axios.get(`/api/users/${nextProps.params.userid}`)
       .then(response => {
         console.log('WILL RECEIVE PROPS: ', response)
         this.setState({
