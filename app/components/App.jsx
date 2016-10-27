@@ -89,7 +89,7 @@ class App extends React.Component {
     // go through current queue and filter out isbn
     const filtered =
       this.state.loggedInUser.queue.filter(book => book._id !== isbn);
-    axios.delete(`/users/${this.state.loggedInUser.fbid}/queue/${isbn}`)
+    axios.delete(`/api/users/${this.state.loggedInUser.fbid}/queue/${isbn}`)
       .then(book => {
         const newState = Object.assign({}, this.state.loggedInUser);
         newState.queue = filtered;
@@ -108,7 +108,7 @@ class App extends React.Component {
       }
     }
     // book is not in queue go ahead and add
-    axios.post(`/users/${this.state.loggedInUser.fbid}/queue/${isbn}`)
+    axios.post(`/api/users/${this.state.loggedInUser.fbid}/queue/${isbn}`)
     .then( response => {
       const newState = Object.assign({}, this.state.loggedInUser);
       newState.queue = newState.queue.concat(response.data);
@@ -128,7 +128,7 @@ class App extends React.Component {
     }
     // book is not in pastReads go ahead and add
 
-    axios.post(`/users/${this.state.loggedInUser.fbid}/pastReads/${isbn}`)
+    axios.post(`/api/users/${this.state.loggedInUser.fbid}/pastReads/${isbn}`)
     .then( response => {
       console.log('RESPONSE: ', response)
       const newState = Object.assign({}, this.state.loggedInUser);
@@ -145,10 +145,10 @@ class App extends React.Component {
     for (let i = 0; i < this.state.loggedInUser.queue.length; i++) {
       if (this.state.loggedInUser.queue[i]._id === isbn) {
         // if we find the book delete it and then add it at the front
-        axios.delete(`/users/${userid}/queue/${isbn}`)
+        axios.delete(`/api/users/${userid}/queue/${isbn}`)
           // on success of deleting send an add to queue query
           .then(deleted => {
-            return axios.post(`/users/${userid}/queue/${isbn}?current=true`)
+            return axios.post(`/api/users/${userid}/queue/${isbn}?current=true`)
           })
           .then(added => {
             const book = added.data;
@@ -169,7 +169,7 @@ class App extends React.Component {
       }
     }
     // book wasn't already in the queue so it needs to be added.
-    axios.post(`/users/${userid}/queue/${isbn}?current=true`)
+    axios.post(`/api/users/${userid}/queue/${isbn}?current=true`)
     .then( book => {
       book = book.data
       const newState = Object.assign({}, this.state.loggedInUser);
@@ -183,7 +183,7 @@ class App extends React.Component {
   removeBookFromFavorites (isbn) {
     // removesBookFromFavorites
     const loggedInUser = this.state.loggedInUser;
-    axios.delete(`/users/${loggedInUser.fbid}/favorites/${isbn}`)
+    axios.delete(`/api/users/${loggedInUser.fbid}/favorites/${isbn}`)
       .then(deleted => {
         const filtered = loggedInUser.favorites.filter(book => {
           return book._id !== isbn;
@@ -200,7 +200,7 @@ class App extends React.Component {
   removeBookFromPastReads (isbn) {
     // removesBookFromPastReads
     const loggedInUser = this.state.loggedInUser;
-    axios.delete(`/users/${loggedInUser.fbid}/pastReads/${isbn}`)
+    axios.delete(`/api/users/${loggedInUser.fbid}/pastReads/${isbn}`)
       .then(deleted => {
         const filtered = loggedInUser.pastReads.filter(book => {
           return book._id !== isbn;
@@ -222,7 +222,7 @@ class App extends React.Component {
       }
     }
     // book is not already in list. Go ahead and add it
-    axios.post(`/users/${this.state.loggedInUser.fbid}/favorites/${isbn}`)
+    axios.post(`/api/users/${this.state.loggedInUser.fbid}/favorites/${isbn}`)
       .then(book => {
         const newState = Object.assign({}, this.state.loggedInUser);
         newState.favorites = newState.favorites.concat(book.data);
@@ -234,7 +234,7 @@ class App extends React.Component {
 
   // function to increase a users book read total
   increaseBookCount () {
-    axios.post(`/users/${this.state.loggedInUser.fbid}/count`)
+    axios.post(`/api/users/${this.state.loggedInUser.fbid}/count`)
       .then(res => {
         console.log('res: ', res);
         let newState = Object.assign({}, this.state.loggedInUser);
