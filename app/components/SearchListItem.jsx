@@ -27,7 +27,6 @@ const SearchListItem = (props) => {
             <Button
               bookid={props.bookid}
               click={props.addBookToQueue.bind(null)}
-              glyph={'glyphicon-plus'}
               type={'To Queue'}
               loggedInUser={props.loggedInUser}
               />
@@ -39,7 +38,6 @@ const SearchListItem = (props) => {
             <Button
               bookid={props.bookid}
               click={props.makeCurrentBook.bind(null)}
-              glyph={'glyphicon-book'}
               type={'Make Current'}
               loggedInUser={props.loggedInUser}
               />

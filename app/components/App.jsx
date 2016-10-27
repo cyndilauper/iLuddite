@@ -158,6 +158,7 @@ removeBookFromFinished (isbn) {
   }
 
   makeCurrentBook (isbn) {
+
     const userid = this.state.loggedInUser.fbid;
     // see if the queue already has the book
     for (let i = 0; i < this.state.loggedInUser.queue.length; i++) {
