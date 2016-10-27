@@ -20,7 +20,7 @@ router.get('/books/:bookid', (req, res, next) => {
 })
 
 router.get('/users/:userid', (req, res, next) => {
-  res.redirect('/');
+  res.sendFile(path.join(__dirname, '../public/app.html'));
 })
 
 router.get('/loggedin', (req, res, next) => {

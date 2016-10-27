@@ -28,7 +28,7 @@ class App extends React.Component {
           this.setState({
             loggedInUser: response.data
           });
-          console.log(response)
+          console.log('loggedInUser: ',this.state.loggedInUser)
           const path = `/users/${this.state.loggedInUser.fbid}`;
           browserHistory.push(path);
         });
@@ -115,6 +115,7 @@ class App extends React.Component {
       this.setState({
         loggedInUser: newState
       })
+      document.getElementById("addBookToQueueButton").classList.add("hide-button")
     })
   }
 
@@ -136,6 +137,7 @@ class App extends React.Component {
       this.setState({
         loggedInUser: newState
       })
+      document.getElementById("addBookToPastReadsButton").classList.add("hide-button")
     })
   }
 
@@ -162,6 +164,8 @@ class App extends React.Component {
             this.setState({
               loggedInUser: newState
             });
+            document.getElementById("addBookToCurrentButton").classList.add("hide-button")
+            document.getElementById("addBookToQueueButton").classList.add("hide-button")
           })
         // return so below code doesn't get hit
         // (work below has already been done in last block)
@@ -177,6 +181,7 @@ class App extends React.Component {
       this.setState({
         loggedInUser: newState
       })
+      document.getElementById("addBookToCurrentButton").classList.add("hide-button")
     })
   }
 
@@ -229,6 +234,7 @@ class App extends React.Component {
         this.setState({
           loggedInUser: newState
         })
+        document.getElementById("addBookToFavoritesButton").classList.add("hide-button")
       })
   }
 
@@ -276,7 +282,8 @@ class App extends React.Component {
             addBookToFavorites: this.addBookToFavorites.bind(this),
             makeCurrentBook: this.makeCurrentBook.bind(this),
             addBookToQueue: this.addBookToQueue.bind(this),
-            addBookToPastReads: this.addBookToPastReads.bind(this)
+            addBookToPastReads: this.addBookToPastReads.bind(this),
+            loggedInUser: this.state.loggedInUser
           })
           break;
         case "UserProfile" :
