@@ -1,5 +1,7 @@
 const React = require('react');
 import { Link } from 'react-router';
+const Button = require('./Button');
+
 
 const SearchListItem = (props) => {
   return (
@@ -21,25 +23,21 @@ const SearchListItem = (props) => {
 
         <div className="row">
           <div className="col-xs-12">
-            <button
-              className="btn btn-primary"
-              onClick={props.addBookToQueue.bind(null, props.bookid)}>
-
-              <span className="glyphicon glyphicon-plus">&nbsp;</span>
-              Add to Queue
-            </button>
+            <Button
+              bookid={props.bookid}
+              click={props.addBookToQueue.bind(null)}
+              glyph={'glyphicon-plus'}
+              text={'Add to Queue'} />
           </div>
         </div>
 
         <div className="row">
           <div className="col-xs-12">
-            <button
-              className="btn btn-primary"
-              onClick={props.makeCurrentBook.bind(null, props.bookid)}>
-
-              <span className="glyphicon glyphicon-book">&nbsp;</span>
-              Make my Current
-            </button>
+            <Button
+              bookid={props.bookid}
+              click={props.makeCurrentBook.bind(null)}
+              glyph={'glyphicon-book'}
+              text={'Make my Current'} />
           </div>
         </div>
         </div>
