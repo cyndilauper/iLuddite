@@ -167,7 +167,7 @@ router.route('/:userid/finished/:bookid') //Adding this to create finished books
   .post((req, res, next) => {
   // POST to user's finished books
     User.findOneAndUpdate({ fbid: req.params.userid },
-      { $push: { finished: req.params.bookid } } )
+      { $push: { finished: req.params.bookid } } ) //Only actually inserting the ISBN, not the whole book
       .then(user => {
         //send the book back, not the user
         if (user) {
