@@ -52,7 +52,7 @@ class UserProfile extends React.Component {
     return (
       <div className="container">
         <UserBox
-          pastReads={this.state.pastReads}
+          pastReads={this.state.user.pastReads}
           user={this.state.user}
           />
         <CurrentBook currentBook={this.state.user.queue[0]}/>
