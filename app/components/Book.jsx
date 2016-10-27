@@ -17,7 +17,7 @@ class Book extends React.Component {
     this.props.clearSearchResults();
     // as soon as the component mounts fetch the book it is
     // supposed to display
-    axios.get(`/books/${this.props.params.bookid}`)
+    axios.get(`/books/${this.props.params.bookid}`) //React router works by automatically passing this prop down to every component
       .then(response => {
         this.setState({
           book: response.data[0]
@@ -31,7 +31,7 @@ class Book extends React.Component {
   // use it as a chance to dismiss the dropdown and fetch
   // the new book the user is trying to view
   componentWillReceiveProps(nextProps) {
-    if (nextProps.params.bookid !== this.props.params.bookid) {
+    if (nextProps.params.bookid !== this.props.params.bookid) { //Apparently, inputting into the search bar has the same effect as the url bar
       this.props.clearSearchResults();
       // fetch the new book
       axios.get(`/books/${nextProps.params.bookid}`)

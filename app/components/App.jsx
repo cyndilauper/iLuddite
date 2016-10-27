@@ -88,9 +88,10 @@ class App extends React.Component {
   removeBookFromQueue (isbn) {
     // go through current queue and filter out isbn
     const filtered = 
-      this.state.loggedInUser.queue.filter(book => book._id !== isbn);
+    this.state.loggedInUser.queue.filter(book => book._id !== isbn);
     axios.delete(`/users/${this.state.loggedInUser.fbid}/queue/${isbn}`)
       .then(book => {
+        console.log('queue after removing book', filtered)
         const newState = Object.assign({}, this.state.loggedInUser);
         newState.queue = filtered;
         this.setState({
@@ -110,6 +111,7 @@ class App extends React.Component {
     // book is not in queue go ahead and add
     axios.post(`/users/${this.state.loggedInUser.fbid}/queue/${isbn}`)
     .then( response => {
+      console.log('response after adding user to queue', response)
       const newState = Object.assign({}, this.state.loggedInUser);
       newState.queue = newState.queue.concat(response.data);
       this.setState({
@@ -117,6 +119,49 @@ class App extends React.Component {
       })
     })
   }
+
+  addBookToFinished (isbn) {
+        // check to see if book is already in user's finished list
+    if(this.state.loggedInUser.length) {
+    for (let i = 0; i < this.state.loggedInUser.finished.length; i++) {
+      if (this.state.loggedInUser.finished[i]._id === isbn) {
+        // book already is in finished, do not add again
+        return;
+      }
+    }
+  }
+  // book is not in finished, go ahead and add
+    axios.post(`/users/${this.state.loggedInUser.fbid}/finished/${isbn}`)
+    .then( response => {
+      console.log('response after adding book to finished', response)
+      const newState = Object.assign({}, this.state.loggedInUser);
+      newState.finished = newState.finished.concat(response.data);
+      this.setState({
+        loggedInUser: newState
+      })
+      console.log(this.state)
+    })
+    //Afterwards, remove the book from the user's queue
+    .then ( response => {
+      this.removeBookFromQueue (isbn)
+    })
+}
+
+removeBookFromFinished (isbn) {
+  // go through current finished list and filter out isbn
+  const filtered = 
+  this.state.loggedInUser.finished.filter(book => book._id !== isbn);
+  axios.delete(`/users/${this.state.loggedInUser.fbid}/finished/${isbn}`)
+    .then(book => {
+      console.log('logged in user', this.state.loggedInUser)
+      console.log('finished array after filtering', filtered)
+      const newState = Object.assign({}, this.state.loggedInUser);
+      newState.finished = filtered;
+      this.setState({
+        loggedInUser: newState
+      });
+    });
+}
 
   makeCurrentBook (isbn) {
     const userid = this.state.loggedInUser.fbid;
@@ -216,7 +261,9 @@ class App extends React.Component {
   renderChildrenWithProps () {
     // loop through the children of App and add properties to component
     // and return a copy of it with new props.
+
     return React.Children.map(this.props.children, (child) => {
+
       switch (child.type.name) {
         case "EditPage" :
           // edit page needs queue and favorites lists and also how to 
@@ -224,9 +271,12 @@ class App extends React.Component {
           return React.cloneElement(child, {
             queue: this.state.loggedInUser.queue,
             favorites: this.state.loggedInUser.favorites,
+            finished: this.state.loggedInUser.finished, //Added this to make finished feature
+            addBookToFinished: this.addBookToFinished.bind(this),
             removeBookFromFavorites: this.removeBookFromFavorites.bind(this),
             removeBookFromQueue: this.removeBookFromQueue.bind(this),
-            makeCurrentBook: this.makeCurrentBook.bind(this)
+            makeCurrentBook: this.makeCurrentBook.bind(this),
+            removeBookFromFinished: this.removeBookFromFinished.bind(this) //Added this to make finished feature
           });
           break;
         case "Book" :

@@ -1,5 +1,6 @@
 const React = require('react');
 const ProfileQueue = require('./ProfileQueue');
+const ProfileFinished = require('./ProfileFinished')
 const UserBox = require('./UserBox');
 const CurrentBook = require('./CurrentBook');
 const DisplayFriends = require('./DisplayFriends');
@@ -11,6 +12,7 @@ class UserProfile extends React.Component {
     this.state = {
       user: {
         queue: [],
+        finished: []
 
       }
     }
@@ -21,6 +23,7 @@ class UserProfile extends React.Component {
     if (!this.state.user.fbid) {
       axios.get(`/users/${this.props.params.userid}`)
         .then((response => {
+          console.log('user data', response)
           this.setState({
             user: response.data
           });
@@ -47,10 +50,10 @@ class UserProfile extends React.Component {
       <div className="container">
         <UserBox 
           increaseBookCount={this.props.increaseBookCount}
-          user={this.state.user}
-          />
+          user={this.state.user} />
         <CurrentBook currentBook={this.state.user.queue[0]}/>
-        <ProfileQueue bookQueue={this.state.user.queue.slice(1)}/>
+        <ProfileQueue bookQueue={this.state.user.queue.slice(1)} />
+        <ProfileFinished finishedQueue={this.state.user.finished} />
         <DisplayFriends friendQueue={this.state.user.friends}/>
       </div>
     );

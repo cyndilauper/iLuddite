@@ -1,20 +1,20 @@
 const React = require('react');
-const FavoriteListItem = require('./FavoriteListItem');
+const FinishedItem = require('./FinishedItem');
 
-const Favorites = (props) => {
+const Finished = (props) => {
   // props.favorites is a list of all the books that are in a 
   // users favorites list
-  const favorites = props.favorites.map(book => 
-    <FavoriteListItem 
+  const finished = props.finished.map(book => 
+    <FinishedItem 
       book={book}
-      removeBookFromFavorites={props.removeBookFromFavorites}/>
+      removeBookFromFinished={props.removeBookFromFinished}/>
   );
 
   return (
     <div className="col-md-6">
-      <h2>Favorites:</h2>
+      <h2>Finished:</h2>
       <ul className="list-group">
-        {favorites}
+        {finished}
       </ul>
     </div>
   );
@@ -25,4 +25,8 @@ const Favorites = (props) => {
 
 // };
 
-module.exports = Favorites;
+Finished.defaultProps = {
+  finished: []
+};
+
+module.exports = Finished;
