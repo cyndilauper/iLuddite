@@ -4,6 +4,7 @@ const ProfileFinished = require('./ProfileFinished');
 const UserBox = require('./UserBox');
 const CurrentBook = require('./CurrentBook');
 const DisplayFriends = require('./DisplayFriends');
+const Carousel = require('./Carousel')
 const axios = require('../axios');
 
 class UserProfile extends React.Component {
@@ -53,6 +54,7 @@ class UserProfile extends React.Component {
         <CurrentBook currentBook={this.state.user.queue[0]}/>
         <ProfileQueue bookQueue={this.state.user.queue.slice(1)} />
         <ProfileFinished finishedQueue={this.state.user.finished} />
+        <Carousel />
         <DisplayFriends friendQueue={this.state.user.friends}/>
       </div>
     );

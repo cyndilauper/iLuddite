@@ -233,7 +233,7 @@ nav span.glyphicon.glyphicon-search {
 
 .userLocation {
   font-size: 1.2em;
-  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
+  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;  
 }
 
 .userBooksRead {
@@ -334,4 +334,24 @@ nav span.glyphicon.glyphicon-search {
 .book-list-item-summary {
 	overflow: scroll;
 	height: 45px;
+}
+
+.slick-initialized.slick-slider {
+  padding-top: 30px;
+}
+
+.slick-next:before, .slick-prev:before {
+  color: black;
+}
+
+button.slick-arrow.slick-prev {
+  background-color: black;
+}
+
+button.slick-arrow.slick-next {
+  background-color: black;
+}
+
+button.slick-arrow {
+  height: 40px;
 }
