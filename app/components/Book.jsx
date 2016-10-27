@@ -39,11 +39,13 @@ class Book extends React.Component {
     // this.setState({
     //   loggedInUser: this.props.loggedInUser
     // })
-
-    console.log('user: ',this.state.loggedInUser)
-
-    
-    let alreadyQueued = this.state.loggedInUser.queue.map(book => 
+    if (!this.state.loggedInUser._id) {
+      axios.get(`/api/users/${this.props.params.userid}`)
+        .then((response => {
+          this.setState({
+            loggedInUser: response.data
+          });
+          let alreadyQueued = this.state.loggedInUser.queue.map(book => 
       book._id
     )
     
@@ -70,6 +72,13 @@ class Book extends React.Component {
     if (alreadyFavorite.includes(this.props.params.bookid)) {
       document.getElementById("addBookToFavoritesButton").classList.add("hide-button")
     }
+        }));
+    }
+
+    console.log('user: ',this.state.loggedInUser)
+
+    
+    
 
     // clear out any search results that might still
     // be showing (this is kinda hacky and probably

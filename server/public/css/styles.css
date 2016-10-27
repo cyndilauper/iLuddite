@@ -1,10 +1,22 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.bodyWrap {
+  max-width: 1000px;
+  margin: auto;
+}
+
+.navbarWrap {
+  max-width: 1000px;
+  margin: auto;
+}
 
 .title{
 	color: white;
 	font-size: 30px;
 	padding-left: 50px;
 	padding-top: 30px;
-  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
 }
 
 .main-body {
@@ -65,7 +77,6 @@ nav h2 {
   padding-left: 8px;
   padding-top: 10px;
   font-size: 26px;
-  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
 }
 
 nav ul {
@@ -78,7 +89,6 @@ nav input {
   width: 100%;
   padding-left: 40px;
   font-size: 1em;
-  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
 }
 
 nav .glyphicon-cog {
@@ -123,7 +133,6 @@ nav span.glyphicon.glyphicon-search {
   margin-right: 20px;
   margin-top: 20px;
 	font-size: 10px;
-  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
 }
 
 .search-list-item h4,
@@ -136,6 +145,7 @@ nav span.glyphicon.glyphicon-search {
   margin-bottom: 5px;
 }
 
+/* Book View */
 @media (min-width: 768px) {
   .bookContainer {
     max-width: 730px;
@@ -156,6 +166,20 @@ nav span.glyphicon.glyphicon-search {
   margin: 0 40px;
 }
 
+/* Book Buttons */
+
+.book-buttons {
+
+}
+
+.book-button {
+
+}
+
+.hide-button {
+  display: none;
+}
+
 .currentColumn {
   padding: 1.2em 0;
 }
@@ -163,16 +187,11 @@ nav span.glyphicon.glyphicon-search {
 .currentPhotoColumn img {
   width: 100%;
 }
-.menu-hold {
-    position: relative;
-    float: right;
-}
+
 .bookPhoto:hover {
   opacity: 0.5;
 }
-.dropdown.btn-group {
-  position: initial;
-}
+
 .bookPhoto{
 	background-size: 100% 100%;
 }
@@ -184,24 +203,20 @@ nav span.glyphicon.glyphicon-search {
 .currentHeader {
   font-size:2em;
   padding-bottom: .5em;
-  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
 }
 
 .currentTitle {
   font-size: 1.3em;
-  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
 }
 
 .currentAuthor {
   font-size: 1.1em;
   font-weight: 300;
   margin-bottom: 1.1em;
-  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
 }
 
 .currentBio {
   font-size: .9em;
-  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
 }
 
 .listName{
@@ -279,16 +294,13 @@ nav span.glyphicon.glyphicon-search {
 .userName {
   font-size: 1.6em;
   font-weight: 600;
-  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
 }
 
 .userLocation {
   font-size: 1.2em;
-  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
 }
 
 .userBooksRead {
-  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
 }
 
 .readingRow {
@@ -300,7 +312,6 @@ nav span.glyphicon.glyphicon-search {
   text-align: center;
   font-size: 2em;
   padding: 1.4em 0 .5em 0;
-  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
 }
 
 .readingColumn {
@@ -454,6 +465,4 @@ nav span.glyphicon.glyphicon-search {
   width: auto;
 }
 
-.hide-button {
-  display: none;
-}
+

@@ -49,7 +49,7 @@ class App extends React.Component {
           addBookToFavorites={this.addBookToFavorites.bind(this)}
           makeCurrentBook={this.makeCurrentBook.bind(this)}
         />
-        <div className="container">
+        <div className="container bodyWrap">
           {this.renderChildrenWithProps()}
         </div>
       </div>
