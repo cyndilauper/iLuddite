@@ -39,18 +39,18 @@ class App extends React.Component {
     const style = { height: '100vh' };
     return (
       <div style={style} onClick={this.clearSearchResults.bind(this)}>
-        <Navbar 
+        <Navbar
           changeSearchText={this.changeSearchText.bind(this)}
-          loggedInUserId={this.state.loggedInUser.fbid}
+          loggedInUser={this.state.loggedInUser}
           searchText={this.state.navbarSearchText}
           searchResults={this.state.navbarSearchResults}
           handleSearchSubmit={this.searchForBook.bind(this)}
           addBookToQueue={this.addBookToQueue.bind(this)}
           makeCurrentBook={this.makeCurrentBook.bind(this)}
         />
-        <div 
-          className="container" 
-          
+        <div
+          className="container"
+
         >
           {this.renderChildrenWithProps()}
         </div>
@@ -87,8 +87,8 @@ class App extends React.Component {
 
   removeBookFromQueue (isbn) {
     // go through current queue and filter out isbn
-    const filtered = 
-    this.state.loggedInUser.queue.filter(book => book._id !== isbn);
+    const filtered =
+      this.state.loggedInUser.queue.filter(book => book._id !== isbn);
     axios.delete(`/users/${this.state.loggedInUser.fbid}/queue/${isbn}`)
       .then(book => {
         const newState = Object.assign({}, this.state.loggedInUser);
@@ -110,7 +110,6 @@ class App extends React.Component {
     // book is not in queue go ahead and add
     axios.post(`/users/${this.state.loggedInUser.fbid}/queue/${isbn}`)
     .then( response => {
-      console.log('response after adding user to queue', response)
       const newState = Object.assign({}, this.state.loggedInUser);
       newState.queue = newState.queue.concat(response.data);
       this.setState({
@@ -132,13 +131,11 @@ class App extends React.Component {
   // book is not in finished, go ahead and add
     axios.post(`/users/${this.state.loggedInUser.fbid}/finished/${isbn}`)
     .then( response => {
-      console.log('response after adding book to finished', response)
       const newState = Object.assign({}, this.state.loggedInUser);
       newState.finished = newState.finished.concat(response.data);
       this.setState({
         loggedInUser: newState
       })
-      console.log(this.state)
     })
     //Afterwards, remove the book from the user's queue
     .then ( response => {
@@ -148,7 +145,7 @@ class App extends React.Component {
 
 removeBookFromFinished (isbn) {
   // go through current finished list and filter out isbn
-  const filtered = 
+  const filtered =
   this.state.loggedInUser.finished.filter(book => book._id !== isbn);
   axios.delete(`/users/${this.state.loggedInUser.fbid}/finished/${isbn}`)
     .then(book => {
@@ -158,9 +155,10 @@ removeBookFromFinished (isbn) {
         loggedInUser: newState
       });
     });
-}
+  }
 
   makeCurrentBook (isbn) {
+
     const userid = this.state.loggedInUser.fbid;
     // see if the queue already has the book
     for (let i = 0; i < this.state.loggedInUser.queue.length; i++) {
@@ -215,7 +213,7 @@ removeBookFromFinished (isbn) {
           loggedInUser: newState
         });
       })
-      
+
   }
 
   addBookToFavorites (isbn) {
@@ -241,7 +239,6 @@ removeBookFromFinished (isbn) {
   increaseBookCount () {
     axios.post(`/users/${this.state.loggedInUser.fbid}/count`)
       .then(res => {
-        console.log('res: ', res);
         let newState = Object.assign({}, this.state.loggedInUser);
         newState.stats++;
         this.setState({
@@ -263,7 +260,7 @@ removeBookFromFinished (isbn) {
 
       switch (child.type.name) {
         case "EditPage" :
-          // edit page needs queue and favorites lists and also how to 
+          // edit page needs queue and favorites lists and also how to
           // modify them
           return React.cloneElement(child, {
             queue: this.state.loggedInUser.queue,

@@ -54,6 +54,7 @@
     "express-session": "^1.14.1",
     "mongoose": "^4.6.4",
     "morgan": "^1.7.0",
+    "nodemon": "^1.11.0",
     "oauth": "^0.9.14",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",

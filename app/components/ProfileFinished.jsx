@@ -25,7 +25,7 @@ const profileFinished = props.finishedQueue.slice(0, 6).map((book, idx) => {
           <div className="row">
             {profileFinished}
           </div>
-        </div> 
+        </div>
       </div>
     </div>
   );
