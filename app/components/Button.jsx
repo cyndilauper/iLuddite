@@ -18,7 +18,7 @@ const Button = (props) => {
   if (type === 'Make Current') {
     curBookId === bookId ? (
       button.glyph = 'glyphicon-ok',
-      button.text = 'Your Current'
+      button.text = 'Current'
     ) : (
       button.glyph = 'glyphicon-book',
       button.text = type
@@ -26,7 +26,7 @@ const Button = (props) => {
   } else {
     inQueue ? (
       button.glyph = 'glyphicon-ok',
-      button.text = 'In Queue'
+      button.text = 'Queued'
     ) : (
       button.glyph = 'glyphicon-plus',
       button.text = type

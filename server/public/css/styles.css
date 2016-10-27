@@ -330,3 +330,8 @@ nav span.glyphicon.glyphicon-search {
 .bookCountTitle {
   font-weight: 500;
 }
+
+.book-list-item-summary {
+	overflow: scroll;
+	height: 45px;
+}

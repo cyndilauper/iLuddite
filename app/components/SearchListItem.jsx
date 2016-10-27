@@ -7,20 +7,25 @@ const SearchListItem = (props) => {
   return (
       <div className="row">
       <li className="search-list-item list-group-item">
-        <div className="col-xs-1">
+        <div className="col-xs-2">
           <Link to={`/books/${props.bookid}`}>
             <img src={props.image} alt={props.title}/>
           </Link>
         </div>
-        <div className="col-xs-1"></div>
-        <div className="col-xs-8">
+        <div className="col-xs-7">
           <Link to={`/books/${props.bookid}`}>
             <h4>{`${props.title.substr(0, 50)}`}<br /><xsall>by {`${props.author.substr(0, 65)}`}</xsall></h4>
           </Link>
-          <p>{props.summary}</p>
+          <div className="row">
+            <div className="col-xs-12 book-list-item-summary">
+              <p>
+                {props.summary}
+              </p>
+            </div>
+          </div>
         </div>
 
-        <div className="col-xs-2">
+        <div className="col-xs-3">
 
         <div className="row">
           <div className="col-xs-12">
