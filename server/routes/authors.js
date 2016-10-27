@@ -65,8 +65,10 @@ router.get('/:authorId/books', (req, res) => {
   function getAuthorBooks(err, response, body) {
     body = xml('' + body, (err, result) => {
       let books = result.GoodreadsResponse.author[0].books[0].book.splice(0, 15)
+      console.log(books[1])
       books = books.map(book => (
         {
+          isbn: book.isbn[0],
           id: book.id[0]._,
           title: book.title[0],
           image: book.image_url[0],

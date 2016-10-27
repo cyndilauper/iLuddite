@@ -163,11 +163,16 @@ nav span.glyphicon.glyphicon-search {
 .currentPhotoColumn img {
   width: 100%;
 }
-
+.menu-hold {
+    position: relative;
+    float: right;
+}
 .bookPhoto:hover {
   opacity: 0.5;
 }
-
+.dropdown.btn-group {
+  position: initial;
+}
 .bookPhoto{
 	background-size: 100% 100%;
 }

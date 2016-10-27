@@ -56,9 +56,11 @@ class UserProfile extends React.Component {
           user={this.state.user}
           />
         <CurrentBook currentBook={this.state.user.queue[0]}/>
-        <ProfileQueue bookQueue={this.state.user.queue.slice(1)}/>
-        <ProfilePastReads pastReads={this.state.user.pastReads}/>
-        <ProfileFavorites favorites={this.state.user.favorites}/>
+        <div className='menu-hold col-md-6'>
+          <ProfileQueue bookQueue={this.state.user.queue.slice(1)}/>
+          <ProfilePastReads pastReads={this.state.user.pastReads}/>
+          <ProfileFavorites favorites={this.state.user.favorites}/>
+        </div>
         <DisplayFriends friendQueue={this.state.user.friends}/>
       </div>
     );
