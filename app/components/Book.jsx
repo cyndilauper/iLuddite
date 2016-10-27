@@ -159,10 +159,10 @@ class Book extends React.Component {
     }
   }
 
-  showPreview(e){
+  togglePreview(e){
     e.preventDefault()
     this.setState({
-      showPreview: true
+      showPreview: !this.state.showPreview
     })
   }
 
@@ -229,11 +229,11 @@ class Book extends React.Component {
                 Add to Past Reads
                 </button>
                 { this.state.showPreview ?
-                  <Preview showPreview={this.showPreview.bind(this)}/> :
-                  <button className='btn btn-default btn-info' 
-                  onClick={this.showPreview.bind(this)}> 
-                  Show Preview </button>
+                  <Preview/> : null 
                 }
+                <button className='btn btn-default btn-info' 
+                onClick={this.togglePreview.bind(this)}> 
+                Toggle Preview </button>
             </div>
           </div>
           <div className="reviewRow">
