@@ -25,7 +25,7 @@ const profileQueue = props.bookQueue.slice(0, 6).map((book, idx) => {
           <div className="row">
             {profileQueue}
           </div>
-        </div> 
+        </div>
       </div>
     </div>
   );
@@ -33,4 +33,3 @@ const profileQueue = props.bookQueue.slice(0, 6).map((book, idx) => {
 };
 
 module.exports = ProfileQueue;
-

@@ -1,6 +1,5 @@
 const React = require('react');
 import { Link } from 'react-router';
-
 const SearchBox = require('./SearchBox');
 
 const Navbar = (props) => {
@@ -13,17 +12,18 @@ const Navbar = (props) => {
           </a>
         </div>
         <div className="col-md-8">
-          <SearchBox 
+          <SearchBox
             changeSearchText={props.changeSearchText}
             searchText={props.searchText}
             searchResults={props.searchResults}
             handleSearchSubmit={props.handleSearchSubmit}
             addBookToQueue={props.addBookToQueue}
             makeCurrentBook={props.makeCurrentBook}
+            loggedInUser={props.loggedInUser}
           />
         </div>
         <div className="col-md-2">
-          <Link to={`/users/${props.loggedInUserId}/edit`}>
+          <Link to={`/users/${props.loggedInUser.fbid}/edit`}>
             <span className="glyphicon glyphicon-cog"></span>
           </Link>
         </div>

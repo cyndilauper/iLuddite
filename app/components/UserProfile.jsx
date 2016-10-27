@@ -1,6 +1,6 @@
 const React = require('react');
 const ProfileQueue = require('./ProfileQueue');
-const ProfileFinished = require('./ProfileFinished')
+const ProfileFinished = require('./ProfileFinished');
 const UserBox = require('./UserBox');
 const CurrentBook = require('./CurrentBook');
 const DisplayFriends = require('./DisplayFriends');
@@ -15,7 +15,7 @@ class UserProfile extends React.Component {
         finished: []
 
       }
-    }
+    };
   }
 
   componentDidMount () {
@@ -47,7 +47,7 @@ class UserProfile extends React.Component {
   render () {
     return (
       <div className="container">
-        <UserBox 
+        <UserBox
           increaseBookCount={this.props.increaseBookCount}
           user={this.state.user} />
         <CurrentBook currentBook={this.state.user.queue[0]}/>

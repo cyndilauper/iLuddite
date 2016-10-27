@@ -12,6 +12,7 @@ const SearchListItem = (props) => {
             <img src={props.image} alt={props.title}/>
           </Link>
         </div>
+        <div className="col-xs-1"></div>
         <div className="col-xs-8">
           <Link to={`/books/${props.bookid}`}>
             <h4>{`${props.title.substr(0, 50)}`}<br /><xsall>by {`${props.author.substr(0, 65)}`}</xsall></h4>
@@ -19,7 +20,7 @@ const SearchListItem = (props) => {
           <p>{props.summary}</p>
         </div>
 
-        <div className="col-xs-3">
+        <div className="col-xs-2">
 
         <div className="row">
           <div className="col-xs-12">
@@ -27,7 +28,9 @@ const SearchListItem = (props) => {
               bookid={props.bookid}
               click={props.addBookToQueue.bind(null)}
               glyph={'glyphicon-plus'}
-              text={'Add to Queue'} />
+              type={'To Queue'}
+              loggedInUser={props.loggedInUser}
+              />
           </div>
         </div>
 
@@ -37,7 +40,9 @@ const SearchListItem = (props) => {
               bookid={props.bookid}
               click={props.makeCurrentBook.bind(null)}
               glyph={'glyphicon-book'}
-              text={'Make my Current'} />
+              type={'Make Current'}
+              loggedInUser={props.loggedInUser}
+              />
           </div>
         </div>
         </div>
