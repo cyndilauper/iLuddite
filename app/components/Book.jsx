@@ -24,6 +24,17 @@ class Book extends React.Component {
 
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.book !== this.state.book){
+      this.setState({
+        reviews: [],
+        currReviews: [],
+        makeRev: "",
+        rating: 0
+      })
+    }
+  }
+
   componentDidMount () {
     // this.setState({
     //   loggedInUser: this.props.loggedInUser
