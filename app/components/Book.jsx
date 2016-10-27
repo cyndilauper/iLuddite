@@ -16,7 +16,7 @@ class Book extends React.Component {
     }
 
     setInterval(() => {
-      var shuffled = this.state.reviews.sort(() => .5 - Math.random())  
+      var shuffled = this.state.reviews.sort(() => .5 - Math.random())
       this.setState({
         currReviews: shuffled.slice(0,2)
       })
@@ -79,6 +79,7 @@ class Book extends React.Component {
     // supposed to display
     axios.get(`/api/books/${this.props.params.bookid}`)
       .then(response => {
+        console.log('munchy breakfast: ', response)
         this.setState({
           book: response.data[0]
         });
@@ -137,11 +138,11 @@ class Book extends React.Component {
     e.preventDefault()
     if (this.state.rating < 5) {
       this.setState({
-        rating: this.state.rating + 1 
+        rating: this.state.rating + 1
       })
     } else if (this.state.rating === 5) {
       this.setState({
-        rating: 0 
+        rating: 0
       })
     }
   }
@@ -157,6 +158,7 @@ class Book extends React.Component {
 
           <div className="bookCol2 col-md-6">
             <h2>{this.state.book.title}</h2>
+            <a href={this.state.book.buyLink}>Buy it now</a>
 
             <h3>
               {+this.state.book.authorId ?
@@ -203,9 +205,9 @@ class Book extends React.Component {
           </div>
         </div>
         <div className="reviewRow">
-          <Review currReviews={this.state.currReviews} 
+          <Review currReviews={this.state.currReviews}
             handleChange={this.handleChange.bind(this)}
-            handleSubmit={this.handleSubmit.bind(this)} 
+            handleSubmit={this.handleSubmit.bind(this)}
             incRating={this.incRating.bind(this)}
             rating={this.state.rating}
             text={this.state.makeRev} />
