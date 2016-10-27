@@ -28,7 +28,7 @@ class App extends React.Component {
           this.setState({
             loggedInUser: response.data
           });
-          console.log(response)
+          console.log('loggedInUser: ',this.state.loggedInUser)
           const path = `/users/${this.state.loggedInUser.fbid}`;
           browserHistory.push(path);
         });
