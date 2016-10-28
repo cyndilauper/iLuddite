@@ -465,4 +465,13 @@ nav span.glyphicon.glyphicon-search {
   width: auto;
 }
 
-
+.menu-hold {
+   position: relative;
+   float: right;
+}
+.bookPhoto:hover {
+ opacity: 0.5;
+}
+.dropdown.btn-group {
+ position: initial;
+}
