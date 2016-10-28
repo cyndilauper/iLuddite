@@ -270,6 +270,18 @@ nav span.glyphicon.glyphicon-search {
   padding-top: 120px;
 }
 
+.readingArrowColumn:hover {
+  opacity: 0.5;
+}
+
+.glyphicon.glyphicon-chevron-left:hover {
+  cursor: pointer;
+}
+
+.glyphicon.glyphicon-chevron-right:hover {
+  cursor: pointer;
+}
+
 .readingArrowColumnLeft {
   text-align: right;
   background: linear-gradient(90deg, #fff 50%, #e8e8e8 50%);
@@ -334,24 +346,4 @@ nav span.glyphicon.glyphicon-search {
 .book-list-item-summary {
 	overflow: scroll;
 	height: 45px;
-}
-
-.slick-initialized.slick-slider {
-  padding-top: 30px;
-}
-
-.slick-next:before, .slick-prev:before {
-  color: black;
-}
-
-button.slick-arrow.slick-prev {
-  background-color: black;
-}
-
-button.slick-arrow.slick-next {
-  background-color: black;
-}
-
-button.slick-arrow {
-  height: 40px;
 }

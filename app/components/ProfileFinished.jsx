@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 
 const ProfileFinished = (props) => {
 // since the queue could get really long we only want to display up to 6 books
-const profileFinished = props.finishedQueue.slice(0, 6).map((book, idx) => {
+const profileFinished = props.finishedQueue.slice(props.indices[0], props.indices[1]).map((book, idx) => {
     return (
       <div className="col-md-2 col-sm-2 col-xs-2 readingColumn">
         <Link to={`/books/${book._id}`}>
@@ -21,11 +21,17 @@ const profileFinished = props.finishedQueue.slice(0, 6).map((book, idx) => {
         </div>
       </div>
       <div className="row readingRow">
-        <div className="col-xs-12">
+        <div className="col-xs-1 readingArrowColumn readingArrowColumnLeft">
+          <span className="glyphicon glyphicon-chevron-left"></span>
+        </div>
+        <div className="col-xs-10">
           <div className="row">
             {profileFinished}
           </div>
         </div>
+      <div className="col-xs-1 readingArrowColumn readingArrowColumnRight">
+        <span className="glyphicon glyphicon-chevron-right"></span>
+      </div>
       </div>
     </div>
   );

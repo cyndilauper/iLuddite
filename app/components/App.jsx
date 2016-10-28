@@ -10,7 +10,9 @@ class App extends React.Component {
     this.state = {
       navbarSearchText: '',
       navbarSearchResults: [],
-      loggedInUser: {}
+      loggedInUser: {},
+      queueIndices: [0,6],
+      finishedIndices: [0,6]
     }
   }
 
@@ -248,6 +250,42 @@ removeBookFromFinished (isbn) {
       .catch(console.log)
   }
 
+  increaseQueueIndices () {
+    if(this.state.loggedInUser.queue.length === this.state.queueIndices[1] || this.state.loggedInUser.queue.length < 7) {
+      return
+    } else {
+    this.state.queueIndices[0] ++
+    this.state.queueIndices[1] ++
+    }
+  }
+
+  decreaseQueueIndices () {
+    if(this.state.queueIndices[0] === 0) {
+      return
+    } else {
+    this.state.queueIndices[0] --
+    this.state.queueIndices[1] --
+    }
+  }
+
+  increaseFinishedIndices () {
+    if(this.state.loggedInUser.finished.length === this.state.finishedIndices[1] || this.state.loggedInUser.finished.length < 7) {
+      return
+    } else {
+    this.state.finishedIndices[0] ++
+    this.state.finishedIndices[1] ++
+    }
+  }
+
+  decreaseFinishedIndices () {
+    if(this.state.finishedIndices[0] === 0) {
+      return
+    } else {
+    this.state.finishedIndices[0] --
+    this.state.finishedIndices[1] --
+    }
+  }
+
   // This function is used to render out children given to App by router
   // before rendering them we inspect what type of component they are
   // and inject properties into them so that they can display all the data
@@ -288,8 +326,14 @@ removeBookFromFinished (isbn) {
         case "UserProfile" :
           // userprofile needs information about the currently logged in user
           return React.cloneElement(child, {
+            queueIndices: this.state.queueIndices,
+            finishedIndices: this.state.finishedIndices,
             loggedInUser: this.state.loggedInUser,
-            increaseBookCount: this.increaseBookCount.bind(this)
+            increaseBookCount: this.increaseBookCount.bind(this),
+            increaseFinishedIndices: this.increaseFinishedIndices.bind(this),
+            decreaseFinishedIndices: this.decreaseFinishedIndices.bind(this),
+            increaseQueueIndices: this.increaseQueueIndices.bind(this),
+            decreaseQueueIndices: this.decreaseQueueIndices.bind(this)
           });
           break;
         default :
