@@ -229,7 +229,7 @@ class Book extends React.Component {
                 Add to Past Reads
                 </button>
                 { this.state.showPreview ?
-                  <Preview/> : null 
+                  <Preview bookid={this.state.book._id}/> : null 
                 }
                 <button className='btn btn-default btn-info' 
                 onClick={this.togglePreview.bind(this)}> 
