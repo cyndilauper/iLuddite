@@ -121,7 +121,7 @@ nav span.glyphicon.glyphicon-search {
 
 .search-list-item {
   padding: 10px 0;
-  height: 120px;
+  /*height: 120px;*/
 }
 
 .search-list-item img {
@@ -130,8 +130,8 @@ nav span.glyphicon.glyphicon-search {
 }
 
 .search-list-item button.btn.btn-primary {
-  margin-right: 20px;
-  margin-top: 20px;
+  margin-right: 5px;
+  margin-top: 5px;
 	font-size: 10px;
 }
 
