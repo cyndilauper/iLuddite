@@ -4,7 +4,7 @@ import { DropdownButton } from 'react-bootstrap';
 var Masonry = require('react-masonry-component');
 
 var masonryOptions = {
-    transitionDuration: 0
+    transitionDuration: 10
 };
 
 const ProfileQueue = React.createClass({
