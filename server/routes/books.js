@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Books = require('../models/books');
 const request = require('request');
+const xml = require('xml2js').parseString;
 
 router.get('/', (req, res, next) => {
   //returns all books
@@ -29,6 +30,8 @@ router.get('/search/:searchterm', (req, res) => {
       //grab the first five books
       body = body.items.slice(0,5);
       let five = body.map(book => {
+        console.log('BOOKI BOOKI: ', book)
+        console.log('LINK: ', book.volumeInfo.infoLink)
         //try to grab the properties we want, otherwise return null
         try {
           return {
@@ -37,7 +40,8 @@ router.get('/search/:searchterm', (req, res) => {
             author: book.volumeInfo.authors[0],
             summary: book.volumeInfo.description,
             coverPath: book.volumeInfo.imageLinks.thumbnail,
-            thumbnailPath: book.volumeInfo.imageLinks.thumbnail
+            thumbnailPath: book.volumeInfo.imageLinks.thumbnail,
+            buyLink: book.volumeInfo.infoLink
           };
         }
         catch(err) {
@@ -51,16 +55,32 @@ router.get('/search/:searchterm', (req, res) => {
       })
       //handle the case in which the book is already in the db
       five.forEach((book) => {
-        Books.findOneAndUpdate({_id: book._id}, {
-          _id: book._id,
-          title: book.title,
-          author: book.author,
-          summary: book.summary,
-          coverPath: book.coverPath,
-          thumbnailPath: book.thumbnailPath
-        }, {upsert:true, new:true}, (err, book) => {
-          if (err) console.log(err);
-          else console.log('book inserted or updated: ', book);
+        let authorName = book.author.toLowerCase().replace('/W','-')
+        let goodOptions = {
+          url: `https://www.goodreads.com/api/author_url/${authorName}?key=${process.env.goodreads}`
+        }
+        request(goodOptions, (err,response,body) => {
+          body = xml('' + body, (err, result) => {
+            let authorId
+            if (result) {
+              authorId = result.GoodreadsResponse.author[0].$.id
+            } else {
+              authorId = 0
+            }
+              Books.findOneAndUpdate({_id: book._id}, {
+                _id: book._id,
+                title: book.title,
+                author: book.author,
+                authorId: authorId,
+                summary: book.summary,
+                coverPath: book.coverPath,
+                thumbnailPath: book.thumbnailPath,
+                buyLink: book.buyLink
+              }, {upsert:true, new:true}, (err, book) => {
+                if (err) console.log(err);
+                else console.log('book inserted or updated: ', book);
+              })
+          })
         })
       })
       //respond with the inserted books

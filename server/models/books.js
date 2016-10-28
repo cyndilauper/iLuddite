@@ -8,7 +8,9 @@ const booksSchema = new Schema({
   author: String,
   summary: String,
   coverPath: String,
-  thumbnailPath: String
+  authorId: { type: Schema.Types.String, ref: 'Authors' },
+  thumbnailPath: String,
+  buyLink: String
 });
 
 const Books = mongoose.model('Books', booksSchema);
