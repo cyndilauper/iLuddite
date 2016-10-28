@@ -48,39 +48,37 @@ class Book extends React.Component {
 
     const { addBookToQueue, addBookToFavorites, makeCurrentBook, loggedInUser } = this.props;
     return (
-      <div className="bookContainer">
-        <div className="bookRow">
-          <div className="bookCol col-md-6">
-            <img className="bookImg" src={this.state.book.thumbnailPath}/>
-          </div>
-
-          <div className="bookCol2 col-md-6">
-            <h2>{this.state.book.title}</h2>
-            <h3>{this.state.book.author}</h3>
-            <h4>About the Book</h4>
-            <p>{this.state.book.summary}</p>
-            <br/>
-            <Button
-              bookid={this.props.bookid}
-              click={addBookToQueue.bind(null)}
-              type={'To Queue'}
-              loggedInUser={loggedInUser}
-              />
-            <Button
-              bookid={this.props.bookid}
-              click={makeCurrentBook.bind(null)}
-              type={'Make Current'}
-              loggedInUser={this.props.loggedInUser}
-              />
-            <Button
-              bookid={this.props.bookid}
-              click={addBookToFavorites.bind(null)}
-              type={'Add to Favorites'}
-              loggedInUser={loggedInUser}
-              />
-          </div>
+      <div className="bookRow row">
+        <div className="bookCol col-sm-4">
+          <img className="bookImg" src={this.state.book.thumbnailPath}/>
         </div>
-
+        <div className="col-sm-1"></div>
+        <div className="bookCol2 col-sm-6">
+          <h2>{this.state.book.title}</h2>
+          <h3>{this.state.book.author}</h3>
+          <h4>About the Book</h4>
+          <p className="book-summary">{this.state.book.summary}</p>
+          <br/>
+          <Button
+            bookid={this.state.book._id}
+            click={addBookToQueue.bind(null)}
+            type={'To Queue'}
+            loggedInUser={loggedInUser}
+            />
+          <Button
+            bookid={this.state.book._id}
+            click={makeCurrentBook.bind(null)}
+            type={'Make Current'}
+            loggedInUser={loggedInUser}
+            />
+          <Button
+            bookid={this.state.book._id}
+            click={addBookToFavorites.bind(null)}
+            type={'Add to Favorites'}
+            loggedInUser={loggedInUser}
+            />
+        </div>
+        <div className="col-sm-1"></div>
       </div>
     );
   }

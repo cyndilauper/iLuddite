@@ -6,12 +6,12 @@ const Navbar = (props) => {
   return (
     <nav className="navbar navbar-default">
       <div className="row">
-        <div className="col-md-2">
+        <div className="col-sm-2">
           <a href="/">
             <h2>iLuddite</h2>
           </a>
         </div>
-        <div className="col-md-8">
+        <div className="col-sm-8">
           <SearchBox
             changeSearchText={props.changeSearchText}
             searchText={props.searchText}
@@ -22,7 +22,7 @@ const Navbar = (props) => {
             loggedInUser={props.loggedInUser}
           />
         </div>
-        <div className="col-md-2">
+        <div className="col-sm-2">
           <Link to={`/users/${props.loggedInUser.fbid}/edit`}>
             <span className="glyphicon glyphicon-cog"></span>
           </Link>
