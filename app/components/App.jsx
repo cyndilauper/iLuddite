@@ -100,6 +100,7 @@ class App extends React.Component {
   }
 
   addBookToQueue (isbn) {
+
     // check to see if book is already in users queue
     for (let i = 0; i < this.state.loggedInUser.queue.length; i++) {
       if (this.state.loggedInUser.queue[i]._id === isbn) {
@@ -158,7 +159,6 @@ removeBookFromFinished (isbn) {
   }
 
   makeCurrentBook (isbn) {
-
     const userid = this.state.loggedInUser.fbid;
     // see if the queue already has the book
     for (let i = 0; i < this.state.loggedInUser.queue.length; i++) {
@@ -281,7 +281,8 @@ removeBookFromFinished (isbn) {
             clearSearchResults: this.clearSearchResults.bind(this),
             addBookToFavorites: this.addBookToFavorites.bind(this),
             makeCurrentBook: this.makeCurrentBook.bind(this),
-            addBookToQueue: this.addBookToQueue.bind(this)
+            addBookToQueue: this.addBookToQueue.bind(this),
+            loggedInUser: this.state.loggedInUser
           })
           break;
         case "UserProfile" :
