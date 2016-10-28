@@ -7,7 +7,7 @@ const Preview = ( { bookid } ) => {
       <div className="preview3">
         <div className="preview6">
           <embed width="100%" height="100%" 
-          src="https://books.google.com/books?id=U_zINMa9cAAC&amp;printsec=frontcover&amp;source=gbs_ViewAPI&amp;output=embed#%257B%257D" />
+          src={`https://books.google.com/books?id=${bookid}&printsec=frontcover&source=gbs_ViewAPI&output=embed#%257B%257D`} />
         </div>
       </div>
     </div>  
