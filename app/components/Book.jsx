@@ -45,6 +45,7 @@ class Book extends React.Component {
   }
 
   render () {
+
     const { addBookToQueue, addBookToFavorites, makeCurrentBook, loggedInUser } = this.props;
     return (
       <div className="bookContainer">
@@ -63,7 +64,7 @@ class Book extends React.Component {
               bookid={this.props.bookid}
               click={addBookToQueue.bind(null)}
               type={'To Queue'}
-              loggedInUser={this.props.loggedInUser}
+              loggedInUser={loggedInUser}
               />
             <Button
               bookid={this.props.bookid}
@@ -75,7 +76,7 @@ class Book extends React.Component {
               bookid={this.props.bookid}
               click={addBookToFavorites.bind(null)}
               type={'Add to Favorites'}
-              loggedInUser={this.props.loggedInUser}
+              loggedInUser={loggedInUser}
               />
           </div>
         </div>
