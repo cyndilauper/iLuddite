@@ -1,36 +1,29 @@
 const React = require('react');
 import { Link } from 'react-router';
+import { DropdownButton } from 'react-bootstrap';
 
 const ProfileQueue = (props) => {
 // since the queue could get really long we only want to display up to 6 books
 const profileQueue = props.bookQueue.slice(0, 6).map((book, idx) => {
     return (
-      <div className="col-md-2 col-sm-2 col-xs-2 readingColumn">
+      <div className="col-md-4">
         <Link to={`/books/${book._id}`}>
-          <img src={book.thumbnailPath} className='img-responsive bookPhoto'/>
+          <img src={book.thumbnailPath} className='bookPhoto'/>
         </Link>
       </div>
     );
   });
 
+  console.log(props.bookQueue)
+
   return(
-   <div className ="wrappingDiv">
-      <div className="row readingTitleRow">
-        <div className="col-xs-12 readingHeader">
-          Reading Queue
-        </div>
+    <DropdownButton title="Queue" className="droppy">
+      <div className="row">
+        {profileQueue}
       </div>
-      <div className="row readingRow">
-        <div className="col-xs-12">
-          <div className="row">
-            {profileQueue}
-          </div>
-        </div> 
-      </div>
-    </div>
+    </DropdownButton>
   );
 
 };
 
 module.exports = ProfileQueue;
-
