@@ -102,7 +102,6 @@ class App extends React.Component {
   }
 
   addBookToQueue (isbn) {
-
     // check to see if book is already in users queue
     for (let i = 0; i < this.state.loggedInUser.queue.length; i++) {
       if (this.state.loggedInUser.queue[i]._id === isbn) {
