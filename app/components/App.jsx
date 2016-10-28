@@ -251,7 +251,7 @@ removeBookFromFinished (isbn) {
   }
 
   increaseQueueIndices () {
-    if(this.state.loggedInUser.queue.length === this.state.queueIndices[1] || this.state.loggedInUser.queue.length < 7) {
+    if(this.state.loggedInUser.queue.length-1 === this.state.queueIndices[1] || this.state.loggedInUser.queue.length < 6) {
       return
     } else {
     this.state.queueIndices[0] ++
@@ -269,7 +269,7 @@ removeBookFromFinished (isbn) {
   }
 
   increaseFinishedIndices () {
-    if(this.state.loggedInUser.finished.length === this.state.finishedIndices[1] || this.state.loggedInUser.finished.length < 7) {
+    if(this.state.loggedInUser.finished.length === this.state.finishedIndices[1] || this.state.loggedInUser.finished.length < 6) {
       return
     } else {
     this.state.finishedIndices[0] ++

@@ -53,7 +53,7 @@ class UserProfile extends React.Component {
           user={this.state.user} />
         <CurrentBook currentBook={this.state.user.queue[0]}/>
         <ProfileQueue bookQueue={this.state.user.queue.slice(1)} indices={this.props.queueIndices} increaseQueueIndices={this.props.increaseQueueIndices} decreaseQueueIndices={this.props.decreaseQueueIndices}/>
-        <ProfileFinished finishedQueue={this.state.user.finished} indices={this.props.finishedIndices}/>
+        <ProfileFinished finishedQueue={this.state.user.finished} indices={this.props.finishedIndices} increaseFinishedIndices={this.props.increaseFinishedIndices} decreaseFinishedIndices={this.props.decreaseFinishedIndices}/>
         <DisplayFriends friendQueue={this.state.user.friends}/>
       </div>
     );

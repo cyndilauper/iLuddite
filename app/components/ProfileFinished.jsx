@@ -22,7 +22,7 @@ const profileFinished = props.finishedQueue.slice(props.indices[0], props.indice
       </div>
       <div className="row readingRow">
         <div className="col-xs-1 readingArrowColumn readingArrowColumnLeft">
-          <span className="glyphicon glyphicon-chevron-left"></span>
+          <span className="glyphicon glyphicon-chevron-left" onClick={props.decreaseFinishedIndices}></span>
         </div>
         <div className="col-xs-10">
           <div className="row">
@@ -30,7 +30,7 @@ const profileFinished = props.finishedQueue.slice(props.indices[0], props.indice
           </div>
         </div>
       <div className="col-xs-1 readingArrowColumn readingArrowColumnRight">
-        <span className="glyphicon glyphicon-chevron-right"></span>
+        <span className="glyphicon glyphicon-chevron-right" onClick={props.increaseFinishedIndices}></span>
       </div>
       </div>
     </div>
