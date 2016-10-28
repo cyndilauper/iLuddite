@@ -33,7 +33,7 @@ app.use('/', routes);
 app.use('/api/users', users);
 app.use('/api/books', books);
 app.use('/auth', auth);
-app.use('/authors', authors)
+app.use('/api/authors', authors)
 app.use('/reviews', reviews)
 
 // 404 catcher
