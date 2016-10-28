@@ -180,6 +180,7 @@ class App extends React.Component {
         loggedInUser: newState
       })
       document.getElementById("addBookToCurrentButton").classList.add("hide-button")
+      document.getElementById("addBookToQueueButton").classList.add("hide-button")
     })
   }
 

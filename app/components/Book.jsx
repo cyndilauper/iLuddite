@@ -14,12 +14,12 @@ class Book extends React.Component {
       rating: 0,
       loggedInUser: {}
     }
-    // setInterval(() => {
-    //   var shuffled = this.state.reviews.sort(() => .5 - Math.random())  
-    //   this.setState({
-    //     currReviews: shuffled.slice(0,2)
-    //   })
-    // }, 5000)
+    setInterval(() => {
+      var shuffled = this.state.reviews.sort(() => .5 - Math.random())  
+      this.setState({
+        currReviews: shuffled.slice(0,2)
+      })
+    }, 5000)
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -223,9 +223,9 @@ class Book extends React.Component {
           </div>
           <div className="reviewRow">
             <Review currReviews={this.state.currReviews}
-              //handleChange={this.handleChange.bind(this)}
-              //handleSubmit={this.handleSubmit.bind(this)}
-              //incRating={this.incRating.bind(this)}
+              handleChange={this.handleChange.bind(this)}
+              handleSubmit={this.handleSubmit.bind(this)}
+              incRating={this.incRating.bind(this)}
               rating={this.state.rating}
               text={this.state.makeRev} />
           </div>
@@ -248,8 +248,8 @@ Book.defaultProps = {
     favorites: [],
     friends: [],
     pastReads: [],
-    queue: []
-    //image: '../public/assets/default-img.jpg'
+    queue: [],
+    image: '../public/assets/default-img.jpg'
   }
 }
 
