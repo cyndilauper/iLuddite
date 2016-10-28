@@ -60,6 +60,7 @@
     "react": "^15.3.2",
     "react-bootstrap": "^0.30.5",
     "react-dom": "^15.3.2",
+    "react-masonry-component": "^4.2.2",
     "react-router": "^2.8.1",
     "request": "^2.75.0",
     "xml2js": "^0.4.17"
