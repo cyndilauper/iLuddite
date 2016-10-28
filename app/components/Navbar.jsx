@@ -6,10 +6,10 @@ const SearchBox = require('./SearchBox');
 const Navbar = (props) => {
   return (
     <nav className="navbar navbar-default">
-      <div className="row">
+      <div className="row navbarWrap">
         <div className="col-md-2">
           <a href="/">
-            <h2>iLuddite</h2>
+            <h3>iLuddite 2.0</h3>
           </a>
         </div>
         <div className="col-md-8">
