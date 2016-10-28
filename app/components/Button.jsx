@@ -10,6 +10,7 @@ const Button = (props) => {
 
     // inQueue will tell us if this instance of Button is connected to a book already in the queue.
   var inQueue = props.loggedInUser.queue.some(book => book._id === bookId);
+  var inFavorites = props.loggedInUser.favorites.some(book => book._id === bookId);
 
     // the if statement below will determine the properties of this object.
       // then we will use this object to fill out the button with the correct info.
@@ -23,12 +24,20 @@ const Button = (props) => {
       button.glyph = 'glyphicon-book',
       button.text = type
     );
-  } else {
+  } else if (type === 'To Queue') {
     inQueue ? (
       button.glyph = 'glyphicon-ok',
       button.text = 'Queued'
     ) : (
       button.glyph = 'glyphicon-plus',
+      button.text = type
+    );
+  } else {
+    inFavorites ? (
+      button.glyph = 'glyphicon-ok',
+      button.text = 'In Favorites'
+    ) : (
+      button.glyph = 'glyphicon-heart',
       button.text = type
     );
   }

@@ -1,17 +1,18 @@
 const React = require('react');
 const Link = require('react-router').Link;
 const axios = require('../axios');
+const Button = require('./Button');
 
 class Book extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
       book: {}
-    }
+    };
   }
 
   componentDidMount () {
-    // clear out any search results that might still 
+    // clear out any search results that might still
     // be showing (this is kinda hacky and probably
     // needs to be done a little differently TODO)
     this.props.clearSearchResults();
@@ -22,7 +23,7 @@ class Book extends React.Component {
         this.setState({
           book: response.data[0]
         });
-      })
+      });
   }
 
   // if the user searches for a book in the navbar
@@ -44,7 +45,7 @@ class Book extends React.Component {
   }
 
   render () {
-    const { addBookToQueue, addBookToFavorites, makeCurrentBook } = this.props;
+    const { addBookToQueue, addBookToFavorites, makeCurrentBook, loggedInUser } = this.props;
     return (
       <div className="bookContainer">
         <div className="bookRow">
@@ -58,24 +59,24 @@ class Book extends React.Component {
             <h4>About the Book</h4>
             <p>{this.state.book.summary}</p>
             <br/>
-            <button
-              className="btn btn-default btn-info" role="button"
-              onClick={addBookToQueue.bind(null, this.state.book._id)}
-            >
-              Add to Queue
-            </button>
-            <button
-              className="btn btn-default btn-info" role="button"
-              onClick={makeCurrentBook.bind(null, this.state.book._id)}
-            >
-              Make my Current
-            </button>
-            <button
-              className="btn btn-default btn-info" role="button"
-              onClick={addBookToFavorites.bind(null, this.state.book._id)}
-            >
-            Add to Favorites
-            </button>
+            <Button
+              bookid={this.props.bookid}
+              click={addBookToQueue.bind(null)}
+              type={'To Queue'}
+              loggedInUser={this.props.loggedInUser}
+              />
+            <Button
+              bookid={this.props.bookid}
+              click={makeCurrentBook.bind(null)}
+              type={'Make Current'}
+              loggedInUser={this.props.loggedInUser}
+              />
+            <Button
+              bookid={this.props.bookid}
+              click={addBookToFavorites.bind(null)}
+              type={'Add to Favorites'}
+              loggedInUser={this.props.loggedInUser}
+              />
           </div>
         </div>
 
@@ -83,7 +84,7 @@ class Book extends React.Component {
     );
   }
 
-};
+}
 
 Book.defaultProps = {
   book: {
@@ -93,6 +94,6 @@ Book.defaultProps = {
     authorDescription: 'Whoever this is probably lead an interesting life, go wikipedia them.',
     summary: 'we can only guess what this book is about.  My guess? Zombies'
   }
-}
+};
 
 module.exports = Book;

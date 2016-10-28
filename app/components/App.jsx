@@ -281,7 +281,8 @@ removeBookFromFinished (isbn) {
             clearSearchResults: this.clearSearchResults.bind(this),
             addBookToFavorites: this.addBookToFavorites.bind(this),
             makeCurrentBook: this.makeCurrentBook.bind(this),
-            addBookToQueue: this.addBookToQueue.bind(this)
+            addBookToQueue: this.addBookToQueue.bind(this),
+            loggedInUser: this.state.loggedInUser
           })
           break;
         case "UserProfile" :
