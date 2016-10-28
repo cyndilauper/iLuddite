@@ -245,6 +245,7 @@ class Book extends React.Component {
               text={this.state.makeRev} />
           </div>
         </div>
+      </div>  
       )
     }
   }
@@ -258,6 +259,7 @@ Book.defaultProps = {
     authorDescription: 'Whoever this is probably lead an interesting life, go wikipedia them.',
     summary: 'we can only guess what this book is about.  My guess? Zombies'
   },
+
   loggedInUser: {
     _id: false,
     favorites: [],
