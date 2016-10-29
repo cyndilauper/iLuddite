@@ -101,14 +101,6 @@ nav span.glyphicon.glyphicon-search {
 
 /* Search results styling */
 
-.current-button-col {
-	padding: 0 10px 0 0;
-}
-
-.queue-button-col {
-	padding: 0;
-}
-
 .search-list-item {
   padding: 10px 0;
   height: 120px;
@@ -120,9 +112,11 @@ nav span.glyphicon.glyphicon-search {
 }
 
 .search-list-item button.btn.btn-primary {
-  margin-right: 20px;
-  margin-top: 20px;
+	margin-left: 1px;
+  margin-right: 1px;
+  margin-top: 16px;
 	font-size: 10px;
+	padding: 5px 2px;
   font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
 }
 
@@ -149,6 +143,8 @@ nav span.glyphicon.glyphicon-search {
 }
 
 .bookImg {
+	height: auto;
+	width: 100%;
   padding-top: 20px;
   padding-bottom: 20px;
 }
@@ -276,6 +272,18 @@ nav span.glyphicon.glyphicon-search {
   padding-top: 120px;
 }
 
+.readingArrowColumn:hover {
+  opacity: 0.5;
+}
+
+.glyphicon.glyphicon-chevron-left:hover {
+  cursor: pointer;
+}
+
+.glyphicon.glyphicon-chevron-right:hover {
+  cursor: pointer;
+}
+
 .readingArrowColumnLeft {
   text-align: right;
   background: linear-gradient(90deg, #fff 50%, #e8e8e8 50%);
@@ -335,4 +343,17 @@ nav span.glyphicon.glyphicon-search {
 
 .bookCountTitle {
   font-weight: 500;
+}
+
+.book-list-item-summary {
+	overflow: scroll;
+	height: 45px;
+}
+
+.book-summary {
+	overflow: scroll;
+	padding: 15px;
+	box-shadow: inset 0px 0px 7px 1px rgba(56,56,56,0.85);
+	border-radius: 4px;
+
 }

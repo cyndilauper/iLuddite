@@ -10,7 +10,9 @@ class App extends React.Component {
     this.state = {
       navbarSearchText: '',
       navbarSearchResults: [],
-      loggedInUser: {}
+      loggedInUser: {},
+      queueIndices: [0,6],
+      finishedIndices: [0,6]
     }
   }
 
@@ -39,18 +41,18 @@ class App extends React.Component {
     const style = { height: '100vh' };
     return (
       <div style={style} onClick={this.clearSearchResults.bind(this)}>
-        <Navbar 
+        <Navbar
           changeSearchText={this.changeSearchText.bind(this)}
-          loggedInUserId={this.state.loggedInUser.fbid}
+          loggedInUser={this.state.loggedInUser}
           searchText={this.state.navbarSearchText}
           searchResults={this.state.navbarSearchResults}
           handleSearchSubmit={this.searchForBook.bind(this)}
           addBookToQueue={this.addBookToQueue.bind(this)}
           makeCurrentBook={this.makeCurrentBook.bind(this)}
         />
-        <div 
-          className="container" 
-          
+        <div
+          className="container"
+
         >
           {this.renderChildrenWithProps()}
         </div>
@@ -87,7 +89,7 @@ class App extends React.Component {
 
   removeBookFromQueue (isbn) {
     // go through current queue and filter out isbn
-    const filtered = 
+    const filtered =
       this.state.loggedInUser.queue.filter(book => book._id !== isbn);
     axios.delete(`/users/${this.state.loggedInUser.fbid}/queue/${isbn}`)
       .then(book => {
@@ -116,6 +118,45 @@ class App extends React.Component {
         loggedInUser: newState
       })
     })
+  }
+
+  addBookToFinished (isbn) {
+        // check to see if book is already in user's finished list
+    if(this.state.loggedInUser.length) {
+    for (let i = 0; i < this.state.loggedInUser.finished.length; i++) {
+      if (this.state.loggedInUser.finished[i]._id === isbn) {
+        // book already is in finished, do not add again
+        return;
+      }
+    }
+  }
+  // book is not in finished, go ahead and add
+    axios.post(`/users/${this.state.loggedInUser.fbid}/finished/${isbn}`)
+    .then( response => {
+      const newState = Object.assign({}, this.state.loggedInUser);
+      newState.finished = newState.finished.concat(response.data);
+      this.setState({
+        loggedInUser: newState
+      })
+    })
+    //Afterwards, remove the book from the user's queue
+    .then ( response => {
+      this.removeBookFromQueue (isbn)
+    })
+}
+
+removeBookFromFinished (isbn) {
+  // go through current finished list and filter out isbn
+  const filtered =
+  this.state.loggedInUser.finished.filter(book => book._id !== isbn);
+  axios.delete(`/users/${this.state.loggedInUser.fbid}/finished/${isbn}`)
+    .then(book => {
+      const newState = Object.assign({}, this.state.loggedInUser);
+      newState.finished = filtered;
+      this.setState({
+        loggedInUser: newState
+      });
+    });
   }
 
   makeCurrentBook (isbn) {
@@ -173,7 +214,7 @@ class App extends React.Component {
           loggedInUser: newState
         });
       })
-      
+
   }
 
   addBookToFavorites (isbn) {
@@ -199,7 +240,6 @@ class App extends React.Component {
   increaseBookCount () {
     axios.post(`/users/${this.state.loggedInUser.fbid}/count`)
       .then(res => {
-        console.log('res: ', res);
         let newState = Object.assign({}, this.state.loggedInUser);
         newState.stats++;
         this.setState({
@@ -209,6 +249,42 @@ class App extends React.Component {
       .catch(console.log)
   }
 
+  increaseQueueIndices () {
+    if(this.state.loggedInUser.queue.length-1 === this.state.queueIndices[1] || this.state.loggedInUser.queue.length < 6) {
+      return
+    } else {
+    this.state.queueIndices[0] ++
+    this.state.queueIndices[1] ++
+    }
+  }
+
+  decreaseQueueIndices () {
+    if(this.state.queueIndices[0] === 0) {
+      return
+    } else {
+    this.state.queueIndices[0] --
+    this.state.queueIndices[1] --
+    }
+  }
+
+  increaseFinishedIndices () {
+    if(this.state.loggedInUser.finished.length === this.state.finishedIndices[1] || this.state.loggedInUser.finished.length < 6) {
+      return
+    } else {
+    this.state.finishedIndices[0] ++
+    this.state.finishedIndices[1] ++
+    }
+  }
+
+  decreaseFinishedIndices () {
+    if(this.state.finishedIndices[0] === 0) {
+      return
+    } else {
+    this.state.finishedIndices[0] --
+    this.state.finishedIndices[1] --
+    }
+  }
+
   // This function is used to render out children given to App by router
   // before rendering them we inspect what type of component they are
   // and inject properties into them so that they can display all the data
@@ -216,17 +292,23 @@ class App extends React.Component {
   renderChildrenWithProps () {
     // loop through the children of App and add properties to component
     // and return a copy of it with new props.
+
     return React.Children.map(this.props.children, (child) => {
+
       switch (child.type.name) {
         case "EditPage" :
-          // edit page needs queue and favorites lists and also how to 
+          // edit page needs queue and favorites lists and also how to
           // modify them
           return React.cloneElement(child, {
             queue: this.state.loggedInUser.queue,
             favorites: this.state.loggedInUser.favorites,
+            finished: this.state.loggedInUser.finished, //Added this to make finished feature
+            addBookToFinished: this.addBookToFinished.bind(this),
             removeBookFromFavorites: this.removeBookFromFavorites.bind(this),
             removeBookFromQueue: this.removeBookFromQueue.bind(this),
-            makeCurrentBook: this.makeCurrentBook.bind(this)
+            makeCurrentBook: this.makeCurrentBook.bind(this),
+            removeBookFromFinished: this.removeBookFromFinished.bind(this), //Added this to make finished feature
+            increaseBookCount: this.increaseBookCount.bind(this)
           });
           break;
         case "Book" :
@@ -236,14 +318,21 @@ class App extends React.Component {
             clearSearchResults: this.clearSearchResults.bind(this),
             addBookToFavorites: this.addBookToFavorites.bind(this),
             makeCurrentBook: this.makeCurrentBook.bind(this),
-            addBookToQueue: this.addBookToQueue.bind(this)
+            addBookToQueue: this.addBookToQueue.bind(this),
+            loggedInUser: this.state.loggedInUser
           })
           break;
         case "UserProfile" :
           // userprofile needs information about the currently logged in user
           return React.cloneElement(child, {
+            queueIndices: this.state.queueIndices,
+            finishedIndices: this.state.finishedIndices,
             loggedInUser: this.state.loggedInUser,
-            increaseBookCount: this.increaseBookCount.bind(this)
+            increaseBookCount: this.increaseBookCount.bind(this),
+            increaseFinishedIndices: this.increaseFinishedIndices.bind(this),
+            decreaseFinishedIndices: this.decreaseFinishedIndices.bind(this),
+            increaseQueueIndices: this.increaseQueueIndices.bind(this),
+            decreaseQueueIndices: this.decreaseQueueIndices.bind(this)
           });
           break;
         default :

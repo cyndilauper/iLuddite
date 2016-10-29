@@ -27,13 +27,6 @@ const UserBox = (props) => {
           </div>
           <div className="row">
             <div className="col-xs-12 incrementBookCount">
-              <button 
-                className="btn btn-default btn-info btn-sm" 
-                role="button"
-                onClick={props.increaseBookCount}
-              >
-                Increase Book Count
-              </button>
             </div>
           </div>
         </div>

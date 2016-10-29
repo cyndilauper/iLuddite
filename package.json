@@ -54,13 +54,16 @@
     "express-session": "^1.14.1",
     "mongoose": "^4.6.4",
     "morgan": "^1.7.0",
+    "nodemon": "^1.11.0",
     "oauth": "^0.9.14",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-router": "^2.8.1",
+    "react-slick": "^0.14.5",
     "request": "^2.75.0",
+    "slick-carousel": "^1.6.0",
     "xml2js": "^0.4.17"
   }
 }

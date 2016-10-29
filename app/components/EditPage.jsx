@@ -1,6 +1,7 @@
 const React = require('react');
 const Queue = require('./Queue');
 const Favorites = require('./Favorites');
+const Finished = require('./Finished')
 
 class EditPage extends React.Component {
   constructor (props) {
@@ -14,10 +15,16 @@ class EditPage extends React.Component {
           queue={this.props.queue}
           removeBookFromQueue={this.props.removeBookFromQueue}
           makeCurrentBook={this.props.makeCurrentBook}
+          addBookToFinished={this.props.addBookToFinished}
+          increaseBookCount= {this.props.increaseBookCount}
         />
         <Favorites 
           favorites={this.props.favorites}
           removeBookFromFavorites={this.props.removeBookFromFavorites}
+        />
+        <Finished 
+          finished={this.props.finished}
+          removeBookFromFinished={this.props.removeBookFromFinished}
         />
       </div>
     );
@@ -26,7 +33,8 @@ class EditPage extends React.Component {
 
 EditPage.defaultProps = {
   queue: [],
-  favorites: []
+  favorites: [],
+  finished: []
 };
 
 module.exports = EditPage;

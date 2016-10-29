@@ -11,19 +11,21 @@ const Queue = (props) => {
       // since it already is the currentBook
       return (
         <QueueListItem
+          addBookToFinished={props.addBookToFinished}
           removeBookFromQueue={props.removeBookFromQueue}
+          increaseBookCount={props.increaseBookCount}
           currentBook={true}
-          book={book}
-        />
+          book={book}/>
       );
     } else {
       return (
         <QueueListItem
+          addBookToFinished={props.addBookToFinished}
           removeBookFromQueue={props.removeBookFromQueue}
+          increaseBookCount={props.increaseBookCount}
           makeCurrentBook={props.makeCurrentBook}
           currentBook={false}
-          book={book}
-        />
+          book={book}/>
       );
     }
   });

@@ -12,10 +12,11 @@ class SearchBox extends React.Component {
     // otherwise it is simply an input box
     if (this.props.searchResults.length) {
       // make a SearchListItem for each book in searchResults
-      const searchResults = this.props.searchResults.map(book => {
-        let summary = book.summary || "Summary not available";
+      const searchResults = this.props.searchResults.map((book, index) => {
+        let summary = book.summary || 'Summary not available';
         return (
           <SearchListItem
+            key={index}
             bookid={book._id}
             title={book.title}
             author={book.author}
@@ -24,9 +25,10 @@ class SearchBox extends React.Component {
             addBookToQueue={this.props.addBookToQueue}
             addBookToFavorites={this.props.addBookToFavorites}
             makeCurrentBook={this.props.makeCurrentBook}
+            loggedInUser={this.props.loggedInUser}
           />
-        )
-      })
+        );
+      });
       return (
         <ul className="search-box" onClick={this.stopBubbling.bind(this)}>
           <span className="glyphicon glyphicon-search"></span>
