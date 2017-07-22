@@ -6,23 +6,23 @@ const DisplayFriends = require('./DisplayFriends');
 const axios = require('../axios');
 
 class UserProfile extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
       user: {
         queue: [],
 
-      }
-    }
+      },
+    };
   }
 
-  componentDidMount () {
+  componentDidMount() {
     // fetch the user to display
     if (!this.state.user.fbid) {
       axios.get(`/users/${this.props.params.userid}`)
-        .then((response => {
+        .then(((response) => {
           this.setState({
-            user: response.data
+            user: response.data,
           });
         }));
     }
@@ -34,24 +34,24 @@ class UserProfile extends React.Component {
   // to do a get request to get the new users information, and change state.
   componentWillReceiveProps(nextProps) {
     axios.get(`/users/${nextProps.params.userid}`)
-      .then(response => {
+      .then((response) => {
         this.setState({
-          user: response.data
+          user: response.data,
         });
       });
   }
 
 
-  render () {
+  render() {
     return (
       <div className="container">
         <UserBox
           increaseBookCount={this.props.increaseBookCount}
           user={this.state.user}
-          />
-        <CurrentBook currentBook={this.state.user.queue[0]}/>
-        <ProfileQueue bookQueue={this.state.user.queue.slice(1)}/>
-        <DisplayFriends friendQueue={this.state.user.friends}/>
+        />
+        <CurrentBook currentBook={this.state.user.queue[0]} />
+        <ProfileQueue bookQueue={this.state.user.queue.slice(1)} />
+        <DisplayFriends friendQueue={this.state.user.friends} />
       </div>
     );
   }

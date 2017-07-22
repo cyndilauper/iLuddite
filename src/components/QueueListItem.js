@@ -29,7 +29,7 @@ const QueueListItem = (props) => {
 };
 
 QueueListItem.defaultProps = {
-  makeCurrentBook: function() {}
-}
+  makeCurrentBook() {},
+};
 
 export default QueueListItem;

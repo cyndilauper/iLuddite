@@ -3,14 +3,14 @@ const Link = require('react-router').Link;
 const axios = require('../axios');
 
 class Book extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
-      book: {}
-    }
+      book: {},
+    };
   }
 
-  componentDidMount () {
+  componentDidMount() {
     // clear out any search results that might still
     // be showing (this is kinda hacky and probably
     // needs to be done a little differently TODO)
@@ -18,11 +18,11 @@ class Book extends React.Component {
     // as soon as the component mounts fetch the book it is
     // supposed to display
     axios.get(`/books/${this.props.params.bookid}`)
-      .then(response => {
+      .then((response) => {
         this.setState({
-          book: response.data[0]
+          book: response.data[0],
         });
-      })
+      });
   }
 
   // if the user searches for a book in the navbar
@@ -35,21 +35,21 @@ class Book extends React.Component {
       this.props.clearSearchResults();
       // fetch the new book
       axios.get(`/books/${nextProps.params.bookid}`)
-        .then(response => {
+        .then((response) => {
           this.setState({
-            book: response.data[0]
+            book: response.data[0],
           });
         });
     }
   }
 
-  render () {
+  render() {
     const { addBookToQueue, addBookToFavorites, makeCurrentBook } = this.props;
     return (
       <div className="bookContainer">
         <div className="bookRow">
           <div className="bookCol col-md-6">
-            <img className="bookImg" src={this.state.book.thumbnailPath}/>
+            <img className="bookImg" src={this.state.book.thumbnailPath} />
           </div>
 
           <div className="bookCol2 col-md-6">
@@ -57,21 +57,24 @@ class Book extends React.Component {
             <h3>{this.state.book.author}</h3>
             <h4>About the Book</h4>
             <p>{this.state.book.summary}</p>
-            <br/>
+            <br />
             <button
-              className="btn btn-default btn-info" role="button"
+              className="btn btn-default btn-info"
+              role="button"
               onClick={addBookToQueue.bind(null, this.state.book._id)}
             >
               Add to Queue
             </button>
             <button
-              className="btn btn-default btn-info" role="button"
+              className="btn btn-default btn-info"
+              role="button"
               onClick={makeCurrentBook.bind(null, this.state.book._id)}
             >
               Make my Current
             </button>
             <button
-              className="btn btn-default btn-info" role="button"
+              className="btn btn-default btn-info"
+              role="button"
               onClick={addBookToFavorites.bind(null, this.state.book._id)}
             >
             Add to Favorites
@@ -83,7 +86,7 @@ class Book extends React.Component {
     );
   }
 
-};
+}
 
 Book.defaultProps = {
   book: {
@@ -91,8 +94,8 @@ Book.defaultProps = {
     title: 'I bet this book has a great title, but we have no idea what it is',
     author: 'The person who wrote this is probably a good writer.  Probably',
     authorDescription: 'Whoever this is probably lead an interesting life, go wikipedia them.',
-    summary: 'we can only guess what this book is about.  My guess? Zombies'
-  }
-}
+    summary: 'we can only guess what this book is about.  My guess? Zombies',
+  },
+};
 
 export default Book;

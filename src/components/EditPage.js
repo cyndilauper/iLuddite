@@ -3,11 +3,11 @@ const Queue = require('./Queue');
 const Favorites = require('./Favorites');
 
 class EditPage extends React.Component {
-  constructor (props) {
-    super(props)
+  constructor(props) {
+    super(props);
   }
 
-  render () {
+  render() {
     return (
       <div className="row">
         <Queue
@@ -22,11 +22,11 @@ class EditPage extends React.Component {
       </div>
     );
   }
-};
+}
 
 EditPage.defaultProps = {
   queue: [],
-  favorites: []
+  favorites: [],
 };
 
 export default EditPage;

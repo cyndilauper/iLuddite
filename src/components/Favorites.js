@@ -5,10 +5,10 @@ const Favorites = (props) => {
   // props.favorites is a list of all the books that are in a
   // users favorites list
   const favorites = props.favorites.map(book =>
-    <FavoriteListItem
+    (<FavoriteListItem
       book={book}
       removeBookFromFavorites={props.removeBookFromFavorites}
-    />
+    />),
   );
 
   return (

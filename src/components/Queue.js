@@ -12,20 +12,19 @@ const Queue = (props) => {
       return (
         <QueueListItem
           removeBookFromQueue={props.removeBookFromQueue}
-          currentBook={true}
-          book={book}
-        />
-      );
-    } else {
-      return (
-        <QueueListItem
-          removeBookFromQueue={props.removeBookFromQueue}
-          makeCurrentBook={props.makeCurrentBook}
-          currentBook={false}
+          currentBook
           book={book}
         />
       );
     }
+    return (
+      <QueueListItem
+        removeBookFromQueue={props.removeBookFromQueue}
+        makeCurrentBook={props.makeCurrentBook}
+        currentBook={false}
+        book={book}
+      />
+    );
   });
   return (
     <div className="col-md-6">
@@ -38,7 +37,7 @@ const Queue = (props) => {
 };
 
 Queue.defaultProps = {
-  queue: []
+  queue: [],
 };
 
 export default Queue;
