@@ -1,6 +1,6 @@
-const React = require('react');
-const Queue = require('./Queue');
-const Favorites = require('./Favorites');
+import React from 'react';
+import Queue from './Queue';
+import Favorites from './Favorites';
 
 class EditPage extends React.Component {
   constructor(props) {

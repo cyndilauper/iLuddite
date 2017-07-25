@@ -1,5 +1,5 @@
-const React = require('react');
-const SearchListItem = require('./SearchListItem');
+import React from 'react';
+import SearchListItem from './SearchListItem';
 
 class SearchBox extends React.Component {
   constructor(props) {

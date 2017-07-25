@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const Schema = mongoose.Schema;
 
 const usersSchema = new Schema({
@@ -10,7 +11,7 @@ const usersSchema = new Schema({
   favorites: [{ type: Schema.Types.String, ref: 'Books' }],
   location: String,
   stats: Number,
-  created_at: { type: Date, default: Date.now }
+  created_at: { type: Date, default: Date.now },
 });
 
 const Users = mongoose.model('Users', usersSchema);

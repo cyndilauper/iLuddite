@@ -1,5 +1,5 @@
-const React = require('react');
-const FavoriteListItem = require('./FavoriteListItem');
+import React from 'react';
+import FavoriteListItem from './FavoriteListItem';
 
 const Favorites = (props) => {
   // props.favorites is a list of all the books that are in a

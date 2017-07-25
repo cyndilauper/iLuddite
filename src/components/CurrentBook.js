@@ -1,6 +1,5 @@
-import { Link } from 'react-router';
-
-const React = require('react');
+import { Link } from 'react-router-dom';
+import React from 'react';
 
 const CurrentBook = props => (
   <div className="col-sm-6 currentColumn">

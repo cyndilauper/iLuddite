@@ -1,10 +1,4 @@
-// This file isn't in use anymore
-
-const React = require('react');
-
-import { browserHistory } from 'react-router';
-
-const axios = require('axios');
+import React from 'react';
 
 class Landing extends React.Component {
   constructor(props) {

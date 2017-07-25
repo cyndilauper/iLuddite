@@ -1,11 +1,11 @@
 #! /usr/bin/env node
-require('dotenv').config({silent: true});
+require('dotenv').config({ silent: true });
 
 const express = require('express');
 const path = require('path');
 const passport = require('passport');
 const session = require('express-session');
-const morgan= require('morgan');
+const morgan = require('morgan');
 
 const db = require('./config/db');
 
@@ -21,9 +21,9 @@ app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
-    secret: 'booksyall',
-    resave: true,
-    saveUninitialized: true
+  secret: 'booksyall',
+  resave: true,
+  saveUninitialized: true,
 }));
 
 require('./config/passport')(app);
@@ -32,11 +32,11 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/books', books);
 app.use('/auth', auth);
-app.use('/authors', authors)
+app.use('/authors', authors);
 
 // 404 catcher
 app.use((req, res, next) => {
-  let err = new Error(`404: ${req.originalUrl} Not Found`);
+  const err = new Error(`404: ${req.originalUrl} Not Found`);
   err.status = 404;
   next(err);
 });
@@ -44,13 +44,13 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
   res.status(500).send({
     message: err.message,
-    error: err
+    error: err,
   });
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 const server = app.listen(port, () => {
-    console.log(`Server listening on port ${port}`);
+  console.log(`Server listening on port ${port}`);
 });
 
 module.exports = app;

@@ -1,6 +1,5 @@
-import { Link } from 'react-router';
-
-const React = require('react');
+import { Link } from 'react-router-dom';
+import React from 'react';
 
 const SearchListItem = props => (
   <li className="search-list-item list-group-item">

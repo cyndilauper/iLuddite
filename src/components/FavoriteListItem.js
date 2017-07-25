@@ -1,4 +1,4 @@
-const React = require('react');
+import React from 'react';
 
 const FavoriteListItem = props => (
   <li className="list-group-item">

@@ -1,6 +1,5 @@
-const React = require('react');
-const Link = require('react-router').Link;
-const axios = require('../axios');
+import React from 'react';
+import axios from '../axios';
 
 class Book extends React.Component {
   constructor(props) {

@@ -1,9 +1,10 @@
-const React = require('react');
-const ProfileQueue = require('./ProfileQueue');
-const UserBox = require('./UserBox');
-const CurrentBook = require('./CurrentBook');
-const DisplayFriends = require('./DisplayFriends');
-const axios = require('../axios');
+import React from 'react';
+
+import ProfileQueue from './ProfileQueue';
+import UserBox from './UserBox';
+import CurrentBook from './CurrentBook';
+import DisplayFriends from './DisplayFriends';
+import axios from '../axios';
 
 class UserProfile extends React.Component {
   constructor(props) {

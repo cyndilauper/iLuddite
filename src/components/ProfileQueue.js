@@ -1,6 +1,5 @@
-import { Link } from 'react-router';
-
-const React = require('react');
+import { Link } from 'react-router-dom';
+import React from 'react';
 
 const ProfileQueue = (props) => {
 // since the queue could get really long we only want to display up to 6 books

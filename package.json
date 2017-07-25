@@ -2,7 +2,7 @@
   "name": "iluddite",
   "version": "1.0.0",
   "engines": {
-    "node": "6.11.1"
+    "node": "8.1.4"
   },
   "description": "A booksharing platform",
   "main": "index.js",
@@ -49,10 +49,10 @@
     "axios": "^0.15.2",
     "btoa": "^1.1.2",
     "dotenv": "^2.0.0",
-    "express": "^4.14.0",
+    "express": "^4.15.3",
     "express-session": "^1.14.1",
     "mongoose": "^4.6.4",
-    "morgan": "^1.7.0",
+    "morgan": "^1.8.2",
     "oauth": "^0.9.14",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",

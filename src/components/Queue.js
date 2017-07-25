@@ -1,5 +1,5 @@
-const React = require('react');
-const QueueListItem = require('./QueueListItem');
+import React from 'react';
+import QueueListItem from './QueueListItem';
 
 const Queue = (props) => {
   // props.queue is a list of all the users books in their queue

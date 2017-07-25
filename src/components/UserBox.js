@@ -1,4 +1,4 @@
-const React = require('react');
+import React from 'react';
 
 const UserBox = props => (
   <div className="col-sm-6 profileColumn">

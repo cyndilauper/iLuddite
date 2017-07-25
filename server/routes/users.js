@@ -1,4 +1,5 @@
 const express = require('express');
+
 const router = express.Router();
 const User = require('../models/users');
 const Book = require('../models/books');
@@ -6,30 +7,30 @@ const profile = require('../services/profile');
 
 router.get('/:userid', (req, res, next) => {
   // GET user info (photo, current book, queue, stats)
-  profile(req, req.params.userid).then(answer => {
+  profile(req, req.params.userid).then((answer) => {
     res.send(answer);
-  })
-})
+  });
+});
 
 router.get('/:userid/queue', (req, res, next) => {
   // GET user queue
   User.findOne({
-    fbid: req.params.userid
-    }).then(found => {
-      if (found) {
-        Book.find()
+    fbid: req.params.userid,
+  }).then((found) => {
+    if (found) {
+      Book.find()
           .where('_id')
           .in(found.queue)
-          .then(found => {
+          .then((found) => {
             res.send(found);
-          })
-      } else {
-        res.send('user and/or queue not found')
-      }
-    }).catch(error => {
-      throw error;
-    })
-})
+          });
+    } else {
+      res.send('user and/or queue not found');
+    }
+  }).catch((error) => {
+    throw error;
+  });
+});
 
 router.route('/:userid/queue/:bookid')
   // POST or DELETE book to queue
@@ -39,117 +40,116 @@ router.route('/:userid/queue/:bookid')
 
       User.findOneAndUpdate({ fbid: req.params.userid },
         { $push: { queue: { $each: [req.params.bookid], $position: 0 } } })
-        .then(user => {
+        .then((user) => {
           if (user) {
-            Book.findOne({_id: req.params.bookid}).then(book => {
+            Book.findOne({ _id: req.params.bookid }).then((book) => {
               res.json(book);
-            })
+            });
           } else {
-            res.json({error: 'user and/or queue not found'})
+            res.json({ error: 'user and/or queue not found' });
           }
-      }).catch(error => {
-        throw error;
-      });
-
+        }).catch((error) => {
+          throw error;
+        });
     } else {
       // else, post to bottom
       User.findOneAndUpdate({ fbid: req.params.userid },
-        { $push: { queue: req.params.bookid } } )
-        .then(user => {
+        { $push: { queue: req.params.bookid } })
+        .then((user) => {
           if (user) {
-            Book.findOne({_id: req.params.bookid})
-            .then(book => {
+            Book.findOne({ _id: req.params.bookid })
+            .then((book) => {
               res.json(book);
-            })
+            });
           } else {
-            res.json({error: 'user and/or queue not found'})
+            res.json({ error: 'user and/or queue not found' });
           }
-      }).catch(error => {
-        throw error;
-      });
+        }).catch((error) => {
+          throw error;
+        });
     }
   })
   .delete((req, res, next) => {
     // delete book from queue
-    User.update( { fbid: req.params.userid },
-      { $pullAll: {queue: [req.params.bookid] } } )
-      .then(done => {
+    User.update({ fbid: req.params.userid },
+      { $pullAll: { queue: [req.params.bookid] } })
+      .then((done) => {
         if (done) {
           res.json(done);
         } else {
-          res.json({error: 'user and/or queue not found'})
+          res.json({ error: 'user and/or queue not found' });
         }
-    }).catch(error => {
-      throw error;
-    })
-  })
+      }).catch((error) => {
+        throw error;
+      });
+  });
 
 router.route('/:userid/favorites')
   // GET, POST, or DELETE user's favorite books
   .get((req, res, next) => {
   // GET user's favorite books
-  User.findOne({
-        fbid: req.params.userid
-    }).then(found => {
+    User.findOne({
+      fbid: req.params.userid,
+    }).then((found) => {
       if (found) {
         Book.find()
           .where('_id')
           .in(found.favorites)
-          .then(found => {
+          .then((found) => {
             res.send(found);
-          })
+          });
       } else {
-        res.send('user and/or favorites not found')
+        res.send('user and/or favorites not found');
       }
-    }).catch(error => {
+    }).catch((error) => {
       throw error;
-    })
-  })
+    });
+  });
 
 router.route('/:userid/favorites/:bookid')
   .post((req, res, next) => {
   // POST to user's favorite books
     User.findOneAndUpdate({ fbid: req.params.userid },
-      { $push: { favorites: req.params.bookid } } )
-      .then(user => {
-        //send the book back, not the user
+      { $push: { favorites: req.params.bookid } })
+      .then((user) => {
+        // send the book back, not the user
         if (user) {
-          Book.findOne({_id: req.params.bookid})
-          .then(book => {
+          Book.findOne({ _id: req.params.bookid })
+          .then((book) => {
             res.json(book);
-          })
+          });
         } else {
-          res.send('user and/or favorites not found')
+          res.send('user and/or favorites not found');
         }
-    }).catch(error => {
-      throw error;
-      console.log('error:', error);
-    });
+      }).catch((error) => {
+        throw error;
+        console.log('error:', error);
+      });
   })
   .delete((req, res, next) => {
   // DELETE from user's favorite books
-    User.update( { fbid: req.params.userid },
-      { $pullAll: { favorites: [req.params.bookid] } } )
-      .then(done => {
+    User.update({ fbid: req.params.userid },
+      { $pullAll: { favorites: [req.params.bookid] } })
+      .then((done) => {
         if (done) {
           res.send(done);
         } else {
-          res.send('user and/or favorite not found')
+          res.send('user and/or favorite not found');
         }
-    }).catch(error => {
-      throw error;
-    })
-  })
+      }).catch((error) => {
+        throw error;
+      });
+  });
 
-//update current book count
+// update current book count
 router.post('/:userid/count', (req, res, next) => {
-  User.findOneAndUpdate( { fbid: req.params.userid },
-    { $inc: { stats: 1 } } )
-    .then(user => {
+  User.findOneAndUpdate({ fbid: req.params.userid },
+    { $inc: { stats: 1 } })
+    .then((user) => {
       res.send(user);
-    }).catch(error => {
-      res.send(error)
-    })  
-})
+    }).catch((error) => {
+      res.send(error);
+    });
+});
 
 module.exports = router;

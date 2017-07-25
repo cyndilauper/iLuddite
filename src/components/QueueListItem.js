@@ -1,4 +1,4 @@
-const React = require('react');
+import React from 'react';
 
 const QueueListItem = (props) => {
   // if currentBook === true then li needs class active

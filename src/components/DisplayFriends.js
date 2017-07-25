@@ -1,6 +1,5 @@
-import { Link } from 'react-router';
-
-const React = require('react');
+import { Link } from 'react-router-dom';
+import React from 'react';
 
 const Friends = (props) => {
   const friendQueue = props.friendQueue.map((friend, idx) => (

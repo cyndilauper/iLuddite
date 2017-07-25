@@ -8,7 +8,7 @@ const booksSchema = new Schema({
   author: String,
   summary: String,
   coverPath: String,
-  thumbnailPath: String
+  thumbnailPath: String,
 });
 
 const Books = mongoose.model('Books', booksSchema);
