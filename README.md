@@ -1,5 +1,5 @@
 # iLuddite
-iLuddite is a Makersquare Greenfield project created by Brittany Artimez, Michael Lefkowitz, Stephen Bolton, Joey Steinburger, and Rachel DePriest. Our application is meant for anybody who loves to read, and wants a more social experience for a traditionally solo exercise.  
+iLuddite is a Makersquare Greenfield project created by Brittany A., Michael Lefkowitz, Stephen Bolton, Joey Steinburger, and Rachel DePriest. Our application is meant for anybody who loves to read, and wants a more social experience for a traditionally solo exercise.  
 
 ##Getting Started
 To get stared working with iLuddite, please clone the iLuddite repository to your computer: 
